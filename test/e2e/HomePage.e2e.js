@@ -1,12 +1,8 @@
 import { ClientFunction, Selector } from 'testcafe';
-import { ReactSelector, waitForReact } from 'testcafe-react-selectors';
-import { getPageUrl } from './helpers';
 
 const getPageTitle = ClientFunction(() => document.title);
 const counterSelector = Selector('[data-tid="counter"]');
 const buttonsSelector = Selector('[data-tclass="btn"]');
-const clickToCounterLink = t =>
-  t.click(Selector('a').withExactText('to Counter'));
 const incrementButton = buttonsSelector.nth(0);
 const decrementButton = buttonsSelector.nth(1);
 const oddButton = buttonsSelector.nth(2);
@@ -32,30 +28,6 @@ test(
   assertNoConsoleErrors
 );
 
-test('should to Counter with click "to Counter" link', async t => {
-  await t
-    .click('[data-tid=container] > a')
-    .expect(getCounterText())
-    .eql('0');
-});
-
-test('should navgiate to /counter', async t => {
-  await waitForReact();
-  await t
-    .click(
-      ReactSelector('Link').withProps({
-        to: '/counter'
-      })
-    )
-    .expect(getPageUrl())
-    .contains('/counter');
-});
-
-fixture`Counter Tests`
-  .page('../../app/app.html')
-  .beforeEach(clickToCounterLink)
-  .afterEach(assertNoConsoleErrors);
-
 test('should display updated count after increment button click', async t => {
   await t
     .click(incrementButton)
@@ -63,7 +35,7 @@ test('should display updated count after increment button click', async t => {
     .eql('1');
 });
 
-test('should display updated count after descrement button click', async t => {
+test('should display updated count after decrement button click', async t => {
   await t
     .click(decrementButton)
     .expect(getCounterText())
@@ -92,11 +64,4 @@ test('should change if async button clicked and a second later', async t => {
     .eql('0')
     .expect(getCounterText())
     .eql('1');
-});
-
-test('should back to home if back button clicked', async t => {
-  await t
-    .click('[data-tid="backButton"] > a')
-    .expect(Selector('[data-tid="container"]').visible)
-    .ok();
 });

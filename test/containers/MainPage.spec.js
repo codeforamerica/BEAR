@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createBrowserHistory } from 'history';
 import { ConnectedRouter } from 'connected-react-router';
-import CounterPage from '../../app/containers/CounterPage';
+import MainPage from '../../app/containers/MainPage';
 import { configureStore } from '../../app/store/configureStore';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -15,7 +15,7 @@ function setup(initialState) {
   const provider = (
     <Provider store={store}>
       <ConnectedRouter history={history}>
-        <CounterPage />
+        <MainPage />
       </ConnectedRouter>
     </Provider>
   );
