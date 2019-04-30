@@ -1,72 +1,66 @@
 // @flow
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { spawn } from 'child_process';
+import path from 'os';
 import styles from './Home.css';
-import routes from '../constants/routes';
-
-type Props = {
-  increment: () => void,
-  incrementIfOdd: () => void,
-  incrementAsync: () => void,
-  decrement: () => void,
-  counter: number
-};
 
 export default class Counter extends Component<Props> {
-  props: Props;
+  constructor(props) {
+    let gogenPath;
+    const home = process.env.HOME;
+    if (process.env.NODE_ENV === 'development') {
+      gogenPath = `${home}/go/bin/gogen`;
+    } else {
+      gogenPath = `${process.resourcesPath}${path.sep}gogen`;
+    }
+    super(props);
+
+    this.state = {
+      gogenPath,
+      selectedCountyCode: 'SACRAMENTO',
+      dojFilePath: `${home}/go/src/gogen/test_fixtures/sacramento/cadoj_sacramento.csv`,
+      outputFilePath: `${home}/Desktop`
+    };
+  }
+
+  runScript = () => {
+    console.log(process.env.NODE_ENV);
+    const {
+      dojFilePath,
+      outputFilePath,
+      selectedCountyCode,
+      gogenPath
+    } = this.state;
+    const goProcess = spawn(gogenPath, [
+      `--input-doj=${dojFilePath}`,
+      `--outputs=${outputFilePath}`,
+      `--county="${selectedCountyCode}"`
+    ]);
+
+    goProcess.stdout.on('data', data => {
+      console.log(`stdout: ${data}`);
+    });
+
+    goProcess.stderr.on('data', data => {
+      console.log(`stderr: ${data}`);
+    });
+
+    goProcess.on('close', code => {
+      console.log(`child process exited with code ${code}`);
+    });
+  };
 
   render() {
-    const {
-      increment,
-      incrementIfOdd,
-      incrementAsync,
-      decrement,
-      counter
-    } = this.props;
     return (
       <div>
-        <div className={styles.backButton} data-tid="backButton">
-          <Link to={routes.HOME}>
-            <i className="fa fa-arrow-left fa-3x" />
-          </Link>
-        </div>
-        <div className={`counter ${styles.counter}`} data-tid="counter">
-          {counter}
-        </div>
-        <div className={styles.btnGroup}>
-          <button
-            className={styles.btn}
-            onClick={increment}
-            data-tclass="btn"
-            type="button"
-          >
-            <i className="fa fa-plus" />
-          </button>
-          <button
-            className={styles.btn}
-            onClick={decrement}
-            data-tclass="btn"
-            type="button"
-          >
-            <i className="fa fa-minus" />
-          </button>
-          <button
-            className={styles.btn}
-            onClick={incrementIfOdd}
-            data-tclass="btn"
-            type="button"
-          >
-            odd
-          </button>
-          <button
-            className={styles.btn}
-            onClick={() => incrementAsync()}
-            data-tclass="btn"
-            type="button"
-          >
-            async
-          </button>
-        </div>
+        <button
+          className={styles.btn}
+          onClick={this.runScript}
+          data-tclass="btn"
+          type="button"
+        >
+          RUN
+        </button>
       </div>
     );
   }
