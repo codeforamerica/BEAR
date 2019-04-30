@@ -1,8 +1,8 @@
-import main from '../../app/reducers/main';
-import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../../app/actions/main';
+import main from '../../app/reducers/home';
+import { INCREMENT_COUNTER, DECREMENT_COUNTER } from '../../app/actions/home';
 
 describe('reducers', () => {
-  describe('main', () => {
+  describe('home', () => {
     it('should handle initial state', () => {
       expect(main(undefined, {})).toMatchSnapshot();
     });

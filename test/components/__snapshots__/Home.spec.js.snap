@@ -1,8 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Main component should match exact snapshot 1`] = `
+exports[`Home component should match exact snapshot 1`] = `
 <div>
   <div>
+    <div
+      className="backButton"
+      data-tid="backButton"
+    >
+      <a
+        href="/"
+        onClick={[Function]}
+      >
+        <i
+          className="fa fa-arrow-left fa-3x"
+        />
+      </a>
+    </div>
     <div
       className="counter counter"
       data-tid="counter"
