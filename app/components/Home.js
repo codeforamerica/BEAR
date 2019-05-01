@@ -4,11 +4,40 @@ import { spawn } from 'child_process';
 import path from 'path';
 import styles from './Home.css';
 
-export default class Home extends Component {
-  constructor(props) {
+type Props = {};
+type State = {
+  gogenPath: string,
+  selectedCountyCode: string,
+  dojFilePath: string,
+  outputFilePath: string
+};
+
+type Process = Process & {
+  resourcesPath: string
+};
+
+export default class Home extends Component<Props, State> {
+  runScript: () => void;
+
+  constructor(props: Props) {
     let gogenPath;
-    const home = process.env.HOME;
-    if (process.env.IS_PACKAGED !== 'false') {
+
+    // const resourcesPath =
+    let home: string;
+    let isPackaged: string;
+
+    if (process.env.HOME != null) {
+      home = process.env.HOME;
+    } else {
+      home = '';
+    }
+    if (process.env.IS_PACKAGED != null) {
+      isPackaged = process.env.IS_PACKAGED;
+    } else {
+      isPackaged = '';
+    }
+
+    if (isPackaged !== 'false') {
       gogenPath = `${process.resourcesPath}${path.sep}gogen`;
     } else {
       gogenPath = `${home}/go/bin/gogen`;
