@@ -1,4 +1,4 @@
-import { spy } from 'sinon';
+import sinon from 'sinon';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -7,33 +7,28 @@ import renderer from 'react-test-renderer';
 import Home from '../../app/components/Home';
 
 Enzyme.configure({ adapter: new Adapter() });
+const sandbox = sinon.sandbox.create();
 
 function setup() {
-  const actions = {
-    increment: spy(),
-    incrementIfOdd: spy(),
-    incrementAsync: spy(),
-    decrement: spy()
-  };
-  const component = shallow(<Home counter={1} {...actions} />);
+  const runScriptStub = sandbox.stub(Home.prototype, 'runScript').returns(true);
+  const component = shallow(<Home />);
   return {
-    component,
-    actions,
     buttons: component.find('button'),
-    p: component.find('.counter')
+    runScriptStub
   };
 }
 
-describe('Home component', () => {
-  it('should should display count', () => {
-    const { p } = setup();
-    expect(p.text()).toMatch(/^1$/);
-  });
+afterEach(() => {
+  sandbox.restore();
+});
 
-  it('should first button should call increment', () => {
-    const { buttons, actions } = setup();
-    buttons.at(0).simulate('click');
-    expect(actions.increment.called).toBe(true);
+describe('Home component', () => {
+  it('run button should call script', () => {
+    const { buttons, runScriptStub } = setup();
+    const runButton = buttons.at(0);
+    runButton.simulate('click');
+    expect(runScriptStub.called).toBe(true);
+    runScriptStub.resetBehavior();
   });
 
   it('should match exact snapshot', () => {
@@ -48,23 +43,5 @@ describe('Home component', () => {
     const tree = renderer.create(counter).toJSON();
 
     expect(tree).toMatchSnapshot();
-  });
-
-  it('should second button should call decrement', () => {
-    const { buttons, actions } = setup();
-    buttons.at(1).simulate('click');
-    expect(actions.decrement.called).toBe(true);
-  });
-
-  it('should third button should call incrementIfOdd', () => {
-    const { buttons, actions } = setup();
-    buttons.at(2).simulate('click');
-    expect(actions.incrementIfOdd.called).toBe(true);
-  });
-
-  it('should fourth button should call incrementAsync', () => {
-    const { buttons, actions } = setup();
-    buttons.at(3).simulate('click');
-    expect(actions.incrementAsync.called).toBe(true);
   });
 });

@@ -1,13 +1,9 @@
 import { ClientFunction, Selector } from 'testcafe';
 
 const getPageTitle = ClientFunction(() => document.title);
-const counterSelector = Selector('[data-tid="counter"]');
 const buttonsSelector = Selector('[data-tclass="btn"]');
-const incrementButton = buttonsSelector.nth(0);
-const decrementButton = buttonsSelector.nth(1);
-const oddButton = buttonsSelector.nth(2);
-const asyncButton = buttonsSelector.nth(3);
-const getCounterText = () => counterSelector().innerText;
+const runButton = buttonsSelector.nth(0);
+const getRunButtonText = () => runButton().innerText;
 const assertNoConsoleErrors = async t => {
   const { error } = await t.getBrowserConsoleMessages();
   await t.expect(error).eql([]);
@@ -28,40 +24,11 @@ test(
   assertNoConsoleErrors
 );
 
-test('should display updated count after increment button click', async t => {
+test('should display a run button', async t => {
+  const { log } = await t.getBrowserConsoleMessages();
+  console.log(log);
   await t
-    .click(incrementButton)
-    .expect(getCounterText())
-    .eql('1');
-});
-
-test('should display updated count after decrement button click', async t => {
-  await t
-    .click(decrementButton)
-    .expect(getCounterText())
-    .eql('-1');
-});
-
-test('should not change if even and if odd button clicked', async t => {
-  await t
-    .click(oddButton)
-    .expect(getCounterText())
-    .eql('0');
-});
-
-test('should change if odd and if odd button clicked', async t => {
-  await t
-    .click(incrementButton)
-    .click(oddButton)
-    .expect(getCounterText())
-    .eql('2');
-});
-
-test('should change if async button clicked and a second later', async t => {
-  await t
-    .click(asyncButton)
-    .expect(getCounterText())
-    .eql('0')
-    .expect(getCounterText())
-    .eql('1');
+    .click(runButton)
+    .expect(getRunButtonText())
+    .eql('RUN');
 });

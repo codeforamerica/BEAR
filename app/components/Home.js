@@ -1,17 +1,17 @@
 // @flow
 import React, { Component } from 'react';
 import { spawn } from 'child_process';
-import path from 'os';
+import path from 'path';
 import styles from './Home.css';
 
-export default class Counter extends Component<Props> {
+export default class Home extends Component {
   constructor(props) {
     let gogenPath;
     const home = process.env.HOME;
-    if (process.env.NODE_ENV === 'development') {
-      gogenPath = `${home}/go/bin/gogen`;
-    } else {
+    if (process.env.IS_PACKAGED !== 'false') {
       gogenPath = `${process.resourcesPath}${path.sep}gogen`;
+    } else {
+      gogenPath = `${home}/go/bin/gogen`;
     }
     super(props);
 
@@ -21,10 +21,11 @@ export default class Counter extends Component<Props> {
       dojFilePath: `${home}/go/src/gogen/test_fixtures/sacramento/cadoj_sacramento.csv`,
       outputFilePath: `${home}/Desktop`
     };
+
+    this.runScript = this.runScript.bind(this);
   }
 
-  runScript = () => {
-    console.log(process.env.NODE_ENV);
+  runScript() {
     const {
       dojFilePath,
       outputFilePath,
@@ -48,7 +49,7 @@ export default class Counter extends Component<Props> {
     goProcess.on('close', code => {
       console.log(`child process exited with code ${code}`);
     });
-  };
+  }
 
   render() {
     return (
