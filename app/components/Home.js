@@ -1,10 +1,15 @@
 // @flow
 import React, { Component } from 'react';
-import { spawn } from 'child_process';
 import path from 'path';
 import styles from './Home.css';
 
-type Props = {};
+type Props = {
+  spawnChildProcess: (
+    path: string,
+    options: Array<string>
+  ) => child_process$ChildProcess // eslint-disable-line camelcase
+};
+
 type State = {
   gogenPath: string,
   selectedCountyCode: string,
@@ -63,7 +68,10 @@ export default class Home extends Component<Props, State> {
       selectedCountyCode,
       gogenPath
     } = this.state;
-    const goProcess = spawn(gogenPath, [
+
+    const { spawnChildProcess } = this.props;
+
+    const goProcess = spawnChildProcess(gogenPath, [
       `--input-doj=${dojFilePath}`,
       `--outputs=${outputFilePath}`,
       `--county="${selectedCountyCode}"`
