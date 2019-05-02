@@ -20,9 +20,10 @@ export default class Home extends Component<Props, State> {
   runScript: () => void;
 
   constructor(props: Props) {
+    super(props);
+
     let gogenPath;
 
-    // const resourcesPath =
     let home: string;
     let isPackaged: string;
 
@@ -30,11 +31,13 @@ export default class Home extends Component<Props, State> {
       home = process.env.HOME;
     } else {
       home = '';
+      throw new Error('Home directory is null');
     }
     if (process.env.IS_PACKAGED != null) {
       isPackaged = process.env.IS_PACKAGED;
     } else {
       isPackaged = '';
+      throw new Error('IS_PACKAGED is null');
     }
 
     if (isPackaged !== 'false') {
@@ -42,7 +45,6 @@ export default class Home extends Component<Props, State> {
     } else {
       gogenPath = `${home}/go/bin/gogen`;
     }
-    super(props);
 
     this.state = {
       gogenPath,

@@ -27,11 +27,11 @@ module.exports = api => {
           useBuiltIns: 'usage'
         }
       ],
-      require('@babel/preset-flow'),
       [require('@babel/preset-react'), { development }]
     ],
     plugins: [
       // Stage 0
+      require('@babel/plugin-transform-flow-strip-types'),
       require('@babel/plugin-proposal-function-bind'),
 
       // Stage 1

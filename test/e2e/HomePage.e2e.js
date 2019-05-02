@@ -25,8 +25,6 @@ test(
 );
 
 test('should display a run button', async t => {
-  const { log } = await t.getBrowserConsoleMessages();
-  console.log(log);
   await t
     .click(runButton)
     .expect(getRunButtonText())

@@ -10,6 +10,8 @@ Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.sandbox.create();
 
 function setup() {
+  process.env.HOME = '/test/home/path';
+  process.env.IS_PACKAGED = 'false';
   const runScriptStub = sandbox.stub(Home.prototype, 'runScript').returns(true);
   const component = shallow(<Home />);
   return {
