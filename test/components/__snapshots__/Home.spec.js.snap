@@ -3,6 +3,33 @@
 exports[`Home component should match exact snapshot 1`] = `
 <div>
   <div>
+    <div>
+      <select
+        id="county-select"
+        onChange={[Function]}
+      >
+        <option
+          value="CONTRA COSTA"
+        >
+          Contra Costa
+        </option>
+        <option
+          value="LOS ANGELES"
+        >
+          Los Angeles
+        </option>
+        <option
+          value="SACRAMENTO"
+        >
+          Sacramento
+        </option>
+        <option
+          value="SAN JOAQUIN"
+        >
+          San Joaquin
+        </option>
+      </select>
+    </div>
     <button
       className="btn"
       data-tclass="btn"

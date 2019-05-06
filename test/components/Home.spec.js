@@ -48,30 +48,43 @@ describe('Home component', () => {
     });
   });
 
-  it('should spawn child process when run button is clicked', () => {
-    const { component, fakeSpawnChildProcess } = setup('false');
-    const runButton = component.find('button').at(0);
-    runButton.simulate('click');
-    expect(fakeSpawnChildProcess.called).toBe(true);
+  describe('updateCounty', () => {
+    it('sets the selected county on the state', () => {
+      const { component } = setup('true');
+      const newCounty = { name: 'Eternia', code: 'ETERNIA' };
+      expect(component.state('county')).toEqual({ name: '', code: '' });
+      component.instance().updateCounty(newCounty);
+      expect(component.state('county')).toEqual(newCounty);
+    });
   });
 
-  it('calls child process with values from state', () => {
-    const { component, fakeSpawnChildProcess } = setup('false');
-    component.setState({
-      gogenPath: 'gogenPath',
-      selectedCountyCode: 'SACRAMENTO',
-      dojFilePath: '/path/to/doj/file',
-      outputFilePath: 'outputPath'
+  describe('runScript', () => {
+    it('should spawn child process when run button is clicked', () => {
+      const { component, fakeSpawnChildProcess } = setup('false');
+      const runButton = component.find('button').at(0);
+      runButton.simulate('click');
+      expect(fakeSpawnChildProcess.called).toBe(true);
     });
-    const runButton = component.find('button').at(0);
-    runButton.simulate('click');
-    const { args } = fakeSpawnChildProcess.getCall(0);
-    expect(args[0]).toEqual('gogenPath');
-    expect(args[1]).toEqual([
-      `--input-doj=/path/to/doj/file`,
-      `--outputs=outputPath`,
-      `--county="SACRAMENTO"`
-    ]);
+
+    it('calls child process with values from state', () => {
+      const { component, fakeSpawnChildProcess } = setup('false');
+      component.setState({
+        gogenPath: 'gogenPath',
+        county: { name: 'Sacramento', code: 'SACRAMENTO' },
+        dojFilePath: '/path/to/doj/file',
+        outputFilePath: 'outputPath'
+      });
+      component.update();
+      const runButton = component.find('button').at(0);
+      runButton.simulate('click');
+      const { args } = fakeSpawnChildProcess.getCall(0);
+      expect(args[0]).toEqual('gogenPath');
+      expect(args[1]).toEqual([
+        `--input-doj=/path/to/doj/file`,
+        `--outputs=outputPath`,
+        `--county="SACRAMENTO"`
+      ]);
+    });
   });
 
   it('should match exact snapshot', () => {

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import path from 'path';
 import styles from './Home.css';
+import CountySelect from './CountySelect';
 
 type Props = {
   spawnChildProcess: (
@@ -12,13 +13,15 @@ type Props = {
 
 type State = {
   gogenPath: string,
-  selectedCountyCode: string,
+  county: County,
   dojFilePath: string,
   outputFilePath: string
 };
 
 export default class Home extends Component<Props, State> {
   runScript: () => void;
+
+  updateCounty: (county: County) => void;
 
   constructor(props: Props) {
     super(props);
@@ -49,28 +52,26 @@ export default class Home extends Component<Props, State> {
 
     this.state = {
       gogenPath,
-      selectedCountyCode: 'SACRAMENTO',
+      county: { name: '', code: '' },
       dojFilePath: `${home}/go/src/gogen/test_fixtures/sacramento/cadoj_sacramento.csv`,
       outputFilePath: `${home}/Desktop`
     };
 
     this.runScript = this.runScript.bind(this);
+    this.updateCounty = this.updateCounty.bind(this);
   }
 
   runScript() {
-    const {
-      dojFilePath,
-      outputFilePath,
-      selectedCountyCode,
-      gogenPath
-    } = this.state;
+    const { dojFilePath, county, outputFilePath, gogenPath } = this.state;
 
     const { spawnChildProcess } = this.props;
+
+    const countyCode = county.code;
 
     const goProcess = spawnChildProcess(gogenPath, [
       `--input-doj=${dojFilePath}`,
       `--outputs=${outputFilePath}`,
-      `--county="${selectedCountyCode}"`
+      `--county="${countyCode}"`
     ]);
 
     goProcess.stdout.on('data', data => {
@@ -86,9 +87,14 @@ export default class Home extends Component<Props, State> {
     });
   }
 
+  updateCounty = (county: County) => {
+    this.setState({ county });
+  };
+
   render() {
     return (
       <div>
+        <CountySelect onCountySelect={this.updateCounty} />
         <button
           className={styles.btn}
           onClick={this.runScript}
