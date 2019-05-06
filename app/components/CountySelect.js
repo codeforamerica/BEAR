@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 
-const COUNTIES = ['Contra Costa', 'Los Angeles', 'Sacramento', 'San Joaquin'];
+import { COUNTIES } from '../constants/californiaCounties';
+
 type Props = {
   onCountySelect: County => void
 };
