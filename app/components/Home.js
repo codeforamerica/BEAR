@@ -17,10 +17,6 @@ type State = {
   outputFilePath: string
 };
 
-type Process = Process & {
-  resourcesPath: string
-};
-
 export default class Home extends Component<Props, State> {
   runScript: () => void;
 
