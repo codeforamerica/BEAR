@@ -14,7 +14,7 @@ The Golang project can be found [here](https://github.com/codeforamerica/gogen).
 First, clone the repo via git:
 
 ```bash
-git clone git@github.com:codeforamerica/automated_conviction_relief.git
+$ git clone git@github.com:codeforamerica/automated_conviction_relief.git
 ```
 
 And then install the dependencies with yarn.
@@ -22,6 +22,21 @@ And then install the dependencies with yarn.
 ```bash
 $ cd automated_conviction_relief
 $ yarn
+```
+
+You will also need the CfA Styleguide NPM package, which is not yet published. To use it, clone the repo and create a symlink:
+
+```bash
+$ cd ~/[workspace]
+$ git clone git@github.com:codeforamerica/cfa-styleguide-npm.git
+$ yarn link
+```
+
+Then link the styleguide package to this project:
+
+```bash
+$ cd [path/to/]automated_conviction_relief
+$ yarn link cfa-styleguide
 ```
 
 ## Starting Development

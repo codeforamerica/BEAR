@@ -1,8 +1,13 @@
 // @flow
 import React, { Component } from 'react';
 import path from 'path';
-import styles from './Home.css';
 import CountySelect from './CountySelect';
+import FormCard, {
+  FormCardHeader,
+  FormCardContent,
+  FormCardFooter
+} from './FormCard';
+import PageContainer from './PageContainer';
 
 type Props = {
   spawnChildProcess: (
@@ -93,17 +98,23 @@ export default class Home extends Component<Props, State> {
 
   render() {
     return (
-      <div>
-        <CountySelect onCountySelect={this.updateCounty} />
-        <button
-          className={styles.btn}
-          onClick={this.runScript}
-          data-tclass="btn"
-          type="button"
-        >
-          RUN
-        </button>
-      </div>
+      <PageContainer>
+        <FormCard>
+          <FormCardHeader>Proposition 64 CA DOJ data upload</FormCardHeader>
+          <FormCardContent>
+            <CountySelect onCountySelect={this.updateCounty} />
+          </FormCardContent>
+          <FormCardFooter>
+            <button
+              className="button button--primary"
+              onClick={this.runScript}
+              type="button"
+            >
+              Continue <i className="icon-arrow_forward" />
+            </button>
+          </FormCardFooter>
+        </FormCard>
+      </PageContainer>
     );
   }
 }

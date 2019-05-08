@@ -1,4 +1,4 @@
-export const COUNTIES = [
+const counties = [
   'Alameda',
   'Alpine',
   'Amador',
@@ -59,6 +59,4 @@ export const COUNTIES = [
   'Yuba'
 ];
 
-export default {
-  COUNTIES
-};
+export default counties;

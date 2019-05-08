@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from 'react';
 
-import { COUNTIES } from '../constants/californiaCounties';
+import counties from '../constants/californiaCounties';
+import { FormCardContent } from './FormCard';
 
 type Props = {
   onCountySelect: County => void
@@ -18,15 +19,22 @@ export default class Home extends Component<Props> {
 
   render() {
     return (
-      <div>
-        <select onChange={this.handleCountySelect} id="county-select">
-          {COUNTIES.map(county => (
-            <option key={county} value={county.toUpperCase()}>
-              {county}
-            </option>
-          ))}
-        </select>
-      </div>
+      <FormCardContent>
+        <p className="form-question">Select your county</p>
+        <div className="select">
+          <select
+            className="select__element"
+            onChange={this.handleCountySelect}
+            id="county-select"
+          >
+            {counties.map(county => (
+              <option key={county} value={county.toUpperCase()}>
+                {county}
+              </option>
+            ))}
+          </select>
+        </div>
+      </FormCardContent>
     );
   }
 }
