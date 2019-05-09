@@ -40,7 +40,9 @@ export default class Home extends Component<Props, State> {
       home = process.env.HOME;
     } else {
       home = '';
-      throw new Error('Home directory is null');
+      if (!process.env.IS_PACKAGED) {
+        throw new Error('Home directory is null');
+      }
     }
     if (process.env.IS_PACKAGED != null) {
       isPackaged = process.env.IS_PACKAGED;
