@@ -1,8 +1,8 @@
 {
-  "name": "automated_conviction_relief",
-  "productName": "AutomatedConvictionRelief",
+  "name": "bear",
+  "productName": "BEAR",
   "version": "0.0.1",
-  "description": "Electron app to configure eligibility logic and identify convictions eligible for Prop 64 relief",
+  "description": "Bulk Expungement Analysis of Records (BEAR). Electron app to configure eligibility logic and identify convictions eligible for Prop 64 relief",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -57,8 +57,8 @@
   },
   "main": "./app/main.prod.js",
   "build": {
-    "productName": "AutomatedConvictionRelief",
-    "appId": "org.develar.AutomatedConvictionRelief",
+    "productName": "BEAR",
+    "appId": "org.develar.BEAR",
     "files": [
       "app/dist/",
       "app/app.html",
@@ -108,7 +108,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/codeforamerica/automated_conviction_relief.git"
+    "url": "git+https://github.com/codeforamerica/BEAR.git"
   },
   "author": {
     "name": "Code for America",
@@ -118,20 +118,18 @@
   "contributors": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/codeforamerica/automated_conviction_relief/issues"
+    "url": "https://github.com/codeforamerica/BEAR/issues"
   },
   "keywords": [
     "electron",
-    "boilerplate",
     "react",
-    "redux",
     "flow",
     "sass",
     "webpack",
     "hot",
     "reload"
   ],
-  "homepage": "https://github.com/electron-react-boilerplate/electron-react-boilerplate#readme",
+  "homepage": "https://github.com/codeforamerica/BEAR#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
@@ -268,9 +266,6 @@
     "node": ">=7.x",
     "npm": ">=4.x",
     "yarn": ">=0.21.3"
-  },
-  "collective": {
-    "url": "https://opencollective.com/electron-react-boilerplate-594"
   },
   "browserslist": "electron 1.6",
   "husky": {
