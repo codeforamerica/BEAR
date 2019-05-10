@@ -24,21 +24,6 @@ $ cd automated_conviction_relief
 $ yarn
 ```
 
-You will also need the CfA Styleguide NPM package, which is not yet published. To use it, clone the repo and create a symlink:
-
-```bash
-$ cd ~/[workspace]
-$ git clone git@github.com:codeforamerica/cfa-styleguide-npm.git
-$ yarn link
-```
-
-Then link the styleguide package to this project:
-
-```bash
-$ cd [path/to/]automated_conviction_relief
-$ yarn link cfa-styleguide
-```
-
 ## Starting Development
 
 Start the app in the `dev` environment. This starts the renderer process in [**hot-module-replacement**](https://webpack.js.org/guides/hmr-react/) mode and starts a webpack dev server that sends hot updates to the renderer process:
