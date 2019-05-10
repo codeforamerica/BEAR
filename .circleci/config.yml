@@ -7,10 +7,6 @@ jobs:
     working_directory: ~/bear
 
     steps:
-      #      - add_ssh_keys:
-      #          fingerprints:
-      #            - "4d:c5:9b:a8:fe:49:2b:c8:59:e0:58:f1:a7:33:06:ff"
-
       - checkout
 
       # Download and cache dependencies
