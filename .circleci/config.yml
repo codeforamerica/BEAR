@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:11.14
+      - image: circleci/node:11.14-browsers
 
     working_directory: ~/bear
 
@@ -34,3 +34,6 @@ jobs:
       - run:
           name: Run end-to-end tests
           command: yarn build-e2e && yarn test-e2e
+
+      - store_test_results:
+          path: /tmp/test-results
