@@ -244,6 +244,7 @@
     "yarn": "^1.15.2"
   },
   "dependencies": {
+    "cfa-styleguide": "codeforamerica/cfa-styleguide-npm",
     "connected-react-router": "^6.3.2",
     "core-js": "2",
     "devtron": "^1.4.0",
