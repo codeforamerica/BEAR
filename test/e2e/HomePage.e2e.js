@@ -1,9 +1,8 @@
 import { ClientFunction, Selector } from 'testcafe';
 
 const getPageTitle = ClientFunction(() => document.title);
-const buttonsSelector = Selector('[data-tclass="btn"]');
-const runButton = buttonsSelector.nth(0);
-const getRunButtonText = () => runButton().innerText;
+const continueButton = Selector('.button').nth(0);
+const getContinueButtonText = () => continueButton().innerText;
 const assertNoConsoleErrors = async t => {
   const { error } = await t.getBrowserConsoleMessages();
   await t.expect(error).eql([]);
@@ -24,9 +23,9 @@ test(
   assertNoConsoleErrors
 );
 
-test('should display a run button', async t => {
+test('should display a continue button', async t => {
   await t
-    .click(runButton)
-    .expect(getRunButtonText())
-    .eql('RUN');
+    .click(continueButton)
+    .expect(getContinueButtonText())
+    .eql('Continue ');
 });
