@@ -4,7 +4,7 @@ jobs:
     docker:
       - image: circleci/node:11.14
 
-    working_directory: ~/repo
+    working_directory: ~/bear
 
     steps:
       #      - add_ssh_keys:
@@ -27,5 +27,10 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      # run tests!
-      - run: yarn test-all
+      - run:
+          name: Run unit tests
+          command: yarn test
+
+      - run:
+          name: Run end-to-end tests
+          command: yarn build-e2e && yarn test-e2e
