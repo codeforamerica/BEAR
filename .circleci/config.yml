@@ -35,7 +35,7 @@ jobs:
           name: Run end-to-end tests
           command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
 
-      - run: package-win && package-mac
+      - run: yarn package-win && yarn package-mac
 
       - persist_to_workspace:
           root: './release'
