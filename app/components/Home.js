@@ -47,8 +47,7 @@ export default class Home extends Component<Props, State> {
     if (process.env.IS_PACKAGED != null) {
       isPackaged = process.env.IS_PACKAGED;
     } else {
-      isPackaged = '';
-      throw new Error('IS_PACKAGED is null');
+      isPackaged = 'false';
     }
 
     if (isPackaged !== 'false') {
