@@ -11,7 +11,7 @@ jobs:
 
       - run:
           name: Fetch gogen binary
-          command: export TOKEN=`echo $GITHUB_ACCESS_TOKEN | base64 --decode` && bash ~/bear/.circleci/github_download_release.sh "latest" ~/bear/gogen
+          command: export TOKEN=$GITHUB_ACCESS_TOKEN && bash ~/bear/.circleci/github_download_release.sh "latest" ~/bear/gogen
 
       # Download and cache dependencies
       - restore_cache:
