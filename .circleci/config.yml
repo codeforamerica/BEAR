@@ -4,20 +4,14 @@ jobs:
     docker:
       - image: circleci/node:11.14-browsers
 
-      - image: circleci/golang:1.12.1
-
     working_directory: ~/bear
 
     steps:
       - checkout
 
       - run:
-          name: Clone gogen repository
-          command: git clone git@github.com:codeforamerica/gogen ~/go/src/gogen
-
-      - run:
-          name: Build gogen binary
-          command: cd ~/go/src/gogen && go get ./... && go build
+          name: Fetch gogen binary
+          command: export TOKEN=`echo $GITHUB_ACCESS_TOKEN | base64 --decode` && sh ~/bear/.circleci/github_download_release.sh "latest" ~/go/bin/gogen
 
       # Download and cache dependencies
       - restore_cache:
