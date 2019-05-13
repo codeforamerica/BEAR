@@ -35,5 +35,37 @@ jobs:
           name: Run end-to-end tests
           command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
 
+      - run: package-win && package-mac
+
+      - persist_to_workspace:
+          root: './release'
+          paths:
+            - 'BEAR 0.0.1.msi'
+            - BEAR-0.0.1.dmg
+
       - store_test_results:
           path: /tmp/test-results
+
+  deploy:
+    docker:
+      - image: cibuilds/github:0.10
+
+    steps:
+      - attach_workspace:
+          at: ./release
+
+      - run: |
+          VERSION=0.0.1
+          ghr -t ${GITHUB_ACCESS_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./release/
+workflows:
+  version: 2
+  build-workflow:
+    jobs:
+      - build
+      - hold:
+          type: approval
+          requires:
+            - build
+      - deploy:
+          requires:
+            - hold
