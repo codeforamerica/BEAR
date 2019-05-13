@@ -1,5 +1,7 @@
 # README
 
+B.E.A.R. (Bulk Expungement Analysis of Records)
+
 This app provides a desktop GUI for a Golang script that takes in CA Department of Justice .dat files containing criminal histories and identifies convictions that are eligible for relief under CA Prop 64.
 The app can be packaged for installation on Windows, Mac, or Linux.
 
@@ -14,7 +16,7 @@ The Golang project can be found [here](https://github.com/codeforamerica/gogen).
 First, clone the repo via git:
 
 ```bash
-$ git clone git@github.com:codeforamerica/automated_conviction_relief.git
+$ git clone git@github.com:codeforamerica/bear.git
 ```
 
 And then install the dependencies with yarn.
