@@ -11,7 +11,11 @@ jobs:
 
       - run:
           name: Fetch gogen binary
-          command: export TOKEN=$GITHUB_ACCESS_TOKEN && mkdir ~/go && mkdir ~/go/bin && bash ~/bear/.circleci/github_download_release.sh "latest" ~/go/bin/gogen && chmod +x ~/go/bin/gogen
+          command: |
+            export TOKEN=$GITHUB_ACCESS_TOKEN
+            mkdir -p ~/go/bin
+            bash ~/bear/.circleci/github_download_release.sh "latest" ~/go/bin/gogen
+            chmod +x ~/go/bin/gogen
 
       # Download and cache dependencies
       - restore_cache:
@@ -35,7 +39,11 @@ jobs:
           name: Run end-to-end tests
           command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
 
-      - run: yarn package-win && yarn package-mac
+      - run:
+          name: Build for Windows
+          command: |
+            sudo apt-get install -y wine && yarn package-win
+      - run: yarn package-mac
 
       - persist_to_workspace:
           root: './release'
