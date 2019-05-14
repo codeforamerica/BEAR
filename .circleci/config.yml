@@ -53,8 +53,6 @@ jobs:
             sudo apt-get install -y wine
             yarn package-win
 
-      - run: yarn package-mac
-
       - persist_to_workspace:
           root: './release'
           paths:
