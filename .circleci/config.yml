@@ -43,7 +43,7 @@ jobs:
           name: Build for Windows
           command: |
             sudo dpkg --add-architecture i386
-            sudo echo "deb https://dl.winehq.org/wine-builds/debian/ stretch main"  >> /etc/apt/sources.list.d/wine.list
+            sudo sh -c 'echo "deb https://dl.winehq.org/wine-builds/debian/ stretch main"  >> /etc/apt/sources.list.d/wine.list'
             sudo apt install apt-transport-https
             sudo apt update
             sudo apt install --install-recommends winehq-stable
