@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:11.14-browsers
+      - image: electronuserland/builder:wine
 
     working_directory: ~/bear
 
@@ -30,27 +30,18 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      #
-      #      - run:
-      #          name: Run unit tests
-      #          command: yarn build && yarn test
-      #
-      #      - run:
-      #          name: Run end-to-end tests
-      #          command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
+
+      - run:
+          name: Run unit tests
+          command: yarn build && yarn test
+
+      - run:
+          name: Run end-to-end tests
+          command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
 
       - run:
           name: Build for Windows
           command: |
-            sudo dpkg --add-architecture i386
-            wget -nc https://dl.winehq.org/wine-builds/winehq.key
-            sudo apt-key add winehq.key
-            sudo sh -c 'echo "deb https://dl.winehq.org/wine-builds/debian/ stretch main"  >> /etc/apt/sources.list.d/wine.list'
-            sudo apt install apt-transport-https
-            sudo apt update
-            sudo apt install --install-recommends winehq-stable
-            echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-            sudo apt-get install -y wine
             yarn package-win
 
       - persist_to_workspace:
