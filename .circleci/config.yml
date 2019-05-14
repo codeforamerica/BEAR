@@ -9,13 +9,13 @@ jobs:
     steps:
       - checkout
 
-      - run:
-          name: Fetch gogen binary
-          command: |
-            export TOKEN=$GITHUB_ACCESS_TOKEN
-            mkdir -p ~/go/bin
-            bash ~/bear/.circleci/github_download_release.sh "latest" ~/go/bin/gogen
-            chmod +x ~/go/bin/gogen
+      #      - run:
+      #          name: Fetch gogen binary
+      #          command: |
+      #            export TOKEN=$GITHUB_ACCESS_TOKEN
+      #            mkdir -p ~/go/bin
+      ##            bash ~/bear/.circleci/github_download_release.sh "latest" ~/go/bin/gogen
+      ##            chmod +x ~/go/bin/gogen
 
       # Download and cache dependencies
       - restore_cache:
