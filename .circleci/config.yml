@@ -30,19 +30,25 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-
-      - run:
-          name: Run unit tests
-          command: yarn build && yarn test
-
-      - run:
-          name: Run end-to-end tests
-          command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
+      #
+      #      - run:
+      #          name: Run unit tests
+      #          command: yarn build && yarn test
+      #
+      #      - run:
+      #          name: Run end-to-end tests
+      #          command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
 
       - run:
           name: Build for Windows
           command: |
-            sudo apt-get install -y wine && yarn package-win
+            sudo dpkg --add-architecture i386
+            sudo add-apt-repository -y ppa:ubuntu-wine/ppa
+            sudo apt-get update
+            echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+            sudo apt-get install -y wine
+            yarn package-win
+
       - run: yarn package-mac
 
       - persist_to_workspace:
