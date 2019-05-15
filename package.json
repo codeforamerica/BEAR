@@ -20,7 +20,7 @@
     "package-all": "yarn build && electron-builder build -mwl",
     "package-ci": "yarn postinstall && yarn build && electron-builder --publish always",
     "package-linux": "yarn build && electron-builder build --linux",
-    "package-win": "yarn build && electron-builder build --win --x64",
+    "package-win": "yarn build && electron-builder build --win --x64 --publish always",
     "package-mac": "yarn build && electron-builder build --mac --x64",
     "postinstall": "yarn flow-typed && electron-builder install-app-deps package.json && yarn build-dll && opencollective-postinstall",
     "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{js,jsx,json,html,css,less,scss,yml}'",
@@ -83,8 +83,7 @@
     },
     "win": {
       "target": [
-        "nsis",
-        "msi"
+        "nsis"
       ]
     },
     "linux": {
@@ -103,8 +102,8 @@
     "publish": {
       "provider": "github",
       "owner": "codeforamerica",
-      "repo": "automated_conviction_relief",
-      "private": false
+      "repo": "BEAR",
+      "private": true
     }
   },
   "repository": {
