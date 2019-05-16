@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:11.14-browsers
+      - image: codeforamerica/bear-ci
 
     working_directory: ~/bear
 
@@ -40,15 +40,15 @@ jobs:
           name: Build and Publish for Windows
           command: |
             if [[ "${CIRCLE_BRANCH}" == "ci_script" && -n "${CIRCLE_TAG}" ]]; then
-              sudo dpkg --add-architecture i386
-              wget -nc https://dl.winehq.org/wine-builds/winehq.key
-              sudo apt-key add winehq.key
-              sudo sh -c 'echo "deb https://dl.winehq.org/wine-builds/debian/ stretch main"  >> /etc/apt/sources.list.d/wine.list'
-              sudo apt install apt-transport-https
-              sudo apt update
-              sudo apt install --install-recommends winehq-stable
-              echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
-              sudo apt-get install -y wine
+              # sudo dpkg --add-architecture i386
+              # wget -nc https://dl.winehq.org/wine-builds/winehq.key
+              # sudo apt-key add winehq.key
+              # sudo sh -c 'echo "deb https://dl.winehq.org/wine-builds/debian/ stretch main"  >> /etc/apt/sources.list.d/wine.list'
+              # sudo apt install apt-transport-https
+              # sudo apt update
+              # sudo apt install --install-recommends winehq-stable
+              # echo ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true | sudo debconf-set-selections
+              # sudo apt-get install -y wine
               yarn package-win
             fi
 
