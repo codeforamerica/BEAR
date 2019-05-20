@@ -23,7 +23,7 @@
 #
 # If your version/tag doesn't match, the script will exit with error.
 REPO="codeforamerica/gogen"
-FILE="gogen_linux"      # the name of your release asset file, e.g. build.tar.gz
+FILE="${FILE:-gogen_linux}"      # the name of your release asset file, e.g. build.tar.gz
 VERSION=$1                       # tag name or the word "latest"
 GITHUB="https://api.github.com"
 

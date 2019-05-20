@@ -49,9 +49,8 @@ jobs:
           name: Fetch gogen binary
           command: |
             export TOKEN=$GITHUB_ACCESS_TOKEN
-            mkdir -p ~/go/bin
-            bash ~/bear/.circleci/github_download_release.sh "latest" ~/go/bin/gogen
-            chmod +x ~/go/bin/gogen
+            export FILE=gogen_win.exe
+            bash ~/bear/.circleci/github_download_release.sh "latest" ./resources/gogen
 
       - restore_cache:
           keys:
