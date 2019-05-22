@@ -2,13 +2,12 @@
 import React, { Component } from 'react';
 
 import counties from '../constants/californiaCounties';
-import { FormCardContent } from './FormCard';
 
 type Props = {
   onCountySelect: County => void
 };
 
-export default class Home extends Component<Props> {
+export default class CountySelect extends Component<Props> {
   handleCountySelect = (e: SyntheticEvent<HTMLSelectElement>) => {
     const { onCountySelect } = this.props;
     onCountySelect({
@@ -19,7 +18,7 @@ export default class Home extends Component<Props> {
 
   render() {
     return (
-      <FormCardContent>
+      <div>
         <p className="form-question">Select your county</p>
         <div className="select">
           <select
@@ -38,7 +37,7 @@ export default class Home extends Component<Props> {
             ))}
           </select>
         </div>
-      </FormCardContent>
+      </div>
     );
   }
 }
