@@ -1,12 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 import path from 'path';
-import CountySelect from './CountySelect';
-import FormCard, {
-  FormCardHeader,
-  FormCardContent,
-  FormCardFooter
-} from './FormCard';
+import CountySelectFormCard from './CountySelectFormCard';
 import PageContainer from './PageContainer';
 
 type Props = {
@@ -104,21 +99,10 @@ export default class Home extends Component<Props, State> {
   render() {
     return (
       <PageContainer>
-        <FormCard>
-          <FormCardHeader>Proposition 64 CA DOJ data upload</FormCardHeader>
-          <FormCardContent>
-            <CountySelect onCountySelect={this.updateCounty} />
-          </FormCardContent>
-          <FormCardFooter>
-            <button
-              className="button button--primary"
-              onClick={this.runScript}
-              type="button"
-            >
-              Continue <i className="icon-arrow_forward" />
-            </button>
-          </FormCardFooter>
-        </FormCard>
+        <CountySelectFormCard
+          onCountySelect={this.updateCounty}
+          onCountyConfirm={this.runScript}
+        />
       </PageContainer>
     );
   }

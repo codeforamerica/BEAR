@@ -36,9 +36,7 @@ exports[`Home component should match exact snapshot 1`] = `
         <div
           className="form-card__content"
         >
-          <div
-            className="form-card__content"
-          >
+          <div>
             <p
               className="form-question"
             >

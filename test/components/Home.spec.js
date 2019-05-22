@@ -70,13 +70,6 @@ describe('Home component', () => {
   });
 
   describe('runScript', () => {
-    it('should spawn child process when run button is clicked', () => {
-      const { component, fakeSpawnChildProcess } = setup('false');
-      const runButton = component.find('button').at(0);
-      runButton.simulate('click');
-      expect(fakeSpawnChildProcess.called).toBe(true);
-    });
-
     it('calls child process with values from state', () => {
       const { component, fakeSpawnChildProcess } = setup('false');
       component.setState({
@@ -86,8 +79,7 @@ describe('Home component', () => {
         outputFilePath: 'outputPath'
       });
       component.update();
-      const runButton = component.find('button').at(0);
-      runButton.simulate('click');
+      component.instance().runScript();
       const { args } = fakeSpawnChildProcess.getCall(0);
       expect(args[0]).toEqual('gogenPath');
       expect(args[1]).toEqual([
