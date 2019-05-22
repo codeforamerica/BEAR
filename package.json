@@ -16,9 +16,9 @@
     "lint-fix": "yarn --silent lint --fix; exit 0",
     "lint-styles": "stylelint --ignore-path .eslintignore '**/*.*(css|scss)' --syntax scss",
     "lint-styles-fix": "yarn --silent lint-styles --fix; exit 0",
-    "package": "yarn build && electron-builder build --publish never",
-    "package-all": "yarn build && electron-builder build -mwl",
-    "package-win": "yarn build && electron-builder build --win --x64 --publish always",
+    "package-mac": "yarn build && electron-builder build --mac --x64 --publish never",
+    "package-win": "yarn build && electron-builder build --win --x64 --publish never",
+    "package-publish-win": "yarn build && electron-builder build --win --x64 --publish always",
     "postinstall": "yarn flow-typed && electron-builder install-app-deps package.json && yarn build-dll && opencollective-postinstall",
     "postlint-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{js,jsx,json,html,css,less,scss,yml}'",
     "postlint-styles-fix": "prettier --ignore-path .eslintignore --single-quote --write '**/*.{css,scss}'",
@@ -64,6 +64,7 @@
       "app/main.prod.js.map",
       "package.json"
     ],
+    "extraResources": ["./gogen.exe", "./gogen"],
     "dmg": {
       "contents": [
         {

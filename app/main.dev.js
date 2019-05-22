@@ -68,6 +68,7 @@ app.on('ready', async () => {
   }
 
   process.env.IS_PACKAGED = !!app.isPackaged;
+  process.env.PLATFORM = process.platform;
 
   mainWindow = new BrowserWindow({
     show: false,

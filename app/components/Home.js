@@ -51,7 +51,11 @@ export default class Home extends Component<Props, State> {
     }
 
     if (isPackaged !== 'false') {
-      gogenPath = `${process.resourcesPath}${path.sep}gogen`;
+      if (process.env.PLATFORM === 'windows') {
+        gogenPath = `${process.resourcesPath}${path.sep}gogen.exe`;
+      } else {
+        gogenPath = `${process.resourcesPath}${path.sep}gogen`;
+      }
     } else {
       gogenPath = `${home}/go/bin/gogen`;
     }

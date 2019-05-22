@@ -8,10 +8,11 @@ import Home from '../../app/components/Home';
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.sandbox.create();
 
-function setup(isPackaged) {
+function setup(isPackaged, platform = 'windows') {
   process.env.HOME = '/test/home/path';
   process.resourcesPath = '/test/resources/path';
   process.env.IS_PACKAGED = isPackaged;
+  process.env.PLATFORM = platform;
   const fakeSpawnResponse = {
     stdout: {
       on: () => {}
@@ -41,10 +42,20 @@ describe('Home component', () => {
       expect(gogenPath).toEqual('/test/home/path/go/bin/gogen');
     });
 
-    it('should point to the resources directory when the app is not packaged', () => {
-      const { component } = setup('true');
-      const gogenPath = component.state('gogenPath');
-      expect(gogenPath).toEqual('/test/resources/path/gogen');
+    describe('when the platform is windows', () => {
+      it('should point to an exe in the resources directory when the app is packaged', () => {
+        const { component } = setup('true', 'windows');
+        const gogenPath = component.state('gogenPath');
+        expect(gogenPath).toEqual('/test/resources/path/gogen.exe');
+      });
+    });
+
+    describe('when the platform is darwin (mac)', () => {
+      it('should point to a mac binary in the resources directory when the app is packaged', () => {
+        const { component } = setup('true', 'darwin');
+        const gogenPath = component.state('gogenPath');
+        expect(gogenPath).toEqual('/test/resources/path/gogen');
+      });
     });
   });
 
