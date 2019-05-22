@@ -26,7 +26,11 @@ export default class Home extends Component<Props> {
             className="select__element"
             onChange={this.handleCountySelect}
             id="county-select"
+            defaultValue=""
           >
+            <option value="" disabled>
+              Choose a county
+            </option>
             {counties.map(county => (
               <option key={county} value={county.toUpperCase()}>
                 {county}
