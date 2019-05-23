@@ -1,0 +1,8 @@
+.fileName {
+  display: flex;
+  align-items: center;
+}
+
+.fileRemove {
+  padding-left: 5px;
+}

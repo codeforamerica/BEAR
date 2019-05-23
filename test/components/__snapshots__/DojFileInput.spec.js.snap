@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DojFileInput component should match exact snapshot 1`] = `
+<div
+  className="file-upload"
+>
+  <label
+    className="button file-upload__label"
+    htmlFor="doj-file-input"
+  >
+    <input
+      className="file-upload__input"
+      id="doj-file-input"
+      name="doj-file-input"
+      onChange={[Function]}
+      type="file"
+    />
+    Upload File
+  </label>
+</div>
+`;

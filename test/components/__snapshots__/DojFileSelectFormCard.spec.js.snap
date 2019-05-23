@@ -1,0 +1,93 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DojFileSelectFormCard component should match exact snapshot when file has been selected 1`] = `
+<div>
+  <div
+    className="form-card"
+  >
+    <header
+      className="form-card__header"
+    >
+      <h1
+        className="form-card__title"
+      >
+        Upload .dat file
+      </h1>
+    </header>
+    <div
+      className="form-card__content"
+    >
+      <div
+        className="doj-file"
+      >
+        <p
+          className="fileName"
+        >
+          file
+          <i
+            className="fileRemove icon-close"
+          />
+        </p>
+      </div>
+    </div>
+    <div
+      className="form-card__footer"
+    >
+      <div>
+        <button
+          className="button button--primary"
+          onClick={[Function]}
+          type="button"
+        >
+          Continue 
+          <i
+            className="icon-arrow_forward"
+          />
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`DojFileSelectFormCard component should match exact snapshot when file has not been selected 1`] = `
+<div>
+  <div
+    className="form-card"
+  >
+    <header
+      className="form-card__header"
+    >
+      <h1
+        className="form-card__title"
+      >
+        Upload .dat file
+      </h1>
+    </header>
+    <div
+      className="form-card__content"
+    >
+      <div
+        className="file-upload"
+      >
+        <label
+          className="button file-upload__label"
+          htmlFor="doj-file-input"
+        >
+          <input
+            className="file-upload__input"
+            id="doj-file-input"
+            name="doj-file-input"
+            onChange={[Function]}
+            type="file"
+          />
+          Upload File
+        </label>
+      </div>
+    </div>
+    <div
+      className="form-card__footer"
+    />
+  </div>
+</div>
+`;

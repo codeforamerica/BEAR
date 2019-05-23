@@ -7,6 +7,7 @@ import FormCard, {
   FormCardHeader
 } from './FormCard';
 import CountySelect from './CountySelect';
+import ContinueButton from './ContinueButton';
 
 type Props = {
   currentScreen: number,
@@ -31,13 +32,7 @@ export default class CountySelectFormCard extends Component<Props> {
           <CountySelect onCountySelect={onCountySelect} />
         </FormCardContent>
         <FormCardFooter>
-          <button
-            className="button button--primary"
-            onClick={this.onContinue}
-            type="button"
-          >
-            Continue <i className="icon-arrow_forward" />
-          </button>
+          <ContinueButton onContinue={this.onContinue} />
         </FormCardFooter>
       </FormCard>
     );

@@ -36,7 +36,7 @@ test('selecting county and clicking continue should show next screen', async t =
     .click(countyOption.withText('Sacramento'))
     .click(continueButton)
     .expect(getCardHeaderText())
-    .eql('Sacramento Proposition 64 CA DOJ data upload');
+    .eql('Upload .dat file');
 });
 
 test('selecting county and clicking continue should hide previous screen', async t => {

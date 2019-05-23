@@ -82,6 +82,16 @@ describe('Home component', () => {
     });
   });
 
+  describe('updateDojFilePath', () => {
+    it('sets the selected file path on the state', () => {
+      const { component } = setup('true');
+      const filePath = 'path/to/file';
+      expect(component.state('dojFilePath')).toEqual('');
+      component.instance().updateFilePath(filePath);
+      expect(component.state('dojFilePath')).toEqual(filePath);
+    });
+  });
+
   describe('updateScreen', () => {
     it('updates state.currentScreen to the supplied value', () => {
       const { component } = setup('true');

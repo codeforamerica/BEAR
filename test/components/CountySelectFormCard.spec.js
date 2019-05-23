@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import CountySelectFormCard from '../../app/components/CountySelectFormCard';
@@ -11,7 +11,7 @@ const sandbox = sinon.sandbox.create();
 function setup() {
   const fakeOnCountySelect = sandbox.spy();
   const fakeOnCountyConfirm = sandbox.spy();
-  const component = shallow(
+  const component = mount(
     <CountySelectFormCard
       currentScreen={1}
       onCountySelect={fakeOnCountySelect}

@@ -23,10 +23,6 @@ type State = {
 export default class Home extends Component<Props, State> {
   runScript: () => void;
 
-  updateCounty: (county: County) => void;
-
-  updateScreen: (newScreen: number) => void;
-
   constructor(props: Props) {
     super(props);
 
@@ -63,13 +59,11 @@ export default class Home extends Component<Props, State> {
       gogenPath,
       county: { name: '', code: '' },
       currentScreen: 1,
-      dojFilePath: `${home}/go/src/gogen/test_fixtures/sacramento/cadoj_sacramento.csv`,
+      dojFilePath: '',
       outputFilePath: `${home}/Desktop`
     };
 
     this.runScript = this.runScript.bind(this);
-    this.updateCounty = this.updateCounty.bind(this);
-    this.updateScreen = this.updateScreen.bind(this);
   }
 
   runScript() {
@@ -102,12 +96,16 @@ export default class Home extends Component<Props, State> {
     this.setState({ county });
   };
 
-  updateScreen(newScreen: number) {
+  updateFilePath = (dojFilePath: string) => {
+    this.setState({ dojFilePath });
+  };
+
+  updateScreen = (newScreen: number) => {
     this.setState({ currentScreen: newScreen });
-  }
+  };
 
   render() {
-    const { currentScreen, county } = this.state;
+    const { currentScreen, county, dojFilePath } = this.state;
     return (
       <PageContainer>
         <CountySelectFormCard
@@ -118,6 +116,8 @@ export default class Home extends Component<Props, State> {
         <DojFileSelectFormCard
           currentScreen={currentScreen}
           countyName={county.name}
+          onFileSelect={this.updateFilePath}
+          dojFilePath={dojFilePath}
         />
       </PageContainer>
     );
