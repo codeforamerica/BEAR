@@ -13,7 +13,6 @@ function setup() {
   const fakeOnCountyConfirm = sandbox.spy();
   const component = shallow(
     <CountySelectFormCard
-      screenNumber={1}
       currentScreen={1}
       onCountySelect={fakeOnCountySelect}
       onCountyConfirm={fakeOnCountyConfirm}
