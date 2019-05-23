@@ -35,26 +35,39 @@ afterEach(() => {
 });
 
 describe('Home component', () => {
-  describe('gogen path', () => {
-    it('should point to the home directory when the app is not packaged', () => {
+  describe('initial state', () => {
+    it('sets the currentScreen to 1', () => {
       const { component } = setup('false');
-      const gogenPath = component.state('gogenPath');
-      expect(gogenPath).toEqual('/test/home/path/go/bin/gogen');
+      expect(component.state('currentScreen')).toEqual(1);
     });
 
-    describe('when the platform is windows', () => {
-      it('should point to an exe in the resources directory when the app is packaged', () => {
-        const { component } = setup('true', 'windows');
+    it('sets the county to an object with an empty name and value', () => {
+      const { component } = setup('false');
+      const county = component.state('county');
+      expect(county).toEqual({ name: '', code: '' });
+    });
+
+    describe('gogen path', () => {
+      it('should point to the home directory when the app is not packaged', () => {
+        const { component } = setup('false');
         const gogenPath = component.state('gogenPath');
-        expect(gogenPath).toEqual('/test/resources/path/gogen.exe');
+        expect(gogenPath).toEqual('/test/home/path/go/bin/gogen');
       });
-    });
 
-    describe('when the platform is darwin (mac)', () => {
-      it('should point to a mac binary in the resources directory when the app is packaged', () => {
-        const { component } = setup('true', 'darwin');
-        const gogenPath = component.state('gogenPath');
-        expect(gogenPath).toEqual('/test/resources/path/gogen');
+      describe('when the platform is windows', () => {
+        it('should point to an exe in the resources directory when the app is packaged', () => {
+          const { component } = setup('true', 'windows');
+          const gogenPath = component.state('gogenPath');
+          expect(gogenPath).toEqual('/test/resources/path/gogen.exe');
+        });
+      });
+
+      describe('when the platform is darwin (mac)', () => {
+        it('should point to a mac binary in the resources directory when the app is packaged', () => {
+          const { component } = setup('true', 'darwin');
+          const gogenPath = component.state('gogenPath');
+          expect(gogenPath).toEqual('/test/resources/path/gogen');
+        });
       });
     });
   });
@@ -66,6 +79,15 @@ describe('Home component', () => {
       expect(component.state('county')).toEqual({ name: '', code: '' });
       component.instance().updateCounty(newCounty);
       expect(component.state('county')).toEqual(newCounty);
+    });
+  });
+
+  describe('updateScreen', () => {
+    it('updates state.currentScreen to the supplied value', () => {
+      const { component } = setup('true');
+      expect(component.state('currentScreen')).toEqual(1);
+      component.instance().updateScreen(3);
+      expect(component.state('currentScreen')).toEqual(3);
     });
   });
 

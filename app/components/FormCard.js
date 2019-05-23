@@ -4,12 +4,18 @@ import FormCardFooter from './FormCardFooter';
 import FormCardContent from './FormCardContent';
 
 type Props = {
+  currentScreen: number,
+  screenNumber: number,
   children: [Component]
 };
 
 export default class FormCard extends Component<Props, State> {
   render() {
-    const { children } = this.props;
+    const { currentScreen, screenNumber, children } = this.props;
+
+    if (currentScreen !== screenNumber) {
+      return null;
+    }
 
     return <div className="form-card">{children}</div>;
   }

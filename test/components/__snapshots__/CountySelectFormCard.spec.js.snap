@@ -337,6 +337,7 @@ exports[`CountySelectFormCard component should match exact snapshot 1`] = `
     >
       <button
         className="button button--primary"
+        onClick={[Function]}
         type="button"
       >
         Continue 

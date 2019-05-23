@@ -9,15 +9,23 @@ import FormCard, {
 import CountySelect from './CountySelect';
 
 type Props = {
+  currentScreen: number,
   onCountySelect: County => void,
-  onCountyConfirm: () => void
+  onCountyConfirm: number => void
 };
 
+const screenNumber = 1;
+
 export default class CountySelectFormCard extends Component<Props> {
+  onContinue = () => {
+    const { onCountyConfirm } = this.props;
+    onCountyConfirm(screenNumber + 1);
+  };
+
   render() {
-    const { onCountySelect, onCountyConfirm } = this.props;
+    const { currentScreen, onCountySelect } = this.props;
     return (
-      <FormCard>
+      <FormCard currentScreen={currentScreen} screenNumber={screenNumber}>
         <FormCardHeader>Proposition 64 CA DOJ data upload</FormCardHeader>
         <FormCardContent>
           <CountySelect onCountySelect={onCountySelect} />
@@ -25,7 +33,7 @@ export default class CountySelectFormCard extends Component<Props> {
         <FormCardFooter>
           <button
             className="button button--primary"
-            onClick={onCountyConfirm}
+            onClick={this.onContinue}
             type="button"
           >
             Continue <i className="icon-arrow_forward" />

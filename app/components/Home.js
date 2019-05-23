@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import path from 'path';
 import CountySelectFormCard from './CountySelectFormCard';
+import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
 
 type Props = {
@@ -14,6 +15,7 @@ type Props = {
 type State = {
   gogenPath: string,
   county: County,
+  currentScreen: number,
   dojFilePath: string,
   outputFilePath: string
 };
@@ -22,6 +24,8 @@ export default class Home extends Component<Props, State> {
   runScript: () => void;
 
   updateCounty: (county: County) => void;
+
+  updateScreen: (newScreen: number) => void;
 
   constructor(props: Props) {
     super(props);
@@ -58,12 +62,14 @@ export default class Home extends Component<Props, State> {
     this.state = {
       gogenPath,
       county: { name: '', code: '' },
+      currentScreen: 1,
       dojFilePath: `${home}/go/src/gogen/test_fixtures/sacramento/cadoj_sacramento.csv`,
       outputFilePath: `${home}/Desktop`
     };
 
     this.runScript = this.runScript.bind(this);
     this.updateCounty = this.updateCounty.bind(this);
+    this.updateScreen = this.updateScreen.bind(this);
   }
 
   runScript() {
@@ -96,12 +102,22 @@ export default class Home extends Component<Props, State> {
     this.setState({ county });
   };
 
+  updateScreen(newScreen: number) {
+    this.setState({ currentScreen: newScreen });
+  }
+
   render() {
+    const { currentScreen, county } = this.state;
     return (
       <PageContainer>
         <CountySelectFormCard
+          currentScreen={currentScreen}
           onCountySelect={this.updateCounty}
-          onCountyConfirm={this.runScript}
+          onCountyConfirm={this.updateScreen}
+        />
+        <DojFileSelectFormCard
+          currentScreen={currentScreen}
+          countyName={county.name}
         />
       </PageContainer>
     );
