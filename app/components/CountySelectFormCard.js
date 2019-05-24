@@ -11,6 +11,7 @@ import ContinueButton from './ContinueButton';
 
 type Props = {
   currentScreen: number,
+  selectedCounty: County,
   onCountySelect: County => void,
   onCountyConfirm: number => void
 };
@@ -19,8 +20,10 @@ const screenNumber = 1;
 
 export default class CountySelectFormCard extends Component<Props> {
   onContinue = () => {
-    const { onCountyConfirm } = this.props;
-    onCountyConfirm(screenNumber + 1);
+    const { selectedCounty, onCountyConfirm } = this.props;
+    if (selectedCounty.code !== '') {
+      onCountyConfirm(screenNumber + 1);
+    }
   };
 
   render() {

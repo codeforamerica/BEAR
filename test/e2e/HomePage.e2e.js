@@ -39,6 +39,13 @@ test('selecting county and clicking continue should show next screen', async t =
     .eql('Upload .dat file');
 });
 
+test('clicking continue without selecting a county should NOT show next screen', async t => {
+  await t
+    .click(continueButton)
+    .expect(getCardHeaderText())
+    .eql('Proposition 64 CA DOJ data upload');
+});
+
 test('selecting county and clicking continue should hide previous screen', async t => {
   await t
     .click(countySelect)

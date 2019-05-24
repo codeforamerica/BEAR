@@ -109,6 +109,7 @@ export default class Home extends Component<Props, State> {
     return (
       <PageContainer>
         <CountySelectFormCard
+          selectedCounty={county}
           currentScreen={currentScreen}
           onCountySelect={this.updateCounty}
           onCountyConfirm={this.updateScreen}
