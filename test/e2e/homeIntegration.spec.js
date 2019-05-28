@@ -77,4 +77,21 @@ describe('The happy path', () => {
       });
     });
   });
+
+  it('can select doj file and continue to eligibility options screen', () => {
+    const countySelect = app.client.$('#county-select');
+    return countySelect.selectByVisibleText('Sacramento').then(() => {
+      return app.client.click('.button').then(() => {
+        return app.client
+          .chooseFile('#doj-file-input', './test/fixtures/file.dat')
+          .then(() => {
+            return app.client.click('.button').then(() => {
+              return app.client.getText('.form-card__title').then(pageTitle => {
+                return expect(pageTitle).toEqual('Analysis for Implementation');
+              });
+            });
+          });
+      });
+    });
+  });
 });

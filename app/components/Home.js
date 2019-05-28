@@ -4,6 +4,7 @@ import path from 'path';
 import CountySelectFormCard from './CountySelectFormCard';
 import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
+import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 
 type Props = {
   spawnChildProcess: (
@@ -119,7 +120,9 @@ export default class Home extends Component<Props, State> {
           countyName={county.name}
           updateFilePath={this.updateFilePath}
           dojFilePath={dojFilePath}
+          onFileConfirm={this.updateScreen}
         />
+        <EligibilityOptionsFormCard currentScreen={currentScreen} />
       </PageContainer>
     );
   }

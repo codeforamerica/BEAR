@@ -13,16 +13,19 @@ const sandbox = sinon.sandbox.create();
 
 function setup(dojFilePath) {
   const fakeUpdateFilePath = sandbox.spy();
+  const onFileConfirmSpy = sandbox.spy();
   const component = mount(
     <DojFileSelectFormCard
       currentScreen={2}
       updateFilePath={fakeUpdateFilePath}
+      onFileConfirm={onFileConfirmSpy}
       dojFilePath={dojFilePath}
     />
   );
   return {
     component,
-    fakeUpdateFilePath
+    fakeUpdateFilePath,
+    onFileConfirmSpy
   };
 }
 
@@ -76,6 +79,16 @@ describe('DojFileSelectFormCard component', () => {
       expect(component.containsAnyMatchingElements([<DojFileItem />])).toEqual(
         true
       );
+    });
+  });
+
+  describe('clicking the continue button', () => {
+    it('should call onFileConfirm with the next screen number', () => {
+      const { component, onFileConfirmSpy } = setup('path/to/file');
+      component.find('.button').simulate('click');
+      expect(onFileConfirmSpy.called).toBe(true);
+      const { args } = onFileConfirmSpy.getCall(0);
+      expect(args[0]).toEqual(3);
     });
   });
 

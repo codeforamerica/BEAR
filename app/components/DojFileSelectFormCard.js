@@ -13,7 +13,8 @@ import FormCard, {
 type Props = {
   currentScreen: number,
   dojFilePath: string,
-  updateFilePath: string => void
+  updateFilePath: string => void,
+  onFileConfirm: number => void
 };
 
 const screenNumber = 2;
@@ -22,7 +23,7 @@ export default class DojFileSelectFormCard extends Component<Props> {
   renderContinueButton = () => {
     const { dojFilePath } = this.props;
     if (dojFilePath !== '') {
-      return <ContinueButton onContinue={() => {}} />;
+      return <ContinueButton onContinue={this.onContinue} />;
     }
   };
 
@@ -35,6 +36,11 @@ export default class DojFileSelectFormCard extends Component<Props> {
     }
 
     return <DojFileInput onFileSelect={updateFilePath} />;
+  };
+
+  onContinue = () => {
+    const { onFileConfirm } = this.props;
+    onFileConfirm(screenNumber + 1);
   };
 
   render() {
