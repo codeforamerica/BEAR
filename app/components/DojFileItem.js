@@ -4,7 +4,8 @@ import path from 'path';
 import styles from './DojFileItem.css';
 
 type Props = {
-  filePath: string
+  filePath: string,
+  onFileRemove: string => void
 };
 
 export default class DojFileItem extends Component<Props> {
@@ -13,12 +14,22 @@ export default class DojFileItem extends Component<Props> {
     return filePath.split(path.sep).pop();
   };
 
+  handleFileRemove = () => {
+    const { onFileRemove } = this.props;
+    onFileRemove('');
+  };
+
   render() {
     return (
       <div className="doj-file">
         <p className={styles.fileName}>
           {this.formatFileName()}
-          <i className={`${styles.fileRemove} icon-close`} />
+          {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}
+          <i
+            className={`${styles.fileRemove} icon-close`}
+            onClick={this.handleFileRemove}
+            role="button"
+          />
         </p>
       </div>
     );

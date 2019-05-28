@@ -12,17 +12,17 @@ Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.sandbox.create();
 
 function setup(dojFilePath) {
-  const fakeOnFileSelect = sandbox.spy();
+  const fakeUpdateFilePath = sandbox.spy();
   const component = mount(
     <DojFileSelectFormCard
       currentScreen={2}
-      onFileSelect={fakeOnFileSelect}
+      updateFilePath={fakeUpdateFilePath}
       dojFilePath={dojFilePath}
     />
   );
   return {
     component,
-    fakeOnFileSelect
+    fakeUpdateFilePath
   };
 }
 

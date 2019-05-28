@@ -9,9 +9,13 @@ Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.sandbox.create();
 
 function setup(filePath) {
-  const component = shallow(<DojFileItem filePath={filePath} />);
+  const onFileRemoveSpy = sandbox.spy();
+  const component = shallow(
+    <DojFileItem filePath={filePath} onFileRemove={onFileRemoveSpy} />
+  );
   return {
-    component
+    component,
+    onFileRemoveSpy
   };
 }
 
@@ -24,6 +28,14 @@ describe('DojFileItem component', () => {
     const { component } = setup('path/to/file.dat');
     const fileName = component.find('.fileName');
     expect(fileName.text()).toEqual('file.dat');
+  });
+
+  it('should call onFileRemove with empty string when the close icon is clicked', () => {
+    const { component, onFileRemoveSpy } = setup('path/to/file.dat');
+    component.find('.icon-close').simulate('click');
+    expect(onFileRemoveSpy.called).toBe(true);
+    const { args } = onFileRemoveSpy.getCall(0);
+    expect(args[0]).toEqual('');
   });
 
   it('should match exact snapshot', () => {

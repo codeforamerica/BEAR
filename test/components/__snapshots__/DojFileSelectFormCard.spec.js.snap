@@ -26,6 +26,8 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
           file
           <i
             className="fileRemove icon-close"
+            onClick={[Function]}
+            role="button"
           />
         </p>
       </div>

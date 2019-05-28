@@ -117,7 +117,7 @@ export default class Home extends Component<Props, State> {
         <DojFileSelectFormCard
           currentScreen={currentScreen}
           countyName={county.name}
-          onFileSelect={this.updateFilePath}
+          updateFilePath={this.updateFilePath}
           dojFilePath={dojFilePath}
         />
       </PageContainer>

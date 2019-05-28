@@ -10,6 +10,8 @@ exports[`DojFileItem component should match exact snapshot 1`] = `
     file
     <i
       className="fileRemove icon-close"
+      onClick={[Function]}
+      role="button"
     />
   </p>
 </div>

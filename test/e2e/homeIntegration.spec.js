@@ -36,7 +36,7 @@ describe('The happy path', () => {
     });
   });
 
-  it('does NOT continue to next screen id county is not selected', () => {
+  it('does NOT continue to next screen if county is not selected', () => {
     return app.client.click('.button').then(() => {
       return app.client.getText('.form-card__title').then(pageTitle => {
         return expect(pageTitle).toEqual('Proposition 64 CA DOJ data upload');
@@ -53,6 +53,25 @@ describe('The happy path', () => {
           .then(() => {
             return app.client.getText('.doj-file').then(fileName => {
               return expect(fileName).toEqual('file.dat');
+            });
+          });
+      });
+    });
+  });
+
+  it('can remove selected doj file', () => {
+    const countySelect = app.client.$('#county-select');
+    return countySelect.selectByVisibleText('Sacramento').then(() => {
+      return app.client.click('.button').then(() => {
+        return app.client
+          .chooseFile('#doj-file-input', './test/fixtures/file.dat')
+          .then(() => {
+            return app.client.click('.icon-close').then(() => {
+              return app.client
+                .getText('.file-upload__label')
+                .then(buttonText => {
+                  return expect(buttonText).toEqual('Upload File');
+                });
             });
           });
       });

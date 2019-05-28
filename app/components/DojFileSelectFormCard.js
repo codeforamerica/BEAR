@@ -13,7 +13,7 @@ import FormCard, {
 type Props = {
   currentScreen: number,
   dojFilePath: string,
-  onFileSelect: string => void
+  updateFilePath: string => void
 };
 
 const screenNumber = 2;
@@ -27,12 +27,14 @@ export default class DojFileSelectFormCard extends Component<Props> {
   };
 
   renderCardContent = () => {
-    const { dojFilePath, onFileSelect } = this.props;
+    const { dojFilePath, updateFilePath } = this.props;
     if (dojFilePath !== '') {
-      return <DojFileItem filePath={dojFilePath} />;
+      return (
+        <DojFileItem filePath={dojFilePath} onFileRemove={updateFilePath} />
+      );
     }
 
-    return <DojFileInput onFileSelect={onFileSelect} />;
+    return <DojFileInput onFileSelect={updateFilePath} />;
   };
 
   render() {
