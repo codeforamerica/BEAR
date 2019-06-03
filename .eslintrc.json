@@ -6,5 +6,8 @@
         "config": "configs/webpack.config.eslint.js"
       }
     }
+  },
+  "rules": {
+    "react/jsx-boolean-value": "off"
   }
 }
