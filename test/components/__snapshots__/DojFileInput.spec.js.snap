@@ -9,6 +9,7 @@ exports[`DojFileInput component should match exact snapshot 1`] = `
     htmlFor="doj-file-input"
   >
     <input
+      accept=".dat, .csv"
       className="file-upload__input"
       id="doj-file-input"
       name="doj-file-input"

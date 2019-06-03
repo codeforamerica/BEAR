@@ -19,6 +19,7 @@ export default class DojFileInput extends Component<Props> {
           <input
             onChange={this.handleFileSelection}
             type="file"
+            accept=".dat, .csv"
             id="doj-file-input"
             name="doj-file-input"
             className="file-upload__input"
