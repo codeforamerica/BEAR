@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = `
+<div>
+  <div
+    className="form-card"
+  >
+    <header
+      className="form-card__header"
+    >
+      <h1
+        className="form-card__title"
+      >
+        Analysis for Implementation
+      </h1>
+    </header>
+    <div
+      className="form-card__content"
+    >
+      <table
+        className="data-table"
+      >
+        <thead>
+          <tr>
+            <th>
+              Type
+            </th>
+            <th>
+              Dismiss
+            </th>
+            <th>
+              Reduce
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <p>
+                All misdemeanors and infractions
+              </p>
+            </td>
+            <td>
+              <input
+                className="radioButton"
+                defaultChecked={true}
+                id="misdemeanor_infraction_no_reduce_option"
+                name="no_reduce_option"
+                type="radio"
+              />
+            </td>
+            <td />
+          </tr>
+          <tr>
+            <td>
+              <p>
+                HS 11357a felonies
+              </p>
+            </td>
+            <td>
+              <input
+                className="radioButton"
+                defaultChecked={true}
+                id="dismiss_11357a"
+                name="11357a"
+                type="radio"
+              />
+            </td>
+            <td>
+              <input
+                className="radioButton"
+                defaultChecked={false}
+                id="reduce_11357a"
+                name="11357a"
+                type="radio"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div
+      className="form-card__footer"
+    />
+  </div>
+</div>
+`;

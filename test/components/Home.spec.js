@@ -47,6 +47,22 @@ describe('Home component', () => {
       expect(county).toEqual({ name: '', code: '' });
     });
 
+    it('sets the baseline eligibility options to an object with all options set to dismiss', () => {
+      const { component } = setup('false');
+      const baselineEligibilityOptions = component.state(
+        'baselineEligibilityOptions'
+      );
+      expect(baselineEligibilityOptions).toEqual({
+        '11357(a)': 'dismiss',
+        '11357(b)': 'dismiss',
+        '11357(c)': 'dismiss',
+        '11357(d)': 'dismiss',
+        '11358': 'dismiss',
+        '11359': 'dismiss',
+        '11360': 'dismiss'
+      });
+    });
+
     describe('gogen path', () => {
       it('should point to the home directory when the app is not packaged', () => {
         const { component } = setup('false');

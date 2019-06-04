@@ -15,9 +15,10 @@ type Props = {
 
 type State = {
   gogenPath: string,
-  county: County,
   currentScreen: number,
+  county: County,
   dojFilePath: string,
+  baselineEligibilityOptions: BaselineEligibilityOptions,
   outputFilePath: string
 };
 
@@ -58,9 +59,18 @@ export default class Home extends Component<Props, State> {
 
     this.state = {
       gogenPath,
-      county: { name: '', code: '' },
       currentScreen: 1,
+      county: { name: '', code: '' },
       dojFilePath: '',
+      baselineEligibilityOptions: {
+        '11357(a)': 'dismiss',
+        '11357(b)': 'dismiss',
+        '11357(c)': 'dismiss',
+        '11357(d)': 'dismiss',
+        '11358': 'dismiss',
+        '11359': 'dismiss',
+        '11360': 'dismiss'
+      },
       outputFilePath: `${home}/Desktop`
     };
 
@@ -106,7 +116,12 @@ export default class Home extends Component<Props, State> {
   };
 
   render() {
-    const { currentScreen, county, dojFilePath } = this.state;
+    const {
+      currentScreen,
+      county,
+      dojFilePath,
+      baselineEligibilityOptions
+    } = this.state;
     return (
       <PageContainer>
         <CountySelectFormCard
@@ -122,7 +137,10 @@ export default class Home extends Component<Props, State> {
           dojFilePath={dojFilePath}
           onFileConfirm={this.updateScreen}
         />
-        <EligibilityOptionsFormCard currentScreen={currentScreen} />
+        <EligibilityOptionsFormCard
+          currentScreen={currentScreen}
+          eligibilityOptions={baselineEligibilityOptions}
+        />
       </PageContainer>
     );
   }

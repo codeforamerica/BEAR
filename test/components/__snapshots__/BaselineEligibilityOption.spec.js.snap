@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
+<tr>
+  <td>
+    <p>
+      HS HS 11357 (a) felonies
+    </p>
+  </td>
+  <td>
+    <input
+      className="radioButton"
+      defaultChecked={true}
+      id="dismiss_HS 11357 (a)"
+      name="HS 11357 (a)"
+      type="radio"
+    />
+  </td>
+  <td>
+    <input
+      className="radioButton"
+      defaultChecked={false}
+      id="reduce_HS 11357 (a)"
+      name="HS 11357 (a)"
+      type="radio"
+    />
+  </td>
+</tr>
+`;

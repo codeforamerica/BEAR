@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RadioButton component should match exact snapshot 1`] = `
+<input
+  className="radioButton"
+  id="whatever_nihilists"
+  name="nihilists"
+  type="radio"
+/>
+`;
