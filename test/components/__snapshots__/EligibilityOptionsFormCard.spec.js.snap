@@ -46,6 +46,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
                 defaultChecked={true}
                 id="misdemeanor_infraction_no_reduce_option"
                 name="no_reduce_option"
+                onChange={[Function]}
                 type="radio"
               />
             </td>
@@ -63,6 +64,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
                 defaultChecked={true}
                 id="dismiss_11357a"
                 name="11357a"
+                onChange={[Function]}
                 type="radio"
               />
             </td>
@@ -72,6 +74,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
                 defaultChecked={false}
                 id="reduce_11357a"
                 name="11357a"
+                onChange={[Function]}
                 type="radio"
               />
             </td>
@@ -81,7 +84,20 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
     </div>
     <div
       className="form-card__footer"
-    />
+    >
+      <div>
+        <button
+          className="button button--primary"
+          onClick={[Function]}
+          type="button"
+        >
+          Continue 
+          <i
+            className="icon-arrow_forward"
+          />
+        </button>
+      </div>
+    </div>
   </div>
 </div>
 `;

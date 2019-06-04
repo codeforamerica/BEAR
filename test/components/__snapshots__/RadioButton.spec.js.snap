@@ -5,6 +5,7 @@ exports[`RadioButton component should match exact snapshot 1`] = `
   className="radioButton"
   id="whatever_nihilists"
   name="nihilists"
+  onChange={[Function]}
   type="radio"
 />
 `;

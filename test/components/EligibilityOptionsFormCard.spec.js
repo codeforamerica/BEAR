@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import EligibilityOptionsFormCard from '../../app/components/EligibilityOptionsFormCard';
@@ -19,14 +19,17 @@ function setup() {
     hs11359: 'dismiss',
     hs11360: 'reduce'
   };
-  const component = shallow(
+  const onOptionsConfirmSpy = sandbox.spy();
+  const component = mount(
     <EligibilityOptionsFormCard
       currentScreen={3}
       eligibilityOptions={options}
+      onOptionsConfirm={onOptionsConfirmSpy}
     />
   );
   return {
-    component
+    component,
+    onOptionsConfirmSpy
   };
 }
 
@@ -93,6 +96,16 @@ describe('EligibilityOptionsFormCard component', () => {
         />
       ])
     ).toEqual(true);
+  });
+
+  describe('clicking the continue button', () => {
+    it('should call onOptionsConfirm with the next screen number', () => {
+      const { component, onOptionsConfirmSpy } = setup('path/to/file');
+      component.find('.button').simulate('click');
+      expect(onOptionsConfirmSpy.called).toBe(true);
+      const { args } = onOptionsConfirmSpy.getCall(0);
+      expect(args[0]).toEqual(4);
+    });
   });
 
   it('should match exact snapshot', () => {

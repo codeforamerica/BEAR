@@ -106,7 +106,7 @@ describe('The happy path', () => {
               return app.client.click('#reduce_11360').then(() => {
                 return app.client.click('.button').then(() => {
                   return app.client
-                    .getText('.form-card__content')
+                    .getText('.form-card__title')
                     .then(cardContent => {
                       return expect(cardContent).toEqual(
                         'Preparing your files'

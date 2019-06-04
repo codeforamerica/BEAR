@@ -51,20 +51,6 @@ describe('BaselineEligibilityOption component', () => {
     ).toEqual(true);
   });
 
-  // it('selects the correct radio button depending on which option is selected', () => {
-  //   const { component } = setup('dismiss');
-  //   const fileInput = component.find('#doj-file-input');
-  //   const fakeEvent = {
-  //     currentTarget: {
-  //       files: [{ path: 'path/to/file' }]
-  //     }
-  //   };
-  //   fileInput.simulate('change', fakeEvent);
-  //   expect(onFileSelectSpy.called).toBe(true);
-  //   const { args } = onFileSelectSpy.getCall(0);
-  //   expect(args[0]).toEqual('path/to/file');
-  // });
-
   it('should match exact snapshot', () => {
     const { component } = setup('dismiss');
     const tree = renderer.create(component).toJSON();

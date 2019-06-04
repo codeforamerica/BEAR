@@ -117,6 +117,19 @@ describe('Home component', () => {
     });
   });
 
+  describe('updateEligibilityOptions', () => {
+    it('updates state.baselineEligibilityOptions for the given code section and option', () => {
+      const { component } = setup('true');
+      expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
+        'dismiss'
+      );
+      component.instance().updateEligibilityOptions('11357(a)', 'reduce');
+      expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
+        'reduce'
+      );
+    });
+  });
+
   describe('runScript', () => {
     it('calls child process with values from state', () => {
       const { component, fakeSpawnChildProcess } = setup('false');

@@ -5,6 +5,7 @@ import CountySelectFormCard from './CountySelectFormCard';
 import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
 import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
+import ProcessingFormCard from './ProcessingFormCard';
 
 type Props = {
   spawnChildProcess: (
@@ -111,6 +112,19 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePath });
   };
 
+  updateEligibilityOptions = (codeSection: string, option: string) => {
+    const { baselineEligibilityOptions } = this.state;
+    const newOption = {};
+    newOption[codeSection] = option;
+
+    const newEligibilityOptions = {
+      ...baselineEligibilityOptions,
+      ...newOption
+    };
+
+    this.setState({ baselineEligibilityOptions: newEligibilityOptions });
+  };
+
   updateScreen = (newScreen: number) => {
     this.setState({ currentScreen: newScreen });
   };
@@ -140,7 +154,10 @@ export default class Home extends Component<Props, State> {
         <EligibilityOptionsFormCard
           currentScreen={currentScreen}
           eligibilityOptions={baselineEligibilityOptions}
+          onEligibilityOptionSelect={this.updateEligibilityOptions}
+          onOptionsConfirm={this.updateScreen}
         />
+        <ProcessingFormCard currentScreen={currentScreen} />
       </PageContainer>
     );
   }

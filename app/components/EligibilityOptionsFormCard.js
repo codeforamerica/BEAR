@@ -8,17 +8,29 @@ import FormCard, {
 } from './FormCard';
 import BaselineEligibilityOption from './BaselineEligibilityOption';
 import RadioButton from './RadioButton';
+import ContinueButton from './ContinueButton';
 
 type Props = {
   currentScreen: number,
-  eligibilityOptions: BaselineEligibilityOptions
+  eligibilityOptions: BaselineEligibilityOptions,
+  onEligibilityOptionSelect: (string, string) => void,
+  onOptionsConfirm: number => void
 };
 
 const screenNumber = 3;
 
 export default class EligibilityOptionsFormCard extends Component<Props> {
+  onContinue = () => {
+    const { onOptionsConfirm } = this.props;
+    onOptionsConfirm(screenNumber + 1);
+  };
+
   render() {
-    const { currentScreen, eligibilityOptions } = this.props;
+    const {
+      currentScreen,
+      eligibilityOptions,
+      onEligibilityOptionSelect
+    } = this.props;
     return (
       <FormCard currentScreen={currentScreen} screenNumber={screenNumber}>
         <FormCardHeader>Analysis for Implementation</FormCardHeader>
@@ -52,6 +64,7 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
                       key={codeSection}
                       codeSection={codeSection}
                       selectedOption={selectedOption}
+                      onEligibilityOptionSelect={onEligibilityOptionSelect}
                     />
                   );
                 }
@@ -59,7 +72,9 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
             </tbody>
           </table>
         </FormCardContent>
-        <FormCardFooter />
+        <FormCardFooter>
+          <ContinueButton onContinue={this.onContinue} />
+        </FormCardFooter>
       </FormCard>
     );
   }

@@ -13,6 +13,7 @@ exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
       defaultChecked={true}
       id="dismiss_HS 11357 (a)"
       name="HS 11357 (a)"
+      onChange={[Function]}
       type="radio"
     />
   </td>
@@ -22,6 +23,7 @@ exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
       defaultChecked={false}
       id="reduce_HS 11357 (a)"
       name="HS 11357 (a)"
+      onChange={[Function]}
       type="radio"
     />
   </td>
