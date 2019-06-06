@@ -7,10 +7,9 @@ import DojFileSelectFormCard from '../../app/components/DojFileSelectFormCard';
 import ContinueButton from '../../app/components/ContinueButton';
 import DojFileItem from '../../app/components/DojFileItem';
 import DojFileInput from '../../app/components/DojFileInput';
-import DisabledContinueButton from '../../app/components/DisabledContinueButton';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup(dojFilePath) {
   const fakeUpdateFilePath = sandbox.spy();
@@ -57,9 +56,7 @@ describe('DojFileSelectFormCard component', () => {
   describe('the Continue button', () => {
     it('should appear as disabled if the file path is empty', () => {
       const { component } = setup('');
-      expect(
-        component.containsAnyMatchingElements([<DisabledContinueButton />])
-      ).toEqual(true);
+      expect(component.find('ContinueButton').props().disabled).toEqual(true);
     });
 
     it('should appear if the file path is not empty', () => {

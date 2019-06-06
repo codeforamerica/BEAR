@@ -10,7 +10,6 @@ import FormCard, {
   FormCardHeader
 } from './FormCard';
 import GoBackButton from './GoBackButton';
-import DisabledContinueButton from './DisabledContinueButton';
 
 type Props = {
   dojFilePath: string,
@@ -20,14 +19,6 @@ type Props = {
 };
 
 export default class DojFileSelectFormCard extends Component<Props> {
-  renderContinueButton = () => {
-    const { dojFilePath } = this.props;
-    if (dojFilePath !== '') {
-      return <ContinueButton onContinue={this.onContinue} />;
-    }
-    return <DisabledContinueButton />;
-  };
-
   renderCardContent = () => {
     const { dojFilePath, updateFilePath } = this.props;
     if (dojFilePath !== '') {
@@ -51,13 +42,18 @@ export default class DojFileSelectFormCard extends Component<Props> {
   };
 
   render() {
+    const { dojFilePath } = this.props;
+
     return (
       <FormCard>
         <FormCardHeader>Upload .dat file</FormCardHeader>
         <FormCardContent>{this.renderCardContent()}</FormCardContent>
         <FormCardFooter>
           <div className="buttons">
-            {this.renderContinueButton()}
+            <ContinueButton
+              onContinue={this.onContinue}
+              disabled={dojFilePath === ''}
+            />
             <GoBackButton onGoBack={this.onGoBack} />
           </div>
         </FormCardFooter>

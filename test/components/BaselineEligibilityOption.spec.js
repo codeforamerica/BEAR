@@ -7,7 +7,7 @@ import BaselineEligibilityOption from '../../app/components/BaselineEligibilityO
 import RadioButton from '../../app/components/RadioButton';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup(selectedOption) {
   const component = shallow(

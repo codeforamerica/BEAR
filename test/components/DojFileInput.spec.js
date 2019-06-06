@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import DojFileInput from '../../app/components/DojFileInput';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup() {
   const onFileSelectSpy = sandbox.spy();

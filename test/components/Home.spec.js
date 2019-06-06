@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import Home from '../../app/components/Home';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup(isPackaged, platform = 'windows') {
   process.env.HOME = '/test/home/path';

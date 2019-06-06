@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import CountySelectFormCard from '../../app/components/CountySelectFormCard';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup(selectedCounty) {
   const fakeOnCountySelect = sandbox.spy();
@@ -39,6 +39,7 @@ describe('CountySelectFormCard component', () => {
       continueButton.simulate('click');
       expect(fakeOnCountyConfirm.called).toBe(true);
       expect(fakeOnCountyConfirm.callCount).toEqual(1);
+      expect(component.find('select').props().value).toBe('ALAMEDA');
     });
   });
 
@@ -49,13 +50,16 @@ describe('CountySelectFormCard component', () => {
       const continueButton = component.find('button').at(0);
       continueButton.simulate('click');
       expect(fakeOnCountyConfirm.called).toBe(false);
+      expect(component.find('select').props().value).toBe('');
     });
   });
 
   it('should match exact snapshot', () => {
+    const defaultCounty = { name: '', code: '' };
+
     const component = (
       <div>
-        <CountySelectFormCard currentScreen={1} />
+        <CountySelectFormCard selectedCounty={defaultCounty} />
       </div>
     );
 

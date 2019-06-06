@@ -4,7 +4,8 @@ import React, { Component } from 'react';
 import counties from '../constants/californiaCounties';
 
 type Props = {
-  onCountySelect: County => void
+  onCountySelect: County => void,
+  selectedCounty: string
 };
 
 export default class CountySelect extends Component<Props> {
@@ -17,6 +18,7 @@ export default class CountySelect extends Component<Props> {
   };
 
   render() {
+    const { selectedCounty } = this.props;
     return (
       <div>
         <p className="form-question">Select your county</p>
@@ -25,7 +27,7 @@ export default class CountySelect extends Component<Props> {
             className="select__element"
             onChange={this.handleCountySelect}
             id="county-select"
-            defaultValue=""
+            value={selectedCounty}
           >
             <option value="" disabled>
               Choose a county

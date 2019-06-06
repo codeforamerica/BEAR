@@ -7,7 +7,7 @@ import EligibilityOptionsFormCard from '../../app/components/EligibilityOptionsF
 import BaselineEligibilityOption from '../../app/components/BaselineEligibilityOption';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup() {
   const options = {

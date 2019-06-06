@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import CountySelect from '../../app/components/CountySelect';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup() {
   const onCountySelectSpy = sandbox.spy();

@@ -16,23 +16,22 @@ type Props = {
 };
 
 export default class CountySelectFormCard extends Component<Props> {
-  onContinue = () => {
-    const { selectedCounty, onCountyConfirm } = this.props;
-    if (selectedCounty.code !== '') {
-      onCountyConfirm();
-    }
-  };
-
   render() {
-    const { onCountySelect } = this.props;
+    const { onCountySelect, onCountyConfirm, selectedCounty } = this.props;
     return (
       <FormCard>
         <FormCardHeader>Proposition 64 CA DOJ data upload</FormCardHeader>
         <FormCardContent>
-          <CountySelect onCountySelect={onCountySelect} />
+          <CountySelect
+            onCountySelect={onCountySelect}
+            selectedCounty={selectedCounty.code}
+          />
         </FormCardContent>
         <FormCardFooter>
-          <ContinueButton onContinue={this.onContinue} />
+          <ContinueButton
+            onContinue={onCountyConfirm}
+            disabled={selectedCounty.code === ''}
+          />
         </FormCardFooter>
       </FormCard>
     );

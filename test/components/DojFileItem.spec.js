@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import DojFileItem from '../../app/components/DojFileItem';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup(filePath) {
   const onFileRemoveSpy = sandbox.spy();

@@ -12,7 +12,6 @@ exports[`CountySelect component should match exact snapshot 1`] = `
   >
     <select
       className="select__element"
-      defaultValue=""
       id="county-select"
       onChange={[Function]}
     >

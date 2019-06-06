@@ -28,9 +28,9 @@ exports[`CountySelectFormCard component should match exact snapshot 1`] = `
         >
           <select
             className="select__element"
-            defaultValue=""
             id="county-select"
             onChange={[Function]}
+            value=""
           >
             <option
               disabled={true}
@@ -337,9 +337,9 @@ exports[`CountySelectFormCard component should match exact snapshot 1`] = `
     >
       <div>
         <button
-          className="button button--primary"
+          className="button button--primary button--disabled"
+          disabled={true}
           id="continue"
-          onClick={[Function]}
           type="button"
         >
           Continue 

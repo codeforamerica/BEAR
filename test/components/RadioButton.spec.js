@@ -6,7 +6,7 @@ import renderer from 'react-test-renderer';
 import RadioButton from '../../app/components/RadioButton';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.sandbox.create();
+const sandbox = sinon.createSandbox();
 
 function setup(selected) {
   const onSelectSpy = sandbox.spy();

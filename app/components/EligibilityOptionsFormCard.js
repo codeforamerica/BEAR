@@ -52,7 +52,6 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
               </tr>
               {Object.entries(eligibilityOptions).map(
                 ([codeSection, selectedOption]) => {
-                  console.log('mapped codesection', codeSection);
                   return (
                     <BaselineEligibilityOption
                       key={codeSection}
