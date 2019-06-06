@@ -38,7 +38,7 @@ describe('Home component', () => {
   describe('initial state', () => {
     it('sets the currentScreen to 1', () => {
       const { component } = setup('false');
-      expect(component.state('currentScreen')).toEqual(1);
+      expect(component.state('currentScreen')).toEqual(0);
     });
 
     it('sets the county to an object with an empty name and value', () => {
@@ -108,12 +108,22 @@ describe('Home component', () => {
     });
   });
 
-  describe('updateScreen', () => {
-    it('updates state.currentScreen to the supplied value', () => {
+  describe('nextScreen', () => {
+    it('increments state.currentScreen', () => {
       const { component } = setup('true');
+      expect(component.state('currentScreen')).toEqual(0);
+      component.instance().nextScreen();
       expect(component.state('currentScreen')).toEqual(1);
-      component.instance().updateScreen(3);
+    });
+  });
+
+  describe('previousScreen', () => {
+    it('decrements state.currentScreen', () => {
+      const { component } = setup('true');
+      component.instance().setState({ currentScreen: 3 });
       expect(component.state('currentScreen')).toEqual(3);
+      component.instance().previousScreen();
+      expect(component.state('currentScreen')).toEqual(2);
     });
   });
 

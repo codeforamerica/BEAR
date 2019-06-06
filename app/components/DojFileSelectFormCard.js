@@ -9,15 +9,15 @@ import FormCard, {
   FormCardFooter,
   FormCardHeader
 } from './FormCard';
+import GoBackButton from './GoBackButton';
+import DisabledContinueButton from './DisabledContinueButton';
 
 type Props = {
-  currentScreen: number,
   dojFilePath: string,
   updateFilePath: string => void,
-  onFileConfirm: number => void
+  onFileConfirm: void => void,
+  onBack: void => void
 };
-
-const screenNumber = 2;
 
 export default class DojFileSelectFormCard extends Component<Props> {
   renderContinueButton = () => {
@@ -25,6 +25,7 @@ export default class DojFileSelectFormCard extends Component<Props> {
     if (dojFilePath !== '') {
       return <ContinueButton onContinue={this.onContinue} />;
     }
+    return <DisabledContinueButton />;
   };
 
   renderCardContent = () => {
@@ -40,16 +41,26 @@ export default class DojFileSelectFormCard extends Component<Props> {
 
   onContinue = () => {
     const { onFileConfirm } = this.props;
-    onFileConfirm(screenNumber + 1);
+    onFileConfirm();
+  };
+
+  onGoBack = () => {
+    const { onBack } = this.props;
+    onBack();
+    // TODO update state.county to '', but not sure how.
   };
 
   render() {
-    const { currentScreen } = this.props;
     return (
-      <FormCard currentScreen={currentScreen} screenNumber={screenNumber}>
+      <FormCard>
         <FormCardHeader>Upload .dat file</FormCardHeader>
         <FormCardContent>{this.renderCardContent()}</FormCardContent>
-        <FormCardFooter>{this.renderContinueButton()}</FormCardFooter>
+        <FormCardFooter>
+          <div className="buttons">
+            {this.renderContinueButton()}
+            <GoBackButton onGoBack={this.onGoBack} />
+          </div>
+        </FormCardFooter>
       </FormCard>
     );
   }

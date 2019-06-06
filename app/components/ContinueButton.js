@@ -13,6 +13,7 @@ export default class ContinueButton extends Component<Props> {
           className="button button--primary"
           onClick={onContinue}
           type="button"
+          id="continue"
         >
           Continue <i className="icon-arrow_forward" />
         </button>

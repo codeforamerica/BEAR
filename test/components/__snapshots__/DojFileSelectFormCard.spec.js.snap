@@ -35,17 +35,35 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
     <div
       className="form-card__footer"
     >
-      <div>
-        <button
-          className="button button--primary"
-          onClick={[Function]}
-          type="button"
-        >
-          Continue 
-          <i
-            className="icon-arrow_forward"
-          />
-        </button>
+      <div
+        className="buttons"
+      >
+        <div>
+          <button
+            className="button button--primary"
+            id="continue"
+            onClick={[Function]}
+            type="button"
+          >
+            Continue 
+            <i
+              className="icon-arrow_forward"
+            />
+          </button>
+        </div>
+        <div>
+          <button
+            className="button"
+            id="goback"
+            onClick={[Function]}
+            type="button"
+          >
+            Go back 
+            <i
+              className="icon-replay"
+            />
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -90,7 +108,36 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
     </div>
     <div
       className="form-card__footer"
-    />
+    >
+      <div
+        className="buttons"
+      >
+        <div>
+          <button
+            className="button button--primary button--disabled"
+            type="button"
+          >
+            Continue 
+            <i
+              className="icon-arrow_forward"
+            />
+          </button>
+        </div>
+        <div>
+          <button
+            className="button"
+            id="goback"
+            onClick={[Function]}
+            type="button"
+          >
+            Go back 
+            <i
+              className="icon-replay"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 `;

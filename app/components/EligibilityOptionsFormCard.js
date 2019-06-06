@@ -11,28 +11,21 @@ import RadioButton from './RadioButton';
 import ContinueButton from './ContinueButton';
 
 type Props = {
-  currentScreen: number,
   eligibilityOptions: BaselineEligibilityOptions,
   onEligibilityOptionSelect: (string, string) => void,
-  onOptionsConfirm: number => void
+  onOptionsConfirm: void => void
 };
-
-const screenNumber = 3;
 
 export default class EligibilityOptionsFormCard extends Component<Props> {
   onContinue = () => {
     const { onOptionsConfirm } = this.props;
-    onOptionsConfirm(screenNumber + 1);
+    onOptionsConfirm();
   };
 
   render() {
-    const {
-      currentScreen,
-      eligibilityOptions,
-      onEligibilityOptionSelect
-    } = this.props;
+    const { eligibilityOptions, onEligibilityOptionSelect } = this.props;
     return (
-      <FormCard currentScreen={currentScreen} screenNumber={screenNumber}>
+      <FormCard>
         <FormCardHeader>Analysis for Implementation</FormCardHeader>
         <FormCardContent>
           <table className="data-table">
@@ -59,6 +52,7 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
               </tr>
               {Object.entries(eligibilityOptions).map(
                 ([codeSection, selectedOption]) => {
+                  console.log('mapped codesection', codeSection);
                   return (
                     <BaselineEligibilityOption
                       key={codeSection}

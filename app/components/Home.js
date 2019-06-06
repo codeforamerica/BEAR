@@ -60,7 +60,7 @@ export default class Home extends Component<Props, State> {
 
     this.state = {
       gogenPath,
-      currentScreen: 1,
+      currentScreen: 0,
       county: { name: '', code: '' },
       dojFilePath: '',
       baselineEligibilityOptions: {
@@ -125,8 +125,14 @@ export default class Home extends Component<Props, State> {
     this.setState({ baselineEligibilityOptions: newEligibilityOptions });
   };
 
-  updateScreen = (newScreen: number) => {
-    this.setState({ currentScreen: newScreen });
+  nextScreen = () => {
+    const { currentScreen } = this.state;
+    this.setState({ currentScreen: currentScreen + 1 });
+  };
+
+  previousScreen = () => {
+    const { currentScreen } = this.state;
+    this.setState({ currentScreen: currentScreen - 1 });
   };
 
   render() {
@@ -137,25 +143,23 @@ export default class Home extends Component<Props, State> {
       baselineEligibilityOptions
     } = this.state;
     return (
-      <PageContainer>
+      <PageContainer currentScreen={currentScreen}>
         <CountySelectFormCard
           selectedCounty={county}
-          currentScreen={currentScreen}
           onCountySelect={this.updateCounty}
-          onCountyConfirm={this.updateScreen}
+          onCountyConfirm={this.nextScreen}
         />
         <DojFileSelectFormCard
-          currentScreen={currentScreen}
           countyName={county.name}
           updateFilePath={this.updateFilePath}
           dojFilePath={dojFilePath}
-          onFileConfirm={this.updateScreen}
+          onFileConfirm={this.nextScreen}
+          onBack={this.previousScreen}
         />
         <EligibilityOptionsFormCard
-          currentScreen={currentScreen}
           eligibilityOptions={baselineEligibilityOptions}
           onEligibilityOptionSelect={this.updateEligibilityOptions}
-          onOptionsConfirm={this.updateScreen}
+          onOptionsConfirm={this.nextScreen}
         />
         <ProcessingFormCard currentScreen={currentScreen} />
       </PageContainer>

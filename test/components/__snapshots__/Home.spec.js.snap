@@ -357,6 +357,7 @@ exports[`Home component should match exact snapshot 1`] = `
           <div>
             <button
               className="button button--primary"
+              id="continue"
               onClick={[Function]}
               type="button"
             >

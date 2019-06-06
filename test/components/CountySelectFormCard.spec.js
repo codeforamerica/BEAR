@@ -38,8 +38,7 @@ describe('CountySelectFormCard component', () => {
       const continueButton = component.find('button').at(0);
       continueButton.simulate('click');
       expect(fakeOnCountyConfirm.called).toBe(true);
-      const { args } = fakeOnCountyConfirm.getCall(0);
-      expect(args[0]).toEqual(2);
+      expect(fakeOnCountyConfirm.callCount).toEqual(1);
     });
   });
 

@@ -103,8 +103,7 @@ describe('EligibilityOptionsFormCard component', () => {
       const { component, onOptionsConfirmSpy } = setup('path/to/file');
       component.find('.button').simulate('click');
       expect(onOptionsConfirmSpy.called).toBe(true);
-      const { args } = onOptionsConfirmSpy.getCall(0);
-      expect(args[0]).toEqual(4);
+      expect(onOptionsConfirmSpy.callCount).toEqual(1);
     });
   });
 
