@@ -160,6 +160,7 @@ export default class Home extends Component<Props, State> {
           eligibilityOptions={baselineEligibilityOptions}
           onEligibilityOptionSelect={this.updateEligibilityOptions}
           onOptionsConfirm={this.nextScreen}
+          onBack={this.previousScreen}
         />
         <ProcessingFormCard currentScreen={currentScreen} />
       </PageContainer>

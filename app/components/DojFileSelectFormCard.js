@@ -38,7 +38,6 @@ export default class DojFileSelectFormCard extends Component<Props> {
   onGoBack = () => {
     const { onBack } = this.props;
     onBack();
-    // TODO update state.county to '', but not sure how.
   };
 
   render() {

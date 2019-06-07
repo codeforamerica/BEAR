@@ -12,11 +12,19 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
         className="form-card__title"
       >
         Analysis for Implementation
+        <p
+          className="options-copy"
+        >
+          Choose from the following options to expedite your office's review of records from the state summary criminal history information database for AB-1793.
+        </p>
       </h1>
     </header>
     <div
       className="form-card__content"
     >
+      <h2>
+        Baseline eligibility
+      </h2>
       <table
         className="data-table"
       >
@@ -85,19 +93,28 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
     <div
       className="form-card__footer"
     >
-      <div>
-        <button
-          className="button button--primary"
-          id="continue"
-          onClick={[Function]}
-          type="button"
-        >
-          Continue 
-          <i
-            className="icon-arrow_forward"
-          />
-        </button>
-      </div>
+      <button
+        className="button button--primary"
+        id="continue"
+        onClick={[Function]}
+        type="button"
+      >
+        Continue 
+        <i
+          className="icon-arrow_forward"
+        />
+      </button>
+      <button
+        className="button"
+        id="goback"
+        onClick={[Function]}
+        type="button"
+      >
+        Go back 
+        <i
+          className="icon-replay"
+        />
+      </button>
     </div>
   </div>
 </div>

@@ -354,20 +354,18 @@ exports[`Home component should match exact snapshot 1`] = `
         <div
           className="form-card__footer"
         >
-          <div>
-            <button
-              className="button button--primary button--disabled"
-              disabled={true}
-              id="continue"
-              onClick={[Function]}
-              type="button"
-            >
-              Continue 
-              <i
-                className="icon-arrow_forward"
-              />
-            </button>
-          </div>
+          <button
+            className="button button--primary button--disabled"
+            disabled={true}
+            id="continue"
+            onClick={[Function]}
+            type="button"
+          >
+            Continue 
+            <i
+              className="icon-arrow_forward"
+            />
+          </button>
         </div>
       </div>
     </div>

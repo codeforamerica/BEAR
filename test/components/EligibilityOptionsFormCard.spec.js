@@ -20,16 +20,19 @@ function setup() {
     hs11360: 'reduce'
   };
   const onOptionsConfirmSpy = sandbox.spy();
+  const onBackSpy = sandbox.spy();
   const component = mount(
     <EligibilityOptionsFormCard
       currentScreen={3}
       eligibilityOptions={options}
       onOptionsConfirm={onOptionsConfirmSpy}
+      onBack={onBackSpy}
     />
   );
   return {
     component,
-    onOptionsConfirmSpy
+    onOptionsConfirmSpy,
+    onBackSpy
   };
 }
 
@@ -99,11 +102,20 @@ describe('EligibilityOptionsFormCard component', () => {
   });
 
   describe('clicking the continue button', () => {
-    it('should call onOptionsConfirm with the next screen number', () => {
+    it('should call onOptionsConfirm once', () => {
       const { component, onOptionsConfirmSpy } = setup('path/to/file');
-      component.find('.button').simulate('click');
+      component.find('#continue').simulate('click');
       expect(onOptionsConfirmSpy.called).toBe(true);
       expect(onOptionsConfirmSpy.callCount).toEqual(1);
+    });
+  });
+
+  describe('clicking the go back button', () => {
+    it('should call onBack once', () => {
+      const { component, onBackSpy } = setup('path/to/file');
+      component.find('#goback').simulate('click');
+      expect(onBackSpy.called).toBe(true);
+      expect(onBackSpy.callCount).toEqual(1);
     });
   });
 

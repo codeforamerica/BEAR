@@ -19,17 +19,15 @@ export default class ContinueButton extends Component<Props> {
   render() {
     const { onContinue, disabled } = this.props;
     return (
-      <div>
-        <button
-          className={this.classes()}
-          onClick={onContinue}
-          type="button"
-          id="continue"
-          disabled={disabled}
-        >
-          Continue <i className="icon-arrow_forward" />
-        </button>
-      </div>
+      <button
+        className={this.classes()}
+        onClick={onContinue}
+        type="button"
+        id="continue"
+        disabled={disabled}
+      >
+        Continue <i className="icon-arrow_forward" />
+      </button>
     );
   }
 }
