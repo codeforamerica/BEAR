@@ -59,6 +59,21 @@ describe('The happy path', () => {
     });
   });
 
+  it('can go back to the county select page', () => {
+    const countySelect = app.client.$('#county-select');
+    return countySelect.selectByVisibleText('Sacramento').then(() => {
+      return app.client.click('.button').then(() => {
+        return app.client.click('#goback').then(() => {
+          return app.client.getText('.form-card__title').then(pageTitle => {
+            return expect(pageTitle).toEqual(
+              'Proposition 64 CA DOJ data upload'
+            );
+          });
+        });
+      });
+    });
+  });
+
   it('can remove selected doj file', () => {
     const countySelect = app.client.$('#county-select');
     return countySelect.selectByVisibleText('Sacramento').then(() => {
