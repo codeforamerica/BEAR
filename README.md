@@ -8,7 +8,7 @@ The app can be packaged for installation on Windows, Mac, or Linux.
 The Golang project can be found [here](https://github.com/codeforamerica/gogen).
 
 <p>
-  This project uses <a href="http://electron.atom.io/">Electron</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="https://github.com/reactjs/redux">Redux</a>, <a href="https://github.com/reactjs/react-router">React Router</a>, <a href="http://webpack.github.io/docs/">Webpack</a> and <a href="https://github.com/gaearon/react-hot-loader">React Hot Loader</a> for rapid application development (HMR).
+  This project uses <a href="http://electron.atom.io/">Electron</a>, <a href="https://facebook.github.io/react/">React</a>, <a href="http://webpack.github.io/docs/">Webpack</a> and <a href="https://github.com/gaearon/react-hot-loader">React Hot Loader</a> for rapid application development (HMR).
 </p>
 
 ## Install
@@ -22,7 +22,7 @@ $ git clone git@github.com:codeforamerica/bear.git
 And then install the dependencies with yarn.
 
 ```bash
-$ cd automated_conviction_relief
+$ cd BEAR
 $ yarn
 ```
 
@@ -34,12 +34,53 @@ Start the app in the `dev` environment. This starts the renderer process in [**h
 $ yarn dev
 ```
 
-## Packaging for Production
+## Testing
 
-To package apps for the local platform:
+To run the unit tests:
 
 ```bash
-$ yarn package
+$ yarn test
+```
+
+To run the end-to-end tests:
+
+```bash
+$ yarn build-e2e
+$ yarn test-e2e
+```
+
+To run all tests including the linter and the Flow type-checker:
+
+```bash
+$ yarn test-all
+```
+
+To update the test snapshots when you have made intentional changes to the UI:
+
+```bash
+$ yarn test-update-snapshots
+```
+
+## Packaging for Production
+
+We use [electron-builder](https://github.com/electron-userland/electron-builder) to package and publish the app.
+
+To package the app for Mac:
+
+```bash
+$ yarn package-mac
+```
+
+To package the app for Windows:
+
+```bash
+$ yarn package-win
+```
+
+To package the app for Windows and automatically publish to Github (this should only be done as part of a successful CI build):
+
+```bash
+$ yarn package-publish-win
 ```
 
 ## Electron-React-Boilerplate
