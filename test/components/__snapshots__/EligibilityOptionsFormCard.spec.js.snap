@@ -63,15 +63,15 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                HS 11357a felonies
+                HS 11357(a) felonies
               </p>
             </td>
             <td>
               <input
                 className="radioButton"
                 defaultChecked={true}
-                id="dismiss_11357a"
-                name="11357a"
+                id="dismiss_11357(a)"
+                name="11357(a)"
                 onChange={[Function]}
                 type="radio"
               />
@@ -80,8 +80,8 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
               <input
                 className="radioButton"
                 defaultChecked={false}
-                id="reduce_11357a"
-                name="11357a"
+                id="reduce_11357(a)"
+                name="11357(a)"
                 onChange={[Function]}
                 type="radio"
               />

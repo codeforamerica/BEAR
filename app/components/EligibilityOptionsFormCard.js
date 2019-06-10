@@ -66,18 +66,16 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
                 </td>
                 <td />
               </tr>
-              {Object.entries(eligibilityOptions).map(
-                ([codeSection, selectedOption]) => {
-                  return (
-                    <BaselineEligibilityOption
-                      key={codeSection}
-                      codeSection={codeSection}
-                      selectedOption={selectedOption}
-                      onEligibilityOptionSelect={onEligibilityOptionSelect}
-                    />
-                  );
-                }
-              )}
+              {Object.entries(eligibilityOptions).map(([_, object]) => {
+                return (
+                  <BaselineEligibilityOption
+                    key={object.codeSection}
+                    codeSection={object.codeSection}
+                    selectedOption={object.option}
+                    onEligibilityOptionSelect={onEligibilityOptionSelect}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </FormCardContent>

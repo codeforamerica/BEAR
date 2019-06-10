@@ -4,11 +4,11 @@ declare type County = {
 };
 
 declare type BaselineEligibilityOptions = {
-  '11357(a)': string,
-  '11357(b)': string,
-  '11357(c)': string,
-  '11357(d)': string,
-  '11358': string,
-  '11359': string,
-  '11360': string
+  '0': { codeSection: string, option: string },
+  '1': { codeSection: string, option: string },
+  '2': { codeSection: string, option: string },
+  '3': { codeSection: string, option: string },
+  '4': { codeSection: string, option: string },
+  '5': { codeSection: string, option: string },
+  '6': { codeSection: string, option: string }
 };

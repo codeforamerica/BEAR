@@ -64,13 +64,13 @@ export default class Home extends Component<Props, State> {
       county: { name: '', code: '' },
       dojFilePath: '',
       baselineEligibilityOptions: {
-        '11357(a)': 'dismiss',
-        '11357(b)': 'dismiss',
-        '11357(c)': 'dismiss',
-        '11357(d)': 'dismiss',
-        '11358': 'dismiss',
-        '11359': 'dismiss',
-        '11360': 'dismiss'
+        '0': { codeSection: '11357(a)', option: 'dismiss' },
+        '1': { codeSection: '11357(b)', option: 'dismiss' },
+        '2': { codeSection: '11357(c)', option: 'dismiss' },
+        '3': { codeSection: '11357(d)', option: 'dismiss' },
+        '4': { codeSection: '11358', option: 'dismiss' },
+        '5': { codeSection: '11359', option: 'dismiss' },
+        '6': { codeSection: '11360', option: 'dismiss' }
       },
       outputFilePath: `${home}/Desktop`
     };
@@ -112,10 +112,13 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePath });
   };
 
-  updateEligibilityOptions = (codeSection: string, option: string) => {
+  updateEligibilityOptions = (key: string, value: string) => {
     const { baselineEligibilityOptions } = this.state;
     const newOption = {};
-    newOption[codeSection] = option;
+    newOption[key] = {
+      codeSection: baselineEligibilityOptions[key].codeSection,
+      option: value
+    };
 
     const newEligibilityOptions = {
       ...baselineEligibilityOptions,
