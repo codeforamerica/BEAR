@@ -1,7 +1,9 @@
 /* eslint-disable react/no-unescaped-entities */
+/* eslint-disable no-unused-vars */
 // @flow
 import React, { Component } from 'react';
 
+import { TupleType } from 'flow-runtime';
 import FormCard, {
   FormCardContent,
   FormCardFooter,
@@ -67,12 +69,12 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
                 <td />
               </tr>
               {Object.entries(eligibilityOptions).map(
-                ([codeSection, selectedOption]) => {
+                ([_, object]: TupleType<number, EligibilityOption>) => {
                   return (
                     <BaselineEligibilityOption
-                      key={codeSection}
-                      codeSection={codeSection}
-                      selectedOption={selectedOption}
+                      key={object.codeSection}
+                      codeSection={object.codeSection}
+                      selectedOption={object.option}
                       onEligibilityOptionSelect={onEligibilityOptionSelect}
                     />
                   );
