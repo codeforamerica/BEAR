@@ -147,7 +147,8 @@ describe('Home component', () => {
         gogenPath: 'gogenPath',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
         dojFilePath: '/path/to/doj/file',
-        outputFilePath: 'outputPath'
+        outputFilePath: 'outputPath',
+        jsonPath: 'path/to/json/file'
       });
       component.update();
       component.instance().runScript();
@@ -156,7 +157,8 @@ describe('Home component', () => {
       expect(args[1]).toEqual([
         `--input-doj=/path/to/doj/file`,
         `--outputs=outputPath`,
-        `--county="SACRAMENTO"`
+        `--county="SACRAMENTO"`,
+        `--jsonPath=path/to/json/file`
       ]);
     });
   });

@@ -20,7 +20,8 @@ type State = {
   county: County,
   dojFilePath: string,
   baselineEligibilityOptions: BaselineEligibilityOptions,
-  outputFilePath: string
+  outputFilePath: string,
+  jsonPath: string
 };
 
 export default class Home extends Component<Props, State> {
@@ -72,14 +73,20 @@ export default class Home extends Component<Props, State> {
         '5': { codeSection: '11359', option: 'dismiss' },
         '6': { codeSection: '11360', option: 'dismiss' }
       },
-      outputFilePath: `${home}/Desktop`
+      outputFilePath: `${home}/Desktop`,
+      jsonPath: ''
     };
-
     this.runScript = this.runScript.bind(this);
   }
 
   runScript() {
-    const { dojFilePath, county, outputFilePath, gogenPath } = this.state;
+    const {
+      dojFilePath,
+      county,
+      outputFilePath,
+      gogenPath,
+      jsonPath
+    } = this.state;
 
     const { spawnChildProcess } = this.props;
 
@@ -88,7 +95,8 @@ export default class Home extends Component<Props, State> {
     const goProcess = spawnChildProcess(gogenPath, [
       `--input-doj=${dojFilePath}`,
       `--outputs=${outputFilePath}`,
-      `--county="${countyCode}"`
+      `--county="${countyCode}"`,
+      `--jsonPath=${jsonPath}`
     ]);
 
     goProcess.stdout.on('data', data => {
