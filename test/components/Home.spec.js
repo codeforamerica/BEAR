@@ -148,7 +148,16 @@ describe('Home component', () => {
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
         dojFilePath: '/path/to/doj/file',
         outputFilePath: 'outputPath',
-        jsonPath: 'path/to/json/file'
+        baselineEligibilityOptions: {
+          '0': { codeSection: '11357(a)', option: 'dismiss' },
+          '1': { codeSection: '11357(b)', option: 'dismiss' },
+          '2': { codeSection: '11357(c)', option: 'dismiss' },
+          '3': { codeSection: '11357(d)', option: 'dismiss' },
+          '4': { codeSection: '11358', option: 'dismiss' },
+          '5': { codeSection: '11359', option: 'dismiss' },
+          '6': { codeSection: '11360', option: 'dismiss' }
+        },
+        jsonPath: './eligibilityFile'
       });
       component.update();
       component.instance().runScript();
@@ -158,7 +167,7 @@ describe('Home component', () => {
         `--input-doj=/path/to/doj/file`,
         `--outputs=outputPath`,
         `--county="SACRAMENTO"`,
-        `--jsonPath=path/to/json/file`
+        `--jsonPath=./eligibilityFile`
       ]);
     });
   });
