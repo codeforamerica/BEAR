@@ -6,5 +6,6 @@ describe('createJsonFile', () => {
     createJsonFile({ hello: 'goodbye' }, './file');
     const file = fs.readFileSync('./file', 'utf8');
     expect(file).toEqual('{"hello":"goodbye"}');
+    fs.unlinkSync('./file');
   });
 });
