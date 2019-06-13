@@ -7,17 +7,12 @@ import FormCard, {
   FormCardHeader
 } from './FormCard';
 
-type Props = {
-  currentScreen: number
-};
-
-const screenNumber = 4;
+type Props = {};
 
 export default class ProcessingFormCard extends Component<Props> {
   render() {
-    const { currentScreen } = this.props;
     return (
-      <FormCard currentScreen={currentScreen} screenNumber={screenNumber}>
+      <FormCard>
         <FormCardHeader>Preparing your files</FormCardHeader>
         <FormCardContent />
         <FormCardFooter />
