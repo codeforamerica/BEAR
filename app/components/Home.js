@@ -2,15 +2,11 @@
 /* eslint-disable lines-between-class-members */
 import React, { Component } from 'react';
 import path from 'path';
-// spike!
-// import fileSaver from 'fs';
 import CountySelectFormCard from './CountySelectFormCard';
 import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
 import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ProcessingFormCard from './ProcessingFormCard';
-import createJsonFile from '../utils/fileUtils';
-import transformEligibilityOptions from '../utils/gogenUtils';
 
 type Props = {
   spawnChildProcess: (
@@ -25,12 +21,10 @@ type State = {
   county: County,
   dojFilePath: string,
   baselineEligibilityOptions: BaselineEligibilityOptions,
-  outputFilePath: string,
-  jsonPath: string
+  outputFilePath: string
 };
 
 export default class Home extends Component<Props, State> {
-  runScript: () => void;
   constructor(props: Props) {
     super(props);
 
@@ -77,49 +71,8 @@ export default class Home extends Component<Props, State> {
         '5': { codeSection: '11359', option: 'dismiss' },
         '6': { codeSection: '11360', option: 'dismiss' }
       },
-      outputFilePath: `${home}/Desktop`,
-      jsonPath: ''
+      outputFilePath: `${home}/Desktop`
     };
-    this.runScript = this.runScript.bind(this);
-  }
-
-  runScript() {
-    const {
-      dojFilePath,
-      county,
-      outputFilePath,
-      gogenPath,
-      baselineEligibilityOptions,
-      jsonPath
-    } = this.state;
-
-    const formattedEligibilityOptions = transformEligibilityOptions(
-      baselineEligibilityOptions
-    );
-
-    createJsonFile(formattedEligibilityOptions, jsonPath);
-    const { spawnChildProcess } = this.props;
-
-    const countyCode = county.code;
-
-    const goProcess = spawnChildProcess(gogenPath, [
-      `--input-doj=${dojFilePath}`,
-      `--outputs=${outputFilePath}`,
-      `--county="${countyCode}"`,
-      `--jsonPath=${jsonPath}`
-    ]);
-
-    goProcess.stdout.on('data', data => {
-      console.log(`stdout: ${data}`);
-    });
-
-    goProcess.stderr.on('data', data => {
-      console.log(`stderr: ${data}`);
-    });
-
-    goProcess.on('close', code => {
-      console.log(`child process exited with code ${code}`);
-    });
   }
 
   updateCounty = (county: County) => {

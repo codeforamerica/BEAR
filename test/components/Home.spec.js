@@ -1,39 +1,20 @@
-import sinon from 'sinon';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
-import fs from 'fs';
 import Home from '../../app/components/Home';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.createSandbox();
 
 function setup(isPackaged, platform = 'windows') {
   process.env.HOME = '/test/home/path';
   process.resourcesPath = '/test/resources/path';
   process.env.IS_PACKAGED = isPackaged;
   process.env.PLATFORM = platform;
-  const fakeSpawnResponse = {
-    stdout: {
-      on: () => {}
-    },
-    stderr: {
-      on: () => {}
-    },
-    on: () => {}
-  };
-  const fakeSpawnChildProcess = sandbox.fake.returns(fakeSpawnResponse);
-  const component = shallow(<Home spawnChildProcess={fakeSpawnChildProcess} />);
-  return {
-    component,
-    fakeSpawnChildProcess
-  };
-}
 
-afterEach(() => {
-  sandbox.restore();
-});
+  const component = shallow(<Home />);
+  return { component };
+}
 
 describe('Home component', () => {
   describe('initial state', () => {
@@ -138,39 +119,6 @@ describe('Home component', () => {
       expect(component.state('baselineEligibilityOptions')['0'].option).toEqual(
         'reduce'
       );
-    });
-  });
-
-  describe('runScript', () => {
-    it('calls child process with values from state', () => {
-      const { component, fakeSpawnChildProcess } = setup('false');
-      component.setState({
-        gogenPath: 'gogenPath',
-        county: { name: 'Sacramento', code: 'SACRAMENTO' },
-        dojFilePath: '/path/to/doj/file',
-        outputFilePath: 'outputPath',
-        baselineEligibilityOptions: {
-          '0': { codeSection: '11357(a)', option: 'dismiss' },
-          '1': { codeSection: '11357(b)', option: 'dismiss' },
-          '2': { codeSection: '11357(c)', option: 'dismiss' },
-          '3': { codeSection: '11357(d)', option: 'dismiss' },
-          '4': { codeSection: '11358', option: 'dismiss' },
-          '5': { codeSection: '11359', option: 'dismiss' },
-          '6': { codeSection: '11360', option: 'dismiss' }
-        },
-        jsonPath: './eligibilityFile'
-      });
-      component.update();
-      component.instance().runScript();
-      const { args } = fakeSpawnChildProcess.getCall(0);
-      expect(args[0]).toEqual('gogenPath');
-      expect(args[1]).toEqual([
-        `--input-doj=/path/to/doj/file`,
-        `--outputs=outputPath`,
-        `--county="SACRAMENTO"`,
-        `--jsonPath=./eligibilityFile`
-      ]);
-      fs.unlinkSync('./eligibilityFile');
     });
   });
 
