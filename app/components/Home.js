@@ -1,13 +1,14 @@
 // @flow
+/* eslint-disable lines-between-class-members */
 import React, { Component } from 'react';
 import path from 'path';
-// spike!
-// import fileSaver from 'fs';
 import CountySelectFormCard from './CountySelectFormCard';
 import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
 import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ProcessingFormCard from './ProcessingFormCard';
+import createJsonFile from '../utils/fileUtils';
+import transformEligibilityOptions from '../utils/gogenUtils';
 
 type Props = {
   spawnChildProcess: (
@@ -28,11 +29,6 @@ type State = {
 
 export default class Home extends Component<Props, State> {
   runScript: () => void;
-  // spike!
-  // eligibilityOptionsString: string;
-  //
-  // jsonFile: void;
-
   constructor(props: Props) {
     super(props);
 
@@ -82,12 +78,6 @@ export default class Home extends Component<Props, State> {
       outputFilePath: `${home}/Desktop`,
       jsonPath: ''
     };
-    // spike!
-    // this.eligibilityOptionsString = JSON.stringify(
-    //   Home.state.baselineEligibilityOptions
-    // );
-    // this.jsonFile = this.createJsonFile(this.eligibilityOptionsString);
-    // Home.state.jsonPath = this.jsonFile;
 
     this.runScript = this.runScript.bind(this);
   }
@@ -98,9 +88,15 @@ export default class Home extends Component<Props, State> {
       county,
       outputFilePath,
       gogenPath,
+      baselineEligibilityOptions,
       jsonPath
     } = this.state;
 
+    const formattedEligibilityOptions = transformEligibilityOptions(
+      baselineEligibilityOptions
+    );
+
+    createJsonFile(formattedEligibilityOptions, jsonPath);
     const { spawnChildProcess } = this.props;
 
     const countyCode = county.code;
@@ -148,14 +144,6 @@ export default class Home extends Component<Props, State> {
 
     this.setState({ baselineEligibilityOptions: newEligibilityOptions });
   };
-  // spike!
-  // createJsonFile = (jsonData: string) => {
-  //   fileSaver.writeFile('eligibility_options.txt', jsonData, function(err) {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //   });
-  // };
 
   nextScreen = () => {
     const { currentScreen } = this.state;
