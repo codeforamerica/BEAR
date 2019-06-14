@@ -15,17 +15,16 @@ export function transformEligibilityOptions(state) {
 
 export function runScript(state, spawnChildProcess) {
   const {
-    dojFilePath,
-    county,
-    outputFilePath,
     gogenPath,
-    baselineEligibilityOptions
+    county,
+    dojFilePath,
+    baselineEligibilityOptions,
+    outputFilePath
   } = state;
 
   const formattedEligibilityOptions = transformEligibilityOptions(
     baselineEligibilityOptions
   );
-
   fs.mkdirSync(outputFilePath, { recursive: true });
   const jsonPath = `${outputFilePath}${path.sep}eligibilityConfig.json`;
   createJsonFile(formattedEligibilityOptions, jsonPath);
