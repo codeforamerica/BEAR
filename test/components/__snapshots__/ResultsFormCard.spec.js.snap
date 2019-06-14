@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultsFormCard component should match exact snapshot 1`] = `
+<div>
+  <div
+    className="form-card"
+  >
+    <header
+      className="form-card__header"
+    >
+      <h1
+        className="form-card__title"
+      >
+        <div
+          className="text--centered"
+        >
+          Your files are ready!
+          <p>
+            We have generated results for undefined county
+          </p>
+          <button
+            className="button button--primary"
+            id="view_results"
+            onClick={[Function]}
+            type="button"
+          >
+            Open Folder
+          </button>
+        </div>
+      </h1>
+    </header>
+    <div
+      className="form-card__content"
+    />
+    <div
+      className="form-card__footer"
+    />
+  </div>
+</div>
+`;

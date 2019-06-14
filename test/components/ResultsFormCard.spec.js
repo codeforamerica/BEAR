@@ -9,16 +9,17 @@ Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
 function setup() {
-  const fakeOpenResultsFolder = sandbox.spy();
+  const fakeOpenFolder = sandbox.spy();
   const component = mount(
     <ResultsFormCard
       county="Alameda"
-      openResultsFolder={fakeOpenResultsFolder}
+      outputFolder="/path/to/output"
+      openFolder={fakeOpenFolder}
     />
   );
   return {
     component,
-    fakeOpenResultsFolder
+    fakeOpenFolder
   };
 }
 
@@ -29,10 +30,12 @@ afterEach(() => {
 describe('ResultsFormCard component', () => {
   describe('clicking the Open Folder button', () => {
     it('should call the openResultsFolder function', () => {
-      const { component, fakeOpenResultsFolder } = setup();
-      const openFolderButton = component.find('button').at(0);
+      const { component, fakeOpenFolder } = setup();
+      const openFolderButton = component.find('#view_results').at(0);
       openFolderButton.simulate('click');
-      expect(fakeOpenResultsFolder.called).toBe(true);
+      expect(fakeOpenFolder.called).toBe(true);
+      const { args } = fakeOpenFolder.getCall(0);
+      expect(args[0]).toEqual('/path/to/output');
     });
   });
 

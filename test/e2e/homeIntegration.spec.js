@@ -112,7 +112,7 @@ describe('The happy path', () => {
     });
   });
 
-  it('can select eligibility options and process file', () => {
+  it('can select eligibility options and display results page', () => {
     const countySelect = app.client.$('#county-select');
     return countySelect.selectByVisibleText('Sacramento').then(() => {
       return app.client.click('#continue').then(() => {
@@ -125,8 +125,8 @@ describe('The happy path', () => {
                   return app.client
                     .getText('.form-card__title')
                     .then(cardContent => {
-                      return expect(cardContent).toEqual(
-                        'Preparing your files'
+                      return expect(cardContent).toContain(
+                        'Your files are ready!'
                       );
                     });
                 });

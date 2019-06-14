@@ -5,7 +5,8 @@ import CountySelectFormCard from './CountySelectFormCard';
 import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
 import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
-import ProcessingFormCard from './ProcessingFormCard';
+import ResultsFormCard from './ResultsFormCard';
+import openFolder from '../utils/osHelpers';
 
 type Props = {
   spawnChildProcess: (
@@ -151,6 +152,7 @@ export default class Home extends Component<Props, State> {
       currentScreen,
       county,
       dojFilePath,
+      outputFilePath,
       baselineEligibilityOptions
     } = this.state;
     return (
@@ -173,7 +175,11 @@ export default class Home extends Component<Props, State> {
           onOptionsConfirm={this.nextScreen}
           onBack={this.previousScreen}
         />
-        <ProcessingFormCard currentScreen={currentScreen} />
+        <ResultsFormCard
+          county={county}
+          outputFolder={outputFilePath}
+          openFolder={openFolder}
+        />
       </PageContainer>
     );
   }

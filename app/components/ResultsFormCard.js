@@ -8,27 +8,36 @@ import FormCard, {
 } from './FormCard';
 
 type Props = {
-  county: string
+  county: County,
+  outputFolder: string,
+  openFolder: string => void
 };
 
 export default class ResultsFormCard extends Component<Props> {
+  openResultsFolder = () => {
+    const { openFolder, outputFolder } = this.props;
+    openFolder(outputFolder);
+  };
+
   render() {
     const { county } = this.props;
     return (
       <FormCard>
-        <FormCardHeader>Your files are ready!</FormCardHeader>
-        <FormCardContent>
-          <div>
-            {`We have generated results for ${county} county`}
+        <FormCardHeader>
+          <div className="text--centered">
+            Your files are ready!
+            <p>{`We have generated results for ${county.name} county`}</p>
             <button
               className="button button--primary"
               type="button"
               id="view_results"
+              onClick={this.openResultsFolder}
             >
               Open Folder
             </button>
           </div>
-        </FormCardContent>
+        </FormCardHeader>
+        <FormCardContent />
         <FormCardFooter />
       </FormCard>
     );
