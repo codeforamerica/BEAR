@@ -1,4 +1,5 @@
 // @flow
+/* eslint-disable lines-between-class-members */
 import React, { Component } from 'react';
 import path from 'path';
 import CountySelectFormCard from './CountySelectFormCard';
@@ -7,6 +8,16 @@ import PageContainer from './PageContainer';
 import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ResultsFormCard from './ResultsFormCard';
 import openFolder from '../utils/osHelpers';
+import { runScript } from '../utils/gogenUtils';
+
+type State = {
+  gogenPath: string,
+  currentScreen: number,
+  county: County,
+  dojFilePath: string,
+  baselineEligibilityOptions: BaselineEligibilityOptions,
+  outputFilePath: string
+};
 
 type Props = {
   spawnChildProcess: (
@@ -15,19 +26,7 @@ type Props = {
   ) => child_process$ChildProcess // eslint-disable-line camelcase
 };
 
-type State = {
-  gogenPath: string,
-  currentScreen: number,
-  county: County,
-  dojFilePath: string,
-  baselineEligibilityOptions: BaselineEligibilityOptions,
-  outputFilePath: string,
-  jsonPath: string
-};
-
 export default class Home extends Component<Props, State> {
-  runScript: () => void;
-
   constructor(props: Props) {
     super(props);
 
@@ -59,7 +58,6 @@ export default class Home extends Component<Props, State> {
     } else {
       gogenPath = `${home}/go/bin/gogen`;
     }
-
     this.state = {
       gogenPath,
       currentScreen: 0,
@@ -74,43 +72,8 @@ export default class Home extends Component<Props, State> {
         '5': { codeSection: '11359', option: 'dismiss' },
         '6': { codeSection: '11360', option: 'dismiss' }
       },
-      outputFilePath: `${home}/Desktop`,
-      jsonPath: ''
+      outputFilePath: `${home}/Desktop`
     };
-    this.runScript = this.runScript.bind(this);
-  }
-
-  runScript() {
-    const {
-      dojFilePath,
-      county,
-      outputFilePath,
-      gogenPath,
-      jsonPath
-    } = this.state;
-
-    const { spawnChildProcess } = this.props;
-
-    const countyCode = county.code;
-
-    const goProcess = spawnChildProcess(gogenPath, [
-      `--input-doj=${dojFilePath}`,
-      `--outputs=${outputFilePath}`,
-      `--county="${countyCode}"`,
-      `--jsonPath=${jsonPath}`
-    ]);
-
-    goProcess.stdout.on('data', data => {
-      console.log(`stdout: ${data}`);
-    });
-
-    goProcess.stderr.on('data', data => {
-      console.log(`stderr: ${data}`);
-    });
-
-    goProcess.on('close', code => {
-      console.log(`child process exited with code ${code}`);
-    });
   }
 
   updateCounty = (county: County) => {
@@ -147,6 +110,12 @@ export default class Home extends Component<Props, State> {
     this.setState({ currentScreen: currentScreen - 1 });
   };
 
+  runScriptInOptions = () => {
+    const { spawnChildProcess } = this.props;
+
+    runScript(this.state, spawnChildProcess);
+  };
+
   render() {
     const {
       currentScreen,
@@ -173,6 +142,7 @@ export default class Home extends Component<Props, State> {
           eligibilityOptions={baselineEligibilityOptions}
           onEligibilityOptionSelect={this.updateEligibilityOptions}
           onOptionsConfirm={this.nextScreen}
+          onOptionsRunScript={this.runScriptInOptions}
           onBack={this.previousScreen}
         />
         <ResultsFormCard

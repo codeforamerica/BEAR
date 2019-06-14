@@ -18,13 +18,15 @@ type Props = {
   eligibilityOptions: BaselineEligibilityOptions,
   onEligibilityOptionSelect: (string, string) => void,
   onOptionsConfirm: void => void,
+  onOptionsRunScript: void => void,
   onBack: void => void
 };
 
 export default class EligibilityOptionsFormCard extends Component<Props> {
   onContinue = () => {
-    const { onOptionsConfirm } = this.props;
+    const { onOptionsConfirm, onOptionsRunScript } = this.props;
     onOptionsConfirm();
+    onOptionsRunScript();
   };
 
   onGoBack = () => {

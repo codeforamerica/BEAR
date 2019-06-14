@@ -20,18 +20,21 @@ function setup() {
     '6': { codeSection: '11360', option: 'dismiss' }
   };
   const onOptionsConfirmSpy = sandbox.spy();
+  const onOptionsRunScriptSpy = sandbox.spy();
   const onBackSpy = sandbox.spy();
   const component = mount(
     <EligibilityOptionsFormCard
       currentScreen={3}
       eligibilityOptions={options}
       onOptionsConfirm={onOptionsConfirmSpy}
+      onOptionsRunScript={onOptionsRunScriptSpy}
       onBack={onBackSpy}
     />
   );
   return {
     component,
     onOptionsConfirmSpy,
+    onOptionsRunScriptSpy,
     onBackSpy
   };
 }
@@ -107,6 +110,12 @@ describe('EligibilityOptionsFormCard component', () => {
       component.find('#continue').simulate('click');
       expect(onOptionsConfirmSpy.called).toBe(true);
       expect(onOptionsConfirmSpy.callCount).toEqual(1);
+    });
+    it('should call onOptionRunScript once', () => {
+      const { component, onOptionsRunScriptSpy } = setup('path/to/file');
+      component.find('#continue').simulate('click');
+      expect(onOptionsRunScriptSpy.called).toBe(true);
+      expect(onOptionsRunScriptSpy.callCount).toEqual(1);
     });
   });
 

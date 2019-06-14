@@ -1,18 +1,25 @@
-import sinon from 'sinon';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
+import sinon from 'sinon';
 import Home from '../../app/components/Home';
 
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
 function setup(isPackaged, platform = 'windows') {
-  process.env.HOME = '/test/home/path';
-  process.resourcesPath = '/test/resources/path';
+  process.env.HOME = '/tmp/test/home/path';
+  process.resourcesPath = '/tmp/test/resources/path';
   process.env.IS_PACKAGED = isPackaged;
   process.env.PLATFORM = platform;
+  const spawnChildProcessSpy = createFakeSpawnChildProcess();
+
+  const component = shallow(<Home spawnChildProcess={spawnChildProcessSpy} />);
+  return { component };
+}
+
+function createFakeSpawnChildProcess() {
   const fakeSpawnResponse = {
     stdout: {
       on: () => {}
@@ -22,12 +29,7 @@ function setup(isPackaged, platform = 'windows') {
     },
     on: () => {}
   };
-  const fakeSpawnChildProcess = sandbox.fake.returns(fakeSpawnResponse);
-  const component = shallow(<Home spawnChildProcess={fakeSpawnChildProcess} />);
-  return {
-    component,
-    fakeSpawnChildProcess
-  };
+  return sandbox.fake.returns(fakeSpawnResponse);
 }
 
 afterEach(() => {
@@ -36,9 +38,16 @@ afterEach(() => {
 
 describe('Home component', () => {
   describe('initial state', () => {
-    it('sets the currentScreen to 1', () => {
+    it('sets the currentScreen to 0', () => {
       const { component } = setup('false');
       expect(component.state('currentScreen')).toEqual(0);
+    });
+
+    it('sets the output file path to HOME/desktop', () => {
+      const { component } = setup('false');
+      expect(component.state('outputFilePath')).toEqual(
+        '/tmp/test/home/path/Desktop'
+      );
     });
 
     it('sets the county to an object with an empty name and value', () => {
@@ -67,14 +76,14 @@ describe('Home component', () => {
       it('should point to the home directory when the app is not packaged', () => {
         const { component } = setup('false');
         const gogenPath = component.state('gogenPath');
-        expect(gogenPath).toEqual('/test/home/path/go/bin/gogen');
+        expect(gogenPath).toEqual('/tmp/test/home/path/go/bin/gogen');
       });
 
       describe('when the platform is windows', () => {
         it('should point to an exe in the resources directory when the app is packaged', () => {
           const { component } = setup('true', 'windows');
           const gogenPath = component.state('gogenPath');
-          expect(gogenPath).toEqual('/test/resources/path/gogen.exe');
+          expect(gogenPath).toEqual('/tmp/test/resources/path/gogen.exe');
         });
       });
 
@@ -82,7 +91,7 @@ describe('Home component', () => {
         it('should point to a mac binary in the resources directory when the app is packaged', () => {
           const { component } = setup('true', 'darwin');
           const gogenPath = component.state('gogenPath');
-          expect(gogenPath).toEqual('/test/resources/path/gogen');
+          expect(gogenPath).toEqual('/tmp/test/resources/path/gogen');
         });
       });
     });
@@ -137,29 +146,6 @@ describe('Home component', () => {
       expect(component.state('baselineEligibilityOptions')['0'].option).toEqual(
         'reduce'
       );
-    });
-  });
-
-  describe('runScript', () => {
-    it('calls child process with values from state', () => {
-      const { component, fakeSpawnChildProcess } = setup('false');
-      component.setState({
-        gogenPath: 'gogenPath',
-        county: { name: 'Sacramento', code: 'SACRAMENTO' },
-        dojFilePath: '/path/to/doj/file',
-        outputFilePath: 'outputPath',
-        jsonPath: 'path/to/json/file'
-      });
-      component.update();
-      component.instance().runScript();
-      const { args } = fakeSpawnChildProcess.getCall(0);
-      expect(args[0]).toEqual('gogenPath');
-      expect(args[1]).toEqual([
-        `--input-doj=/path/to/doj/file`,
-        `--outputs=outputPath`,
-        `--county="SACRAMENTO"`,
-        `--jsonPath=path/to/json/file`
-      ]);
     });
   });
 
