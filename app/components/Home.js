@@ -7,13 +7,7 @@ import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
 import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ProcessingFormCard from './ProcessingFormCard';
-
-type Props = {
-  spawnChildProcess: (
-    path: string,
-    options: Array<string>
-  ) => child_process$ChildProcess // eslint-disable-line camelcase
-};
+import { runScript } from '../utils/gogenUtils';
 
 type State = {
   gogenPath: string,
@@ -22,6 +16,13 @@ type State = {
   dojFilePath: string,
   baselineEligibilityOptions: BaselineEligibilityOptions,
   outputFilePath: string
+};
+
+type Props = {
+  spawnChildProcess: (
+    path: string,
+    options: Array<string>
+  ) => child_process$ChildProcess // eslint-disable-line camelcase
 };
 
 export default class Home extends Component<Props, State> {
@@ -56,7 +57,6 @@ export default class Home extends Component<Props, State> {
     } else {
       gogenPath = `${home}/go/bin/gogen`;
     }
-
     this.state = {
       gogenPath,
       currentScreen: 0,
@@ -109,6 +109,12 @@ export default class Home extends Component<Props, State> {
     this.setState({ currentScreen: currentScreen - 1 });
   };
 
+  runScriptInOptions = () => {
+    const { spawnChildProcess } = this.props;
+
+    runScript(this.state, spawnChildProcess);
+  };
+
   render() {
     const {
       currentScreen,
@@ -134,6 +140,7 @@ export default class Home extends Component<Props, State> {
           eligibilityOptions={baselineEligibilityOptions}
           onEligibilityOptionSelect={this.updateEligibilityOptions}
           onOptionsConfirm={this.nextScreen}
+          onOptionsRunScript={this.runScriptInOptions}
           onBack={this.previousScreen}
         />
         <ProcessingFormCard currentScreen={currentScreen} />
