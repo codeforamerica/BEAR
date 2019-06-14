@@ -11,9 +11,9 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
       <h1
         className="form-card__title"
       >
-        Analysis for Implementation
+        Baseline eligibility
         <p
-          className="options-copy"
+          className="text--help"
         >
           Choose from the following options to expedite your office's review of records from the state summary criminal history information database for AB-1793.
         </p>
@@ -22,16 +22,13 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
     <div
       className="form-card__content"
     >
-      <h2>
-        Baseline eligibility
-      </h2>
       <table
         className="data-table"
       >
         <thead>
           <tr>
             <th>
-              Type
+              Type of convictions
             </th>
             <th>
               Dismiss
@@ -45,7 +42,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                All misdemeanors and infractions
+                All HS 11357-60 misdemeanors and infractions
               </p>
             </td>
             <td>

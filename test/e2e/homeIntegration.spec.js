@@ -102,9 +102,7 @@ describe('The happy path', () => {
           .then(() => {
             return app.client.click('.button').then(() => {
               return app.client.getText('.form-card__title').then(pageTitle => {
-                return expect(pageTitle).toContain(
-                  'Analysis for Implementation'
-                );
+                return expect(pageTitle).toContain('Baseline eligibility');
               });
             });
           });
