@@ -61,7 +61,7 @@ export default class Home extends Component<Props, State> {
     this.state = {
       gogenPath,
       currentScreen: 0,
-      county: { name: "", code: '' },
+      county: { name: '', code: '' },
       dojFilePath: '',
       baselineEligibilityOptions: {
         '0': { codeSection: '11357(a)', option: 'dismiss' },
@@ -110,10 +110,6 @@ export default class Home extends Component<Props, State> {
     this.setState({ currentScreen: currentScreen - 1 });
   };
 
-  finalScreen = () => {
-    this.setState({ currentScreen: 3 });
-  };
-
   homeScreen = () => {
     this.setState({
       currentScreen: 0,
@@ -150,7 +146,6 @@ export default class Home extends Component<Props, State> {
           selectedCounty={county}
           onCountySelect={this.updateCounty}
           onCountyConfirm={this.nextScreen}
-          onFinalPage={this.finalScreen}
         />
         <DojFileSelectFormCard
           countyName={county.name}

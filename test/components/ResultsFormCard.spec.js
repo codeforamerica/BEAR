@@ -57,7 +57,7 @@ describe('ResultsFormCard component', () => {
   it('should match exact snapshot', () => {
     const component = (
       <div>
-        <ResultsFormCard county="Alameda"/>
+        <ResultsFormCard county="Alameda" />
       </div>
     );
 
