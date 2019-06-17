@@ -25,16 +25,18 @@ export function runScript(state, spawnChildProcess) {
   const formattedEligibilityOptions = transformEligibilityOptions(
     baselineEligibilityOptions
   );
-  fs.mkdirSync(outputFilePath, { recursive: true });
+  if (!fs.existsSync(outputFilePath)){
+    fs.mkdirSync(outputFilePath, { recursive: true });
+  }
   const jsonPath = `${outputFilePath}${path.sep}eligibilityConfig.json`;
   createJsonFile(formattedEligibilityOptions, jsonPath);
 
   const countyCode = county.code;
-
+console.log("county code:", countyCode)
   const goProcess = spawnChildProcess(gogenPath, [
     `--input-doj=${dojFilePath}`,
     `--outputs=${outputFilePath}`,
-    `--county="${countyCode}"`,
+    `--county=${countyCode}`,
     `--jsonPath=${jsonPath}`
   ]);
 

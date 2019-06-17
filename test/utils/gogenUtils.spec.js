@@ -72,8 +72,8 @@ describe('runScript', () => {
       `--county="SACRAMENTO"`,
       `--jsonPath=outputPath/eligibilityConfig.json`
     ]);
-
-    fs.unlinkSync('outputPath/eligibilityConfig.json');
-    fs.rmdirSync('outputPath');
+    //
+    // fs.unlinkSync('outputPath/eligibilityConfig.json');
+    // fs.rmdirSync('outputPath');
   });
 });

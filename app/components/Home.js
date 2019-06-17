@@ -61,7 +61,7 @@ export default class Home extends Component<Props, State> {
     this.state = {
       gogenPath,
       currentScreen: 0,
-      county: { name: '', code: '' },
+      county: { name: "", code: '' },
       dojFilePath: '',
       baselineEligibilityOptions: {
         '0': { codeSection: '11357(a)', option: 'dismiss' },
@@ -110,9 +110,29 @@ export default class Home extends Component<Props, State> {
     this.setState({ currentScreen: currentScreen - 1 });
   };
 
+  finalScreen = () => {
+    this.setState({ currentScreen: 3 });
+  };
+
+  homeScreen = () => {
+    this.setState({
+      currentScreen: 0,
+      county: { name: '', code: '' },
+      dojFilePath: '',
+      baselineEligibilityOptions: {
+        '0': { codeSection: '11357(a)', option: 'dismiss' },
+        '1': { codeSection: '11357(b)', option: 'dismiss' },
+        '2': { codeSection: '11357(c)', option: 'dismiss' },
+        '3': { codeSection: '11357(d)', option: 'dismiss' },
+        '4': { codeSection: '11358', option: 'dismiss' },
+        '5': { codeSection: '11359', option: 'dismiss' },
+        '6': { codeSection: '11360', option: 'dismiss' }
+      }
+    });
+  };
+
   runScriptInOptions = () => {
     const { spawnChildProcess } = this.props;
-
     runScript(this.state, spawnChildProcess);
   };
 
@@ -130,6 +150,7 @@ export default class Home extends Component<Props, State> {
           selectedCounty={county}
           onCountySelect={this.updateCounty}
           onCountyConfirm={this.nextScreen}
+          onFinalPage={this.finalScreen}
         />
         <DojFileSelectFormCard
           countyName={county.name}
@@ -149,6 +170,7 @@ export default class Home extends Component<Props, State> {
           county={county}
           outputFolder={outputFilePath}
           openFolder={openFolder}
+          onStartOver={this.homeScreen}
         />
       </PageContainer>
     );

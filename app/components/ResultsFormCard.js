@@ -6,11 +6,13 @@ import FormCard, {
   FormCardFooter,
   FormCardHeader
 } from './FormCard';
+import StartOverButton from './StartOverButton';
 
 type Props = {
   county: County,
   outputFolder: string,
-  openFolder: string => void
+  openFolder: string => void,
+  onStartOver: void => void
 };
 
 export default class ResultsFormCard extends Component<Props> {
@@ -19,6 +21,10 @@ export default class ResultsFormCard extends Component<Props> {
     openFolder(outputFolder);
   };
 
+  onClickStartOver = () => {
+    const { onStartOver } = this.props;
+    onStartOver();
+  };
   render() {
     const { county } = this.props;
     return (
@@ -37,9 +43,19 @@ export default class ResultsFormCard extends Component<Props> {
             </button>
           </div>
         </FormCardHeader>
-        <FormCardContent />
-        <FormCardFooter />
+        <FormCardContent>
+          <h3 className="text--centered">What's included in the folder:</h3>
+          <div className="vertical-steps__step">
+            <p><b>Clear My Record Results Files: </b> Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Nam sagittis sodales eleifend. Praesent
+              in tincidunt turpis, id euismod enim. Integer a massa sed quam
+              suscipit facilisis. Donec interdum placerat eros.</p>
+          </div>
+        </FormCardContent>
+        <FormCardFooter>
+          <StartOverButton onStartOver={this.onClickStartOver}/>
+        </FormCardFooter>
       </FormCard>
-    );
+  );
   }
-}
+  }
