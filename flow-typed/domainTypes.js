@@ -3,6 +3,6 @@ declare type County = {
   code: string
 };
 
-declare type BaselineEligibilityOptions = { [string]: EligibilityOption };
+declare type BaselineEligibilityOptions = { [string]: string };
 
-declare type EligibilityOption = { codeSection: string, option: string };
+// declare type EligibilityOption = { codeSection: string, option: string };
