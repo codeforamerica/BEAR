@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RadioButton from './RadioButton';
 
 type Props = {
+  indexKey: string,
   codeSection: string,
   selectedOption: string,
   onEligibilityOptionSelect: (string, string) => void

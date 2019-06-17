@@ -71,7 +71,7 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
                 <td />
               </tr>
               {Object.entries(eligibilityOptions).map(
-                ([_, object]: TupleType<number, EligibilityOption>) => {
+                ([codeSection, option]: TupleType<string, string>) => {
                   return (
                     <BaselineEligibilityOption
                       key={object.codeSection}

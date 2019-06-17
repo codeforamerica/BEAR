@@ -32,7 +32,6 @@ export function runScript(state, spawnChildProcess) {
   createJsonFile(formattedEligibilityOptions, jsonPath);
 
   const countyCode = county.code;
-  console.log('county code:', countyCode);
   const goProcess = spawnChildProcess(gogenPath, [
     `--input-doj=${dojFilePath}`,
     `--outputs=${outputFilePath}`,

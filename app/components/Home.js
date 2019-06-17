@@ -64,13 +64,14 @@ export default class Home extends Component<Props, State> {
       county: { name: '', code: '' },
       dojFilePath: '',
       baselineEligibilityOptions: {
-        '0': { codeSection: '11357(a)', option: 'dismiss' },
-        '1': { codeSection: '11357(b)', option: 'dismiss' },
-        '2': { codeSection: '11357(c)', option: 'dismiss' },
-        '3': { codeSection: '11357(d)', option: 'dismiss' },
-        '4': { codeSection: '11358', option: 'dismiss' },
-        '5': { codeSection: '11359', option: 'dismiss' },
-        '6': { codeSection: '11360', option: 'dismiss' }
+        '11357(a)': 'dismiss'
+        // '0': { codeSection: '11357(a)', option: 'dismiss' },
+        // '1': { codeSection: '11357(b)', option: 'dismiss' },
+        // '2': { codeSection: '11357(c)', option: 'dismiss' },
+        // '3': { codeSection: '11357(d)', option: 'dismiss' },
+        // '4': { codeSection: '11358', option: 'dismiss' },
+        // '5': { codeSection: '11359', option: 'dismiss' },
+        // '6': { codeSection: '11360', option: 'dismiss' }
       },
       outputFilePath: `${home}/Desktop`
     };
@@ -91,6 +92,7 @@ export default class Home extends Component<Props, State> {
       codeSection: baselineEligibilityOptions[key].codeSection,
       option: value
     };
+    console.log("newOption[codeSection]=", newOption[indexKey]);
 
     const newEligibilityOptions = {
       ...baselineEligibilityOptions,
