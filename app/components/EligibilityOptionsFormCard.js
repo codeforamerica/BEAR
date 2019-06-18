@@ -3,7 +3,6 @@
 // @flow
 import React, { Component } from 'react';
 
-import { TupleType } from 'flow-runtime';
 import FormCard, {
   FormCardContent,
   FormCardFooter,
@@ -15,7 +14,7 @@ import ContinueButton from './ContinueButton';
 import GoBackButton from './GoBackButton';
 
 type Props = {
-  eligibilityOptions: BaselineEligibilityOptions,
+  baselineEligibilityOptions: BaselineEligibilityOptions,
   onEligibilityOptionSelect: (string, string) => void,
   onOptionsConfirm: void => void,
   onOptionsRunScript: void => void,
@@ -35,7 +34,10 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
   };
 
   render() {
-    const { eligibilityOptions, onEligibilityOptionSelect } = this.props;
+    const {
+      baselineEligibilityOptions,
+      onEligibilityOptionSelect
+    } = this.props;
     return (
       <FormCard>
         <FormCardHeader>
@@ -70,18 +72,24 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
                 </td>
                 <td />
               </tr>
-              {Object.entries(eligibilityOptions).map(
-                ([codeSection, option]: TupleType<string, string>) => {
-                  return (
-                    <BaselineEligibilityOption
-                      key={object.codeSection}
-                      codeSection={object.codeSection}
-                      selectedOption={object.option}
-                      onEligibilityOptionSelect={onEligibilityOptionSelect}
-                    />
-                  );
-                }
-              )}
+              {[
+                '11357(a)',
+                '11357(b)',
+                '11357(c)',
+                '11357(d)',
+                '11358',
+                '11359',
+                '11360'
+              ].map(codeSection => {
+                return (
+                  <BaselineEligibilityOption
+                    key={codeSection}
+                    codeSection={codeSection}
+                    baselineEligibilityOptions={baselineEligibilityOptions}
+                    onEligibilityOptionSelect={onEligibilityOptionSelect}
+                  />
+                );
+              })}
             </tbody>
           </table>
         </FormCardContent>

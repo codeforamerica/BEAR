@@ -8,18 +8,20 @@ import {
 describe('transformEligibilityOptions', () => {
   it('formats the eligibility options for the json file', () => {
     const optionState = {
-      '0': { codeSection: '11357(a)', option: 'dismiss' },
-      '1': { codeSection: '11357(b)', option: 'dismiss' },
-      '2': { codeSection: '11357(c)', option: 'reduce' },
-      '3': { codeSection: '11357(d)', option: 'dismiss' },
-      '4': { codeSection: '11358', option: 'dismiss' },
-      '5': { codeSection: '11359', option: 'reduce' },
-      '6': { codeSection: '11360', option: 'reduce' }
+      '11357(a)': 'dismiss',
+      '11357(b)': 'dismiss',
+      '11357(c)': 'reduce',
+      '11357(d)': 'dismiss',
+      '11358': 'dismiss',
+      '11359': 'reduce',
+      '11360': 'reduce'
     };
     const subject = transformEligibilityOptions(optionState);
     expect(subject).toEqual({
-      dismiss: ['11357(A)', '11357(B)', '11357(D)', '11358'],
-      reduce: ['11357(C)', '11359', '11360']
+      baselineEligibility: {
+        dismiss: ['11357(A)', '11357(B)', '11357(D)', '11358'],
+        reduce: ['11357(C)', '11359', '11360']
+      }
     });
   });
 });
@@ -52,13 +54,13 @@ describe('runScript', () => {
       dojFilePath: '/path/to/doj/file',
       outputFilePath: 'outputPath',
       baselineEligibilityOptions: {
-        '0': { codeSection: '11357(a)', option: 'dismiss' },
-        '1': { codeSection: '11357(b)', option: 'dismiss' },
-        '2': { codeSection: '11357(c)', option: 'dismiss' },
-        '3': { codeSection: '11357(d)', option: 'dismiss' },
-        '4': { codeSection: '11358', option: 'dismiss' },
-        '5': { codeSection: '11359', option: 'dismiss' },
-        '6': { codeSection: '11360', option: 'dismiss' }
+        '11357(a)': 'dismiss',
+        '11357(b)': 'dismiss',
+        '11357(c)': 'dismiss',
+        '11357(d)': 'dismiss',
+        '11358': 'dismiss',
+        '11359': 'dismiss',
+        '11360': 'dismiss'
       }
     };
 
@@ -70,7 +72,7 @@ describe('runScript', () => {
       `--input-doj=/path/to/doj/file`,
       `--outputs=outputPath`,
       `--county="SACRAMENTO"`,
-      `--jsonPath=outputPath/eligibilityConfig.json`
+      `--eligibility-options=outputPath/eligibilityConfig.json`
     ]);
 
     fs.unlinkSync('outputPath/eligibilityConfig.json');

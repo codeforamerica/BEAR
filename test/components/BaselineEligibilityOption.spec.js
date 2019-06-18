@@ -9,15 +9,27 @@ import RadioButton from '../../app/components/RadioButton';
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
-function setup(selectedOption) {
-  const component = shallow(
+function setup() {
+  const options = {
+    '11357(a)': 'dismiss',
+    '11357(b)': 'reduce'
+  };
+  const component1 = shallow(
     <BaselineEligibilityOption
-      codeSection="HS 11357 (a)"
-      selectedOption={selectedOption}
+      codeSection="11357(a)"
+      baselineEligibilityOptions={options}
+    />
+  );
+
+  const component2 = shallow(
+    <BaselineEligibilityOption
+      codeSection="11357(b)"
+      baselineEligibilityOptions={options}
     />
   );
   return {
-    component
+    component1,
+    component2
   };
 }
 
@@ -26,34 +38,39 @@ afterEach(() => {
 });
 
 describe('BaselineEligibilityOption component', () => {
-  it('selects the correct radio button if dismiss is selected', () => {
-    const { component } = setup('dismiss');
+  it('if dismissed, reduce should not be selected', () => {
+    const { component1 } = setup();
     expect(
-      component.containsAnyMatchingElements([
+      component1.containsAnyMatchingElements([
         <RadioButton selected={true} value="dismiss" />
       ])
     ).toEqual(true);
 
     expect(
-      component.containsAnyMatchingElements([<RadioButton value="reduce" />])
+      component1.containsAnyMatchingElements([
+        <RadioButton selected={false} value="reduce" />
+      ])
     ).toEqual(true);
   });
 
-  it('selects the correct radio button if reduce is selected', () => {
-    const { component } = setup('reduce');
+  it('if reduced, dismiss should not be selected', () => {
+    const { component2 } = setup();
     expect(
-      component.containsAnyMatchingElements([
-        <RadioButton selected value="reduce" />
+      component2.containsAnyMatchingElements([
+        <RadioButton selected={true} value="reduce" />
       ])
     ).toEqual(true);
+
     expect(
-      component.containsAnyMatchingElements([<RadioButton value="dismiss" />])
+      component2.containsAnyMatchingElements([
+        <RadioButton selected={false} value="dismiss" />
+      ])
     ).toEqual(true);
   });
 
   it('should match exact snapshot', () => {
-    const { component } = setup('dismiss');
-    const tree = renderer.create(component).toJSON();
+    const { component1 } = setup();
+    const tree = renderer.create(component1).toJSON();
 
     expect(tree).toMatchSnapshot();
   });

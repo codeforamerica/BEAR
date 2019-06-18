@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import RadioButton from './RadioButton';
 
 type Props = {
-  indexKey: string,
   codeSection: string,
-  selectedOption: string,
+  baselineEligibilityOptions: string,
   onEligibilityOptionSelect: (string, string) => void
 };
 
@@ -12,7 +11,7 @@ export default class BaselineEligibilityOption extends Component<Props> {
   render() {
     const {
       codeSection,
-      selectedOption,
+      baselineEligibilityOptions,
       onEligibilityOptionSelect
     } = this.props;
     return (
@@ -22,7 +21,7 @@ export default class BaselineEligibilityOption extends Component<Props> {
         </td>
         <td>
           <RadioButton
-            selected={selectedOption === 'dismiss'}
+            selected={baselineEligibilityOptions[codeSection] === 'dismiss'}
             value="dismiss"
             group={codeSection}
             onSelect={onEligibilityOptionSelect}
@@ -30,7 +29,7 @@ export default class BaselineEligibilityOption extends Component<Props> {
         </td>
         <td>
           <RadioButton
-            selected={selectedOption === 'reduce'}
+            selected={baselineEligibilityOptions[codeSection] === 'reduce'}
             value="reduce"
             group={codeSection}
             onSelect={onEligibilityOptionSelect}

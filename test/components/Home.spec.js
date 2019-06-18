@@ -31,7 +31,6 @@ function createFakeSpawnChildProcess() {
   };
   return sandbox.fake.returns(fakeSpawnResponse);
 }
-
 afterEach(() => {
   sandbox.restore();
 });
@@ -62,13 +61,13 @@ describe('Home component', () => {
         'baselineEligibilityOptions'
       );
       expect(baselineEligibilityOptions).toEqual({
-        '0': { codeSection: '11357(a)', option: 'dismiss' },
-        '1': { codeSection: '11357(b)', option: 'dismiss' },
-        '2': { codeSection: '11357(c)', option: 'dismiss' },
-        '3': { codeSection: '11357(d)', option: 'dismiss' },
-        '4': { codeSection: '11358', option: 'dismiss' },
-        '5': { codeSection: '11359', option: 'dismiss' },
-        '6': { codeSection: '11360', option: 'dismiss' }
+        '11357(a)': 'dismiss',
+        '11357(b)': 'dismiss',
+        '11357(c)': 'dismiss',
+        '11357(d)': 'dismiss',
+        '11358': 'dismiss',
+        '11359': 'dismiss',
+        '11360': 'dismiss'
       });
     });
 
@@ -139,11 +138,11 @@ describe('Home component', () => {
   describe('updateEligibilityOptions', () => {
     it('updates state.baselineEligibilityOptions for the given code section and option', () => {
       const { component } = setup('true');
-      expect(component.state('baselineEligibilityOptions')['0'].option).toEqual(
+      expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
         'dismiss'
       );
-      component.instance().updateEligibilityOptions('0', 'reduce');
-      expect(component.state('baselineEligibilityOptions')['0'].option).toEqual(
+      component.instance().updateEligibilityOptions('11357(a)', 'reduce');
+      expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
         'reduce'
       );
     });
