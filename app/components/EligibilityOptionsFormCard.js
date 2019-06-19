@@ -39,19 +39,18 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
     return (
       <FormCard>
         <FormCardHeader>
-          Analysis for Implementation
-          <p className="options-copy">
+          Baseline eligibility
+          <p className="text--help">
             Choose from the following options to expedite your office's review
             of records from the state summary criminal history information
             database for AB-1793.
           </p>
         </FormCardHeader>
         <FormCardContent>
-          <h2>Baseline eligibility</h2>
           <table className="data-table">
             <thead>
               <tr>
-                <th>Type</th>
+                <th>Type of convictions</th>
                 <th>Dismiss</th>
                 <th>Reduce</th>
               </tr>
@@ -59,7 +58,7 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
             <tbody>
               <tr>
                 <td>
-                  <p>All misdemeanors and infractions</p>
+                  <p>All HS 11357-60 misdemeanors and infractions</p>
                 </td>
                 <td>
                   <RadioButton
