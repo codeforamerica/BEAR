@@ -110,7 +110,7 @@ describe('The happy path', () => {
     });
   });
 
-  it('can select eligibility options and process file', () => {
+  it('can select eligibility options and display results page', () => {
     const countySelect = app.client.$('#county-select');
     return countySelect.selectByVisibleText('Sacramento').then(() => {
       return app.client.click('#continue').then(() => {
@@ -123,8 +123,8 @@ describe('The happy path', () => {
                   return app.client
                     .getText('.form-card__title')
                     .then(cardContent => {
-                      return expect(cardContent).toEqual(
-                        'Preparing your files'
+                      return expect(cardContent).toContain(
+                        'Your files are ready!'
                       );
                     });
                 });
@@ -134,4 +134,31 @@ describe('The happy path', () => {
       });
     });
   });
+  // uncomment when ready
+  // it('can open the folder with the results files', () => {
+  //   const countySelect = app.client.$('#county-select');
+  //   return countySelect.selectByVisibleText('Sacramento').then(() => {
+  //     return app.client.click('#continue').then(() => {
+  //       return app.client
+  //         .chooseFile('#doj-file-input', './test/fixtures/file.dat')
+  //         .then(() => {
+  //           return app.client.click('#continue').then(() => {
+  //             return app.client.click('#reduce_11360').then(() => {
+  //               return app.client.click('.button').then(() => {
+  //                 return app.client.click('#view_results').then(() => {
+  //                   return app.client
+  //                     .getText('#mock_dialogue_text')
+  //                     .then(dialogueText => {
+  //                       return expect(dialogueText).toEqual(
+  //                         'Your mock file dialogue'
+  //                       );
+  //                     });
+  //                 });
+  //               });
+  //             });
+  //           });
+  //         });
+  //     });
+  //   });
+  // });
 });

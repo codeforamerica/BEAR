@@ -3,13 +3,15 @@ import fs from 'fs';
 import path from 'path';
 import createJsonFile from './fileUtils';
 
-export function transformEligibilityOptions(state) {
-  const jsonObject = { dismiss: [], reduce: [] };
-  Object.values(state).forEach(value => {
-    value.option === 'dismiss'
-      ? jsonObject.dismiss.push(value.codeSection.toUpperCase())
-      : jsonObject.reduce.push(value.codeSection.toUpperCase());
-  });
+export function transformEligibilityOptions(eligibilityOptions) {
+  const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
+  Object.keys(eligibilityOptions)
+    .sort()
+    .forEach(codeSection => {
+      eligibilityOptions[codeSection] === 'dismiss'
+        ? jsonObject.baselineEligibility.dismiss.push(codeSection.toUpperCase())
+        : jsonObject.baselineEligibility.reduce.push(codeSection.toUpperCase());
+    });
   return jsonObject;
 }
 
@@ -25,17 +27,20 @@ export function runScript(state, spawnChildProcess) {
   const formattedEligibilityOptions = transformEligibilityOptions(
     baselineEligibilityOptions
   );
-  fs.mkdirSync(outputFilePath, { recursive: true });
-  const jsonPath = `${outputFilePath}${path.sep}eligibilityConfig.json`;
-  createJsonFile(formattedEligibilityOptions, jsonPath);
+  if (!fs.existsSync(outputFilePath)) {
+    fs.mkdirSync(outputFilePath, { recursive: true });
+  }
+  const pathToEligibilityOptions = `${outputFilePath}${
+    path.sep
+  }eligibilityConfig.json`;
+  createJsonFile(formattedEligibilityOptions, pathToEligibilityOptions);
 
   const countyCode = county.code;
-
   const goProcess = spawnChildProcess(gogenPath, [
     `--input-doj=${dojFilePath}`,
     `--outputs=${outputFilePath}`,
-    `--county="${countyCode}"`,
-    `--jsonPath=${jsonPath}`
+    `--county=${countyCode}`,
+    `--eligibility-options=${pathToEligibilityOptions}`
   ]);
 
   goProcess.stdout.on('data', data => {

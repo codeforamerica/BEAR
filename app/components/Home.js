@@ -6,7 +6,8 @@ import CountySelectFormCard from './CountySelectFormCard';
 import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
 import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
-import ProcessingFormCard from './ProcessingFormCard';
+import ResultsFormCard from './ResultsFormCard';
+import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 
 type State = {
@@ -63,13 +64,13 @@ export default class Home extends Component<Props, State> {
       county: { name: '', code: '' },
       dojFilePath: '',
       baselineEligibilityOptions: {
-        '0': { codeSection: '11357(a)', option: 'dismiss' },
-        '1': { codeSection: '11357(b)', option: 'dismiss' },
-        '2': { codeSection: '11357(c)', option: 'dismiss' },
-        '3': { codeSection: '11357(d)', option: 'dismiss' },
-        '4': { codeSection: '11358', option: 'dismiss' },
-        '5': { codeSection: '11359', option: 'dismiss' },
-        '6': { codeSection: '11360', option: 'dismiss' }
+        '11357(a)': 'dismiss',
+        '11357(b)': 'dismiss',
+        '11357(c)': 'dismiss',
+        '11357(d)': 'dismiss',
+        '11358': 'dismiss',
+        '11359': 'dismiss',
+        '11360': 'dismiss'
       },
       outputFilePath: `${home}/Desktop`
     };
@@ -83,13 +84,10 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePath });
   };
 
-  updateEligibilityOptions = (key: string, value: string) => {
+  updateEligibilityOptions = (codeSection: string, value: string) => {
     const { baselineEligibilityOptions } = this.state;
     const newOption = {};
-    newOption[key] = {
-      codeSection: baselineEligibilityOptions[key].codeSection,
-      option: value
-    };
+    newOption[codeSection] = value;
 
     const newEligibilityOptions = {
       ...baselineEligibilityOptions,
@@ -109,9 +107,25 @@ export default class Home extends Component<Props, State> {
     this.setState({ currentScreen: currentScreen - 1 });
   };
 
+  homeScreen = () => {
+    this.setState({
+      currentScreen: 0,
+      county: { name: '', code: '' },
+      dojFilePath: '',
+      baselineEligibilityOptions: {
+        '11357(a)': 'dismiss',
+        '11357(b)': 'dismiss',
+        '11357(c)': 'dismiss',
+        '11357(d)': 'dismiss',
+        '11358': 'dismiss',
+        '11359': 'dismiss',
+        '11360': 'dismiss'
+      }
+    });
+  };
+
   runScriptInOptions = () => {
     const { spawnChildProcess } = this.props;
-
     runScript(this.state, spawnChildProcess);
   };
 
@@ -120,6 +134,7 @@ export default class Home extends Component<Props, State> {
       currentScreen,
       county,
       dojFilePath,
+      outputFilePath,
       baselineEligibilityOptions
     } = this.state;
     return (
@@ -137,13 +152,18 @@ export default class Home extends Component<Props, State> {
           onBack={this.previousScreen}
         />
         <EligibilityOptionsFormCard
-          eligibilityOptions={baselineEligibilityOptions}
+          baselineEligibilityOptions={baselineEligibilityOptions}
           onEligibilityOptionSelect={this.updateEligibilityOptions}
           onOptionsConfirm={this.nextScreen}
           onOptionsRunScript={this.runScriptInOptions}
           onBack={this.previousScreen}
         />
-        <ProcessingFormCard currentScreen={currentScreen} />
+        <ResultsFormCard
+          county={county}
+          outputFolder={outputFilePath}
+          openFolder={openFolder}
+          onStartOver={this.homeScreen}
+        />
       </PageContainer>
     );
   }

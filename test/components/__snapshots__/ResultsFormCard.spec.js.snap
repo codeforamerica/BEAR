@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ResultsFormCard component should match exact snapshot 1`] = `
+<div>
+  <div
+    className="form-card"
+  >
+    <header
+      className="form-card__header"
+    >
+      <h1
+        className="form-card__title"
+      >
+        <div
+          className="text--centered"
+        >
+          Your files are ready!
+          <p>
+            We have generated results for undefined county
+          </p>
+          <button
+            className="button button--primary"
+            id="view_results"
+            onClick={[Function]}
+            type="button"
+          >
+            Open Folder
+          </button>
+        </div>
+      </h1>
+    </header>
+    <div
+      className="form-card__content"
+    >
+      <h3
+        className="text--centered"
+      >
+        What's included in the folder:
+      </h3>
+      <div
+        className="vertical-steps__step"
+      >
+        <p>
+          <b>
+            Clear My Record Results Files: 
+          </b>
+           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sagittis sodales eleifend. Praesent in tincidunt turpis, id euismod enim. Integer a massa sed quam suscipit facilisis. Donec interdum placerat eros.
+        </p>
+      </div>
+    </div>
+    <div
+      className="form-card__footer"
+    >
+      <button
+        className="button"
+        id="start_over"
+        onClick={[Function]}
+        type="button"
+      >
+        Start Over
+      </button>
+    </div>
+  </div>
+</div>
+`;

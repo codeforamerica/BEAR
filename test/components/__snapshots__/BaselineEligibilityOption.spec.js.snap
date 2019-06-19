@@ -4,15 +4,15 @@ exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
 <tr>
   <td>
     <p>
-      HS HS 11357 (a) felonies
+      HS 11357(a) felonies
     </p>
   </td>
   <td>
     <input
       className="radioButton"
       defaultChecked={true}
-      id="dismiss_HS 11357 (a)"
-      name="HS 11357 (a)"
+      id="dismiss_11357(a)"
+      name="11357(a)"
       onChange={[Function]}
       type="radio"
     />
@@ -21,8 +21,8 @@ exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
     <input
       className="radioButton"
       defaultChecked={false}
-      id="reduce_HS 11357 (a)"
-      name="HS 11357 (a)"
+      id="reduce_11357(a)"
+      name="11357(a)"
       onChange={[Function]}
       type="radio"
     />

@@ -11,34 +11,35 @@ const sandbox = sinon.createSandbox();
 
 function setup() {
   const options = {
-    '0': { codeSection: '11357(a)', option: 'reduce' },
-    '1': { codeSection: '11357(b)', option: 'dismiss' },
-    '2': { codeSection: '11357(c)', option: 'reduce' },
-    '3': { codeSection: '11357(d)', option: 'reduce' },
-    '4': { codeSection: '11358', option: 'dismiss' },
-    '5': { codeSection: '11359', option: 'reduce' },
-    '6': { codeSection: '11360', option: 'dismiss' }
+    '11357(a)': 'reduce',
+    '11357(b)': 'dismiss',
+    '11357(c)': 'reduce',
+    '11357(d)': 'reduce',
+    '11358': 'dismiss',
+    '11359': 'reduce',
+    '11360': 'dismiss'
   };
+
   const onOptionsConfirmSpy = sandbox.spy();
   const onOptionsRunScriptSpy = sandbox.spy();
   const onBackSpy = sandbox.spy();
   const component = mount(
     <EligibilityOptionsFormCard
       currentScreen={3}
-      eligibilityOptions={options}
+      baselineEligibilityOptions={options}
       onOptionsConfirm={onOptionsConfirmSpy}
       onOptionsRunScript={onOptionsRunScriptSpy}
       onBack={onBackSpy}
     />
   );
   return {
+    options,
     component,
     onOptionsConfirmSpy,
     onOptionsRunScriptSpy,
     onBackSpy
   };
 }
-
 afterEach(() => {
   sandbox.restore();
 });
@@ -48,58 +49,37 @@ describe('EligibilityOptionsFormCard component', () => {
     const { component } = setup('');
     expect(
       component.containsAnyMatchingElements([
-        <BaselineEligibilityOption
-          codeSection="11357(a)"
-          selectedOption="reduce"
-        />
+        <BaselineEligibilityOption codeSection="11357(a)" />
       ])
     ).toEqual(true);
     expect(
       component.containsAnyMatchingElements([
-        <BaselineEligibilityOption
-          codeSection="11357(b)"
-          selectedOption="dismiss"
-        />
+        <BaselineEligibilityOption codeSection="11357(b)" />
       ])
     ).toEqual(true);
     expect(
       component.containsAnyMatchingElements([
-        <BaselineEligibilityOption
-          codeSection="11357(c)"
-          selectedOption="reduce"
-        />
+        <BaselineEligibilityOption codeSection="11357(c)" />
       ])
     ).toEqual(true);
     expect(
       component.containsAnyMatchingElements([
-        <BaselineEligibilityOption
-          codeSection="11357(d)"
-          selectedOption="reduce"
-        />
+        <BaselineEligibilityOption codeSection="11357(d)" />
       ])
     ).toEqual(true);
     expect(
       component.containsAnyMatchingElements([
-        <BaselineEligibilityOption
-          codeSection="11358"
-          selectedOption="dismiss"
-        />
+        <BaselineEligibilityOption codeSection="11358" />
       ])
     ).toEqual(true);
     expect(
       component.containsAnyMatchingElements([
-        <BaselineEligibilityOption
-          codeSection="11359"
-          selectedOption="reduce"
-        />
+        <BaselineEligibilityOption codeSection="11359" />
       ])
     ).toEqual(true);
     expect(
       component.containsAnyMatchingElements([
-        <BaselineEligibilityOption
-          codeSection="11360"
-          selectedOption="dismiss"
-        />
+        <BaselineEligibilityOption codeSection="11360" />
       ])
     ).toEqual(true);
   });
@@ -129,12 +109,12 @@ describe('EligibilityOptionsFormCard component', () => {
   });
 
   it('should match exact snapshot', () => {
-    const options = [{ codeSection: '11357(a)', option: 'dismiss' }];
+    const options = { '11357(a)': 'dismiss' };
     const component = (
       <div>
         <EligibilityOptionsFormCard
           currentScreen={3}
-          eligibilityOptions={options}
+          baselineEligibilityOptions={options}
         />
       </div>
     );
