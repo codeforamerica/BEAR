@@ -25,8 +25,8 @@ export default class DojFileInput extends Component<Props> {
             className="file-upload__input"
           />
           Upload File
-        </label>
-      </div>
-    );
-  }
+</label>
+</div>
+);
+}
 }

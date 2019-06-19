@@ -134,7 +134,6 @@ describe('The happy path', () => {
       });
     });
   });
-  // uncomment when ready
   // it('can open the folder with the results files', () => {
   //   const countySelect = app.client.$('#county-select');
   //   return countySelect.selectByVisibleText('Sacramento').then(() => {
@@ -146,13 +145,10 @@ describe('The happy path', () => {
   //             return app.client.click('#reduce_11360').then(() => {
   //               return app.client.click('.button').then(() => {
   //                 return app.client.click('#view_results').then(() => {
-  //                   return app.client
-  //                     .getText('#mock_dialogue_text')
-  //                     .then(dialogueText => {
-  //                       return expect(dialogueText).toEqual(
-  //                         'Your mock file dialogue'
-  //                       );
-  //                     });
+  //                   return app.client.getSelectedText('Desktop').then((text) => {
+  //                     console.log("logging", text);
+  //                     console.log("logging", text);
+  //                   });
   //                 });
   //               });
   //             });

@@ -26,7 +26,6 @@ export default class DojFileSelectFormCard extends Component<Props> {
         <DojFileItem filePath={dojFilePath} onFileRemove={updateFilePath} />
       );
     }
-
     return <DojFileInput onFileSelect={updateFilePath} />;
   };
 
