@@ -1,7 +1,7 @@
 {
   "name": "bear",
   "productName": "BEAR",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Bulk Expungement Analysis of Records (BEAR). Electron app to configure eligibility logic and identify convictions eligible for Prop 64 relief",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
