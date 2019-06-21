@@ -45,7 +45,7 @@ describe('Home component', () => {
     it('sets the output file path to HOME/desktop', () => {
       const { component } = setup('false');
       expect(component.state('outputFilePath')).toEqual(
-        '/tmp/test/home/path/Desktop'
+        '/tmp/test/home/path/Desktop/Clear My Record output/CMR output'
       );
     });
 
@@ -53,6 +53,12 @@ describe('Home component', () => {
       const { component } = setup('false');
       const county = component.state('county');
       expect(county).toEqual({ name: '', code: '' });
+    });
+
+    it('sets the dateTime to an empty string', () => {
+      const { component } = setup('false');
+      const dateTime = component.state('dateTime');
+      expect(dateTime).toEqual('');
     });
 
     it('sets the baseline eligibility options to an object with all options set to dismiss', () => {
@@ -135,13 +141,13 @@ describe('Home component', () => {
     });
   });
 
-  describe('updateEligibilityOptions', () => {
+  describe('updateStateWithOptions', () => {
     it('updates state.baselineEligibilityOptions for the given code section and option', () => {
       const { component } = setup('true');
       expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
         'dismiss'
       );
-      component.instance().updateEligibilityOptions('11357(a)', 'reduce');
+      component.instance().updateStateWithOptions('11357(a)', 'reduce');
       expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
         'reduce'
       );

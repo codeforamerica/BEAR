@@ -9,9 +9,11 @@ import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ResultsFormCard from './ResultsFormCard';
 import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
+import { getDateTime } from '../utils/fileUtils';
 
 type State = {
   gogenPath: string,
+  dateTime: string,
   currentScreen: number,
   county: County,
   dojFilePath: string,
@@ -60,6 +62,7 @@ export default class Home extends Component<Props, State> {
     }
     this.state = {
       gogenPath,
+      dateTime: '',
       currentScreen: 0,
       county: { name: '', code: '' },
       dojFilePath: '',
@@ -72,7 +75,7 @@ export default class Home extends Component<Props, State> {
         '11359': 'dismiss',
         '11360': 'dismiss'
       },
-      outputFilePath: `${home}/Desktop`
+      outputFilePath: `${home}/Desktop/Clear My Record output/CMR output`
     };
   }
 
@@ -84,8 +87,8 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePath });
   };
 
-  updateEligibilityOptions = (codeSection: string, value: string) => {
-    const { baselineEligibilityOptions } = this.state;
+  updateStateWithOptions = (codeSection: string, value: string) => {
+    const { baselineEligibilityOptions, outputFilePath } = this.state;
     const newOption = {};
     newOption[codeSection] = value;
 
@@ -93,8 +96,13 @@ export default class Home extends Component<Props, State> {
       ...baselineEligibilityOptions,
       ...newOption
     };
-
-    this.setState({ baselineEligibilityOptions: newEligibilityOptions });
+    const date = getDateTime();
+    const newOutputFilePath = `${outputFilePath} ${date}`;
+    this.setState({
+      baselineEligibilityOptions: newEligibilityOptions,
+      dateTime: date,
+      outputFilePath: newOutputFilePath
+    });
   };
 
   nextScreen = () => {
@@ -153,7 +161,7 @@ export default class Home extends Component<Props, State> {
         />
         <EligibilityOptionsFormCard
           baselineEligibilityOptions={baselineEligibilityOptions}
-          onEligibilityOptionSelect={this.updateEligibilityOptions}
+          onEligibilityOptionSelect={this.updateStateWithOptions}
           onOptionsConfirm={this.nextScreen}
           onOptionsRunScript={this.runScriptInOptions}
           onBack={this.previousScreen}
