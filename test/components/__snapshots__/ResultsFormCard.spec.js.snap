@@ -38,11 +38,31 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
         What's included in the folder:
       </h3>
       <div
-        className="vertical-steps__step"
+        className="sidePadding"
       >
         <p>
           <b>
-            Clear My Record Results Files: 
+            Clear My Record Results File: 
+          </b>
+           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sagittis sodales eleifend. Praesent in tincidunt turpis, id euismod enim. Integer a massa sed quam suscipit facilisis. Donec interdum placerat eros.
+        </p>
+      </div>
+      <div
+        className="sidePadding"
+      >
+        <p>
+          <b>
+            Condensed Results Files: 
+          </b>
+           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sagittis sodales eleifend. Praesent in tincidunt turpis, id euismod enim. Integer a massa sed quam suscipit facilisis. Donec interdum placerat eros.
+        </p>
+      </div>
+      <div
+        className="sidePadding"
+      >
+        <p>
+          <b>
+            Summary Report: 
           </b>
            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sagittis sodales eleifend. Praesent in tincidunt turpis, id euismod enim. Integer a massa sed quam suscipit facilisis. Donec interdum placerat eros.
         </p>

@@ -7,6 +7,7 @@ import FormCard, {
   FormCardHeader
 } from './FormCard';
 import StartOverButton from './StartOverButton';
+import styles from './ResultsFormCard.css';
 
 type Props = {
   county: County,
@@ -48,12 +49,28 @@ export default class ResultsFormCard extends Component<Props> {
           <h3 className="text--centered">
             What&apos;s included in the folder:
           </h3>
-          <div className="vertical-steps__step">
+          <div className={styles.sidePadding}>
             <p>
-              <b>Clear My Record Results Files: </b> Lorem ipsum dolor sit amet,
+              <b>Clear My Record Results File: </b> Lorem ipsum dolor sit amet,
               consectetur adipiscing elit. Nam sagittis sodales eleifend.
               Praesent in tincidunt turpis, id euismod enim. Integer a massa sed
               quam suscipit facilisis. Donec interdum placerat eros.
+            </p>
+          </div>
+          <div className={styles.sidePadding}>
+            <p>
+              <b>Condensed Results Files: </b> Lorem ipsum dolor sit amet,
+              consectetur adipiscing elit. Nam sagittis sodales eleifend.
+              Praesent in tincidunt turpis, id euismod enim. Integer a massa sed
+              quam suscipit facilisis. Donec interdum placerat eros.
+            </p>
+          </div>
+          <div className={styles.sidePadding}>
+            <p>
+              <b>Summary Report: </b> Lorem ipsum dolor sit amet, consectetur
+              adipiscing elit. Nam sagittis sodales eleifend. Praesent in
+              tincidunt turpis, id euismod enim. Integer a massa sed quam
+              suscipit facilisis. Donec interdum placerat eros.
             </p>
           </div>
         </FormCardContent>
