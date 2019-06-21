@@ -1,33 +1,26 @@
 const { exec } = require('child_process');
 
-export default function openFolder(path: string) {
+export default function openFolder(path: string): boolean {
   if (process.platform === 'darwin') {
-    console.log('in there');
-    openOnMac(path);
-  } else {
-    openOnWindows(path);
+    return openOnMac(path);
   }
+  return openOnWindows(path);
 }
 
-export function openOnMac(path: string) {
-  exec(`open ${path}`, (err, stdout, stderr) => {
-    console.log('im in there');
+export function openOnMac(path: string): boolean {
+  exec(`open ${path}`, err => {
     if (err) {
-      return 'false';
+      return false;
     }
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
   });
-  return 'true';
+  return true;
 }
 
-export function openOnWindows(path: string) {
-  exec(`start c:${path} `, (err, stdout, stderr) => {
+export function openOnWindows(path: string): boolean {
+  exec(`start c:${path} `, err => {
     if (err) {
-      return 'false';
+      return false;
     }
-    console.log(`stdout: ${stdout}`);
-    console.log(`stderr: ${stderr}`);
   });
-  return 'true';
+  return true;
 }

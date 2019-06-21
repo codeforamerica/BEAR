@@ -134,27 +134,4 @@ describe('The happy path', () => {
       });
     });
   });
-  // it('can open the folder with the results files', () => {
-  //   const countySelect = app.client.$('#county-select');
-  //   return countySelect.selectByVisibleText('Sacramento').then(() => {
-  //     return app.client.click('#continue').then(() => {
-  //       return app.client
-  //         .chooseFile('#doj-file-input', './test/fixtures/file.dat')
-  //         .then(() => {
-  //           return app.client.click('#continue').then(() => {
-  //             return app.client.click('#reduce_11360').then(() => {
-  //               return app.client.click('.button').then(() => {
-  //                 return app.client.click('#view_results').then(() => {
-  //                   return app.client.getSelectedText('Desktop').then((text) => {
-  //                     console.log("logging", text);
-  //                     console.log("logging", text);
-  //                   });
-  //                 });
-  //               });
-  //             });
-  //           });
-  //         });
-  //     });
-  //   });
-  // });
 });

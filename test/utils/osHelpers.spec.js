@@ -7,7 +7,6 @@ describe('openFolder', () => {
     if (!fs.existsSync(path)) {
       fs.mkdirSync(path, { recursive: true });
     }
-    openFolder(path);
-    expect(false).toEqual('true');
+    expect(openFolder(path)).toEqual(true);
   });
 });
