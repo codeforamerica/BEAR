@@ -69,6 +69,7 @@ describe('runScript', () => {
     const { args } = fakeSpawnChildProcess.getCall(0);
     expect(args[0]).toEqual('gogenPath');
     expect(args[1]).toEqual([
+      `run`,
       `--input-doj=/path/to/doj/file`,
       `--outputs=outputPath`,
       `--county="SACRAMENTO"`,

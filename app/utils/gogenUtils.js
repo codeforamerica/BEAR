@@ -37,6 +37,7 @@ export function runScript(state, spawnChildProcess) {
 
   const countyCode = county.code;
   const goProcess = spawnChildProcess(gogenPath, [
+    `run`,
     `--input-doj=${dojFilePath}`,
     `--outputs=${outputFilePath}`,
     `--county=${countyCode}`,
