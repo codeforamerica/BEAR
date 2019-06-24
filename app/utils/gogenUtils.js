@@ -18,6 +18,7 @@ export function transformEligibilityOptions(eligibilityOptions) {
 export function runScript(state, spawnChildProcess) {
   const {
     gogenPath,
+    dateTime,
     county,
     dojFilePath,
     baselineEligibilityOptions,
@@ -38,6 +39,7 @@ export function runScript(state, spawnChildProcess) {
   const countyCode = county.code;
   const goProcess = spawnChildProcess(gogenPath, [
     `run`,
+    `--date-for-file-name=${dateTime}`,
     `--input-doj=${dojFilePath}`,
     `--outputs=${outputFilePath}`,
     `--county=${countyCode}`,

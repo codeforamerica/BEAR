@@ -50,6 +50,7 @@ describe('runScript', () => {
     const fakeSpawnChildProcess = createFakeSpawnChildProcess();
     const state = {
       gogenPath: 'gogenPath',
+      dateTime: 'date',
       county: { name: 'Sacramento', code: 'SACRAMENTO' },
       dojFilePath: '/path/to/doj/file',
       outputFilePath: 'outputPath',
@@ -70,9 +71,10 @@ describe('runScript', () => {
     expect(args[0]).toEqual('gogenPath');
     expect(args[1]).toEqual([
       `run`,
+      `--date-for-file-name=date`,
       `--input-doj=/path/to/doj/file`,
       `--outputs=outputPath`,
-      `--county="SACRAMENTO"`,
+      `--county=SACRAMENTO`,
       `--eligibility-options=outputPath/eligibilityConfig.json`
     ]);
 
