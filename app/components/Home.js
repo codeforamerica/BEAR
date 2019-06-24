@@ -10,6 +10,7 @@ import ResultsFormCard from './ResultsFormCard';
 import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 import { getDateTime } from '../utils/fileUtils';
+import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 
 type State = {
   gogenPath: string,
@@ -77,7 +78,10 @@ export default class Home extends Component<Props, State> {
         '11360': 'dismiss'
       },
       initialFilePath: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
-      outputFilePath: ''
+      outputFilePath: '',
+      additionalReliefOptions: {
+        subjectUnder21AtConviction: true
+      }
     };
   }
 
@@ -168,7 +172,8 @@ export default class Home extends Component<Props, State> {
       county,
       dojFilePath,
       outputFilePath,
-      baselineEligibilityOptions
+      baselineEligibilityOptions,
+      additionalReliefOptions
     } = this.state;
     return (
       <PageContainer currentScreen={currentScreen}>
@@ -189,6 +194,13 @@ export default class Home extends Component<Props, State> {
           updateDate={this.updateDateForPath}
           onEligibilityOptionSelect={this.updateStateWithOptions}
           onOptionsConfirm={this.nextScreen}
+          onBack={this.previousScreen}
+        />
+        <AdditionalReliefFormCard
+          additionalReliefOptions={additionalReliefOptions}
+          onEligibilityOptionSelect={this.updateAdditionalReliefOptions}
+          onOptionsConfirm={this.nextScreen}
+          onOptionsRunScript={this.runScriptInOptions}
           onBack={this.previousScreen}
         />
         <ResultsFormCard

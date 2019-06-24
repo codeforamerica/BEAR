@@ -5,4 +5,6 @@ declare type County = {
 
 declare type BaselineEligibilityOptions = { [string]: string };
 
-// declare type EligibilityOption = { codeSection: string, option: string };
+declare type AdditionalReliefOptions = {
+  subjectUnder21AtConviction: boolean
+};

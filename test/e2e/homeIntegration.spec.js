@@ -110,7 +110,7 @@ describe('The happy path', () => {
     });
   });
 
-  it('can select eligibility options and display results page', () => {
+  it('can select eligibility options and display additional relief page', () => {
     const countySelect = app.client.$('#county-select');
     return countySelect.selectByVisibleText('Sacramento').then(() => {
       return app.client.click('#continue').then(() => {
@@ -119,14 +119,41 @@ describe('The happy path', () => {
           .then(() => {
             return app.client.click('#continue').then(() => {
               return app.client.click('#reduce_11360').then(() => {
-                return app.client.click('.button').then(() => {
+                return app.client.click('#continue').then(() => {
                   return app.client
                     .getText('.form-card__title')
                     .then(cardContent => {
-                      return expect(cardContent).toContain(
-                        'Your files are ready!'
-                      );
+                      return expect(cardContent).toContain('Additional relief');
                     });
+                });
+              });
+            });
+          });
+      });
+    });
+  });
+
+  fit('can select additional relief options and display results page', () => {
+    const countySelect = app.client.$('#county-select');
+    return countySelect.selectByVisibleText('Sacramento').then(() => {
+      return app.client.click('#continue').then(() => {
+        return app.client
+          .chooseFile('#doj-file-input', './test/fixtures/file.dat')
+          .then(() => {
+            return app.client.click('#continue').then(() => {
+              return app.client.click('#reduce_11360').then(() => {
+                return app.client.click('#continue').then(() => {
+                  return app.client.click('#dismiss_under_21').then(() => {
+                    return app.client.click('#continue').then(() => {
+                      return app.client
+                        .getText('.form-card__title')
+                        .then(cardContent => {
+                          return expect(cardContent).toContain(
+                            'Your files are ready!'
+                          );
+                        });
+                    });
+                  });
                 });
               });
             });
