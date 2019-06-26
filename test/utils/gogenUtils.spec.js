@@ -53,7 +53,7 @@ describe('runScript', () => {
       dateTime: 'date',
       county: { name: 'Sacramento', code: 'SACRAMENTO' },
       dojFilePath: '/path/to/doj/file',
-      outputFilePath: 'outputPath',
+      outputFilePath: 'outputPath/outputPath',
       baselineEligibilityOptions: {
         '11357(a)': 'dismiss',
         '11357(b)': 'dismiss',
@@ -75,7 +75,7 @@ describe('runScript', () => {
       `--input-doj=/path/to/doj/file`,
       `--outputs=outputPath`,
       `--county=SACRAMENTO`,
-      `--eligibility-options=outputPath/eligibilityConfig.json`
+      `--eligibility-options=outputPath/outputPath/eligibilityConfig.json`
     ]);
 
     fs.unlinkSync('outputPath/eligibilityConfig.json');
