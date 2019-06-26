@@ -75,7 +75,7 @@ export default class Home extends Component<Props, State> {
         '11359': 'dismiss',
         '11360': 'dismiss'
       },
-      outputFilePath: `${home}/Desktop/Clear My Record output/CMR output`
+      outputFilePath: `${home}/Desktop/Clear_My_Record_output/CMR_output`
     };
   }
 
@@ -97,7 +97,7 @@ export default class Home extends Component<Props, State> {
       ...newOption
     };
     const date = getDateTime();
-    const newOutputFilePath = `${outputFilePath} ${date}`;
+    const newOutputFilePath = `${outputFilePath}_${date}`;
     this.setState({
       baselineEligibilityOptions: newEligibilityOptions,
       dateTime: date,

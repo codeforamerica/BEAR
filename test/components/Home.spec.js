@@ -45,7 +45,7 @@ describe('Home component', () => {
     it('sets the output file path to HOME/desktop', () => {
       const { component } = setup('false');
       expect(component.state('outputFilePath')).toEqual(
-        '/tmp/test/home/path/Desktop/Clear My Record output/CMR output'
+        '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output'
       );
     });
 
