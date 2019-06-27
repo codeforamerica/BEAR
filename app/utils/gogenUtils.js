@@ -29,7 +29,10 @@ export function runScript(state, spawnChildProcess) {
     baselineEligibilityOptions
   );
   if (!fs.existsSync(outputFilePath)) {
-    fs.mkdirSync(outputFilePath, { recursive: true });
+    fs.mkdir(outputFilePath, { recursive: true }, err => {
+      if (err) throw err;
+      console.log('error making path:', path);
+    });
   }
   const pathToEligibilityOptions = `${outputFilePath}${
     path.sep

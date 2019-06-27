@@ -18,6 +18,7 @@ type State = {
   county: County,
   dojFilePath: string,
   baselineEligibilityOptions: BaselineEligibilityOptions,
+  initialFilePath: string,
   outputFilePath: string
 };
 
@@ -75,7 +76,8 @@ export default class Home extends Component<Props, State> {
         '11359': 'dismiss',
         '11360': 'dismiss'
       },
-      outputFilePath: `${home}/Desktop/Clear_My_Record_output/CMR_output`
+      initialFilePath: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
+      outputFilePath: ''
     };
   }
 
@@ -103,6 +105,14 @@ export default class Home extends Component<Props, State> {
       dateTime: date,
       outputFilePath: newOutputFilePath
     });
+  };
+
+  resetOutputPath = () => {
+    const { initialFilePath } = this.state;
+    this.setState({
+      outputFilePath: initialFilePath
+    });
+    console.log('reset file path');
   };
 
   nextScreen = () => {
@@ -171,6 +181,7 @@ export default class Home extends Component<Props, State> {
           outputFolder={outputFilePath}
           openFolder={openFolder}
           onStartOver={this.homeScreen}
+          resetOutputPath={this.resetOutputPath}
         />
       </PageContainer>
     );

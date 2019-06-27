@@ -13,7 +13,8 @@ type Props = {
   county: County,
   outputFolder: string,
   openFolder: string => void,
-  onStartOver: void => void
+  onStartOver: void => void,
+  resetOutputPath: void => void
 };
 
 export default class ResultsFormCard extends Component<Props> {
@@ -23,7 +24,8 @@ export default class ResultsFormCard extends Component<Props> {
   };
 
   onClickStartOver = () => {
-    const { onStartOver } = this.props;
+    const { onStartOver, resetOutputPath } = this.props;
+    resetOutputPath();
     onStartOver();
   };
 

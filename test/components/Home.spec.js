@@ -42,11 +42,16 @@ describe('Home component', () => {
       expect(component.state('currentScreen')).toEqual(0);
     });
 
-    it('sets the output file path to HOME/desktop', () => {
+    it('sets the initial file path to HOME/desktop', () => {
       const { component } = setup('false');
-      expect(component.state('outputFilePath')).toEqual(
+      expect(component.state('initialFilePath')).toEqual(
         '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output'
       );
+    });
+
+    it('sets the output file path to any empty string', () => {
+      const { component } = setup('false');
+      expect(component.state('outputFilePath')).toEqual('');
     });
 
     it('sets the county to an object with an empty name and value', () => {
@@ -150,6 +155,18 @@ describe('Home component', () => {
       component.instance().updateStateWithOptions('11357(a)', 'reduce');
       expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
         'reduce'
+      );
+    });
+  });
+
+  describe('resetOutputPath', () => {
+    it('resets the date after restart', () => {
+      const { component } = setup('true');
+      expect(component.state('dojFilePath')).toEqual('');
+      component.instance().updateStateWithOptions();
+      component.instance().resetOutputPath();
+      expect(component.state('outputFilePath')).toEqual(
+        component.state('initialFilePath')
       );
     });
   });

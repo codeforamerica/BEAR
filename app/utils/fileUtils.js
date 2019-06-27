@@ -36,5 +36,5 @@ export function getDateTime() {
 
   if (minutes < 10) minutes = `0${minutes}`;
   if (seconds < 10) seconds = `0${seconds}`;
-  return `${month}_${day}_${year}__${hours}.${minutes}.${seconds}.${ampm}`;
+  return `${month}_${day}_${year}_${hours}.${minutes}.${seconds}.${ampm}`;
 }

@@ -11,6 +11,7 @@ const sandbox = sinon.createSandbox();
 function setup() {
   const openFolderSpy = sandbox.spy();
   const startOverSpy = sandbox.spy();
+  const resetOutputPathSpy = sandbox.spy();
   const component = mount(
     <ResultsFormCard
       county="Alameda"
@@ -18,12 +19,14 @@ function setup() {
       openFolder={openFolderSpy}
       currentScreen={4}
       onStartOver={startOverSpy}
+      resetOutputPath={resetOutputPathSpy}
     />
   );
   return {
     component,
     openFolderSpy,
-    startOverSpy
+    startOverSpy,
+    resetOutputPathSpy
   };
 }
 
@@ -44,7 +47,15 @@ describe('ResultsFormCard component', () => {
   });
 
   describe('clicking the Start Over button', () => {
-    it('should call the return the user to the home page', () => {
+    it('should call reset path', () => {
+      const { component, resetOutputPathSpy } = setup();
+      const startOverButton = component.find('#start_over').at(0);
+      startOverButton.simulate('click');
+      expect(component.props().currentScreen).toEqual(4);
+      expect(resetOutputPathSpy.called).toBe(true);
+      expect(resetOutputPathSpy.callCount).toEqual(1);
+    });
+    it('should call start over and return the user to the home page', () => {
       const { component, startOverSpy } = setup();
       const startOverButton = component.find('#start_over').at(0);
       startOverButton.simulate('click');
