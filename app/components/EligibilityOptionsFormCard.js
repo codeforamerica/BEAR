@@ -15,17 +15,17 @@ import GoBackButton from './GoBackButton';
 
 type Props = {
   baselineEligibilityOptions: BaselineEligibilityOptions,
+  updateDate: void => void,
   onEligibilityOptionSelect: (string, string) => void,
   onOptionsConfirm: void => void,
-  onOptionsRunScript: void => void,
   onBack: void => void
 };
 
 export default class EligibilityOptionsFormCard extends Component<Props> {
   onContinue = () => {
-    const { onOptionsConfirm, onOptionsRunScript } = this.props;
+    const { updateDate, onOptionsConfirm } = this.props;
+    updateDate();
     onOptionsConfirm();
-    onOptionsRunScript();
   };
 
   onGoBack = () => {

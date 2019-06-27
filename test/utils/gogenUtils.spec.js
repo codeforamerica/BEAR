@@ -73,12 +73,13 @@ describe('runScript', () => {
       `run`,
       `--date-for-file-name=date`,
       `--input-doj=/path/to/doj/file`,
-      `--outputs=outputPath`,
+      `--outputs=outputPath/outputPath`,
       `--county=SACRAMENTO`,
       `--eligibility-options=outputPath/outputPath/eligibilityConfig.json`
     ]);
 
-    fs.unlinkSync('outputPath/eligibilityConfig.json');
+    fs.unlinkSync('outputPath/outputPath/eligibilityConfig.json');
+    fs.rmdirSync('outputPath/outputPath');
     fs.rmdirSync('outputPath');
   });
 });

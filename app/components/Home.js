@@ -81,6 +81,13 @@ export default class Home extends Component<Props, State> {
     };
   }
 
+  componentDidUpdate(prevProps: Props, prevState: State) {
+    const { dateTime } = this.state;
+    if (dateTime !== prevState.dateTime) {
+      this.runScriptInOptions();
+    }
+  }
+
   updateCounty = (county: County) => {
     this.setState({ county });
   };
@@ -90,7 +97,7 @@ export default class Home extends Component<Props, State> {
   };
 
   updateStateWithOptions = (codeSection: string, value: string) => {
-    const { baselineEligibilityOptions, outputFilePath } = this.state;
+    const { baselineEligibilityOptions } = this.state;
     const newOption = {};
     newOption[codeSection] = value;
 
@@ -98,10 +105,19 @@ export default class Home extends Component<Props, State> {
       ...baselineEligibilityOptions,
       ...newOption
     };
-    const date = getDateTime();
-    const newOutputFilePath = `${outputFilePath}_${date}`;
+
     this.setState({
-      baselineEligibilityOptions: newEligibilityOptions,
+      baselineEligibilityOptions: newEligibilityOptions
+    });
+  };
+
+  updateDateForPath = () => {
+    const { initialFilePath } = this.state;
+
+    const date = getDateTime();
+    const newOutputFilePath = `${initialFilePath}_${date}`;
+
+    this.setState({
       dateTime: date,
       outputFilePath: newOutputFilePath
     });
@@ -112,7 +128,6 @@ export default class Home extends Component<Props, State> {
     this.setState({
       outputFilePath: initialFilePath
     });
-    console.log('reset file path');
   };
 
   nextScreen = () => {
@@ -171,9 +186,9 @@ export default class Home extends Component<Props, State> {
         />
         <EligibilityOptionsFormCard
           baselineEligibilityOptions={baselineEligibilityOptions}
+          updateDate={this.updateDateForPath}
           onEligibilityOptionSelect={this.updateStateWithOptions}
           onOptionsConfirm={this.nextScreen}
-          onOptionsRunScript={this.runScriptInOptions}
           onBack={this.previousScreen}
         />
         <ResultsFormCard

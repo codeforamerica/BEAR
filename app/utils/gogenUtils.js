@@ -29,14 +29,13 @@ export function runScript(state, spawnChildProcess) {
     baselineEligibilityOptions
   );
   if (!fs.existsSync(outputFilePath)) {
-    fs.mkdir(outputFilePath, { recursive: true }, err => {
+    fs.mkdirSync(outputFilePath, { recursive: true }, err => {
       if (err) throw err;
       console.log('error making path:', path);
     });
   }
-  const pathToEligibilityOptions = `${outputFilePath}${
-    path.sep
-  }eligibilityConfig.json`;
+  const JsonFileName = 'eligibilityConfig.json';
+  const pathToEligibilityOptions = path.join(outputFilePath, JsonFileName);
   createJsonFile(formattedEligibilityOptions, pathToEligibilityOptions);
 
   const countyCode = county.code;

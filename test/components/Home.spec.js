@@ -14,6 +14,7 @@ function setup(isPackaged, platform = 'windows') {
   process.env.IS_PACKAGED = isPackaged;
   process.env.PLATFORM = platform;
   const spawnChildProcessSpy = createFakeSpawnChildProcess();
+  sinon.useFakeTimers(new Date(2011, 0, 1).getTime());
 
   const component = shallow(<Home spawnChildProcess={spawnChildProcessSpy} />);
   return { component };
@@ -155,6 +156,17 @@ describe('Home component', () => {
       component.instance().updateStateWithOptions('11357(a)', 'reduce');
       expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
         'reduce'
+      );
+    });
+  });
+
+  describe('updateDateForPath', () => {
+    it('updates state.baselineEligibilityOptions for the given code section and option', () => {
+      const { component } = setup('true');
+      expect(component.state('outputFilePath')).toEqual('');
+      component.instance().updateDateForPath();
+      expect(component.state('outputFilePath')).toEqual(
+        '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output_Jan_1_2011_0.00.00.AM'
       );
     });
   });
