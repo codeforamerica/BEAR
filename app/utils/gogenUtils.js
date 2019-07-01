@@ -34,7 +34,7 @@ export function runScript(state, spawnChildProcess) {
       console.log('error making path:', path);
     });
   }
-  const JsonFileName = 'eligibilityConfig.json';
+  const JsonFileName = `eligibilityConfig_${dateTime}.json`;
   const pathToEligibilityOptions = path.join(outputFilePath, JsonFileName);
   createJsonFile(formattedEligibilityOptions, pathToEligibilityOptions);
 
