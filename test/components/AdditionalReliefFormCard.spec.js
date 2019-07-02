@@ -37,7 +37,7 @@ afterEach(() => {
   sandbox.restore();
 });
 
-describe('EligibilityOptionsFormCard component', () => {
+describe('AdditionalReliefFormCard component', () => {
   describe('clicking the continue button', () => {
     it('should call onOptionsConfirm once', () => {
       const { component, onOptionsConfirmSpy } = setup();
@@ -68,24 +68,25 @@ describe('EligibilityOptionsFormCard component', () => {
       expect(
         component.props().additionalReliefOptions.subjectUnder21AtConviction
       ).toEqual(true);
-      component.find('#dismiss_under_21').simulate('click');
+      component.find('#dismiss_under_21').simulate('change');
       expect(onOptionChangeSpy.called).toBe(true);
       expect(onOptionChangeSpy.callCount).toEqual(1);
       const { args } = onOptionChangeSpy.getCall(0);
-      expect(args[0]).toEqual({ subjectUnder21AtConviction: false });
+      expect(args[0]).toEqual('subjectUnder21AtConviction');
+      expect(args[1]).toEqual(false);
     });
   });
 
-  // it('should match exact snapshot', () => {
-  //   const options = { subjectUnder21AtConviction: true };
-  //   const component = (
-  //     <div>
-  //       <AdditionalReliefFormCard additionalReliefOptions={options} />
-  //     </div>
-  //   );
-  //
-  //   const tree = renderer.create(component).toJSON();
-  //
-  //   expect(tree).toMatchSnapshot();
-  // });
+  it('should match exact snapshot', () => {
+    const options = { subjectUnder21AtConviction: true };
+    const component = (
+      <div>
+        <AdditionalReliefFormCard additionalReliefOptions={options} />
+      </div>
+    );
+
+    const tree = renderer.create(component).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
 });

@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-expressions */
 import fs from 'fs';
 import path from 'path';
-import createJsonFile from './fileUtils';
 
-export function transformEligibilityOptions(eligibilityOptions) {
+export function transformBaselineEligibilityOptions(eligibilityOptions) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
   Object.keys(eligibilityOptions)
     .sort()
@@ -15,17 +14,18 @@ export function transformEligibilityOptions(eligibilityOptions) {
   return jsonObject;
 }
 
-export function runScript(state, spawnChildProcess) {
+export function runScript(state, spawnChildProcess, createJsonFile) {
   const {
     gogenPath,
     dateTime,
     county,
     dojFilePath,
     baselineEligibilityOptions,
+    additionalReliefOptions,
     outputFilePath
   } = state;
 
-  const formattedEligibilityOptions = transformEligibilityOptions(
+  const formattedEligibilityOptions = transformBaselineEligibilityOptions(
     baselineEligibilityOptions
   );
   if (!fs.existsSync(outputFilePath)) {
@@ -34,10 +34,15 @@ export function runScript(state, spawnChildProcess) {
       console.log('error making path:', path);
     });
   }
+
   const JsonFileName = `eligibilityConfig_${dateTime}.json`;
   const pathToEligibilityOptions = path.join(outputFilePath, JsonFileName);
-  createJsonFile(formattedEligibilityOptions, pathToEligibilityOptions);
+  const eligibilityLogicConfig = {
+    ...formattedEligibilityOptions,
+    additionalRelief: additionalReliefOptions
+  };
 
+  createJsonFile(eligibilityLogicConfig, pathToEligibilityOptions);
   const countyCode = county.code;
   const goProcess = spawnChildProcess(gogenPath, [
     `run`,

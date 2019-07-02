@@ -147,13 +147,15 @@ describe('Home component', () => {
     });
   });
 
-  describe('updateStateWithOptions', () => {
+  describe('updateStateWithEligibilityOptions', () => {
     it('updates state.baselineEligibilityOptions for the given code section and option', () => {
       const { component } = setup('true');
       expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
         'dismiss'
       );
-      component.instance().updateStateWithOptions('11357(a)', 'reduce');
+      component
+        .instance()
+        .updateStateWithEligibilityOptions('11357(a)', 'reduce');
       expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
         'reduce'
       );
@@ -175,7 +177,7 @@ describe('Home component', () => {
     it('resets the date after restart', () => {
       const { component } = setup('true');
       expect(component.state('dojFilePath')).toEqual('');
-      component.instance().updateStateWithOptions();
+      component.instance().updateStateWithEligibilityOptions();
       component.instance().resetOutputPath();
       expect(component.state('outputFilePath')).toEqual(
         component.state('initialFilePath')

@@ -133,7 +133,7 @@ describe('The happy path', () => {
     });
   });
 
-  fit('can select additional relief options and display results page', () => {
+  it('can select additional relief options and display results page', () => {
     const countySelect = app.client.$('#county-select');
     return countySelect.selectByVisibleText('Sacramento').then(() => {
       return app.client.click('#continue').then(() => {

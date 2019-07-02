@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
+<div>
+  <div
+    className="form-card"
+  >
+    <header
+      className="form-card__header"
+    >
+      <h1
+        className="form-card__title"
+      >
+        Additional relief
+      </h1>
+    </header>
+    <div
+      className="form-card__content"
+    >
+      <label
+        className="checkbox"
+        htmlFor="dismiss_under_21"
+      >
+        Dismiss convictions for people who were convicted of one of the above convictions at an age of 21 or younger
+        <input
+          defaultChecked={true}
+          id="dismiss_under_21"
+          name="dismiss_under_21"
+          onChange={[Function]}
+          type="checkbox"
+          value="true"
+        />
+      </label>
+    </div>
+    <div
+      className="form-card__footer"
+    >
+      <button
+        className="button button--primary"
+        id="continue"
+        onClick={[Function]}
+        type="button"
+      >
+        Continue 
+        <i
+          className="icon-arrow_forward"
+        />
+      </button>
+      <button
+        className="button"
+        id="goback"
+        onClick={[Function]}
+        type="button"
+      >
+        Go back 
+        <i
+          className="icon-replay"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;

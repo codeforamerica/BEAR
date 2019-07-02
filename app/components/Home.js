@@ -9,7 +9,7 @@ import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ResultsFormCard from './ResultsFormCard';
 import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
-import { getDateTime } from '../utils/fileUtils';
+import { getDateTime, createJsonFile } from '../utils/fileUtils';
 import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 
 type State = {
@@ -19,6 +19,7 @@ type State = {
   county: County,
   dojFilePath: string,
   baselineEligibilityOptions: BaselineEligibilityOptions,
+  additionalReliefOptions: AdditionalReliefOptions,
   initialFilePath: string,
   outputFilePath: string
 };
@@ -100,7 +101,20 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePath });
   };
 
-  updateStateWithOptions = (codeSection: string, value: string) => {
+  updateAdditionalReliefOptions = (reliefOption: string, value: boolean) => {
+    const { additionalReliefOptions } = this.state;
+    const newOption = {};
+    newOption[reliefOption] = value;
+
+    const newAdditionalReliefOptions = {
+      ...additionalReliefOptions,
+      ...newOption
+    };
+
+    this.setState({ additionalReliefOptions: newAdditionalReliefOptions });
+  };
+
+  updateStateWithEligibilityOptions = (codeSection: string, value: string) => {
     const { baselineEligibilityOptions } = this.state;
     const newOption = {};
     newOption[codeSection] = value;
@@ -163,7 +177,7 @@ export default class Home extends Component<Props, State> {
 
   runScriptInOptions = () => {
     const { spawnChildProcess } = this.props;
-    runScript(this.state, spawnChildProcess);
+    runScript(this.state, spawnChildProcess, createJsonFile);
   };
 
   render() {
@@ -192,7 +206,7 @@ export default class Home extends Component<Props, State> {
         <EligibilityOptionsFormCard
           baselineEligibilityOptions={baselineEligibilityOptions}
           updateDate={this.updateDateForPath}
-          onEligibilityOptionSelect={this.updateStateWithOptions}
+          onEligibilityOptionSelect={this.updateStateWithEligibilityOptions}
           onOptionsConfirm={this.nextScreen}
           onBack={this.previousScreen}
         />
