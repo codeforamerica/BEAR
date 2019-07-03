@@ -12,6 +12,7 @@ import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 import { getDateTime, createJsonFile } from '../utils/fileUtils';
+import ProcessingFormCard from './ProcessingFormCard';
 
 type State = {
   gogenPath: string,
@@ -190,6 +191,12 @@ export default class Home extends Component<Props, State> {
           updateDate={this.updateDateForPath}
           onOptionsConfirm={this.nextScreen}
           onBack={this.previousScreen}
+        />
+        <ProcessingFormCard
+          dojFilePath={dojFilePath}
+          onComplete={this.nextScreen}
+          onStartOver={this.homeScreen}
+          resetOutputPath={this.resetOutputPath}
         />
         <ResultsFormCard
           county={county}

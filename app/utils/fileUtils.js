@@ -38,3 +38,7 @@ export function getDateTime() {
   if (seconds < 10) seconds = `0${seconds}`;
   return `${month}_${day}_${year}_${hours}.${minutes}.${seconds}.${ampm}`;
 }
+
+export function getFileSize(pathname) {
+  return fs.statSync(pathname).size;
+}
