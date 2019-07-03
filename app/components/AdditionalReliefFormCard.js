@@ -15,15 +15,15 @@ type Props = {
   additionalReliefOptions: AdditionalReliefOptions,
   onEligibilityOptionSelect: (string, boolean) => void,
   onOptionsConfirm: void => void,
-  onOptionsRunScript: void => void,
+  updateDate: void => void,
   onBack: void => void
 };
 
 export default class AdditionalReliefFormCard extends Component<Props> {
   onContinue = () => {
-    const { onOptionsConfirm, onOptionsRunScript } = this.props;
+    const { onOptionsConfirm, updateDate } = this.props;
     onOptionsConfirm();
-    onOptionsRunScript();
+    updateDate();
   };
 
   onGoBack = () => {

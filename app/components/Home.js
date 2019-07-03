@@ -205,7 +205,6 @@ export default class Home extends Component<Props, State> {
         />
         <EligibilityOptionsFormCard
           baselineEligibilityOptions={baselineEligibilityOptions}
-          updateDate={this.updateDateForPath}
           onEligibilityOptionSelect={this.updateStateWithEligibilityOptions}
           onOptionsConfirm={this.nextScreen}
           onBack={this.previousScreen}
@@ -213,8 +212,8 @@ export default class Home extends Component<Props, State> {
         <AdditionalReliefFormCard
           additionalReliefOptions={additionalReliefOptions}
           onEligibilityOptionSelect={this.updateAdditionalReliefOptions}
+          updateDate={this.updateDateForPath}
           onOptionsConfirm={this.nextScreen}
-          onOptionsRunScript={this.runScriptInOptions}
           onBack={this.previousScreen}
         />
         <ResultsFormCard

@@ -13,14 +13,14 @@ function setup() {
 
   const onOptionsConfirmSpy = sandbox.spy();
   const onOptionChangeSpy = sandbox.spy();
-  const onOptionsRunScriptSpy = sandbox.spy();
+  const updateDateSpy = sandbox.spy();
   const onBackSpy = sandbox.spy();
   const component = mount(
     <AdditionalReliefFormCard
       additionalReliefOptions={options}
       onEligibilityOptionSelect={onOptionChangeSpy}
       onOptionsConfirm={onOptionsConfirmSpy}
-      onOptionsRunScript={onOptionsRunScriptSpy}
+      updateDate={updateDateSpy}
       onBack={onBackSpy}
     />
   );
@@ -29,7 +29,7 @@ function setup() {
     component,
     onOptionChangeSpy,
     onOptionsConfirmSpy,
-    onOptionsRunScriptSpy,
+    updateDateSpy,
     onBackSpy
   };
 }
@@ -45,11 +45,11 @@ describe('AdditionalReliefFormCard component', () => {
       expect(onOptionsConfirmSpy.called).toBe(true);
       expect(onOptionsConfirmSpy.callCount).toEqual(1);
     });
-    it('should call onOptionRunScript once', () => {
-      const { component, onOptionsRunScriptSpy } = setup();
+    it('should call updateDate once', () => {
+      const { component, updateDateSpy } = setup('path/to/file');
       component.find('#continue').simulate('click');
-      expect(onOptionsRunScriptSpy.called).toBe(true);
-      expect(onOptionsRunScriptSpy.callCount).toEqual(1);
+      expect(updateDateSpy.called).toBe(true);
+      expect(updateDateSpy.callCount).toEqual(1);
     });
   });
 

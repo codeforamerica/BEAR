@@ -21,14 +21,12 @@ function setup() {
   };
 
   const onOptionsConfirmSpy = sandbox.spy();
-  const updateDateSpy = sandbox.spy();
   const onBackSpy = sandbox.spy();
   const component = mount(
     <EligibilityOptionsFormCard
       currentScreen={3}
       baselineEligibilityOptions={options}
       onOptionsConfirm={onOptionsConfirmSpy}
-      updateDate={updateDateSpy}
       onBack={onBackSpy}
     />
   );
@@ -36,7 +34,6 @@ function setup() {
     options,
     component,
     onOptionsConfirmSpy,
-    updateDateSpy,
     onBackSpy
   };
 }
@@ -85,12 +82,6 @@ describe('EligibilityOptionsFormCard component', () => {
   });
 
   describe('clicking the continue button', () => {
-    it('should call updateDate once', () => {
-      const { component, updateDateSpy } = setup('path/to/file');
-      component.find('#continue').simulate('click');
-      expect(updateDateSpy.called).toBe(true);
-      expect(updateDateSpy.callCount).toEqual(1);
-    });
     it('should call onOptionsConfirm once', () => {
       const { component, onOptionsConfirmSpy } = setup('path/to/file');
       component.find('#continue').simulate('click');
