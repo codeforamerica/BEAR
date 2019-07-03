@@ -9,7 +9,7 @@ import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ResultsFormCard from './ResultsFormCard';
 import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
-import { getDateTime, createJsonFile } from '../utils/fileUtils';
+import { getDateTime, createJsonFile, fillPDF } from '../utils/fileUtils';
 import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 
 type State = {
@@ -90,6 +90,7 @@ export default class Home extends Component<Props, State> {
     const { dateTime } = this.state;
     if (dateTime !== prevState.dateTime) {
       this.runScriptInOptions();
+      this.createSummaryPDF();
     }
   }
 
@@ -156,6 +157,13 @@ export default class Home extends Component<Props, State> {
   previousScreen = () => {
     const { currentScreen } = this.state;
     this.setState({ currentScreen: currentScreen - 1 });
+  };
+
+  createSummaryPDF = () => {
+    const { outputFilePath } = this.state;
+    const inputFilePath = './resources/cr_181_form.pdf';
+    const summaryFilePath = path.join(outputFilePath, 'summary_report.pdf');
+    fillPDF(inputFilePath, summaryFilePath);
   };
 
   homeScreen = () => {
