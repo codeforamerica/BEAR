@@ -81,7 +81,9 @@ export default class Home extends Component<Props, State> {
       initialFilePath: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
       outputFilePath: '',
       additionalReliefOptions: {
-        subjectUnder21AtConviction: true
+        subjectUnder21AtConviction: true,
+        dismissOlderThanAgeThreshold: true,
+        subjectAgeThreshold: 40
       }
     };
   }
@@ -101,7 +103,8 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePath });
   };
 
-  updateAdditionalReliefOptions = (reliefOption: string, value: boolean) => {
+  // eslint-disable-next-line flowtype/no-weak-types
+  updateAdditionalReliefOptions = (reliefOption: string, value: any) => {
     const { additionalReliefOptions } = this.state;
     const newOption = {};
     newOption[reliefOption] = value;
@@ -171,6 +174,11 @@ export default class Home extends Component<Props, State> {
         '11358': 'dismiss',
         '11359': 'dismiss',
         '11360': 'dismiss'
+      },
+      additionalReliefOptions: {
+        subjectUnder21AtConviction: true,
+        dismissOlderThanAgeThreshold: true,
+        subjectAgeThreshold: 40
       }
     });
   };

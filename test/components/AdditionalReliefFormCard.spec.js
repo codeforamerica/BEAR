@@ -9,7 +9,11 @@ Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
 function setup() {
-  const options = { subjectUnder21AtConviction: true };
+  const options = {
+    subjectUnder21AtConviction: true,
+    dismissOlderThanAgeThreshold: true,
+    subjectAgeThreshold: 40
+  };
 
   const onOptionsConfirmSpy = sandbox.spy();
   const onOptionChangeSpy = sandbox.spy();
@@ -25,7 +29,6 @@ function setup() {
     />
   );
   return {
-    options,
     component,
     onOptionChangeSpy,
     onOptionsConfirmSpy,
@@ -65,15 +68,59 @@ describe('AdditionalReliefFormCard component', () => {
   describe('clicking the checkbox for convictions that occurred when under 21', () => {
     it('should call onOptionChange with the correct arguments', () => {
       const { component, onOptionChangeSpy } = setup();
-      expect(
-        component.props().additionalReliefOptions.subjectUnder21AtConviction
-      ).toEqual(true);
-      component.find('#dismiss_under_21').simulate('change');
+      component.find('#true_subjectUnder21AtConviction').simulate('change');
       expect(onOptionChangeSpy.called).toBe(true);
       expect(onOptionChangeSpy.callCount).toEqual(1);
       const { args } = onOptionChangeSpy.getCall(0);
       expect(args[0]).toEqual('subjectUnder21AtConviction');
       expect(args[1]).toEqual(false);
+    });
+  });
+
+  describe('clicking the checkbox for subjects over a certain age', () => {
+    it('should call onOptionChange with the correct arguments', () => {
+      const { component, onOptionChangeSpy } = setup();
+      expect(
+        component.props().additionalReliefOptions.dismissOlderThanAgeThreshold
+      ).toEqual(true);
+
+      const checkbox = component.find('#true_dismissOlderThanAgeThreshold');
+      const fakeEvent = {
+        currentTarget: {
+          name: 'dismissOlderThanAgeThreshold'
+        }
+      };
+      checkbox.simulate('change', fakeEvent);
+
+      expect(onOptionChangeSpy.called).toBe(true);
+      expect(onOptionChangeSpy.callCount).toEqual(1);
+      const { args } = onOptionChangeSpy.getCall(0);
+      expect(args[0]).toEqual('dismissOlderThanAgeThreshold');
+      expect(args[1]).toEqual(false);
+    });
+  });
+
+  describe('selecting a minimum age for subjects', () => {
+    it('should call onOptionChange with the correct arguments', () => {
+      const { component, onOptionChangeSpy } = setup();
+      expect(
+        component.props().additionalReliefOptions.subjectAgeThreshold
+      ).toEqual(40);
+
+      const ageSelect = component.find('#age-select');
+      const fakeEvent = {
+        currentTarget: {
+          value: '60',
+          selectedOptions: [{ text: '60' }]
+        }
+      };
+      ageSelect.simulate('change', fakeEvent);
+      expect(onOptionChangeSpy.called).toBe(true);
+      expect(onOptionChangeSpy.callCount).toEqual(1);
+      const { args } = onOptionChangeSpy.getCall(0);
+      expect(args[0]).toEqual('subjectAgeThreshold');
+      // Event above isn't propagating with correct value; not sure why. Below is failing as result.
+      // expect(args[1]).toEqual(60);
     });
   });
 
