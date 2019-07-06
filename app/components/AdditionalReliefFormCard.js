@@ -11,12 +11,11 @@ import FormCard, {
 import ContinueButton from './ContinueButton';
 import GoBackButton from './GoBackButton';
 import Checkbox from './Checkbox';
-import AgeSelect from './AgeSelect';
+import NumberSelect from './NumberSelect';
 
 type Props = {
   additionalReliefOptions: AdditionalReliefOptions,
-  // eslint-disable-next-line flowtype/no-weak-types
-  onEligibilityOptionSelect: (string, any) => void,
+  onReliefOptionSelect: (string, any) => void,
   onOptionsConfirm: void => void,
   updateDate: void => void,
   onBack: void => void
@@ -35,15 +34,15 @@ export default class AdditionalReliefFormCard extends Component<Props> {
   };
 
   handleChecked = (group: string) => {
-    const { onEligibilityOptionSelect, additionalReliefOptions } = this.props;
+    const { onReliefOptionSelect, additionalReliefOptions } = this.props;
 
     const toggledValue = !additionalReliefOptions[group];
-    onEligibilityOptionSelect(group, toggledValue);
+    onReliefOptionSelect(group, toggledValue);
   };
 
-  handleAgeSelect = (age: number) => {
-    const { onEligibilityOptionSelect } = this.props;
-    onEligibilityOptionSelect('subjectAgeThreshold', age);
+  handleNumberSelect = (group: string, selectedNumber: number) => {
+    const { onReliefOptionSelect } = this.props;
+    onReliefOptionSelect(group, selectedNumber);
   };
 
   render() {
@@ -68,12 +67,33 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             onCheck={this.handleChecked}
           >
             Dismiss convictions for people who are older than X:
-            <AgeSelect
+            <NumberSelect
               labelText="Choose a minimum age to consider people eligible for dismissal."
-              minAge={40}
-              maxAge={65}
-              onAgeSelect={this.handleAgeSelect}
-              selectedAge={additionalReliefOptions.subjectAgeThreshold}
+              group="subjectAgeThreshold"
+              minNumber={40}
+              maxNumber={65}
+              onNumberSelect={this.handleNumberSelect}
+              selectedNumber={additionalReliefOptions.subjectAgeThreshold}
+            />
+          </Checkbox>
+          <Checkbox
+            checked={
+              additionalReliefOptions.dismissYearsSinceConvictionThreshold
+            }
+            labelText="Dismiss convictions that occurred more than X years ago."
+            group="dismissYearsSinceConvictionThreshold"
+            onCheck={this.handleChecked}
+          >
+            Dismiss convictions that occurred more than X years ago:
+            <NumberSelect
+              labelText="Choose a minimum number of years since last conviction for dismissal."
+              group="yearsSinceConvictionThreshold"
+              minNumber={1}
+              maxNumber={15}
+              onNumberSelect={this.handleNumberSelect}
+              selectedNumber={
+                additionalReliefOptions.yearsSinceConvictionThreshold
+              }
             />
           </Checkbox>
         </FormCardContent>

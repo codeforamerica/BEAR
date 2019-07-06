@@ -23,6 +23,16 @@ export function transformSubjectAgeThreshold(additionalReliefOptions) {
   return { subjectAgeThreshold: 0 };
 }
 
+export function transformYearsSinceConviction(additionalReliefOptions) {
+  if (additionalReliefOptions.dismissYearsSinceConvictionThreshold) {
+    return {
+      yearsSinceConvictionThreshold:
+        additionalReliefOptions.yearsSinceConvictionThreshold
+    };
+  }
+  return { yearsSinceConvictionThreshold: 0 };
+}
+
 export function runScript(state, spawnChildProcess, createJsonFile) {
   const {
     gogenPath,
@@ -49,7 +59,8 @@ export function runScript(state, spawnChildProcess, createJsonFile) {
 
   const formattedAdditionalReliefOptions = {
     ...additionalReliefOptions,
-    ...transformSubjectAgeThreshold(additionalReliefOptions)
+    ...transformSubjectAgeThreshold(additionalReliefOptions),
+    ...transformYearsSinceConviction(additionalReliefOptions)
   };
 
   const eligibilityLogicConfig = {

@@ -8,5 +8,7 @@ declare type BaselineEligibilityOptions = { [string]: string };
 declare type AdditionalReliefOptions = {
   subjectUnder21AtConviction: boolean,
   dismissOlderThanAgeThreshold: boolean,
-  subjectAgeThreshold: number
+  subjectAgeThreshold: number,
+  dismissYearsSinceConvictionThreshold: boolean,
+  yearsSinceConvictionThreshold: number
 };
