@@ -74,13 +74,6 @@ export default class Home extends Component<Props, State> {
     };
   }
 
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    const { dateTime } = this.state;
-    if (dateTime !== prevState.dateTime) {
-      this.runScriptInOptions();
-    }
-  }
-
   updateCounty = (county: County) => {
     this.setState({ county });
   };
@@ -195,6 +188,7 @@ export default class Home extends Component<Props, State> {
         <ProcessingFormCard
           dojFilePath={dojFilePath}
           onComplete={this.nextScreen}
+          runScript={this.runScriptInOptions}
           onStartOver={this.homeScreen}
           resetOutputPath={this.resetOutputPath}
         />

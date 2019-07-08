@@ -4,6 +4,7 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import ProgressBar, { PROCESSING_RATE } from '../../app/components/ProgressBar';
+import sleep from '../../app/utils/testHelpers';
 
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
@@ -22,10 +23,6 @@ function setup(fileSize = 1000) {
 afterEach(() => {
   sandbox.restore();
 });
-
-function sleep(seconds) {
-  return new Promise(resolve => setTimeout(resolve, seconds * 1000));
-}
 
 describe('ProgressBar component', () => {
   describe('setup', () => {

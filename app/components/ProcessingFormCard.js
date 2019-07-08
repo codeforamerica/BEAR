@@ -13,11 +13,17 @@ import { getFileSize } from '../utils/fileUtils';
 type Props = {
   dojFilePath: string,
   onComplete: void => void,
+  runScript: void => void,
   onStartOver: void => void,
   resetOutputPath: void => void
 };
 
 export default class ProcessingFormCard extends Component<Props> {
+  componentDidMount() {
+    const { runScript } = this.props;
+    runScript();
+  }
+
   onClickStartOver = () => {
     const { onStartOver, resetOutputPath } = this.props;
     resetOutputPath();
@@ -33,6 +39,7 @@ export default class ProcessingFormCard extends Component<Props> {
           <ProgressBar
             fileSizeInBytes={getFileSize(dojFilePath)}
             onComplete={onComplete}
+            isComplete={false}
           />
         </FormCardContent>
         <FormCardFooter>

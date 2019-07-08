@@ -1,3 +1,5 @@
+import sleep from '../../app/utils/testHelpers';
+
 const { Application } = require('spectron');
 const electronPath = require('electron'); // Require Electron from the binaries included in node_modules.
 const path = require('path');
@@ -124,7 +126,15 @@ describe('The happy path', () => {
     await app.client.click('#true_subjectHasOnlyProp64Charges');
     await app.client.click('#continue');
 
-    const cardContent = await app.client.getText('.form-card__title');
-    expect(cardContent).toContain('Your files are ready!');
+    const processingCardContent = await app.client.getText('.form-card__title');
+    expect(processingCardContent).toContain(
+      'Reading and preparing your files ...'
+    );
+
+    await sleep(11);
+    const resultsFormCardContent = await app.client.getText(
+      '.form-card__title'
+    );
+    expect(resultsFormCardContent).toContain('Your files are ready!');
   });
 });
