@@ -144,9 +144,9 @@ export default class Home extends Component<Props, State> {
     this.setState(defaultAnalysisOptions);
   };
 
-  runScriptInOptions = () => {
+  runScriptInOptions = (callbackFunction: function) => {
     const { spawnChildProcess } = this.props;
-    runScript(this.state, spawnChildProcess, createJsonFile);
+    runScript(this.state, spawnChildProcess, createJsonFile, callbackFunction);
   };
 
   render() {

@@ -33,7 +33,12 @@ export function transformYearsSinceConviction(additionalReliefOptions) {
   return { yearsSinceConvictionThreshold: 0 };
 }
 
-export function runScript(state, spawnChildProcess, createJsonFile) {
+export function runScript(
+  state,
+  spawnChildProcess,
+  createJsonFile,
+  childFinishedCallback: function
+) {
   const {
     gogenPath,
     dateTime,
@@ -87,7 +92,5 @@ export function runScript(state, spawnChildProcess, createJsonFile) {
     console.log(`stderr: ${data}`);
   });
 
-  goProcess.on('close', code => {
-    console.log(`child process exited with code ${code}`);
-  });
+  goProcess.on('close', childFinishedCallback);
 }

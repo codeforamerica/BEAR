@@ -13,15 +13,26 @@ import { getFileSize } from '../utils/fileUtils';
 type Props = {
   dojFilePath: string,
   onComplete: void => void,
-  runScript: void => void,
+  runScript: ((void) => void) => void,
   onStartOver: void => void,
   resetOutputPath: void => void
 };
 
-export default class ProcessingFormCard extends Component<Props> {
+type State = {
+  gogenComplete: boolean
+};
+
+export default class ProcessingFormCard extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      gogenComplete: false
+    };
+  }
+
   componentDidMount() {
     const { runScript } = this.props;
-    runScript();
+    runScript(this.onGogenComplete);
   }
 
   onClickStartOver = () => {
@@ -30,16 +41,21 @@ export default class ProcessingFormCard extends Component<Props> {
     onStartOver();
   };
 
+  onGogenComplete = () => {
+    this.setState({ gogenComplete: true });
+  };
+
   render() {
     const { dojFilePath, onComplete } = this.props;
+    const { gogenComplete } = this.state;
     return (
       <FormCard>
         <FormCardHeader>Reading and preparing your files ...</FormCardHeader>
         <FormCardContent>
           <ProgressBar
             fileSizeInBytes={getFileSize(dojFilePath)}
-            onComplete={onComplete}
-            isComplete={false}
+            onCompleteCallback={onComplete}
+            isComplete={gogenComplete}
           />
         </FormCardContent>
         <FormCardFooter>

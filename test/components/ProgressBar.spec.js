@@ -3,20 +3,27 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
-import ProgressBar, { PROCESSING_RATE } from '../../app/components/ProgressBar';
+import ProgressBar, {
+  PROCESSING_RATE,
+  MAX_STEP_SIZE
+} from '../../app/components/ProgressBar';
 import sleep from '../../app/utils/testHelpers';
 
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
 function setup(fileSize = 1000) {
-  const onCompleteSpy = sandbox.spy();
+  const onCompleteCallbackSpy = sandbox.spy();
   const component = shallow(
-    <ProgressBar fileSizeInBytes={fileSize} onComplete={onCompleteSpy} />
+    <ProgressBar
+      fileSizeInBytes={fileSize}
+      onCompleteCallback={onCompleteCallbackSpy}
+      isComplete={false}
+    />
   );
   return {
     component,
-    onCompleteSpy
+    onCompleteCallbackSpy
   };
 }
 
@@ -26,14 +33,14 @@ afterEach(() => {
 
 describe('ProgressBar component', () => {
   describe('setup', () => {
-    it('defaults the step if the file size is below the processing rate', () => {
+    it('defaults the stepSize to the maximum if the computed stepSize would be > maximum', () => {
       const { component } = setup(PROCESSING_RATE / 100);
-      expect(component.instance().state.step).toEqual(10);
+      expect(component.instance().state.stepSize).toEqual(MAX_STEP_SIZE);
     });
 
-    it('computes the step if the file size is above the processing rate', () => {
+    it('uses the computed stepSize if the stepSize is <= maximum', () => {
       const { component } = setup(PROCESSING_RATE * 100);
-      expect(component.instance().state.step).toEqual(1);
+      expect(component.instance().state.stepSize).toEqual(1);
     });
 
     it('initializes fill to zero', async () => {
@@ -43,7 +50,7 @@ describe('ProgressBar component', () => {
   });
 
   describe('tick', () => {
-    it('increases fill by the step amount', () => {
+    it('increases fill by the stepSize amount', () => {
       const { component } = setup();
       const instance = component.instance();
       instance.tick();
@@ -51,26 +58,52 @@ describe('ProgressBar component', () => {
       instance.tick();
       expect(instance.state.fill).toEqual(20);
     });
+  });
 
-    describe('when fill is 100', () => {
-      it('calls the onComplete method', () => {
-        const { component, onCompleteSpy } = setup();
+  describe('lifecycle', () => {
+    it('advances fill with the passage of time', async () => {
+      const { component } = setup();
+      expect(component.instance().state.fill).toEqual(0);
+      await sleep(3);
+      expect(component.instance().state.fill > 0).toBe(true);
+    });
+  });
+
+  describe('termination', () => {
+    describe('when fill is 100 but isComplete not set', () => {
+      it('does not call the onCompleteCallback method', () => {
+        const { component, onCompleteCallbackSpy } = setup();
         const instance = component.instance();
 
         for (let i = 0; i < 10; i += 1) {
           instance.tick();
         }
-        expect(onCompleteSpy.called).toBe(true);
-        expect(onCompleteSpy.callCount).toBe(1);
+        expect(onCompleteCallbackSpy.called).toBe(false);
       });
     });
 
-    describe('lifecycle', () => {
-      it('advances fill with the passage of time', async () => {
-        const { component } = setup();
-        expect(component.instance().state.fill).toEqual(0);
-        await sleep(3);
-        expect(component.instance().state.fill).not.toBe(0);
+    describe('when fill is not 100 and isComplete is set', () => {
+      it('does not call the onCompleteCallback method', () => {
+        const { component, onCompleteCallbackSpy } = setup();
+        const instance = component.instance();
+
+        for (let i = 0; i < 3; i += 1) {
+          instance.tick();
+        }
+        component.setProps({ isComplete: true });
+        expect(onCompleteCallbackSpy.called).toBe(false);
+      });
+    });
+
+    describe('when fill is 100 and isComplete is set', () => {
+      it('calls the onCompleteCallback method', () => {
+        const { component, onCompleteCallbackSpy } = setup();
+        const instance = component.instance();
+
+        component.setProps({ isComplete: true });
+        instance.setState({ fill: 100 });
+        instance.tick();
+        expect(onCompleteCallbackSpy.called).toBe(true);
       });
     });
   });

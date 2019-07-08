@@ -1,20 +1,31 @@
+// @flow
 import React, { Component } from 'react';
 
 type Props = {
   fileSizeInBytes: number,
-  onComplete: void => void
+  onCompleteCallback: void => void,
+  isComplete: boolean
+};
+
+type State = {
+  fill: number,
+  stepSize: number
 };
 
 export const PROCESSING_RATE = 10000000;
+export const MAX_STEP_SIZE = 10;
+export const MAX_FILL = 100;
 
-export default class ProgressBar extends Component<Props> {
-  constructor(props) {
+export default class ProgressBar extends Component<Props, State> {
+  timerID: IntervalID;
+
+  constructor(props: Props) {
     super(props);
     const { fileSizeInBytes } = this.props;
-    const step = (PROCESSING_RATE * 100) / fileSizeInBytes;
+    const stepSize = (PROCESSING_RATE * MAX_FILL) / fileSizeInBytes;
     this.state = {
       fill: 0,
-      step: Math.min(10, step)
+      stepSize: Math.min(MAX_STEP_SIZE, stepSize)
     };
   }
 
@@ -27,13 +38,24 @@ export default class ProgressBar extends Component<Props> {
   }
 
   tick() {
-    this.setState(state => ({ fill: Math.min(100, state.fill + state.step) }));
-    const { fill } = this.state;
-    if (fill === 100) {
-      clearInterval(this.timerID);
-      const { onComplete } = this.props;
-      onComplete();
+    const { isComplete } = this.props;
+    const { stepSize, fill } = this.state;
+    if (isComplete) {
+      if (fill === MAX_FILL) {
+        clearInterval(this.timerID);
+        const { onCompleteCallback } = this.props;
+        onCompleteCallback();
+        return;
+      }
+      if (stepSize !== MAX_FILL / MAX_STEP_SIZE) {
+        this.setState({
+          fill: MAX_FILL
+        });
+      }
     }
+    this.setState(state => ({
+      fill: Math.min(MAX_FILL, state.fill + state.stepSize)
+    }));
   }
 
   render() {
