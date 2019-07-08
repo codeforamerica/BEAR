@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar component should match exact snapshot 1`] = `
+<div>
+   Fill: 
+  0
+   
+</div>
+`;

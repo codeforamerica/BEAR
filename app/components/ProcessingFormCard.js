@@ -31,7 +31,7 @@ export default class ProcessingFormCard extends Component<Props> {
         <FormCardHeader>Reading and preparing your files ...</FormCardHeader>
         <FormCardContent>
           <ProgressBar
-            range={getFileSize(dojFilePath)}
+            fileSizeInBytes={getFileSize(dojFilePath)}
             onComplete={onComplete}
           />
         </FormCardContent>

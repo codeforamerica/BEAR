@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
 type Props = {
-  range: number,
+  fileSizeInBytes: number,
   onComplete: void => void
 };
 
-const PROCESSING_RATE = 10000000;
+export const PROCESSING_RATE = 10000000;
 
 export default class ProgressBar extends Component<Props> {
   constructor(props) {
     super(props);
-    const { range } = this.props;
-    const step = (PROCESSING_RATE * 100) / range;
+    const { fileSizeInBytes } = this.props;
+    const step = (PROCESSING_RATE * 100) / fileSizeInBytes;
     this.state = {
       fill: 0,
       step: Math.min(10, step)
