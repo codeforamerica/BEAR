@@ -359,7 +359,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
             Select to dismiss convictions for people who only have HS 11357, 11358, 11359, 11360 convictions on their record.
           </span>
           <input
-            defaultChecked={3}
+            defaultChecked={true}
             id="true_subjectHasOnlyProp64Charges"
             name="subjectHasOnlyProp64Charges"
             onChange={[Function]}
