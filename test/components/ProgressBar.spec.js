@@ -42,8 +42,6 @@ describe('ProgressBar component', () => {
     it('initializes fill to zero', async () => {
       const { component } = setup();
       expect(component.instance().state.fill).toEqual(0);
-      await sleep(3);
-      expect(component.instance().state.fill).not.toBe(0);
     });
   });
 
@@ -67,6 +65,15 @@ describe('ProgressBar component', () => {
         }
         expect(onCompleteSpy.called).toBe(true);
         expect(onCompleteSpy.callCount).toBe(1);
+      });
+    });
+
+    describe('lifecycle', () => {
+      it('advances fill with the passage of time', async () => {
+        const { component } = setup();
+        expect(component.instance().state.fill).toEqual(0);
+        await sleep(3);
+        expect(component.instance().state.fill).not.toBe(0);
       });
     });
   });
