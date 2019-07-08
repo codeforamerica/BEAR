@@ -83,7 +83,9 @@ export default class Home extends Component<Props, State> {
       additionalReliefOptions: {
         subjectUnder21AtConviction: true,
         dismissOlderThanAgeThreshold: true,
-        subjectAgeThreshold: 40
+        subjectAgeThreshold: 40,
+        dismissYearsSinceConvictionThreshold: true,
+        yearsSinceConvictionThreshold: 5
       }
     };
   }
@@ -178,7 +180,9 @@ export default class Home extends Component<Props, State> {
       additionalReliefOptions: {
         subjectUnder21AtConviction: true,
         dismissOlderThanAgeThreshold: true,
-        subjectAgeThreshold: 40
+        subjectAgeThreshold: 40,
+        dismissYearsSinceConvictionThreshold: true,
+        yearsSinceConvictionThreshold: 5
       }
     });
   };
@@ -219,7 +223,7 @@ export default class Home extends Component<Props, State> {
         />
         <AdditionalReliefFormCard
           additionalReliefOptions={additionalReliefOptions}
-          onEligibilityOptionSelect={this.updateAdditionalReliefOptions}
+          onReliefOptionSelect={this.updateAdditionalReliefOptions}
           updateDate={this.updateDateForPath}
           onOptionsConfirm={this.nextScreen}
           onBack={this.previousScreen}

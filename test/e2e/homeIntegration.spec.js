@@ -115,9 +115,11 @@ describe('The happy path', () => {
     await app.client.click('#continue');
 
     await app.client.click('#true_subjectUnder21AtConviction');
-    await app.client.click('#true_dismissOlderThanAgeThreshold');
-    const ageSelect = app.client.$('#age-select');
+    const ageSelect = app.client.$('#subjectAgeThreshold-select');
     await ageSelect.selectByVisibleText('45');
+
+    const yearSelect = app.client.$('#yearsSinceConvictionThreshold-select');
+    await yearSelect.selectByVisibleText('3');
     await app.client.click('#continue');
 
     const cardContent = await app.client.getText('.form-card__title');

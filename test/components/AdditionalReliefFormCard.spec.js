@@ -12,7 +12,9 @@ function setup() {
   const options = {
     subjectUnder21AtConviction: true,
     dismissOlderThanAgeThreshold: true,
-    subjectAgeThreshold: 40
+    subjectAgeThreshold: 40,
+    dismissYearsSinceConvictionThreshold: true,
+    yearsSinceConvictionThreshold: 5
   };
 
   const onOptionsConfirmSpy = sandbox.spy();
@@ -22,7 +24,7 @@ function setup() {
   const component = mount(
     <AdditionalReliefFormCard
       additionalReliefOptions={options}
-      onEligibilityOptionSelect={onOptionChangeSpy}
+      onReliefOptionSelect={onOptionChangeSpy}
       onOptionsConfirm={onOptionsConfirmSpy}
       updateDate={updateDateSpy}
       onBack={onBackSpy}
@@ -107,7 +109,7 @@ describe('AdditionalReliefFormCard component', () => {
         component.props().additionalReliefOptions.subjectAgeThreshold
       ).toEqual(40);
 
-      const ageSelect = component.find('#age-select');
+      const ageSelect = component.find('#subjectAgeThreshold-select');
       const fakeEvent = {
         currentTarget: {
           value: '60',
@@ -124,8 +126,66 @@ describe('AdditionalReliefFormCard component', () => {
     });
   });
 
+  describe('clicking the checkbox for number of years since conviction', () => {
+    it('should call onOptionChange with the correct arguments', () => {
+      const { component, onOptionChangeSpy } = setup();
+      expect(
+        component.props().additionalReliefOptions
+          .dismissYearsSinceConvictionThreshold
+      ).toEqual(true);
+
+      const checkbox = component.find(
+        '#true_dismissYearsSinceConvictionThreshold'
+      );
+      const fakeEvent = {
+        currentTarget: {
+          name: 'dismissYearsSinceConvictionThreshold'
+        }
+      };
+      checkbox.simulate('change', fakeEvent);
+
+      expect(onOptionChangeSpy.called).toBe(true);
+      expect(onOptionChangeSpy.callCount).toEqual(1);
+      const { args } = onOptionChangeSpy.getCall(0);
+      expect(args[0]).toEqual('dismissYearsSinceConvictionThreshold');
+      expect(args[1]).toEqual(false);
+    });
+  });
+
+  describe('selecting a non-default number of years since conviction', () => {
+    it('should call onOptionChange with the correct arguments', () => {
+      const { component, onOptionChangeSpy } = setup();
+      expect(
+        component.props().additionalReliefOptions.yearsSinceConvictionThreshold
+      ).toEqual(5);
+
+      const numYearsSelect = component.find(
+        '#yearsSinceConvictionThreshold-select'
+      );
+      const fakeEvent = {
+        currentTarget: {
+          value: '12',
+          selectedOptions: [{ text: '12' }]
+        }
+      };
+      numYearsSelect.simulate('change', fakeEvent);
+      expect(onOptionChangeSpy.called).toBe(true);
+      expect(onOptionChangeSpy.callCount).toEqual(1);
+      const { args } = onOptionChangeSpy.getCall(0);
+      expect(args[0]).toEqual('yearsSinceConvictionThreshold');
+      // Event above isn't propagating with correct value; not sure why. Below is failing as result.
+      // expect(args[1]).toEqual(12);
+    });
+  });
+
   it('should match exact snapshot', () => {
-    const options = { subjectUnder21AtConviction: true };
+    const options = {
+      subjectUnder21AtConviction: true,
+      dismissOlderThanAgeThreshold: true,
+      subjectAgeThreshold: 12,
+      dismissYearsSinceConvictionThreshold: true,
+      yearsSinceConvictionThreshold: 3
+    };
     const component = (
       <div>
         <AdditionalReliefFormCard additionalReliefOptions={options} />

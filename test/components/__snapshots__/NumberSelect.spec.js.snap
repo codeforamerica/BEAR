@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AgeSelect component should match exact snapshot 1`] = `
+exports[`NumberSelect component should match exact snapshot 1`] = `
 <div>
   <label
     className="sr-only"
-    htmlFor="age-select"
+    htmlFor="number-select"
   />
   <div
     className="select"

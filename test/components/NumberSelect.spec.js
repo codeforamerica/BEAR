@@ -3,19 +3,24 @@ import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
-import AgeSelect from '../../app/components/AgeSelect';
+import NumberSelect from '../../app/components/NumberSelect';
 
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
 function setup() {
-  const onAgeSelectSpy = sandbox.spy();
+  const onNumberSelectSpy = sandbox.spy();
   const component = shallow(
-    <AgeSelect onAgeSelect={onAgeSelectSpy} minAge={1} maxAge={3} />
+    <NumberSelect
+      onNumberSelect={onNumberSelectSpy}
+      group="age"
+      minNumber={1}
+      maxNumber={3}
+    />
   );
   return {
     component,
-    onAgeSelectSpy
+    onNumberSelectSpy
   };
 }
 
@@ -23,9 +28,9 @@ afterEach(() => {
   sandbox.restore();
 });
 
-describe('AgeSelect component', () => {
-  it('selecting age should call onAgeSelect with numeric value', () => {
-    const { component, onAgeSelectSpy } = setup();
+describe('NumberSelect component', () => {
+  it('selecting a number should call onNumberSelect with numeric value', () => {
+    const { component, onNumberSelectSpy } = setup();
     const ageSelect = component.find('#age-select');
     const fakeEvent = {
       currentTarget: {
@@ -34,8 +39,8 @@ describe('AgeSelect component', () => {
       }
     };
     ageSelect.simulate('change', fakeEvent);
-    expect(onAgeSelectSpy.called).toBe(true);
-    expect(onAgeSelectSpy.args[0][0]).toEqual(3);
+    expect(onNumberSelectSpy.called).toBe(true);
+    expect(onNumberSelectSpy.args[0][1]).toEqual(3);
   });
 
   it('should populate dropdown with numbers between max and min', () => {
