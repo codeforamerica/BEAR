@@ -341,6 +341,33 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           />
         </label>
       </div>
+      <div
+        className="form-group grid"
+      >
+        <div
+          className="form-question grid__item width-two-thirds"
+        >
+          Dismiss all HS 11357, HS 11358, HS 11359, or HS 11360 convictions if those are the only convictions on an individual's record.
+        </div>
+        <label
+          className="shift-fourth-fifths checkbox"
+          htmlFor="true_subjectHasOnlyProp64Charges"
+        >
+          <span
+            className="sr-only"
+          >
+            Select to dismiss convictions for people who only have HS 11357, 11358, 11359, 11360 convictions on their record.
+          </span>
+          <input
+            defaultChecked={3}
+            id="true_subjectHasOnlyProp64Charges"
+            name="subjectHasOnlyProp64Charges"
+            onChange={[Function]}
+            type="checkbox"
+            value={true}
+          />
+        </label>
+      </div>
     </div>
     <div
       className="form-card__footer"

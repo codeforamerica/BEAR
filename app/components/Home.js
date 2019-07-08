@@ -85,7 +85,8 @@ export default class Home extends Component<Props, State> {
         dismissOlderThanAgeThreshold: true,
         subjectAgeThreshold: 40,
         dismissYearsSinceConvictionThreshold: true,
-        yearsSinceConvictionThreshold: 5
+        yearsSinceConvictionThreshold: 5,
+        subjectHasOnlyProp64Charges: true
       }
     };
   }
@@ -182,7 +183,8 @@ export default class Home extends Component<Props, State> {
         dismissOlderThanAgeThreshold: true,
         subjectAgeThreshold: 40,
         dismissYearsSinceConvictionThreshold: true,
-        yearsSinceConvictionThreshold: 5
+        yearsSinceConvictionThreshold: 5,
+        subjectHasOnlyProp64Charges: true
       }
     });
   };
