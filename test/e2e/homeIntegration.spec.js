@@ -120,6 +120,8 @@ describe('The happy path', () => {
 
     const yearSelect = app.client.$('#yearsSinceConvictionThreshold-select');
     await yearSelect.selectByVisibleText('3');
+
+    await app.client.click('#true_subjectHasOnlyProp64Charges');
     await app.client.click('#continue');
 
     const cardContent = await app.client.getText('.form-card__title');

@@ -96,6 +96,15 @@ export default class AdditionalReliefFormCard extends Component<Props> {
               }
             />
           </Checkbox>
+          <Checkbox
+            checked={additionalReliefOptions.subjectHasOnlyProp64Charges}
+            labelText="Select to dismiss convictions for people who only have HS 11357, 11358, 11359, 11360 convictions on their record."
+            group="subjectHasOnlyProp64Charges"
+            onCheck={this.handleChecked}
+          >
+            Dismiss all HS 11357, HS 11358, HS 11359, or HS 11360 convictions if
+            those are the only convictions on an individual's record.
+          </Checkbox>
         </FormCardContent>
         <FormCardFooter>
           <ContinueButton onContinue={this.onContinue} />

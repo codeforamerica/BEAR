@@ -14,7 +14,8 @@ function setup() {
     dismissOlderThanAgeThreshold: true,
     subjectAgeThreshold: 40,
     dismissYearsSinceConvictionThreshold: true,
-    yearsSinceConvictionThreshold: 5
+    yearsSinceConvictionThreshold: 5,
+    subjectHasOnlyProp64Charges: true
   };
 
   const onOptionsConfirmSpy = sandbox.spy();
@@ -178,13 +179,37 @@ describe('AdditionalReliefFormCard component', () => {
     });
   });
 
+  describe('clicking the checkbox for dismiss if only Prop64 convictions', () => {
+    it('should call onOptionChange with the correct arguments', () => {
+      const { component, onOptionChangeSpy } = setup();
+      expect(
+        component.props().additionalReliefOptions.subjectHasOnlyProp64Charges
+      ).toEqual(true);
+
+      const checkbox = component.find('#true_subjectHasOnlyProp64Charges');
+      const fakeEvent = {
+        currentTarget: {
+          name: 'subjectHasOnlyProp64Charges'
+        }
+      };
+      checkbox.simulate('change', fakeEvent);
+
+      expect(onOptionChangeSpy.called).toBe(true);
+      expect(onOptionChangeSpy.callCount).toEqual(1);
+      const { args } = onOptionChangeSpy.getCall(0);
+      expect(args[0]).toEqual('subjectHasOnlyProp64Charges');
+      expect(args[1]).toEqual(false);
+    });
+  });
+
   it('should match exact snapshot', () => {
     const options = {
       subjectUnder21AtConviction: true,
       dismissOlderThanAgeThreshold: true,
       subjectAgeThreshold: 12,
       dismissYearsSinceConvictionThreshold: true,
-      yearsSinceConvictionThreshold: 3
+      yearsSinceConvictionThreshold: 3,
+      subjectHasOnlyProp64Charges: true
     };
     const component = (
       <div>
