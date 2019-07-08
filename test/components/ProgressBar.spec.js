@@ -23,6 +23,10 @@ afterEach(() => {
   sandbox.restore();
 });
 
+function sleep(seconds) {
+  return new Promise(resolve => setTimeout(resolve, seconds * 1000));
+}
+
 describe('ProgressBar component', () => {
   describe('setup', () => {
     it('defaults the step if the file size is below the processing rate', () => {
@@ -35,9 +39,11 @@ describe('ProgressBar component', () => {
       expect(component.instance().state.step).toEqual(1);
     });
 
-    it('initializes fill to zero', () => {
+    it('initializes fill to zero', async () => {
       const { component } = setup();
       expect(component.instance().state.fill).toEqual(0);
+      await sleep(3);
+      expect(component.instance().state.fill).not.toBe(0);
     });
   });
 
