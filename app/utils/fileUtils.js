@@ -41,13 +41,11 @@ export function getDateTime() {
   return `${month}_${day}_${year}_${hours}.${minutes}.${seconds}.${ampm}`;
 }
 
-export function fillPDF(inputFilePath, outputPath) {
+export function fillPDF(inputFilePath, outputPath, contentForFields) {
   if (fs.existsSync(inputFilePath)) {
     pdftk
       .input(inputFilePath)
-      .fillForm({
-        NAMEOFPERSONFILING: 'data'
-      })
+      .fillForm(contentForFields)
       .flatten()
       .output(outputPath)
       .then(() => {

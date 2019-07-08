@@ -160,10 +160,21 @@ export default class Home extends Component<Props, State> {
   };
 
   createSummaryPDF = () => {
-    const { outputFilePath } = this.state;
-    const inputFilePath = './resources/cr_181_form.pdf';
+    const { outputFilePath, dateTime, county } = this.state;
+    const inputFilePath = './resources/summaryResultsTemplate.pdf';
     const summaryFilePath = path.join(outputFilePath, 'summary_report.pdf');
-    fillPDF(inputFilePath, summaryFilePath);
+    const summaryOutputPDFHash = {
+      outputDateTime: dateTime,
+      county: county.name,
+      individualsThatGotRelief: 'some people',
+      numProp64DismissedOrReduced: 'some other num',
+      numProp64MisdemeanorsDismissed: 'some misd',
+      numProp64FeloniesDismissedOrReduced: 'some felonies',
+      dismissedCodeSections: 'dismissed code sections',
+      reducedCodeSections: 'reduced code sections',
+      additionalReliefOptions: 'options, options, options'
+    };
+    fillPDF(inputFilePath, summaryFilePath, summaryOutputPDFHash);
   };
 
   homeScreen = () => {
