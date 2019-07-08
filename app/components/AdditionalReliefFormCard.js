@@ -33,7 +33,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
     onBack();
   };
 
-  handleChecked = (group: string) => {
+  handleToggleChecked = (group: string) => {
     const { onReliefOptionSelect, additionalReliefOptions } = this.props;
 
     const toggledValue = !additionalReliefOptions[group];
@@ -55,7 +55,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             checked={additionalReliefOptions.subjectUnder21AtConviction}
             labelText="Select to dismiss convictions for people who were convicted of one of the above convictions at an age of 21 or younger."
             group="subjectUnder21AtConviction"
-            onCheck={this.handleChecked}
+            onChange={this.handleToggleChecked}
           >
             Dismiss convictions for people who were convicted of one of the
             above convictions at an age of 21 or younger.
@@ -64,7 +64,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             checked={additionalReliefOptions.dismissOlderThanAgeThreshold}
             labelText="Select to dismiss convictions for people who are older than specified age."
             group="dismissOlderThanAgeThreshold"
-            onCheck={this.handleChecked}
+            onChange={this.handleToggleChecked}
           >
             Dismiss convictions for people who are older than X:
             <NumberSelect
@@ -82,7 +82,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             }
             labelText="Dismiss convictions that occurred more than X years ago."
             group="dismissYearsSinceConvictionThreshold"
-            onCheck={this.handleChecked}
+            onChange={this.handleToggleChecked}
           >
             Dismiss convictions that occurred more than X years ago:
             <NumberSelect
@@ -100,7 +100,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             checked={additionalReliefOptions.subjectHasOnlyProp64Charges}
             labelText="Select to dismiss convictions for people who only have HS 11357, 11358, 11359, 11360 convictions on their record."
             group="subjectHasOnlyProp64Charges"
-            onCheck={this.handleChecked}
+            onChange={this.handleToggleChecked}
           >
             Dismiss all HS 11357, HS 11358, HS 11359, or HS 11360 convictions if
             those are the only convictions on an individual's record.
