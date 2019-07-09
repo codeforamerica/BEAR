@@ -50,17 +50,23 @@ export default class ProcessingFormCard extends Component<Props, State> {
     const { gogenComplete } = this.state;
     return (
       <FormCard>
-        <FormCardHeader>Reading and preparing your files ...</FormCardHeader>
+        <FormCardHeader />
         <FormCardContent>
-          <ProgressBar
-            fileSizeInBytes={getFileSize(dojFilePath)}
-            onCompleteCallback={onComplete}
-            isComplete={gogenComplete}
-          />
+          <div className="box-wrapper text--centered">
+            <div
+              className="emoji--woman-detective-medium-dark-skin-tone"
+              style={{ width: '100px', height: '100px', align: 'center' }}
+            />
+            <h3>Reading and preparing your files ...</h3>
+            <ProgressBar
+              fileSizeInBytes={getFileSize(dojFilePath)}
+              onCompleteCallback={onComplete}
+              isComplete={gogenComplete}
+            />
+            <StartOverButton onStartOver={this.onClickStartOver} />
+          </div>
         </FormCardContent>
-        <FormCardFooter>
-          <StartOverButton onStartOver={this.onClickStartOver} />
-        </FormCardFooter>
+        <FormCardFooter />
       </FormCard>
     );
   }

@@ -126,7 +126,9 @@ describe('The happy path', () => {
     await app.client.click('#true_subjectHasOnlyProp64Charges');
     await app.client.click('#continue');
 
-    const processingCardContent = await app.client.getText('.form-card__title');
+    const processingCardContent = await app.client.getText(
+      '.form-card__content h3'
+    );
     expect(processingCardContent).toContain(
       'Reading and preparing your files ...'
     );

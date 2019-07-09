@@ -60,6 +60,17 @@ export default class ProgressBar extends Component<Props, State> {
 
   render() {
     const { fill } = this.state;
-    return <div> Fill: {Math.round(fill)} </div>;
+    const percentage = Math.round(fill);
+    return (
+      <div className="box text--centered with-padding-large">
+        <div className="progress-indicator">
+          <div
+            className="progress-indicator__bar"
+            style={{ width: `${percentage}%` }}
+          />
+          <div className="progress-indicator__percentage">{percentage}%</div>
+        </div>
+      </div>
+    );
   }
 }
