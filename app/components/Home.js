@@ -11,7 +11,7 @@ import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
-import { getDateTime, createJsonFile } from '../utils/fileUtils';
+import { getDateTime, createJsonFile, getFileSize } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
 
 type State = {
@@ -189,6 +189,7 @@ export default class Home extends Component<Props, State> {
           dojFilePath={dojFilePath}
           onComplete={this.nextScreen}
           runScript={this.runScriptInOptions}
+          getFileSize={getFileSize}
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
         />
