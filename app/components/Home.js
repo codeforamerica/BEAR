@@ -189,7 +189,7 @@ export default class Home extends Component<Props, State> {
           dojFilePath={dojFilePath}
           onComplete={this.nextScreen}
           runScript={this.runScriptInOptions}
-          onStartOver={this.homeScreen}
+          onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
         />
         <ResultsFormCard
