@@ -7,13 +7,13 @@ type Props = {
   group: string,
   labelText: string,
   value: string,
-  onCheck: (string, string) => void
+  onChange: (string, string) => void
 };
 
 export default class Checkbox extends Component<Props> {
-  handleCheck = () => {
-    const { onCheck, group, value } = this.props;
-    onCheck(group, value);
+  handleChange = () => {
+    const { onChange, group, value } = this.props;
+    onChange(group, value);
   };
 
   render() {
@@ -35,7 +35,7 @@ export default class Checkbox extends Component<Props> {
             name={group}
             value={true}
             id={`true_${group}`}
-            onChange={this.handleCheck}
+            onChange={this.handleChange}
           />
         </label>
       </div>

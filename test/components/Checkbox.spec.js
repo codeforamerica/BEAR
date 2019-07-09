@@ -9,20 +9,20 @@ Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
 function setup(checked) {
-  const onCheckSpy = sandbox.spy();
+  const onChangeSpy = sandbox.spy();
   const component = shallow(
     <Checkbox
       labelText="Caterine Vauban"
       checked={checked}
       group="nihilists"
-      onCheck={onCheckSpy}
+      onChange={onChangeSpy}
     >
       This is a checkbox
     </Checkbox>
   );
   return {
     component,
-    onCheckSpy
+    onChangeSpy
   };
 }
 
@@ -63,12 +63,12 @@ describe('Checkbox component', () => {
     expect(component.find('input').props().id).toEqual('true_nihilists');
   });
 
-  it('calls onCheck with the group and value when checkbox is clicked', () => {
-    const { component, onCheckSpy } = setup();
+  it('calls onChange with the group and value when checkbox is clicked', () => {
+    const { component, onChangeSpy } = setup();
     component.find('input').simulate('change');
 
-    expect(onCheckSpy.called).toEqual(true);
-    const { args } = onCheckSpy.getCall(0);
+    expect(onChangeSpy.called).toEqual(true);
+    const { args } = onChangeSpy.getCall(0);
     expect(args[0]).toEqual('nihilists');
   });
 
