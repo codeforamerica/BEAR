@@ -93,4 +93,8 @@ export function runScript(
   });
 
   goProcess.on('close', childFinishedCallback);
+  goProcess.on('error', error => {
+    console.error(error);
+    childFinishedCallback();
+  });
 }
