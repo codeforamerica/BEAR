@@ -8,7 +8,6 @@ import FormCard, {
 } from './FormCard';
 import ProgressBar from './ProgressBar';
 import StartOverButton from './StartOverButton';
-import styles from './ProcessingFormCard.css';
 
 type Props = {
   dojFilePath: string,
@@ -54,11 +53,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
         <FormCardHeader />
         <FormCardContent>
           <div className="box-wrapper text--centered">
-            <div
-              className={`${
-                styles.processingImage
-              } emoji--woman-detective-medium-dark-skin-tone`}
-            />
+            <div className="emoji emoji--huge emoji--woman-detective-medium-dark-skin-tone" />
             <h3>Reading and preparing your files ...</h3>
             <ProgressBar
               fileSizeInBytes={getFileSize(dojFilePath)}
