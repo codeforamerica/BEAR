@@ -14,6 +14,25 @@ export function transformBaselineEligibilityOptions(eligibilityOptions) {
   return jsonObject;
 }
 
+export function transformSubjectAgeThreshold(additionalReliefOptions) {
+  if (additionalReliefOptions.dismissOlderThanAgeThreshold) {
+    return {
+      subjectAgeThreshold: additionalReliefOptions.subjectAgeThreshold
+    };
+  }
+  return { subjectAgeThreshold: 0 };
+}
+
+export function transformYearsSinceConviction(additionalReliefOptions) {
+  if (additionalReliefOptions.dismissYearsSinceConvictionThreshold) {
+    return {
+      yearsSinceConvictionThreshold:
+        additionalReliefOptions.yearsSinceConvictionThreshold
+    };
+  }
+  return { yearsSinceConvictionThreshold: 0 };
+}
+
 export function runScript(state, spawnChildProcess, createJsonFile) {
   const {
     gogenPath,
@@ -25,21 +44,28 @@ export function runScript(state, spawnChildProcess, createJsonFile) {
     outputFilePath
   } = state;
 
-  const formattedEligibilityOptions = transformBaselineEligibilityOptions(
-    baselineEligibilityOptions
-  );
   if (!fs.existsSync(outputFilePath)) {
     fs.mkdirSync(outputFilePath, { recursive: true }, err => {
       if (err) throw err;
       console.log('error making path:', path);
     });
   }
-
   const JsonFileName = `eligibilityConfig_${dateTime}.json`;
   const pathToEligibilityOptions = path.join(outputFilePath, JsonFileName);
+
+  const formattedEligibilityOptions = transformBaselineEligibilityOptions(
+    baselineEligibilityOptions
+  );
+
+  const formattedAdditionalReliefOptions = {
+    ...additionalReliefOptions,
+    ...transformSubjectAgeThreshold(additionalReliefOptions),
+    ...transformYearsSinceConviction(additionalReliefOptions)
+  };
+
   const eligibilityLogicConfig = {
     ...formattedEligibilityOptions,
-    additionalRelief: additionalReliefOptions
+    additionalRelief: formattedAdditionalReliefOptions
   };
 
   createJsonFile(eligibilityLogicConfig, pathToEligibilityOptions);

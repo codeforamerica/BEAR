@@ -7,10 +7,11 @@ import DojFileSelectFormCard from './DojFileSelectFormCard';
 import PageContainer from './PageContainer';
 import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ResultsFormCard from './ResultsFormCard';
+import AdditionalReliefFormCard from './AdditionalReliefFormCard';
+import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 import { getDateTime, createJsonFile, fillPDF } from '../utils/fileUtils';
-import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 
 type State = {
   gogenPath: string,
@@ -20,7 +21,7 @@ type State = {
   dojFilePath: string,
   baselineEligibilityOptions: BaselineEligibilityOptions,
   additionalReliefOptions: AdditionalReliefOptions,
-  initialFilePath: string,
+  outputPathPrefix: string,
   outputFilePath: string
 };
 
@@ -66,23 +67,9 @@ export default class Home extends Component<Props, State> {
     this.state = {
       gogenPath,
       dateTime: '',
-      currentScreen: 0,
-      county: { name: '', code: '' },
-      dojFilePath: '',
-      baselineEligibilityOptions: {
-        '11357(a)': 'dismiss',
-        '11357(b)': 'dismiss',
-        '11357(c)': 'dismiss',
-        '11357(d)': 'dismiss',
-        '11358': 'dismiss',
-        '11359': 'dismiss',
-        '11360': 'dismiss'
-      },
-      initialFilePath: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
+      outputPathPrefix: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
       outputFilePath: '',
-      additionalReliefOptions: {
-        subjectUnder21AtConviction: true
-      }
+      ...defaultAnalysisOptions
     };
   }
 
@@ -102,7 +89,8 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePath });
   };
 
-  updateAdditionalReliefOptions = (reliefOption: string, value: boolean) => {
+  // eslint-disable-next-line flowtype/no-weak-types
+  updateAdditionalReliefOptions = (reliefOption: string, value: any) => {
     const { additionalReliefOptions } = this.state;
     const newOption = {};
     newOption[reliefOption] = value;
@@ -131,10 +119,10 @@ export default class Home extends Component<Props, State> {
   };
 
   updateDateForPath = () => {
-    const { initialFilePath } = this.state;
+    const { outputPathPrefix } = this.state;
 
     const date = getDateTime();
-    const newOutputFilePath = `${initialFilePath}_${date}`;
+    const newOutputFilePath = `${outputPathPrefix}_${date}`;
 
     this.setState({
       dateTime: date,
@@ -143,9 +131,9 @@ export default class Home extends Component<Props, State> {
   };
 
   resetOutputPath = () => {
-    const { initialFilePath } = this.state;
+    const { outputPathPrefix } = this.state;
     this.setState({
-      outputFilePath: initialFilePath
+      outputFilePath: outputPathPrefix
     });
   };
 
@@ -159,9 +147,13 @@ export default class Home extends Component<Props, State> {
     this.setState({ currentScreen: currentScreen - 1 });
   };
 
+  resetInitialState = () => {
+    this.setState(defaultAnalysisOptions);
+  };
+
   createSummaryPDF = () => {
     const { outputFilePath, dateTime, county } = this.state;
-    const inputFilePath = './resources/summaryResultsTemplate.pdf';
+    const inputFilePath = './resources/summaryReportTemplateNew.pdf';
     const summaryFilePath = path.join(outputFilePath, 'summary_report.pdf');
     const summaryOutputPDFHash = {
       outputDateTime: dateTime,
@@ -175,23 +167,6 @@ export default class Home extends Component<Props, State> {
       additionalReliefOptions: 'options, options, options'
     };
     fillPDF(inputFilePath, summaryFilePath, summaryOutputPDFHash);
-  };
-
-  homeScreen = () => {
-    this.setState({
-      currentScreen: 0,
-      county: { name: '', code: '' },
-      dojFilePath: '',
-      baselineEligibilityOptions: {
-        '11357(a)': 'dismiss',
-        '11357(b)': 'dismiss',
-        '11357(c)': 'dismiss',
-        '11357(d)': 'dismiss',
-        '11358': 'dismiss',
-        '11359': 'dismiss',
-        '11360': 'dismiss'
-      }
-    });
   };
 
   runScriptInOptions = () => {
@@ -230,7 +205,7 @@ export default class Home extends Component<Props, State> {
         />
         <AdditionalReliefFormCard
           additionalReliefOptions={additionalReliefOptions}
-          onEligibilityOptionSelect={this.updateAdditionalReliefOptions}
+          onReliefOptionSelect={this.updateAdditionalReliefOptions}
           updateDate={this.updateDateForPath}
           onOptionsConfirm={this.nextScreen}
           onBack={this.previousScreen}
@@ -239,7 +214,7 @@ export default class Home extends Component<Props, State> {
           county={county}
           outputFolder={outputFilePath}
           openFolder={openFolder}
-          onStartOver={this.homeScreen}
+          onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
         />
       </PageContainer>

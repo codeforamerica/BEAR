@@ -2,7 +2,8 @@ import sinon from 'sinon';
 import fs from 'fs';
 import {
   runScript,
-  transformBaselineEligibilityOptions
+  transformBaselineEligibilityOptions,
+  transformSubjectAgeThreshold
 } from '../../app/utils/gogenUtils';
 
 describe('transformBaselineEligibilityOptions', () => {
@@ -26,6 +27,30 @@ describe('transformBaselineEligibilityOptions', () => {
   });
 });
 
+describe('transformSubjectAgeThreshold', () => {
+  describe('when dismissOlderThanAgeThreshold is true', () => {
+    it('passes through the subjectAgeThreshold', () => {
+      const optionState = {
+        dismissOlderThanAgeThreshold: true,
+        subjectAgeThreshold: 40
+      };
+      const subject = transformSubjectAgeThreshold(optionState);
+      expect(subject).toEqual({ subjectAgeThreshold: 40 });
+    });
+  });
+
+  describe('when dismissOlderThanAgeThreshold is false', () => {
+    it('sets subjectAgeThreshold to 0', () => {
+      const optionState = {
+        dismissOlderThanAgeThreshold: false,
+        subjectAgeThreshold: 40
+      };
+      const subject = transformSubjectAgeThreshold(optionState);
+      expect(subject).toEqual({ subjectAgeThreshold: 0 });
+    });
+  });
+});
+
 describe('runScript', () => {
   const sandbox = sinon.createSandbox();
 
@@ -45,7 +70,9 @@ describe('runScript', () => {
       '11360': 'dismiss'
     },
     additionalReliefOptions: {
-      subjectUnder21AtConviction: true
+      subjectUnder21AtConviction: true,
+      dismissOlderThanAgeThreshold: false,
+      subjectAgeThreshold: 50
     }
   };
 
@@ -101,5 +128,6 @@ describe('runScript', () => {
     ]);
     expect(args[0].baselineEligibility.reduce).toEqual([]);
     expect(args[0].additionalRelief.subjectUnder21AtConviction).toBe(true);
+    expect(args[0].additionalRelief.subjectAgeThreshold).toBe(0);
   });
 });

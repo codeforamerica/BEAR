@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`NumberSelect component should match exact snapshot 1`] = `
+<div>
+  <label
+    className="sr-only"
+    htmlFor="number-select"
+  />
+  <div
+    className="select"
+  >
+    <select
+      className="select__element"
+      id="age-select"
+      onChange={[Function]}
+    >
+      <option
+        value={1}
+      >
+        1
+      </option>
+      <option
+        value={2}
+      >
+        2
+      </option>
+      <option
+        value={3}
+      >
+        3
+      </option>
+    </select>
+  </div>
+</div>
+`;

@@ -1,1 +1,5 @@
 @import '~cfa-styleguide/styles.css';
+
+.grid {
+  max-width: none; /* override 960px max-width from styleguide */
+}

@@ -10,10 +10,12 @@ import FormCard, {
 } from './FormCard';
 import ContinueButton from './ContinueButton';
 import GoBackButton from './GoBackButton';
+import Checkbox from './Checkbox';
+import NumberSelect from './NumberSelect';
 
 type Props = {
   additionalReliefOptions: AdditionalReliefOptions,
-  onEligibilityOptionSelect: (string, boolean) => void,
+  onReliefOptionSelect: (string, any) => void,
   onOptionsConfirm: void => void,
   updateDate: void => void,
   onBack: void => void
@@ -31,12 +33,16 @@ export default class AdditionalReliefFormCard extends Component<Props> {
     onBack();
   };
 
-  toggleUnder21Select = () => {
-    const { onEligibilityOptionSelect, additionalReliefOptions } = this.props;
-    onEligibilityOptionSelect(
-      'subjectUnder21AtConviction',
-      !additionalReliefOptions.subjectUnder21AtConviction
-    );
+  handleToggleChecked = (group: string) => {
+    const { onReliefOptionSelect, additionalReliefOptions } = this.props;
+
+    const toggledValue = !additionalReliefOptions[group];
+    onReliefOptionSelect(group, toggledValue);
+  };
+
+  handleNumberSelect = (group: string, selectedNumber: number) => {
+    const { onReliefOptionSelect } = this.props;
+    onReliefOptionSelect(group, selectedNumber);
   };
 
   render() {
@@ -45,20 +51,60 @@ export default class AdditionalReliefFormCard extends Component<Props> {
       <FormCard>
         <FormCardHeader>Additional relief</FormCardHeader>
         <FormCardContent>
-          <label htmlFor="dismiss_under_21" className="checkbox">
+          <Checkbox
+            checked={additionalReliefOptions.subjectUnder21AtConviction}
+            labelText="Select to dismiss convictions for people who were convicted of one of the above convictions at an age of 21 or younger."
+            group="subjectUnder21AtConviction"
+            onChange={this.handleToggleChecked}
+          >
             Dismiss convictions for people who were convicted of one of the
-            above convictions at an age of 21 or younger
-            <input
-              type="checkbox"
-              name="dismiss_under_21"
-              id="dismiss_under_21"
-              value="true"
-              defaultChecked={
-                additionalReliefOptions.subjectUnder21AtConviction
-              }
-              onChange={this.toggleUnder21Select}
+            above convictions at an age of 21 or younger.
+          </Checkbox>
+          <Checkbox
+            checked={additionalReliefOptions.dismissOlderThanAgeThreshold}
+            labelText="Select to dismiss convictions for people who are older than specified age."
+            group="dismissOlderThanAgeThreshold"
+            onChange={this.handleToggleChecked}
+          >
+            Dismiss convictions for people who are older than X:
+            <NumberSelect
+              labelText="Choose a minimum age to consider people eligible for dismissal."
+              group="subjectAgeThreshold"
+              minNumber={40}
+              maxNumber={65}
+              onNumberSelect={this.handleNumberSelect}
+              selectedNumber={additionalReliefOptions.subjectAgeThreshold}
             />
-          </label>
+          </Checkbox>
+          <Checkbox
+            checked={
+              additionalReliefOptions.dismissYearsSinceConvictionThreshold
+            }
+            labelText="Dismiss convictions that occurred more than X years ago."
+            group="dismissYearsSinceConvictionThreshold"
+            onChange={this.handleToggleChecked}
+          >
+            Dismiss convictions that occurred more than X years ago:
+            <NumberSelect
+              labelText="Choose a minimum number of years since last conviction for dismissal."
+              group="yearsSinceConvictionThreshold"
+              minNumber={1}
+              maxNumber={15}
+              onNumberSelect={this.handleNumberSelect}
+              selectedNumber={
+                additionalReliefOptions.yearsSinceConvictionThreshold
+              }
+            />
+          </Checkbox>
+          <Checkbox
+            checked={additionalReliefOptions.subjectHasOnlyProp64Charges}
+            labelText="Select to dismiss convictions for people who only have HS 11357, 11358, 11359, 11360 convictions on their record."
+            group="subjectHasOnlyProp64Charges"
+            onChange={this.handleToggleChecked}
+          >
+            Dismiss all HS 11357, HS 11358, HS 11359, or HS 11360 convictions if
+            those are the only convictions on an individual's record.
+          </Checkbox>
         </FormCardContent>
         <FormCardFooter>
           <ContinueButton onContinue={this.onContinue} />

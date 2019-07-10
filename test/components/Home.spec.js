@@ -45,7 +45,7 @@ describe('Home component', () => {
 
     it('sets the initial file path to HOME/desktop', () => {
       const { component } = setup('false');
-      expect(component.state('initialFilePath')).toEqual(
+      expect(component.state('outputPathPrefix')).toEqual(
         '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output'
       );
     });
@@ -180,7 +180,7 @@ describe('Home component', () => {
       component.instance().updateStateWithEligibilityOptions();
       component.instance().resetOutputPath();
       expect(component.state('outputFilePath')).toEqual(
-        component.state('initialFilePath')
+        component.state('outputPathPrefix')
       );
     });
   });
