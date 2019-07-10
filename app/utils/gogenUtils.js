@@ -33,7 +33,12 @@ export function transformYearsSinceConviction(additionalReliefOptions) {
   return { yearsSinceConvictionThreshold: 0 };
 }
 
-export function runScript(state, spawnChildProcess, createJsonFile) {
+export function runScript(
+  state,
+  spawnChildProcess,
+  createJsonFile,
+  stdoutCallbackFunction
+) {
   const {
     gogenPath,
     dateTime,
@@ -80,14 +85,36 @@ export function runScript(state, spawnChildProcess, createJsonFile) {
   ]);
 
   goProcess.stdout.on('data', data => {
-    console.log(`stdout: ${data}`);
-  });
-
-  goProcess.stderr.on('data', data => {
-    console.log(`stderr: ${data}`);
+    stdoutCallbackFunction(data);
   });
 
   goProcess.on('close', code => {
     console.log(`child process exited with code ${code}`);
   });
+
+  goProcess.stderr.on('data', data => {
+    console.log(`stderr: ${data}`);
+  });
+}
+
+export function getDataFromStdout(data) {
+  console.log('stdout:', data.toString());
+  return {
+    individualsThatGotRelief: 'some people',
+    numProp64DismissedOrReduced: 'some other num',
+    numProp64MisdemeanorsDismissed: 'some misd',
+    numProp64FeloniesDismissedOrReduced: 'some felonies',
+    dismissedCodeSections: 'dismissed code sections',
+    reducedCodeSections: 'reduced code sections',
+    additionalReliefOptions: 'options, options, options',
+    fullResultsFileName: 'full filename',
+    fullResultsColumns: 'full columns',
+    fullResultsRows: 'full rows',
+    condensedResultsFileName: 'condensed filename',
+    condensedResultsColumns: 'condensed columns',
+    condensedResultsRows: 'condensed rows',
+    convictionsResultsFileName: 'convictions filename',
+    convictionsResultsColumns: 'convictions columns',
+    convictionsResultsRows: 'convictions rows'
+  };
 }

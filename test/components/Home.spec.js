@@ -163,13 +163,15 @@ describe('Home component', () => {
   });
 
   describe('updateDateForPath', () => {
-    it('updates state.baselineEligibilityOptions for the given code section and option', () => {
+    it('updates state.dateTime and outputFilePath', () => {
       const { component } = setup('true');
       expect(component.state('outputFilePath')).toEqual('');
+      expect(component.state('dateTime')).toEqual('');
       component.instance().updateDateForPath();
       expect(component.state('outputFilePath')).toEqual(
         '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output_Jan_1_2011_0.00.00.AM'
       );
+      expect(component.state('dateTime')).toEqual('Jan_1_2011_0.00.00.AM');
     });
   });
 

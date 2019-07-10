@@ -88,8 +88,10 @@ describe('runScript', () => {
     };
     return sandbox.fake.returns(fakeSpawnResponse);
   }
+
   const fakeSpawnChildProcess = createFakeSpawnChildProcess();
   const fakeCreateJsonFile = sandbox.spy();
+  const fakeGogenPDFFunction = sandbox.spy();
 
   afterEach(() => {
     sandbox.restore();
@@ -99,7 +101,12 @@ describe('runScript', () => {
   });
 
   it('calls child process with values from state', () => {
-    runScript(state, fakeSpawnChildProcess, fakeCreateJsonFile);
+    runScript(
+      state,
+      fakeSpawnChildProcess,
+      fakeCreateJsonFile,
+      fakeGogenPDFFunction
+    );
 
     const { args } = fakeSpawnChildProcess.getCall(0);
     expect(args[0]).toEqual('gogenPath');
@@ -114,7 +121,12 @@ describe('runScript', () => {
   });
 
   it('passes the transformed eligibility config to createJsonFile', () => {
-    runScript(state, fakeSpawnChildProcess, fakeCreateJsonFile);
+    runScript(
+      state,
+      fakeSpawnChildProcess,
+      fakeCreateJsonFile,
+      fakeGogenPDFFunction
+    );
 
     const { args } = fakeCreateJsonFile.getCall(0);
     expect(args[0].baselineEligibility.dismiss).toEqual([
@@ -126,6 +138,7 @@ describe('runScript', () => {
       '11359',
       '11360'
     ]);
+
     expect(args[0].baselineEligibility.reduce).toEqual([]);
     expect(args[0].additionalRelief.subjectUnder21AtConviction).toBe(true);
     expect(args[0].additionalRelief.subjectAgeThreshold).toBe(0);

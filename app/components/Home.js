@@ -10,8 +10,8 @@ import ResultsFormCard from './ResultsFormCard';
 import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import openFolder from '../utils/osHelpers';
-import { runScript } from '../utils/gogenUtils';
-import { getDateTime, createJsonFile, fillPDF } from '../utils/fileUtils';
+import { getDataFromStdout, runScript } from '../utils/gogenUtils';
+import { createJsonFile, fillPDF, getDateTime } from '../utils/fileUtils';
 
 type State = {
   gogenPath: string,
@@ -77,7 +77,6 @@ export default class Home extends Component<Props, State> {
     const { dateTime } = this.state;
     if (dateTime !== prevState.dateTime) {
       this.runScriptInOptions();
-      this.createSummaryPDF();
     }
   }
 
@@ -151,27 +150,34 @@ export default class Home extends Component<Props, State> {
     this.setState(defaultAnalysisOptions);
   };
 
-  createSummaryPDF = () => {
-    const { outputFilePath, dateTime, county } = this.state;
+  getSummaryData = (data: string) => {
+    const { dateTime, county } = this.state;
+
+    const objectValuesFromState = {
+      outputDateTime: dateTime,
+      county: county.name
+    };
+    const objectValuesFromStdout = getDataFromStdout(data);
+
+    return { ...objectValuesFromState, ...objectValuesFromStdout };
+  };
+
+  createSummaryPDF = (data: string) => {
+    const { outputFilePath } = this.state;
     const inputFilePath = './resources/summaryReportTemplateNew.pdf';
     const summaryFilePath = path.join(outputFilePath, 'summary_report.pdf');
-    const summaryOutputPDFHash = {
-      outputDateTime: dateTime,
-      county: county.name,
-      individualsThatGotRelief: 'some people',
-      numProp64DismissedOrReduced: 'some other num',
-      numProp64MisdemeanorsDismissed: 'some misd',
-      numProp64FeloniesDismissedOrReduced: 'some felonies',
-      dismissedCodeSections: 'dismissed code sections',
-      reducedCodeSections: 'reduced code sections',
-      additionalReliefOptions: 'options, options, options'
-    };
-    fillPDF(inputFilePath, summaryFilePath, summaryOutputPDFHash);
+    const summaryDataObject = this.getSummaryData(data);
+    fillPDF(inputFilePath, summaryFilePath, summaryDataObject);
   };
 
   runScriptInOptions = () => {
     const { spawnChildProcess } = this.props;
-    runScript(this.state, spawnChildProcess, createJsonFile);
+    runScript(
+      this.state,
+      spawnChildProcess,
+      createJsonFile,
+      this.createSummaryPDF
+    );
   };
 
   render() {

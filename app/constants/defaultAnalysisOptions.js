@@ -1,5 +1,6 @@
 const defaultAnalysisOptions = {
   currentScreen: 0,
+  dateTime: '',
   county: { name: '', code: '' },
   dojFilePath: '',
   baselineEligibilityOptions: {
