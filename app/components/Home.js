@@ -10,7 +10,7 @@ import ResultsFormCard from './ResultsFormCard';
 import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import openFolder from '../utils/osHelpers';
-import { getDataFromStdout, runScript } from '../utils/gogenUtils';
+import { parseGogenOutput, runScript } from '../utils/gogenUtils';
 import { createJsonFile, fillPDF, getDateTime } from '../utils/fileUtils';
 
 type State = {
@@ -150,23 +150,23 @@ export default class Home extends Component<Props, State> {
     this.setState(defaultAnalysisOptions);
   };
 
-  getSummaryData = (data: string) => {
+  getSummaryData = (gogenOutput: string) => {
     const { dateTime, county } = this.state;
 
     const objectValuesFromState = {
-      outputDateTime: dateTime,
+      dateTime,
       county: county.name
     };
-    const objectValuesFromStdout = getDataFromStdout(data);
+    const objectValuesFromStdout = parseGogenOutput(gogenOutput);
 
     return { ...objectValuesFromState, ...objectValuesFromStdout };
   };
 
-  createSummaryPDF = (data: string) => {
+  createSummaryPDF = (gogenOutput: string) => {
     const { outputFilePath } = this.state;
-    const inputFilePath = './resources/summaryReportTemplateNew.pdf';
+    const inputFilePath = './resources/summaryReportTemplate.pdf';
     const summaryFilePath = path.join(outputFilePath, 'summary_report.pdf');
-    const summaryDataObject = this.getSummaryData(data);
+    const summaryDataObject = this.getSummaryData(gogenOutput);
     fillPDF(inputFilePath, summaryFilePath, summaryDataObject);
   };
 

@@ -187,6 +187,23 @@ describe('Home component', () => {
     });
   });
 
+  describe('getSummaryData', () => {
+    it('returns an object with all data needed to fill pdf of summary report', () => {
+      const { component } = setup('true');
+      component.instance().updateDateForPath();
+      const fakeGogenOutput =
+        'Some output stuff &&&&&&{"noLongerHaveFelony": 6, "noConvictions": 3, "noConvictionsLast7": 7}';
+      const result = component.instance().getSummaryData(fakeGogenOutput);
+      expect(result).toEqual({
+        dateTime: 'Jan_1_2011_0.00.00.AM',
+        county: '',
+        noLongerHaveFelony: 6,
+        noConvictions: 3,
+        noConvictionsLast7: 7
+      });
+    });
+  });
+
   it('should match exact snapshot', () => {
     const counter = (
       <div>

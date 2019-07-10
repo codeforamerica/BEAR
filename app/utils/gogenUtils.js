@@ -97,24 +97,10 @@ export function runScript(
   });
 }
 
-export function getDataFromStdout(data) {
-  console.log('stdout:', data.toString());
-  return {
-    individualsThatGotRelief: 'some people',
-    numProp64DismissedOrReduced: 'some other num',
-    numProp64MisdemeanorsDismissed: 'some misd',
-    numProp64FeloniesDismissedOrReduced: 'some felonies',
-    dismissedCodeSections: 'dismissed code sections',
-    reducedCodeSections: 'reduced code sections',
-    additionalReliefOptions: 'options, options, options',
-    fullResultsFileName: 'full filename',
-    fullResultsColumns: 'full columns',
-    fullResultsRows: 'full rows',
-    condensedResultsFileName: 'condensed filename',
-    condensedResultsColumns: 'condensed columns',
-    condensedResultsRows: 'condensed rows',
-    convictionsResultsFileName: 'convictions filename',
-    convictionsResultsColumns: 'convictions columns',
-    convictionsResultsRows: 'convictions rows'
-  };
+export function parseGogenOutput(data) {
+  const dataString = data.toString();
+  console.log('stdout: ', dataString);
+  const dataWeCareAbout = dataString.split('&&&&&&')[1];
+  const jsonData = JSON.parse(dataWeCareAbout);
+  return jsonData;
 }
