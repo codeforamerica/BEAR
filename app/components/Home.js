@@ -151,9 +151,9 @@ export default class Home extends Component<Props, State> {
 
   getSummaryData = (gogenOutput: string) => {
     const { dateTime, county } = this.state;
-
+    const reformattedDateTime = dateTime.replace(/_/g, ' ').replace(/\./g, ':');
     const objectValuesFromState = {
-      dateTime,
+      dateTime: reformattedDateTime,
       county: county.name
     };
     const objectValuesFromStdout = parseGogenOutput(gogenOutput);
@@ -162,9 +162,12 @@ export default class Home extends Component<Props, State> {
   };
 
   createSummaryPDF = (gogenOutput: string) => {
-    const { outputFilePath } = this.state;
+    const { outputFilePath, dateTime } = this.state;
     const inputFilePath = './resources/summaryReportTemplate.pdf';
-    const summaryFilePath = path.join(outputFilePath, 'summary_report.pdf');
+    const summaryFilePath = path.join(
+      outputFilePath,
+      `summary_report_${dateTime}.pdf`
+    );
     const summaryDataObject = this.getSummaryData(gogenOutput);
     fillPDF(inputFilePath, summaryFilePath, summaryDataObject);
   };

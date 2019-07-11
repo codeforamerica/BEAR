@@ -195,7 +195,7 @@ describe('Home component', () => {
         'Some output stuff &&&&&&{"noLongerHaveFelony": 6, "noConvictions": 3, "noConvictionsLast7": 7}';
       const result = component.instance().getSummaryData(fakeGogenOutput);
       expect(result).toEqual({
-        dateTime: 'Jan_1_2011_0.00.00.AM',
+        dateTime: 'Jan 1 2011 0:00:00:AM',
         county: '',
         noLongerHaveFelony: 6,
         noConvictions: 3,

@@ -1,6 +1,5 @@
 import fs from 'fs';
 import pdftk from 'node-pdftk';
-import openFolder from './osHelpers';
 
 export function createJsonFile(jsonData, fileName) {
   const jsonString = JSON.stringify(jsonData);
@@ -53,8 +52,7 @@ export function fillPDF(inputFilePath, outputPath, contentForFields) {
       .flatten()
       .output(outputPath)
       .then(() => {
-        openFolder(outputPath);
-        return console.log('success');
+        return console.log('successfully filled pdf');
       })
       .catch(err => {
         console.log('the following error occurred:', err);
