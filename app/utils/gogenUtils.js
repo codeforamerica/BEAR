@@ -8,8 +8,8 @@ export function transformBaselineEligibilityOptions(eligibilityOptions) {
     .sort()
     .forEach(codeSection => {
       eligibilityOptions[codeSection] === 'dismiss'
-        ? jsonObject.baselineEligibility.dismiss.push(codeSection.toUpperCase())
-        : jsonObject.baselineEligibility.reduce.push(codeSection.toUpperCase());
+        ? jsonObject.baselineEligibility.dismiss.push(codeSection)
+        : jsonObject.baselineEligibility.reduce.push(codeSection);
     });
   return jsonObject;
 }

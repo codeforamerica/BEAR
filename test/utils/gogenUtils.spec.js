@@ -20,8 +20,8 @@ describe('transformBaselineEligibilityOptions', () => {
     const subject = transformBaselineEligibilityOptions(optionState);
     expect(subject).toEqual({
       baselineEligibility: {
-        dismiss: ['11357(A)', '11357(B)', '11357(D)', '11358'],
-        reduce: ['11357(C)', '11359', '11360']
+        dismiss: ['11357(a)', '11357(b)', '11357(d)', '11358'],
+        reduce: ['11357(c)', '11359', '11360']
       }
     });
   });
@@ -118,10 +118,10 @@ describe('runScript', () => {
 
     const { args } = fakeCreateJsonFile.getCall(0);
     expect(args[0].baselineEligibility.dismiss).toEqual([
-      '11357(A)',
-      '11357(B)',
-      '11357(C)',
-      '11357(D)',
+      '11357(a)',
+      '11357(b)',
+      '11357(c)',
+      '11357(d)',
       '11358',
       '11359',
       '11360'
