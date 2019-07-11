@@ -41,6 +41,10 @@ export function getDateTime() {
   return `${month}_${day}_${year}_${hours}.${minutes}.${seconds}.${ampm}`;
 }
 
+export function getFileSize(pathname) {
+  return fs.statSync(pathname).size;
+}
+
 export function fillPDF(inputFilePath, outputPath, contentForFields) {
   if (fs.existsSync(inputFilePath)) {
     pdftk

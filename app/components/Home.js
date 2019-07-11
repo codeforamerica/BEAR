@@ -11,7 +11,13 @@ import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import openFolder from '../utils/osHelpers';
 import { parseGogenOutput, runScript } from '../utils/gogenUtils';
-import { createJsonFile, fillPDF, getDateTime } from '../utils/fileUtils';
+import {
+  createJsonFile,
+  fillPDF,
+  getDateTime,
+  getFileSize
+} from '../utils/fileUtils';
+import ProcessingFormCard from './ProcessingFormCard';
 
 type State = {
   gogenPath: string,
@@ -71,13 +77,6 @@ export default class Home extends Component<Props, State> {
       outputFilePath: '',
       ...defaultAnalysisOptions
     };
-  }
-
-  componentDidUpdate(prevProps: Props, prevState: State) {
-    const { dateTime } = this.state;
-    if (dateTime !== prevState.dateTime) {
-      this.runScriptInOptions();
-    }
   }
 
   updateCounty = (county: County) => {
@@ -170,13 +169,14 @@ export default class Home extends Component<Props, State> {
     fillPDF(inputFilePath, summaryFilePath, summaryDataObject);
   };
 
-  runScriptInOptions = () => {
+  runScriptInOptions = (callbackFunction: function) => {
     const { spawnChildProcess } = this.props;
     runScript(
       this.state,
       spawnChildProcess,
       createJsonFile,
-      this.createSummaryPDF
+      this.createSummaryPDF,
+      callbackFunction
     );
   };
 
@@ -215,6 +215,14 @@ export default class Home extends Component<Props, State> {
           updateDate={this.updateDateForPath}
           onOptionsConfirm={this.nextScreen}
           onBack={this.previousScreen}
+        />
+        <ProcessingFormCard
+          dojFilePath={dojFilePath}
+          onComplete={this.nextScreen}
+          runScript={this.runScriptInOptions}
+          getFileSize={getFileSize}
+          onStartOver={this.resetInitialState}
+          resetOutputPath={this.resetOutputPath}
         />
         <ResultsFormCard
           county={county}

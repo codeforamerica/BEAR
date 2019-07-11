@@ -24,10 +24,10 @@ afterEach(() => {
 });
 
 describe('DojFileItem component', () => {
-  it('should display only the file name from path', () => {
+  it('should display the file name from path', () => {
     const { component } = setup('path/to/file.dat');
     const fileName = component.find('.fileName');
-    expect(fileName.text()).toEqual('file.dat');
+    expect(fileName.text()).toEqual('File imported: file.dat');
   });
 
   it('should call onFileRemove with empty string when the close icon is clicked', () => {

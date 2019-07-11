@@ -44,8 +44,13 @@ export default class DojFileSelectFormCard extends Component<Props> {
 
     return (
       <FormCard>
-        <FormCardHeader>Upload .dat file</FormCardHeader>
-        <FormCardContent>{this.renderCardContent()}</FormCardContent>
+        <FormCardHeader>
+          Import Prop 64 bulk conviction data file
+        </FormCardHeader>
+        <FormCardContent>
+          <p>Select a .dat file to import</p>
+          {this.renderCardContent()}
+        </FormCardContent>
         <FormCardFooter>
           <div className="buttons">
             <ContinueButton

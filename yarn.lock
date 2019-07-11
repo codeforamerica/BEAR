@@ -2937,8 +2937,8 @@ ccount@^1.0.0:
   resolved "https://registry.yarnpkg.com/ccount/-/ccount-1.0.3.tgz#f1cec43f332e2ea5a569fd46f9f5bde4e6102aff"
 
 cfa-styleguide@codeforamerica/cfa-styleguide-npm:
-  version "0.0.1"
-  resolved "https://codeload.github.com/codeforamerica/cfa-styleguide-npm/tar.gz/15e2a9f614eca5f8916b0d12124b1ff0ecc76ed5"
+  version "1.0.0"
+  resolved "https://codeload.github.com/codeforamerica/cfa-styleguide-npm/tar.gz/105a3ee032d44d7fdb12b74fbb65a998ad1c3bab"
 
 chai@^4.1.2:
   version "4.2.0"

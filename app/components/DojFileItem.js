@@ -23,7 +23,7 @@ export default class DojFileItem extends Component<Props> {
     return (
       <div className="doj-file">
         <p className={styles.fileName}>
-          {this.formatFileName()}
+          File imported: {this.formatFileName()}
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}
           <i
             className={`${styles.fileRemove} icon-close`}

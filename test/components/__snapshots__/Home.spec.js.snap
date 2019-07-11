@@ -30,7 +30,7 @@ exports[`Home component should match exact snapshot 1`] = `
           <h1
             className="form-card__title"
           >
-            Proposition 64 CA DOJ data upload
+            CA County Selection
           </h1>
         </header>
         <div
@@ -55,7 +55,7 @@ exports[`Home component should match exact snapshot 1`] = `
                   disabled={true}
                   value=""
                 >
-                  Choose a county
+                  Choose your county
                 </option>
                 <option
                   value="ALAMEDA"

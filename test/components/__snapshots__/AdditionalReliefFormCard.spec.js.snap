@@ -12,6 +12,9 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
         className="form-card__title"
       >
         Additional relief
+        <p>
+          Choose from the following options to expand relief.
+        </p>
       </h1>
     </header>
     <div
@@ -23,7 +26,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
         <div
           className="form-question grid__item width-two-thirds"
         >
-          Dismiss convictions for people who were convicted of one of the above convictions at an age of 21 or younger.
+          Dismiss all Prop 64 convictions if the conviction happened when the person was 21 or younger.
         </div>
         <label
           className="shift-fourth-fifths checkbox"
@@ -32,7 +35,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           <span
             className="sr-only"
           >
-            Select to dismiss convictions for people who were convicted of one of the above convictions at an age of 21 or younger.
+            Select to dismiss all Prop 64 convictions if the conviction happened when the person was 21 or younger.
           </span>
           <input
             defaultChecked={true}

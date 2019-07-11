@@ -3,6 +3,7 @@ import RadioButton from './RadioButton';
 
 type Props = {
   codeSection: string,
+  codeSectionDescription: string,
   baselineEligibilityOptions: string,
   onEligibilityOptionSelect: (string, string) => void
 };
@@ -11,13 +12,14 @@ export default class BaselineEligibilityOption extends Component<Props> {
   render() {
     const {
       codeSection,
+      codeSectionDescription,
       baselineEligibilityOptions,
       onEligibilityOptionSelect
     } = this.props;
     return (
       <tr>
         <td>
-          <p>{`HS ${codeSection} felonies`}</p>
+          <p>{`H&S § ${codeSectionDescription}`}</p>
         </td>
         <td>
           <RadioButton

@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import styles from './DOJFileInput.css';
 
 type Props = {
   onFileSelect: string => void
@@ -24,8 +25,9 @@ export default class DojFileInput extends Component<Props> {
             name="doj-file-input"
             className="file-upload__input"
           />
-          Upload File
+          Select file
         </label>
+        <p className={styles.emptyMessage}>No file selected</p>
       </div>
     );
   }

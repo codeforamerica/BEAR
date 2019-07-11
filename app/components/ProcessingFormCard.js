@@ -6,15 +6,63 @@ import FormCard, {
   FormCardFooter,
   FormCardHeader
 } from './FormCard';
+import ProgressBar from './ProgressBar';
+import StartOverButton from './StartOverButton';
 
-type Props = {};
+type Props = {
+  dojFilePath: string,
+  getFileSize: string => number,
+  onComplete: void => void,
+  runScript: ((void) => void) => void,
+  onStartOver: void => void,
+  resetOutputPath: void => void
+};
 
-export default class ProcessingFormCard extends Component<Props> {
+type State = {
+  gogenComplete: boolean
+};
+
+export default class ProcessingFormCard extends Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      gogenComplete: false
+    };
+  }
+
+  componentDidMount() {
+    const { runScript } = this.props;
+    runScript(this.onGogenComplete);
+  }
+
+  onClickStartOver = () => {
+    const { onStartOver, resetOutputPath } = this.props;
+    resetOutputPath();
+    onStartOver();
+  };
+
+  onGogenComplete = () => {
+    this.setState({ gogenComplete: true });
+  };
+
   render() {
+    const { dojFilePath, onComplete, getFileSize } = this.props;
+    const { gogenComplete } = this.state;
     return (
       <FormCard>
-        <FormCardHeader>Preparing your files</FormCardHeader>
-        <FormCardContent />
+        <FormCardHeader />
+        <FormCardContent>
+          <div className="box-wrapper text--centered">
+            <div className="emoji emoji--huge emoji--woman-detective-medium-dark-skin-tone" />
+            <h3>Reading and preparing your files ...</h3>
+            <ProgressBar
+              fileSizeInBytes={getFileSize(dojFilePath)}
+              onCompleteCallback={onComplete}
+              isComplete={gogenComplete}
+            />
+            <StartOverButton onStartOver={this.onClickStartOver} />
+          </div>
+        </FormCardContent>
         <FormCardFooter />
       </FormCard>
     );

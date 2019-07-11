@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`ProgressBar component should match exact snapshot 1`] = `
+<div
+  className="box text--centered with-padding-large"
+>
+  <div
+    className="progress-indicator"
+  >
+    <div
+      className="progress-indicator__bar"
+      style={
+        Object {
+          "width": "0%",
+        }
+      }
+    />
+    <div
+      className="progress-indicator__percentage"
+    >
+      0
+      %
+    </div>
+  </div>
+</div>
+`;

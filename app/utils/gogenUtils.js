@@ -37,7 +37,8 @@ export function runScript(
   state,
   spawnChildProcess,
   createJsonFile,
-  stdoutCallbackFunction
+  stdoutCallbackFunction,
+  childFinishedCallback: function
 ) {
   const {
     gogenPath,
@@ -88,8 +89,10 @@ export function runScript(
     stdoutCallbackFunction(data);
   });
 
-  goProcess.on('close', code => {
-    console.log(`child process exited with code ${code}`);
+  goProcess.on('close', childFinishedCallback);
+  goProcess.on('error', error => {
+    console.error(error);
+    childFinishedCallback();
   });
 
   goProcess.stderr.on('data', data => {

@@ -7,6 +7,7 @@ exports[`DojFileItem component should match exact snapshot 1`] = `
   <p
     className="fileName"
   >
+    File imported: 
     file
     <i
       className="fileRemove icon-close"

@@ -30,7 +30,7 @@ export default class CountySelect extends Component<Props> {
             value={selectedCounty}
           >
             <option value="" disabled>
-              Choose a county
+              Choose your county
             </option>
             {counties.map(county => (
               <option key={county} value={county.toUpperCase()}>
