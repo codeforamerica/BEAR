@@ -42,9 +42,9 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
       >
         <p>
           <b>
-            Clear My Record Results File: 
+            Full Results File: 
           </b>
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sagittis sodales eleifend. Praesent in tincidunt turpis, id euismod enim. Integer a massa sed quam suscipit facilisis. Donec interdum placerat eros.
+           CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information.
         </p>
       </div>
       <div
@@ -54,7 +54,17 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
           <b>
             Condensed Results Files: 
           </b>
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sagittis sodales eleifend. Praesent in tincidunt turpis, id euismod enim. Integer a massa sed quam suscipit facilisis. Donec interdum placerat eros.
+           CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible.
+        </p>
+      </div>
+      <div
+        className="sidePadding"
+      >
+        <p>
+          <b>
+            Conviction Results File: 
+          </b>
+           CSV file with only Prop 64 convictions in the county of your choice.
         </p>
       </div>
       <div
@@ -64,21 +74,25 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
           <b>
             Summary Report: 
           </b>
-           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sagittis sodales eleifend. Praesent in tincidunt turpis, id euismod enim. Integer a massa sed quam suscipit facilisis. Donec interdum placerat eros.
+           PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions.
         </p>
       </div>
     </div>
     <div
       className="form-card__footer"
     >
-      <button
-        className="button"
-        id="start_over"
-        onClick={[Function]}
-        type="button"
+      <div
+        className="text--centered"
       >
-        Start Over
-      </button>
+        <button
+          className="button"
+          id="start_over"
+          onClick={[Function]}
+          type="button"
+        >
+          Start Over
+        </button>
+      </div>
     </div>
   </div>
 </div>

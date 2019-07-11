@@ -49,16 +49,20 @@ export default class AdditionalReliefFormCard extends Component<Props> {
     const { additionalReliefOptions } = this.props;
     return (
       <FormCard>
-        <FormCardHeader>Additional relief</FormCardHeader>
+        <FormCardHeader>
+          Additional relief
+          <p>Choose from the following options to expand relief.</p>
+        </FormCardHeader>
         <FormCardContent>
           <Checkbox
             checked={additionalReliefOptions.subjectUnder21AtConviction}
-            labelText="Select to dismiss convictions for people who were convicted of one of the above convictions at an age of 21 or younger."
+            labelText="Select to dismiss all Prop 64 convictions if the conviction happened when the
+            person was 21 or younger."
             group="subjectUnder21AtConviction"
             onChange={this.handleToggleChecked}
           >
-            Dismiss convictions for people who were convicted of one of the
-            above convictions at an age of 21 or younger.
+            Dismiss all Prop 64 convictions if the conviction happened when the
+            person was 21 or younger.
           </Checkbox>
           <Checkbox
             checked={additionalReliefOptions.dismissOlderThanAgeThreshold}

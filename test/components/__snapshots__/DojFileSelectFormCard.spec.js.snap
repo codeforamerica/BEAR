@@ -11,18 +11,22 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       <h1
         className="form-card__title"
       >
-        Upload .dat file
+        Import Prop 64 bulk conviction data file
       </h1>
     </header>
     <div
       className="form-card__content"
     >
+      <p>
+        Select a .dat file to import
+      </p>
       <div
         className="doj-file"
       >
         <p
           className="fileName"
         >
+          File imported: 
           file
           <i
             className="fileRemove icon-close"
@@ -78,12 +82,15 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       <h1
         className="form-card__title"
       >
-        Upload .dat file
+        Import Prop 64 bulk conviction data file
       </h1>
     </header>
     <div
       className="form-card__content"
     >
+      <p>
+        Select a .dat file to import
+      </p>
       <div
         className="file-upload"
       >
@@ -99,8 +106,13 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
             onChange={[Function]}
             type="file"
           />
-          Upload File
+          Select file
         </label>
+        <p
+          className="emptyMessage"
+        >
+          No file selected
+        </p>
       </div>
     </div>
     <div

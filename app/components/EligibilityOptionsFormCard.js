@@ -41,9 +41,7 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
         <FormCardHeader>
           Baseline eligibility
           <p className="text--help">
-            Choose from the following options to expedite your office's review
-            of records from the state summary criminal history information
-            database for AB-1793.
+            Choose whether to dismiss or reduce Prop 64 convictions.
           </p>
         </FormCardHeader>
         <FormCardContent>
@@ -58,7 +56,7 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
             <tbody>
               <tr>
                 <td>
-                  <p>All HS 11357-60 misdemeanors and infractions</p>
+                  <p>All Prop 64 misdemeanors and infractions</p>
                 </td>
                 <td>
                   <RadioButton
@@ -70,18 +68,28 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
                 <td />
               </tr>
               {[
-                '11357(a)',
-                '11357(b)',
-                '11357(c)',
-                '11357(d)',
-                '11358',
-                '11359',
-                '11360'
-              ].map(codeSection => {
+                { codeSection: '11357(a)', description: '11357 (a) felonies' },
+                { codeSection: '11357(b)', description: '11357 (b) felonies' },
+                { codeSection: '11357(c)', description: '11357 (c) felonies' },
+                { codeSection: '11357(d)', description: '11357 (d) felonies' },
+                {
+                  codeSection: '11358',
+                  description: '11358 felonies including all subsections'
+                },
+                {
+                  codeSection: '11359',
+                  description: '11359 felonies including all subsections'
+                },
+                {
+                  codeSection: '11360',
+                  description: '11360 felonies including all subsections'
+                }
+              ].map(option => {
                 return (
                   <BaselineEligibilityOption
-                    key={codeSection}
-                    codeSection={codeSection}
+                    key={option.codeSection}
+                    codeSection={option.codeSection}
+                    codeSectionDescription={option.description}
                     baselineEligibilityOptions={baselineEligibilityOptions}
                     onEligibilityOptionSelect={onEligibilityOptionSelect}
                   />

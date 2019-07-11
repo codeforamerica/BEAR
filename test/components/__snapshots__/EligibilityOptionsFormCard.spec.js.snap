@@ -15,7 +15,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
         <p
           className="text--help"
         >
-          Choose from the following options to expedite your office's review of records from the state summary criminal history information database for AB-1793.
+          Choose whether to dismiss or reduce Prop 64 convictions.
         </p>
       </h1>
     </header>
@@ -42,7 +42,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                All HS 11357-60 misdemeanors and infractions
+                All Prop 64 misdemeanors and infractions
               </p>
             </td>
             <td>
@@ -60,7 +60,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                HS 11357(a) felonies
+                H&S § 11357 (a) felonies
               </p>
             </td>
             <td>
@@ -87,7 +87,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                HS 11357(b) felonies
+                H&S § 11357 (b) felonies
               </p>
             </td>
             <td>
@@ -114,7 +114,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                HS 11357(c) felonies
+                H&S § 11357 (c) felonies
               </p>
             </td>
             <td>
@@ -141,7 +141,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                HS 11357(d) felonies
+                H&S § 11357 (d) felonies
               </p>
             </td>
             <td>
@@ -168,7 +168,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                HS 11358 felonies
+                H&S § 11358 felonies including all subsections
               </p>
             </td>
             <td>
@@ -195,7 +195,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                HS 11359 felonies
+                H&S § 11359 felonies including all subsections
               </p>
             </td>
             <td>
@@ -222,7 +222,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                HS 11360 felonies
+                H&S § 11360 felonies including all subsections
               </p>
             </td>
             <td>

@@ -16,7 +16,12 @@ exports[`DojFileInput component should match exact snapshot 1`] = `
       onChange={[Function]}
       type="file"
     />
-    Upload File
+    Select file
   </label>
+  <p
+    className="emptyMessage"
+  >
+    No file selected
+  </p>
 </div>
 `;

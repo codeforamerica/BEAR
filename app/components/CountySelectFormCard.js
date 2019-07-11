@@ -20,7 +20,7 @@ export default class CountySelectFormCard extends Component<Props> {
     const { onCountySelect, onCountyConfirm, selectedCounty } = this.props;
     return (
       <FormCard>
-        <FormCardHeader>Proposition 64 CA DOJ data upload</FormCardHeader>
+        <FormCardHeader>CA County Selection</FormCardHeader>
         <FormCardContent>
           <CountySelect
             onCountySelect={onCountySelect}

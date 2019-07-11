@@ -53,31 +53,36 @@ export default class ResultsFormCard extends Component<Props> {
           </h3>
           <div className={styles.sidePadding}>
             <p>
-              <b>Clear My Record Results File: </b> Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Nam sagittis sodales eleifend.
-              Praesent in tincidunt turpis, id euismod enim. Integer a massa sed
-              quam suscipit facilisis. Donec interdum placerat eros.
+              <b>Full Results File: </b> CSV file of the original bulk data set
+              with appended columns which display eligibility determinations and
+              provide supporting information.
             </p>
           </div>
           <div className={styles.sidePadding}>
             <p>
-              <b>Condensed Results Files: </b> Lorem ipsum dolor sit amet,
-              consectetur adipiscing elit. Nam sagittis sodales eleifend.
-              Praesent in tincidunt turpis, id euismod enim. Integer a massa sed
-              quam suscipit facilisis. Donec interdum placerat eros.
+              <b>Condensed Results Files: </b> CSV file with eligibility
+              determinations and columns relevant for determining whether a
+              conviction is eligible.
             </p>
           </div>
           <div className={styles.sidePadding}>
             <p>
-              <b>Summary Report: </b> Lorem ipsum dolor sit amet, consectetur
-              adipiscing elit. Nam sagittis sodales eleifend. Praesent in
-              tincidunt turpis, id euismod enim. Integer a massa sed quam
-              suscipit facilisis. Donec interdum placerat eros.
+              <b>Conviction Results File: </b> CSV file with only Prop 64
+              convictions in the county of your choice.
+            </p>
+          </div>
+          <div className={styles.sidePadding}>
+            <p>
+              <b>Summary Report: </b> PDF document with eligibility criteria
+              used to create results and summary statistics on how these results
+              impact those with Prop 64 convictions.
             </p>
           </div>
         </FormCardContent>
         <FormCardFooter>
-          <StartOverButton onStartOver={this.onClickStartOver} />
+          <div className="text--centered">
+            <StartOverButton onStartOver={this.onClickStartOver} />
+          </div>
         </FormCardFooter>
       </FormCard>
     );
