@@ -27,7 +27,7 @@
     "start": "cross-env NODE_ENV=production electron ./app/main.prod.js",
     "start-main-dev": "cross-env HOT=1 NODE_ENV=development electron -r @babel/register ./app/main.dev.js",
     "start-renderer-dev": "cross-env NODE_ENV=development webpack-dev-server --config configs/webpack.config.renderer.dev.babel.js",
-    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest test/components",
+    "test": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest test/components test/utils",
     "test-update-snapshots": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest -u test/components",
     "test-all": "yarn lint && yarn flow && yarn build && yarn test && yarn build-e2e && yarn test-e2e",
     "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest test/e2e",
