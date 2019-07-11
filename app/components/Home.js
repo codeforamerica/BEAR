@@ -13,6 +13,7 @@ import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 import { getDateTime, createJsonFile, getFileSize } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
+import IntroductionFormCard from './IntroductionFormCard';
 
 type State = {
   gogenPath: string,
@@ -160,6 +161,7 @@ export default class Home extends Component<Props, State> {
     } = this.state;
     return (
       <PageContainer currentScreen={currentScreen}>
+        <IntroductionFormCard onBegin={this.nextScreen} />
         <CountySelectFormCard
           selectedCounty={county}
           onCountySelect={this.updateCounty}

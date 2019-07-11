@@ -21,12 +21,15 @@ describe('The happy path', () => {
     }
   });
 
-  it('loads the first screen', async () => {
-    const text = await app.client.getText('.form-card__title');
-    expect(text).toEqual('CA County Selection');
+  it('loads the information page', async () => {
+    const text = await app.client.getText('.form-card__content');
+    expect(text[0]).toContain('Using Clear my Record will expedite');
   });
 
   it('can select county and continue to next screen', async () => {
+    await app.client.click('#begin');
+    const text = await app.client.getText('.form-card__title');
+    expect(text).toEqual('CA County Selection');
     const countySelect = app.client.$('#county-select');
     await countySelect.selectByVisibleText('Sacramento');
     await app.client.click('#continue');
@@ -36,6 +39,8 @@ describe('The happy path', () => {
   });
 
   it('does NOT continue to next screen if county is not selected', async () => {
+    await app.client.click('#begin');
+
     await app.client.click('#continue');
 
     const pageTitle = await app.client.getText('.form-card__title');
@@ -43,6 +48,8 @@ describe('The happy path', () => {
   });
 
   it('can select doj file and display the name', async () => {
+    await app.client.click('#begin');
+
     const countySelect = app.client.$('#county-select');
     await countySelect.selectByVisibleText('Sacramento');
     await app.client.click('#continue');
@@ -53,6 +60,8 @@ describe('The happy path', () => {
   });
 
   it('can go back to the county select page', async () => {
+    await app.client.click('#begin');
+
     const countySelect = app.client.$('#county-select');
     await countySelect.selectByVisibleText('Sacramento');
     await app.client.click('#continue');
@@ -64,6 +73,8 @@ describe('The happy path', () => {
   });
 
   it('can remove selected doj file', async () => {
+    await app.client.click('#begin');
+
     const countySelect = app.client.$('#county-select');
     await countySelect.selectByVisibleText('Sacramento');
     await app.client.click('#continue');
@@ -76,6 +87,8 @@ describe('The happy path', () => {
   });
 
   it('can select doj file and continue to eligibility options screen', async () => {
+    await app.client.click('#begin');
+
     const countySelect = app.client.$('#county-select');
     await countySelect.selectByVisibleText('Sacramento');
     await app.client.click('#continue');
@@ -88,6 +101,8 @@ describe('The happy path', () => {
   });
 
   it('can select eligibility options and display additional relief page', async () => {
+    await app.client.click('#begin');
+
     const countySelect = app.client.$('#county-select');
     await countySelect.selectByVisibleText('Sacramento');
     await app.client.click('#continue');
@@ -105,6 +120,8 @@ describe('The happy path', () => {
 
   it('can select additional relief options and display results page', async () => {
     jest.setTimeout(30000);
+    await app.client.click('#begin');
+
     const countySelect = app.client.$('#county-select');
     await countySelect.selectByVisibleText('Sacramento');
     await app.client.click('#continue');

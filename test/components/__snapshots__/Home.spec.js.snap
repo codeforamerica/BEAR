@@ -24,349 +24,92 @@ exports[`Home component should match exact snapshot 1`] = `
       <div
         className="form-card"
       >
-        <header
-          className="form-card__header"
-        >
-          <h1
-            className="form-card__title"
-          >
-            CA County Selection
-          </h1>
-        </header>
         <div
           className="form-card__content"
         >
-          <div>
-            <p
-              className="form-question"
+          <div
+            className="text--centered"
+          >
+            <h1
+              className="introductionTitle"
             >
-              Select your county
+              Using Clear my Record will expedite the process of determining which Prop 64 convictions are eligible for relief under H&S § 11361.9.
+            </h1>
+            <p>
+              Here's what you need to do:
             </p>
             <div
-              className="select"
+              className="vertical-steps"
             >
-              <select
-                className="select__element"
-                id="county-select"
-                onChange={[Function]}
-                value=""
+              <div
+                className="vertical-steps__step"
               >
-                <option
-                  disabled={true}
-                  value=""
+                <div
+                  className="emoji emoji--big emoji--page-facing-up"
+                />
+                <h2
+                  className="stepTitle"
                 >
-                  Choose your county
-                </option>
-                <option
-                  value="ALAMEDA"
+                  Import bulk conviction data
+                </h2>
+                <p
+                  className="stepBody"
                 >
-                  Alameda
-                </option>
-                <option
-                  value="ALPINE"
+                  Choose your county and import the bulk Prop 64 conviction data file received from the DOJ.
+                </p>
+              </div>
+              <div
+                className="vertical-steps__step"
+              >
+                <div
+                  className="emoji emoji--big emoji--clipboard"
+                />
+                <h2
+                  className="stepTitle"
                 >
-                  Alpine
-                </option>
-                <option
-                  value="AMADOR"
+                  Select eligibility requirements
+                </h2>
+                <p
+                  className="stepBody"
                 >
-                  Amador
-                </option>
-                <option
-                  value="BUTTE"
+                  Determine which convictions to reduce or dismiss.
+                </p>
+              </div>
+              <div
+                className="vertical-steps__step"
+              >
+                <div
+                  className="emoji emoji--big emoji--checkmark"
+                />
+                <h2
+                  className="stepTitle"
                 >
-                  Butte
-                </option>
-                <option
-                  value="CALAVERAS"
+                  Review files
+                </h2>
+                <p
+                  className="stepBody"
                 >
-                  Calaveras
-                </option>
-                <option
-                  value="COLUSA"
-                >
-                  Colusa
-                </option>
-                <option
-                  value="CONTRA COSTA"
-                >
-                  Contra Costa
-                </option>
-                <option
-                  value="DEL NORTE"
-                >
-                  Del Norte
-                </option>
-                <option
-                  value="EL DORADO"
-                >
-                  El Dorado
-                </option>
-                <option
-                  value="FRESNO"
-                >
-                  Fresno
-                </option>
-                <option
-                  value="GLENN"
-                >
-                  Glenn
-                </option>
-                <option
-                  value="HUMBOLDT"
-                >
-                  Humboldt
-                </option>
-                <option
-                  value="IMPERIAL"
-                >
-                  Imperial
-                </option>
-                <option
-                  value="INYO"
-                >
-                  Inyo
-                </option>
-                <option
-                  value="KERN"
-                >
-                  Kern
-                </option>
-                <option
-                  value="KINGS"
-                >
-                  Kings
-                </option>
-                <option
-                  value="LAKE"
-                >
-                  Lake
-                </option>
-                <option
-                  value="LASSEN"
-                >
-                  Lassen
-                </option>
-                <option
-                  value="LOS ANGELES"
-                >
-                  Los Angeles
-                </option>
-                <option
-                  value="MADERA"
-                >
-                  Madera
-                </option>
-                <option
-                  value="MARIN"
-                >
-                  Marin
-                </option>
-                <option
-                  value="MARIPOSA"
-                >
-                  Mariposa
-                </option>
-                <option
-                  value="MENDOCINO"
-                >
-                  Mendocino
-                </option>
-                <option
-                  value="MERCED"
-                >
-                  Merced
-                </option>
-                <option
-                  value="MODOC"
-                >
-                  Modoc
-                </option>
-                <option
-                  value="MONO"
-                >
-                  Mono
-                </option>
-                <option
-                  value="MONTEREY"
-                >
-                  Monterey
-                </option>
-                <option
-                  value="NAPA"
-                >
-                  Napa
-                </option>
-                <option
-                  value="NEVADA"
-                >
-                  Nevada
-                </option>
-                <option
-                  value="ORANGE"
-                >
-                  Orange
-                </option>
-                <option
-                  value="PLACER"
-                >
-                  Placer
-                </option>
-                <option
-                  value="PLUMAS"
-                >
-                  Plumas
-                </option>
-                <option
-                  value="RIVERSIDE"
-                >
-                  Riverside
-                </option>
-                <option
-                  value="SACRAMENTO"
-                >
-                  Sacramento
-                </option>
-                <option
-                  value="SAN BENITO"
-                >
-                  San Benito
-                </option>
-                <option
-                  value="SAN BERNARDINO"
-                >
-                  San Bernardino
-                </option>
-                <option
-                  value="SAN DIEGO"
-                >
-                  San Diego
-                </option>
-                <option
-                  value="SAN FRANCISCO"
-                >
-                  San Francisco
-                </option>
-                <option
-                  value="SAN JOAQUIN"
-                >
-                  San Joaquin
-                </option>
-                <option
-                  value="SAN LUIS OBISPO"
-                >
-                  San Luis Obispo
-                </option>
-                <option
-                  value="SAN MATEO"
-                >
-                  San Mateo
-                </option>
-                <option
-                  value="SANTA BARBARA"
-                >
-                  Santa Barbara
-                </option>
-                <option
-                  value="SANTA CLARA"
-                >
-                  Santa Clara
-                </option>
-                <option
-                  value="SANTA CRUZ"
-                >
-                  Santa Cruz
-                </option>
-                <option
-                  value="SHASTA"
-                >
-                  Shasta
-                </option>
-                <option
-                  value="SIERRA"
-                >
-                  Sierra
-                </option>
-                <option
-                  value="SISKIYOU"
-                >
-                  Siskiyou
-                </option>
-                <option
-                  value="SOLANO"
-                >
-                  Solano
-                </option>
-                <option
-                  value="SONOMA"
-                >
-                  Sonoma
-                </option>
-                <option
-                  value="STANISLAUS"
-                >
-                  Stanislaus
-                </option>
-                <option
-                  value="SUTTER"
-                >
-                  Sutter
-                </option>
-                <option
-                  value="TEHAMA"
-                >
-                  Tehama
-                </option>
-                <option
-                  value="TRINITY"
-                >
-                  Trinity
-                </option>
-                <option
-                  value="TULARE"
-                >
-                  Tulare
-                </option>
-                <option
-                  value="TUOLUMNE"
-                >
-                  Tuolumne
-                </option>
-                <option
-                  value="VENTURA"
-                >
-                  Ventura
-                </option>
-                <option
-                  value="YOLO"
-                >
-                  Yolo
-                </option>
-                <option
-                  value="YUBA"
-                >
-                  Yuba
-                </option>
-              </select>
+                  Open and review files which now include Prop 64 eligibility determinations.
+                </p>
+              </div>
+            </div>
+            <div
+              className="box nudge--large"
+            >
+              <button
+                className="button button--primary"
+                id="begin"
+                onClick={[Function]}
+                type="button"
+              >
+                Got it!
+              </button>
             </div>
           </div>
         </div>
         <div
           className="form-card__footer"
-        >
-          <button
-            className="button button--primary button--disabled"
-            disabled={true}
-            id="continue"
-            onClick={[Function]}
-            type="button"
-          >
-            Continue 
-            <i
-              className="icon-arrow_forward"
-            />
-          </button>
-        </div>
+        />
       </div>
     </div>
     <footer>

@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`IntroductionFormCard component should match exact snapshot 1`] = `
+<div>
+  <div
+    className="form-card"
+  >
+    <div
+      className="form-card__content"
+    >
+      <div
+        className="text--centered"
+      >
+        <h1
+          className="introductionTitle"
+        >
+          Using Clear my Record will expedite the process of determining which Prop 64 convictions are eligible for relief under H&S § 11361.9.
+        </h1>
+        <p>
+          Here's what you need to do:
+        </p>
+        <div
+          className="vertical-steps"
+        >
+          <div
+            className="vertical-steps__step"
+          >
+            <div
+              className="emoji emoji--big emoji--page-facing-up"
+            />
+            <h2
+              className="stepTitle"
+            >
+              Import bulk conviction data
+            </h2>
+            <p
+              className="stepBody"
+            >
+              Choose your county and import the bulk Prop 64 conviction data file received from the DOJ.
+            </p>
+          </div>
+          <div
+            className="vertical-steps__step"
+          >
+            <div
+              className="emoji emoji--big emoji--clipboard"
+            />
+            <h2
+              className="stepTitle"
+            >
+              Select eligibility requirements
+            </h2>
+            <p
+              className="stepBody"
+            >
+              Determine which convictions to reduce or dismiss.
+            </p>
+          </div>
+          <div
+            className="vertical-steps__step"
+          >
+            <div
+              className="emoji emoji--big emoji--checkmark"
+            />
+            <h2
+              className="stepTitle"
+            >
+              Review files
+            </h2>
+            <p
+              className="stepBody"
+            >
+              Open and review files which now include Prop 64 eligibility determinations.
+            </p>
+          </div>
+        </div>
+        <div
+          className="box nudge--large"
+        >
+          <button
+            className="button button--primary"
+            id="begin"
+            type="button"
+          >
+            Got it!
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      className="form-card__footer"
+    />
+  </div>
+</div>
+`;
