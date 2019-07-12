@@ -65,7 +65,8 @@
     ],
     "extraResources": [
       "./gogen.exe",
-      "./gogen"
+      "./gogen",
+      "./resources/*"
     ],
     "dmg": {
       "contents": [

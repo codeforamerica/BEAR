@@ -63,7 +63,7 @@ export default class Home extends Component<Props, State> {
       isPackaged = 'false';
     }
     if (isPackaged !== 'false') {
-      summaryTemplatePath = `${process.resourcesPath}${path.sep}summaryReportTemplate.pdf`;
+      summaryTemplatePath = `${process.resourcesPath}${path.sep}resources${path.sep}summaryReportTemplate.pdf`;
       if (process.env.PLATFORM === 'windows') {
         gogenPath = `${process.resourcesPath}${path.sep}gogen.exe`;
       } else {
