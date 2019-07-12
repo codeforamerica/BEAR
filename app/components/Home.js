@@ -22,6 +22,7 @@ import ProcessingFormCard from './ProcessingFormCard';
 
 type State = {
   gogenPath: string,
+  summaryTemplatePath: string,
   dateTime: string,
   currentScreen: number,
   county: County,
@@ -44,10 +45,10 @@ export default class Home extends Component<Props, State> {
     super(props);
 
     let gogenPath;
-
+    let summaryTemplatePath;
     let home: string;
-    let isPackaged: string;
 
+    let isPackaged: string;
     if (process.env.HOME != null) {
       home = process.env.HOME;
     } else {
@@ -61,18 +62,20 @@ export default class Home extends Component<Props, State> {
     } else {
       isPackaged = 'false';
     }
-
     if (isPackaged !== 'false') {
+      summaryTemplatePath = `${process.resourcesPath}${path.sep}summaryReportTemplate.pdf`;
       if (process.env.PLATFORM === 'windows') {
         gogenPath = `${process.resourcesPath}${path.sep}gogen.exe`;
       } else {
         gogenPath = `${process.resourcesPath}${path.sep}gogen`;
       }
     } else {
+      summaryTemplatePath = './resources/summaryReportTemplate.pdf';
       gogenPath = `${home}/go/bin/gogen`;
     }
     this.state = {
       gogenPath,
+      summaryTemplatePath,
       dateTime: '',
       outputPathPrefix: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
       outputFilePath: '',
@@ -163,14 +166,13 @@ export default class Home extends Component<Props, State> {
   };
 
   createSummaryPDF = (gogenOutput: string) => {
-    const { outputFilePath, dateTime } = this.state;
-    const inputFilePath = './resources/summaryReportTemplate.pdf';
+    const { outputFilePath, dateTime, summaryTemplatePath } = this.state;
     const summaryFilePath = path.join(
       outputFilePath,
       `summary_report_${dateTime}.pdf`
     );
     const summaryDataObject = this.getSummaryData(gogenOutput);
-    fillPDF(inputFilePath, summaryFilePath, summaryDataObject);
+    fillPDF(summaryTemplatePath, summaryFilePath, summaryDataObject);
   };
 
   runScriptInOptions = (callbackFunction: function) => {

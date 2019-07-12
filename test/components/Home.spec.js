@@ -106,6 +106,24 @@ describe('Home component', () => {
         });
       });
     });
+
+    describe('summary template path', () => {
+      it('should point to the resources directory when the app is not packaged', () => {
+        const { component } = setup('false');
+        const summaryTemplatePath = component.state('summaryTemplatePath');
+        expect(summaryTemplatePath).toEqual(
+          './resources/summaryReportTemplate.pdf'
+        );
+      });
+
+      it('should point to a mac binary in the resources directory when the app is packaged', () => {
+        const { component } = setup('true');
+        const summaryTemplatePath = component.state('summaryTemplatePath');
+        expect(summaryTemplatePath).toEqual(
+          '/tmp/test/resources/path/summaryReportTemplate.pdf'
+        );
+      });
+    });
   });
 
   describe('updateCounty', () => {
