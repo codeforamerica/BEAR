@@ -1,5 +1,5 @@
 import fs from 'fs';
-import createJsonFile from '../../app/utils/fileUtils';
+import { createJsonFile } from '../../app/utils/fileUtils';
 
 describe('createJsonFile', () => {
   it('writes json data to a new file', () => {
