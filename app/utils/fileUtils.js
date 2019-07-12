@@ -1,4 +1,5 @@
 import fs from 'fs';
+import pdftk from 'node-pdftk';
 
 export function createJsonFile(jsonData, fileName) {
   const jsonString = JSON.stringify(jsonData);
@@ -41,4 +42,22 @@ export function getDateTime() {
 
 export function getFileSize(pathname) {
   return fs.statSync(pathname).size;
+}
+
+export function fillPDF(inputFilePath, outputPath, contentForFields) {
+  if (fs.existsSync(inputFilePath)) {
+    pdftk
+      .input(inputFilePath)
+      .fillForm(contentForFields)
+      .flatten()
+      .output(outputPath)
+      .then(() => {
+        return console.log('successfully filled pdf');
+      })
+      .catch(err => {
+        console.log('the following error occurred:', err);
+      });
+  } else {
+    console.log('filepath does not exist', inputFilePath);
+  }
 }

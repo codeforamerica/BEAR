@@ -37,6 +37,7 @@ export function runScript(
   state,
   spawnChildProcess,
   createJsonFile,
+  stdoutCallbackFunction,
   childFinishedCallback: function
 ) {
   const {
@@ -85,11 +86,7 @@ export function runScript(
   ]);
 
   goProcess.stdout.on('data', data => {
-    console.log(`stdout: ${data}`);
-  });
-
-  goProcess.stderr.on('data', data => {
-    console.log(`stderr: ${data}`);
+    stdoutCallbackFunction(data);
   });
 
   goProcess.on('close', childFinishedCallback);
@@ -97,4 +94,16 @@ export function runScript(
     console.error(error);
     childFinishedCallback();
   });
+
+  goProcess.stderr.on('data', data => {
+    console.log(`stderr: ${data}`);
+  });
+}
+
+export function parseGogenOutput(data) {
+  const dataString = data.toString();
+  console.log('stdout: ', dataString);
+  const dataWeCareAbout = dataString.split('&&&&&&')[1];
+  const jsonData = JSON.parse(dataWeCareAbout);
+  return jsonData;
 }

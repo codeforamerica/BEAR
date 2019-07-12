@@ -9,11 +9,16 @@ import EligibilityOptionsFormCard from './EligibilityOptionsFormCard';
 import ResultsFormCard from './ResultsFormCard';
 import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
-import openFolder from '../utils/osHelpers';
-import { runScript } from '../utils/gogenUtils';
-import { getDateTime, createJsonFile, getFileSize } from '../utils/fileUtils';
-import ProcessingFormCard from './ProcessingFormCard';
 import IntroductionFormCard from './IntroductionFormCard';
+import openFolder from '../utils/osHelpers';
+import { parseGogenOutput, runScript } from '../utils/gogenUtils';
+import {
+  createJsonFile,
+  fillPDF,
+  getDateTime,
+  getFileSize
+} from '../utils/fileUtils';
+import ProcessingFormCard from './ProcessingFormCard';
 
 type State = {
   gogenPath: string,
@@ -145,9 +150,38 @@ export default class Home extends Component<Props, State> {
     this.setState(defaultAnalysisOptions);
   };
 
+  getSummaryData = (gogenOutput: string) => {
+    const { dateTime, county } = this.state;
+    const reformattedDateTime = dateTime.replace(/_/g, ' ').replace(/\./g, ':');
+    const objectValuesFromState = {
+      dateTime: reformattedDateTime,
+      county: county.name
+    };
+    const objectValuesFromStdout = parseGogenOutput(gogenOutput);
+
+    return { ...objectValuesFromState, ...objectValuesFromStdout };
+  };
+
+  createSummaryPDF = (gogenOutput: string) => {
+    const { outputFilePath, dateTime } = this.state;
+    const inputFilePath = './resources/summaryReportTemplate.pdf';
+    const summaryFilePath = path.join(
+      outputFilePath,
+      `summary_report_${dateTime}.pdf`
+    );
+    const summaryDataObject = this.getSummaryData(gogenOutput);
+    fillPDF(inputFilePath, summaryFilePath, summaryDataObject);
+  };
+
   runScriptInOptions = (callbackFunction: function) => {
     const { spawnChildProcess } = this.props;
-    runScript(this.state, spawnChildProcess, createJsonFile, callbackFunction);
+    runScript(
+      this.state,
+      spawnChildProcess,
+      createJsonFile,
+      this.createSummaryPDF,
+      callbackFunction
+    );
   };
 
   render() {

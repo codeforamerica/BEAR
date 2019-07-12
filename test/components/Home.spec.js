@@ -163,13 +163,15 @@ describe('Home component', () => {
   });
 
   describe('updateDateForPath', () => {
-    it('updates state.baselineEligibilityOptions for the given code section and option', () => {
+    it('updates state.dateTime and outputFilePath', () => {
       const { component } = setup('true');
       expect(component.state('outputFilePath')).toEqual('');
+      expect(component.state('dateTime')).toEqual('');
       component.instance().updateDateForPath();
       expect(component.state('outputFilePath')).toEqual(
         '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output_Jan_1_2011_0.00.00.AM'
       );
+      expect(component.state('dateTime')).toEqual('Jan_1_2011_0.00.00.AM');
     });
   });
 
@@ -182,6 +184,23 @@ describe('Home component', () => {
       expect(component.state('outputFilePath')).toEqual(
         component.state('outputPathPrefix')
       );
+    });
+  });
+
+  describe('getSummaryData', () => {
+    it('returns an object with all data needed to fill pdf of summary report', () => {
+      const { component } = setup('true');
+      component.instance().updateDateForPath();
+      const fakeGogenOutput =
+        'Some output stuff &&&&&&{"noLongerHaveFelony": 6, "noConvictions": 3, "noConvictionsLast7": 7}';
+      const result = component.instance().getSummaryData(fakeGogenOutput);
+      expect(result).toEqual({
+        dateTime: 'Jan 1 2011 0:00:00:AM',
+        county: '',
+        noLongerHaveFelony: 6,
+        noConvictions: 3,
+        noConvictionsLast7: 7
+      });
     });
   });
 
