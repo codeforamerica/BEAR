@@ -120,7 +120,7 @@ describe('Home component', () => {
         const { component } = setup('true');
         const summaryTemplatePath = component.state('summaryTemplatePath');
         expect(summaryTemplatePath).toEqual(
-          '/tmp/test/resources/path/summaryReportTemplate.pdf'
+          '/tmp/test/resources/path/resources/summaryReportTemplate.pdf'
         );
       });
     });
