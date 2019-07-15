@@ -8,6 +8,8 @@ import FormCard, {
 } from './FormCard';
 import ProgressBar from './ProgressBar';
 import StartOverButton from './StartOverButton';
+import SummaryReportPdf from './SummaryReportPdf';
+import ReactPDF from '@react-pdf/renderer';
 
 type Props = {
   dojFilePath: string,
@@ -68,3 +70,5 @@ export default class ProcessingFormCard extends Component<Props, State> {
     );
   }
 }
+ReactPDF.renderToFile(<SummaryReportPdf county={'cool place'} dateTime={'today'}/>,  `/Users/newuser/Desktop/example.pdf`);
+
