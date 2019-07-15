@@ -168,6 +168,33 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
+                H&S § 11357 felonies (when no sub-section is specified)
+              </p>
+            </td>
+            <td>
+              <input
+                className="radioButton"
+                defaultChecked={false}
+                id="dismiss_11357(no-sub-section)"
+                name="11357(no-sub-section)"
+                onChange={[Function]}
+                type="radio"
+              />
+            </td>
+            <td>
+              <input
+                className="radioButton"
+                defaultChecked={false}
+                id="reduce_11357(no-sub-section)"
+                name="11357(no-sub-section)"
+                onChange={[Function]}
+                type="radio"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <p>
                 H&S § 11358 felonies including all subsections
               </p>
             </td>
