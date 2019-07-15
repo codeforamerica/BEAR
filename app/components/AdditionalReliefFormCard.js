@@ -28,11 +28,6 @@ export default class AdditionalReliefFormCard extends Component<Props> {
     updateDate();
   };
 
-  onGoBack = () => {
-    const { onBack } = this.props;
-    onBack();
-  };
-
   handleToggleChecked = (group: string) => {
     const { onReliefOptionSelect, additionalReliefOptions } = this.props;
 
@@ -46,7 +41,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
   };
 
   render() {
-    const { additionalReliefOptions } = this.props;
+    const { additionalReliefOptions, onBack } = this.props;
     return (
       <FormCard>
         <FormCardHeader>
@@ -112,7 +107,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
         </FormCardContent>
         <FormCardFooter>
           <ContinueButton onContinue={this.onContinue} />
-          <GoBackButton onGoBack={this.onGoBack} />
+          <GoBackButton onGoBack={onBack} />
         </FormCardFooter>
       </FormCard>
     );

@@ -29,18 +29,8 @@ export default class DojFileSelectFormCard extends Component<Props> {
     return <DojFileInput onFileSelect={updateFilePath} />;
   };
 
-  onContinue = () => {
-    const { onFileConfirm } = this.props;
-    onFileConfirm();
-  };
-
-  onGoBack = () => {
-    const { onBack } = this.props;
-    onBack();
-  };
-
   render() {
-    const { dojFilePath } = this.props;
+    const { dojFilePath, onBack, onFileConfirm } = this.props;
 
     return (
       <FormCard>
@@ -54,10 +44,10 @@ export default class DojFileSelectFormCard extends Component<Props> {
         <FormCardFooter>
           <div className="buttons">
             <ContinueButton
-              onContinue={this.onContinue}
+              onContinue={onFileConfirm}
               disabled={dojFilePath === ''}
             />
-            <GoBackButton onGoBack={this.onGoBack} />
+            <GoBackButton onGoBack={onBack} />
           </div>
         </FormCardFooter>
       </FormCard>

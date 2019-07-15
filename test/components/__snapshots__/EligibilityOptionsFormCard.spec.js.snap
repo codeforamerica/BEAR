@@ -266,7 +266,6 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
       <button
         className="button"
         id="goback"
-        onClick={[Function]}
         type="button"
       >
         Go back 

@@ -46,7 +46,6 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
           className="button button--primary"
           disabled={false}
           id="continue"
-          onClick={[Function]}
           type="button"
         >
           Continue 
@@ -57,7 +56,6 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
         <button
           className="button"
           id="goback"
-          onClick={[Function]}
           type="button"
         >
           Go back 
@@ -125,7 +123,6 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
           className="button button--primary button--disabled"
           disabled={true}
           id="continue"
-          onClick={[Function]}
           type="button"
         >
           Continue 
@@ -136,7 +133,6 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
         <button
           className="button"
           id="goback"
-          onClick={[Function]}
           type="button"
         >
           Go back 

@@ -32,15 +32,11 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
     onOptionsConfirm();
   };
 
-  onGoBack = () => {
-    const { onBack } = this.props;
-    onBack();
-  };
-
   render() {
     const {
       baselineEligibilityOptions,
-      onEligibilityOptionSelect
+      onEligibilityOptionSelect,
+      onBack
     } = this.props;
     return (
       <FormCard>
@@ -106,7 +102,7 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
         </FormCardContent>
         <FormCardFooter>
           <ContinueButton onContinue={this.onContinue} />
-          <GoBackButton onGoBack={this.onGoBack} />
+          <GoBackButton onGoBack={onBack} />
         </FormCardFooter>
       </FormCard>
     );
