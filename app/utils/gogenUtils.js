@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import fs from 'fs';
 import path from 'path';
+import React from 'react';
 
 export function transformBaselineEligibilityOptions(eligibilityOptions) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
@@ -27,7 +28,7 @@ export function transformYearsSinceConviction(additionalReliefOptions) {
   if (additionalReliefOptions.dismissYearsSinceConvictionThreshold) {
     return {
       yearsSinceConvictionThreshold:
-        additionalReliefOptions.yearsSinceConvictionThreshold
+      additionalReliefOptions.yearsSinceConvictionThreshold
     };
   }
   return { yearsSinceConvictionThreshold: 0 };
@@ -37,7 +38,6 @@ export function runScript(
   state,
   spawnChildProcess,
   createJsonFile,
-  stdoutCallbackFunction,
   childFinishedCallback: function
 ) {
   const {
@@ -84,9 +84,15 @@ export function runScript(
     `--county=${countyCode}`,
     `--eligibility-options=${pathToEligibilityOptions}`
   ]);
-
+  // let reachedSummaryData = false;
+  writeToFile('summaryOutput.txt', 'Summary Output: ');
+  let numTimesCalled = 0;
   goProcess.stdout.on('data', data => {
-    stdoutCallbackFunction(data);
+    numTimesCalled++;
+    const dataString = data.toString();
+    console.log('stdout: ', dataString);
+    fs.appendFileSync('summaryOutput.txt', data);
+    console.log(`Called ${numTimesCalled} times`)
   });
 
   goProcess.on('close', childFinishedCallback);
@@ -100,10 +106,21 @@ export function runScript(
   });
 }
 
-export function parseGogenOutput(data) {
-  const dataString = data.toString();
-  console.log('stdout: ', dataString);
-  const dataWeCareAbout = dataString.split('&&&&&&')[1];
-  const jsonData = JSON.parse(dataWeCareAbout);
-  return jsonData;
+// export function parseGogenOutput(data, outputFilePath, reachedSummaryData) {
+//   const dataString = data.toString();
+//   console.log('stdout: ', dataString);
+//   console.log('this is the PATH', outputFilePath);
+//   // const summaryOutputPath = path.join(outputFilePath, 'summaryOutput.txt');
+//   const dataWeCareAbout = dataString.split('&&&&&&')[1];
+//   if (dataWeCareAbout) {
+//     this.setState({ reachedSummaryData: true });
+//   }
+//   console.log('reached Summary Data: ', reachedSummaryData);
+//   if (reachedSummaryData) {
+//     writeToFile('summaryOutput.txt', dataWeCareAbout);
+//   }
+// }
+
+function writeToFile(filename, text) {
+  fs.writeFileSync(filename, text, 'utf8');
 }

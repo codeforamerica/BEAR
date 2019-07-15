@@ -1,6 +1,7 @@
 import sinon from 'sinon';
 import fs from 'fs';
 import {
+  parseGogenOutput,
   runScript,
   transformBaselineEligibilityOptions,
   transformSubjectAgeThreshold
@@ -142,5 +143,35 @@ describe('runScript', () => {
     expect(args[0].baselineEligibility.reduce).toEqual([]);
     expect(args[0].additionalRelief.subjectUnder21AtConviction).toBe(true);
     expect(args[0].additionalRelief.subjectAgeThreshold).toBe(0);
+  });
+
+  it('parses and loads data from multiple events', () => {
+    function createFakeSpawnChildProcess() {
+      const fakeSpawnResponse = {
+        stdout: {
+          on: () => {}
+        },
+        stderr: {
+          on: () => {}
+        },
+        on: () => {}
+      };
+      return sandbox.fake.returns(fakeSpawnResponse);
+    }
+
+    const fakeSpawnChildProcessWithEvents = createFakeSpawnChildProcess();
+    runScript(
+      state,
+      fakeSpawnChildProcessWithEvents,
+      fakeCreateJsonFile,
+      parseGogenOutput,
+    );
+
+
+
+    // Step 1: Trigger data event without &&
+    // Step 2: Trigger data event with &&
+    // Step 3: Trigger data event without &&
+    // Expect that dataString includes relevant data from steps 2 & 3
   });
 });

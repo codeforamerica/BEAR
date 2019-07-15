@@ -30,7 +30,8 @@ type State = {
   baselineEligibilityOptions: BaselineEligibilityOptions,
   additionalReliefOptions: AdditionalReliefOptions,
   outputPathPrefix: string,
-  outputFilePath: string
+  outputFilePath: string,
+  reachedSummaryData: boolean
 };
 
 type Props = {
@@ -79,6 +80,7 @@ export default class Home extends Component<Props, State> {
       dateTime: '',
       outputPathPrefix: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
       outputFilePath: '',
+      reachedSummaryData: false,
       ...defaultAnalysisOptions
     };
   }
