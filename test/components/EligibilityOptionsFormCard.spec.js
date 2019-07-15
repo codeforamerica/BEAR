@@ -9,7 +9,7 @@ import BaselineEligibilityOption from '../../app/components/BaselineEligibilityO
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
-function setup() {
+function setup(isAllDismiss) {
   const options = {
     '11357(a)': 'reduce',
     '11357(b)': 'dismiss',
@@ -22,19 +22,23 @@ function setup() {
 
   const onOptionsConfirmSpy = sandbox.spy();
   const onBackSpy = sandbox.spy();
+  const onUpdateDateSpy = sandbox.spy();
   const component = mount(
     <EligibilityOptionsFormCard
       currentScreen={3}
       baselineEligibilityOptions={options}
       onOptionsConfirm={onOptionsConfirmSpy}
       onBack={onBackSpy}
+      updateDate={onUpdateDateSpy}
+      isAllDismiss={isAllDismiss}
     />
   );
   return {
     options,
     component,
     onOptionsConfirmSpy,
-    onBackSpy
+    onBackSpy,
+    onUpdateDateSpy
   };
 }
 afterEach(() => {
@@ -83,10 +87,25 @@ describe('EligibilityOptionsFormCard component', () => {
 
   describe('clicking the continue button', () => {
     it('should call onOptionsConfirm once', () => {
-      const { component, onOptionsConfirmSpy } = setup('path/to/file');
+      const { component, onOptionsConfirmSpy } = setup();
       component.find('#continue').simulate('click');
       expect(onOptionsConfirmSpy.called).toBe(true);
       expect(onOptionsConfirmSpy.callCount).toEqual(1);
+    });
+
+    describe('updating date', () => {
+      it('should call updateDate once if all charges dismissed', () => {
+        const { component, onUpdateDateSpy } = setup(true);
+        component.find('#continue').simulate('click');
+        expect(onUpdateDateSpy.called).toBe(true);
+        expect(onUpdateDateSpy.callCount).toEqual(1);
+      });
+
+      it('should not call updateDate if isAllDismiss is false', () => {
+        const { component, onUpdateDateSpy } = setup(false);
+        component.find('#continue').simulate('click');
+        expect(onUpdateDateSpy.called).toBe(false);
+      });
     });
   });
 

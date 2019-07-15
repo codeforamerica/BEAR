@@ -144,6 +144,23 @@ export default class Home extends Component<Props, State> {
     this.setState({ currentScreen: currentScreen + 1 });
   };
 
+  isAllDismiss = () => {
+    const { baselineEligibilityOptions } = this.state;
+    return Object.values(baselineEligibilityOptions).every(
+      option => option === 'dismiss'
+    );
+  };
+
+  eligibilityOptionsNextScreen = () => {
+    const { currentScreen } = this.state;
+
+    if (this.isAllDismiss()) {
+      this.setState({ currentScreen: currentScreen + 2 });
+    } else {
+      this.nextScreen();
+    }
+  };
+
   previousScreen = () => {
     const { currentScreen } = this.state;
     this.setState({ currentScreen: currentScreen - 1 });
@@ -213,8 +230,10 @@ export default class Home extends Component<Props, State> {
         <EligibilityOptionsFormCard
           baselineEligibilityOptions={baselineEligibilityOptions}
           onEligibilityOptionSelect={this.updateStateWithEligibilityOptions}
-          onOptionsConfirm={this.nextScreen}
+          onOptionsConfirm={this.eligibilityOptionsNextScreen}
+          updateDate={this.updateDateForPath}
           onBack={this.previousScreen}
+          isAllDismiss={this.isAllDismiss()}
         />
         <AdditionalReliefFormCard
           additionalReliefOptions={additionalReliefOptions}

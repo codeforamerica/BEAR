@@ -17,12 +17,18 @@ type Props = {
   baselineEligibilityOptions: BaselineEligibilityOptions,
   onEligibilityOptionSelect: (string, string) => void,
   onOptionsConfirm: void => void,
-  onBack: void => void
+  updateDate: void => void,
+  onBack: void => void,
+  isAllDismiss: boolean
 };
 
 export default class EligibilityOptionsFormCard extends Component<Props> {
   onContinue = () => {
-    const { onOptionsConfirm } = this.props;
+    const { onOptionsConfirm, updateDate, isAllDismiss } = this.props;
+
+    if (isAllDismiss) {
+      updateDate();
+    }
     onOptionsConfirm();
   };
 

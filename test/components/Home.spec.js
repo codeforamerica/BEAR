@@ -165,6 +165,35 @@ describe('Home component', () => {
     });
   });
 
+  describe('eligibilityOptionsNextScreen', () => {
+    it('Adds 1 to state.currentScreen if at least one charge is reduced', () => {
+      const { component } = setup('true');
+      component.setState({
+        currentScreen: 3,
+        baselineEligibilityOptions: {
+          '11357(a)': 'reduce',
+          '11357(b)': 'dismiss',
+          '11357(c)': 'dismiss',
+          '11357(d)': 'dismiss',
+          '11358': 'dismiss',
+          '11359': 'dismiss',
+          '11360': 'dismiss'
+        }
+      });
+      expect(component.state('currentScreen')).toEqual(3);
+      component.instance().eligibilityOptionsNextScreen();
+      expect(component.state('currentScreen')).toEqual(4);
+    });
+
+    it('Adds 2 to state.currentScreen if all charges are dismissed', () => {
+      const { component } = setup('true');
+      component.setState({ currentScreen: 3 });
+      expect(component.state('currentScreen')).toEqual(3);
+      component.instance().eligibilityOptionsNextScreen();
+      expect(component.state('currentScreen')).toEqual(5);
+    });
+  });
+
   describe('updateStateWithEligibilityOptions', () => {
     it('updates state.baselineEligibilityOptions for the given code section and option', () => {
       const { component } = setup('true');
