@@ -35,6 +35,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
   componentDidMount() {
     const { runScriptInOptions } = this.props;
     runScriptInOptions(this.onGogenComplete);
+    window.scrollTo(0, 0);
   }
 
   onClickStartOver = () => {

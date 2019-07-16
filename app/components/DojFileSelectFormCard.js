@@ -19,6 +19,10 @@ type Props = {
 };
 
 export default class DojFileSelectFormCard extends Component<Props> {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   renderCardContent = () => {
     const { dojFilePath, updateFilePath } = this.props;
     if (dojFilePath !== '') {
