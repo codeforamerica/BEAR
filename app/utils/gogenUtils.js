@@ -2,7 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 
-export function transformBaselineEligibilityOptions(eligibilityOptions) {
+function transformBaselineEligibilityOptions(eligibilityOptions) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
   Object.keys(eligibilityOptions)
     .sort()
@@ -14,23 +14,29 @@ export function transformBaselineEligibilityOptions(eligibilityOptions) {
   return jsonObject;
 }
 
-export function transformSubjectAgeThreshold(additionalReliefOptions) {
-  if (additionalReliefOptions.dismissOlderThanAgeThreshold) {
-    return {
-      subjectAgeThreshold: additionalReliefOptions.subjectAgeThreshold
-    };
-  }
-  return { subjectAgeThreshold: 0 };
-}
+function transformOptionalReliefValues(additionalReliefOptions) {
+  const transformedOptions = {
+    subjectAgeThreshold: 0,
+    yearsSinceConvictionThreshold: 0,
+    yearsCrimeFreeThreshold: 0
+  };
 
-export function transformYearsSinceConviction(additionalReliefOptions) {
-  if (additionalReliefOptions.dismissYearsSinceConvictionThreshold) {
-    return {
-      yearsSinceConvictionThreshold:
-        additionalReliefOptions.yearsSinceConvictionThreshold
-    };
+  if (additionalReliefOptions.dismissOlderThanAgeThreshold) {
+    transformedOptions.subjectAgeThreshold =
+      additionalReliefOptions.subjectAgeThreshold;
   }
-  return { yearsSinceConvictionThreshold: 0 };
+
+  if (additionalReliefOptions.dismissYearsSinceConvictionThreshold) {
+    transformedOptions.yearsSinceConvictionThreshold =
+      additionalReliefOptions.yearsSinceConvictionThreshold;
+  }
+
+  if (additionalReliefOptions.dismissYearsCrimeFreeThreshold) {
+    transformedOptions.yearsCrimeFreeThreshold =
+      additionalReliefOptions.yearsCrimeFreeThreshold;
+  }
+
+  return transformedOptions;
 }
 
 export function runScript(
@@ -65,8 +71,7 @@ export function runScript(
 
   const formattedAdditionalReliefOptions = {
     ...additionalReliefOptions,
-    ...transformSubjectAgeThreshold(additionalReliefOptions),
-    ...transformYearsSinceConviction(additionalReliefOptions)
+    ...transformOptionalReliefValues(additionalReliefOptions)
   };
 
   const eligibilityLogicConfig = {
