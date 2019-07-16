@@ -11,5 +11,7 @@ declare type AdditionalReliefOptions = {
   subjectAgeThreshold: number,
   dismissYearsSinceConvictionThreshold: boolean,
   yearsSinceConvictionThreshold: number,
+  dismissYearsCrimeFreeThreshold: boolean,
+  yearsCrimeFreeThreshold: number,
   subjectHasOnlyProp64Charges: boolean
 };

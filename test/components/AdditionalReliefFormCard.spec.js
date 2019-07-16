@@ -68,6 +68,33 @@ describe('AdditionalReliefFormCard component', () => {
     });
   });
 
+  describe('handleToggleChecked', () => {
+    it('calls the option change callback with given group and the opposite of the current value', () => {
+      const { component, onOptionChangeSpy } = setup();
+      expect(
+        component.props().additionalReliefOptions.subjectUnder21AtConviction
+      ).toEqual(true);
+      component.instance().handleToggleChecked('subjectUnder21AtConviction');
+      expect(onOptionChangeSpy.called).toBe(true);
+      expect(onOptionChangeSpy.callCount).toEqual(1);
+      const { args } = onOptionChangeSpy.getCall(0);
+      expect(args[0]).toEqual('subjectUnder21AtConviction');
+      expect(args[1]).toEqual(false);
+    });
+  });
+
+  describe('handleNumberSelect', () => {
+    it('calls the option change callback with given group and number', () => {
+      const { component, onOptionChangeSpy } = setup();
+      component.instance().handleNumberSelect('subjectAgeThreshold', 50);
+      expect(onOptionChangeSpy.called).toBe(true);
+      expect(onOptionChangeSpy.callCount).toEqual(1);
+      const { args } = onOptionChangeSpy.getCall(0);
+      expect(args[0]).toEqual('subjectAgeThreshold');
+      expect(args[1]).toEqual(50);
+    });
+  });
+
   describe('clicking the checkbox for convictions that occurred when under 21', () => {
     it('should call onOptionChange with the correct arguments', () => {
       const { component, onOptionChangeSpy } = setup();

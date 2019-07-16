@@ -18,6 +18,8 @@ const defaultAnalysisOptions = {
     subjectAgeThreshold: 40,
     dismissYearsSinceConvictionThreshold: true,
     yearsSinceConvictionThreshold: 5,
+    dismissYearsCrimeFreeThreshold: true,
+    yearsCrimeFreeThreshold: 5,
     subjectHasOnlyProp64Charges: true
   }
 };

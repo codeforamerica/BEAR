@@ -84,6 +84,23 @@ describe('Home component', () => {
       });
     });
 
+    it('sets the additional relief options to an object with the correct defaults', () => {
+      const { component } = setup('false');
+      const additionalReliefOptions = component.state(
+        'additionalReliefOptions'
+      );
+      expect(additionalReliefOptions).toEqual({
+        subjectUnder21AtConviction: true,
+        dismissOlderThanAgeThreshold: true,
+        subjectAgeThreshold: 40,
+        dismissYearsSinceConvictionThreshold: true,
+        yearsSinceConvictionThreshold: 5,
+        dismissYearsCrimeFreeThreshold: true,
+        yearsCrimeFreeThreshold: 5,
+        subjectHasOnlyProp64Charges: true
+      });
+    });
+
     describe('gogen path', () => {
       it('should point to the home directory when the app is not packaged', () => {
         const { component } = setup('false');

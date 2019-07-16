@@ -85,7 +85,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
           >
             Dismiss convictions that occurred more than X years ago:
             <NumberSelect
-              labelText="Choose a minimum number of years since last conviction for dismissal."
+              labelText="Choose a minimum number of years since this conviction for dismissal."
               group="yearsSinceConvictionThreshold"
               minNumber={1}
               maxNumber={15}
@@ -93,6 +93,23 @@ export default class AdditionalReliefFormCard extends Component<Props> {
               selectedNumber={
                 additionalReliefOptions.yearsSinceConvictionThreshold
               }
+            />
+          </Checkbox>
+          <Checkbox
+            checked={additionalReliefOptions.dismissYearsCrimeFreeThreshold}
+            labelText="Dismiss convictions if the individual has had no convictions in the past X years."
+            group="dismissYearsCrimeFreeThreshold"
+            onChange={this.handleToggleChecked}
+          >
+            Dismiss convictions if the individual has had no convictions in the
+            past X years:
+            <NumberSelect
+              labelText="Choose a minimum number of years since last conviction for dismissal."
+              group="yearsCrimeFreeThreshold"
+              minNumber={1}
+              maxNumber={15}
+              onNumberSelect={this.handleNumberSelect}
+              selectedNumber={additionalReliefOptions.yearsCrimeFreeThreshold}
             />
           </Checkbox>
           <Checkbox
