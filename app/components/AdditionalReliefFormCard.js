@@ -125,6 +125,14 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             Dismiss all HS 11357, HS 11358, HS 11359, or HS 11360 convictions if
             those are the only convictions on an individual's record.
           </Checkbox>
+          <Checkbox
+            checked={additionalReliefOptions.subjectIsDeceased}
+            labelText="Select to dismiss all Prop 64 convictions if an individual is deceased "
+            group="subjectIsDeceased"
+            onChange={this.handleToggleChecked}
+          >
+            Dismiss all Prop 64 convictions if the individual is deceased.
+          </Checkbox>
         </FormCardContent>
         <FormCardFooter>
           <ContinueButton onContinue={this.onContinue} />

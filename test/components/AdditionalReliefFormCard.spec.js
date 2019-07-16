@@ -15,7 +15,8 @@ function setup() {
     subjectAgeThreshold: 40,
     dismissYearsSinceConvictionThreshold: true,
     yearsSinceConvictionThreshold: 5,
-    subjectHasOnlyProp64Charges: true
+    subjectHasOnlyProp64Charges: true,
+    subjectIsDeceased: true
   };
 
   const onOptionsConfirmSpy = sandbox.spy();
@@ -225,6 +226,29 @@ describe('AdditionalReliefFormCard component', () => {
       expect(onOptionChangeSpy.callCount).toEqual(1);
       const { args } = onOptionChangeSpy.getCall(0);
       expect(args[0]).toEqual('subjectHasOnlyProp64Charges');
+      expect(args[1]).toEqual(false);
+    });
+  });
+
+  describe('clicking the checkbox for dismiss if subject is deceased', () => {
+    it('should call onOptionChange with the correct arguments', () => {
+      const { component, onOptionChangeSpy } = setup();
+      expect(
+        component.props().additionalReliefOptions.subjectIsDeceased
+      ).toEqual(true);
+
+      const checkbox = component.find('#true_subjectIsDeceased');
+      const fakeEvent = {
+        currentTarget: {
+          name: 'subjectIsDeceased'
+        }
+      };
+      checkbox.simulate('change', fakeEvent);
+
+      expect(onOptionChangeSpy.called).toBe(true);
+      expect(onOptionChangeSpy.callCount).toEqual(1);
+      const { args } = onOptionChangeSpy.getCall(0);
+      expect(args[0]).toEqual('subjectIsDeceased');
       expect(args[1]).toEqual(false);
     });
   });

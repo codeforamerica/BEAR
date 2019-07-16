@@ -160,7 +160,8 @@ describe('runScript', () => {
           yearsSinceConvictionThreshold: 5,
           dismissYearsCrimeFreeThreshold: true,
           yearsCrimeFreeThreshold: 5,
-          subjectHasOnlyProp64Charges: true
+          subjectHasOnlyProp64Charges: true,
+          subjectIsDeceased: true
         });
       });
     });
@@ -190,7 +191,8 @@ describe('runScript', () => {
             yearsSinceConvictionThreshold: 5,
             dismissYearsCrimeFreeThreshold: false,
             yearsCrimeFreeThreshold: 5,
-            subjectHasOnlyProp64Charges: false
+            subjectHasOnlyProp64Charges: false,
+            subjectIsDeceased: false
           }
         };
 

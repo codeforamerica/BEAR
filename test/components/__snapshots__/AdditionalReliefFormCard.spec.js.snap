@@ -490,6 +490,32 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           />
         </label>
       </div>
+      <div
+        className="form-group grid"
+      >
+        <div
+          className="form-question grid__item width-two-thirds"
+        >
+          Dismiss all Prop 64 convictions if the individual is deceased.
+        </div>
+        <label
+          className="shift-fourth-fifths checkbox"
+          htmlFor="true_subjectIsDeceased"
+        >
+          <span
+            className="sr-only"
+          >
+            Select to dismiss all Prop 64 convictions if an individual is deceased 
+          </span>
+          <input
+            id="true_subjectIsDeceased"
+            name="subjectIsDeceased"
+            onChange={[Function]}
+            type="checkbox"
+            value={true}
+          />
+        </label>
+      </div>
     </div>
     <div
       className="form-card__footer"
