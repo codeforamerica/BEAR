@@ -11,18 +11,12 @@ import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import IntroductionFormCard from './IntroductionFormCard';
 import openFolder from '../utils/osHelpers';
-import { parseGogenOutput, runScript } from '../utils/gogenUtils';
-import {
-  createJsonFile,
-  fillPDF,
-  getDateTime,
-  getFileSize
-} from '../utils/fileUtils';
+import { runScript } from '../utils/gogenUtils';
+import { createJsonFile, getDateTime, getFileSize } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
 
 type State = {
   gogenPath: string,
-  summaryTemplatePath: string,
   dateTime: string,
   currentScreen: number,
   county: County,
@@ -45,7 +39,6 @@ export default class Home extends Component<Props, State> {
     super(props);
 
     let gogenPath;
-    let summaryTemplatePath;
     let home: string;
 
     let isPackaged: string;
@@ -63,19 +56,16 @@ export default class Home extends Component<Props, State> {
       isPackaged = 'false';
     }
     if (isPackaged !== 'false') {
-      summaryTemplatePath = `${process.resourcesPath}${path.sep}resources${path.sep}summaryReportTemplate.pdf`;
       if (process.env.PLATFORM === 'windows') {
         gogenPath = `${process.resourcesPath}${path.sep}gogen.exe`;
       } else {
         gogenPath = `${process.resourcesPath}${path.sep}gogen`;
       }
     } else {
-      summaryTemplatePath = './resources/summaryReportTemplate.pdf';
       gogenPath = `${home}/go/bin/gogen`;
     }
     this.state = {
       gogenPath,
-      summaryTemplatePath,
       dateTime: '',
       outputPathPrefix: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
       outputFilePath: '',
@@ -170,37 +160,9 @@ export default class Home extends Component<Props, State> {
     this.setState(defaultAnalysisOptions);
   };
 
-  getSummaryData = (gogenOutput: string) => {
-    const { dateTime, county } = this.state;
-    const reformattedDateTime = dateTime.replace(/_/g, ' ').replace(/\./g, ':');
-    const objectValuesFromState = {
-      dateTime: reformattedDateTime,
-      county: county.name
-    };
-    const objectValuesFromStdout = parseGogenOutput(gogenOutput);
-
-    return { ...objectValuesFromState, ...objectValuesFromStdout };
-  };
-
-  createSummaryPDF = (gogenOutput: string) => {
-    const { outputFilePath, dateTime, summaryTemplatePath } = this.state;
-    const summaryFilePath = path.join(
-      outputFilePath,
-      `summary_report_${dateTime}.pdf`
-    );
-    const summaryDataObject = this.getSummaryData(gogenOutput);
-    fillPDF(summaryTemplatePath, summaryFilePath, summaryDataObject);
-  };
-
   runScriptInOptions = (callbackFunction: function) => {
     const { spawnChildProcess } = this.props;
-    runScript(
-      this.state,
-      spawnChildProcess,
-      createJsonFile,
-      this.createSummaryPDF,
-      callbackFunction
-    );
+    runScript(this.state, spawnChildProcess, createJsonFile, callbackFunction);
   };
 
   render() {

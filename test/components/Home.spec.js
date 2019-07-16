@@ -106,24 +106,6 @@ describe('Home component', () => {
         });
       });
     });
-
-    describe('summary template path', () => {
-      it('should point to the resources directory when the app is not packaged', () => {
-        const { component } = setup('false');
-        const summaryTemplatePath = component.state('summaryTemplatePath');
-        expect(summaryTemplatePath).toEqual(
-          './resources/summaryReportTemplate.pdf'
-        );
-      });
-
-      it('should point to a mac binary in the resources directory when the app is packaged', () => {
-        const { component } = setup('true');
-        const summaryTemplatePath = component.state('summaryTemplatePath');
-        expect(summaryTemplatePath).toEqual(
-          '/tmp/test/resources/path/resources/summaryReportTemplate.pdf'
-        );
-      });
-    });
   });
 
   describe('updateCounty', () => {
@@ -231,23 +213,6 @@ describe('Home component', () => {
       expect(component.state('outputFilePath')).toEqual(
         component.state('outputPathPrefix')
       );
-    });
-  });
-
-  describe('getSummaryData', () => {
-    it('returns an object with all data needed to fill pdf of summary report', () => {
-      const { component } = setup('true');
-      component.instance().updateDateForPath();
-      const fakeGogenOutput =
-        'Some output stuff &&&&&&{"noLongerHaveFelony": 6, "noConvictions": 3, "noConvictionsLast7": 7}';
-      const result = component.instance().getSummaryData(fakeGogenOutput);
-      expect(result).toEqual({
-        dateTime: 'Jan 1 2011 0:00:00:AM',
-        county: '',
-        noLongerHaveFelony: 6,
-        noConvictions: 3,
-        noConvictionsLast7: 7
-      });
     });
   });
 
