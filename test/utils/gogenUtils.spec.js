@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import fs from 'fs';
-import { runScript } from '../../app/utils/gogenUtils';
+import { runScript, writeSummaryOutput } from '../../app/utils/gogenUtils';
 import defaultAnalysisOptions from '../../app/constants/defaultAnalysisOptions';
 
 describe('runScript', () => {
@@ -22,12 +22,12 @@ describe('runScript', () => {
   function setup() {
     const fakeSpawnChildProcess = createFakeSpawnChildProcess();
     const fakeCreateJsonFile = sandbox.spy();
-    const fakeGogenPDFFunction = sandbox.spy();
+    const fakeGogenCallbackFunction = sandbox.spy();
 
     return {
       fakeSpawnChildProcess,
       fakeCreateJsonFile,
-      fakeGogenPDFFunction
+      fakeGogenCallbackFunction
     };
   }
 
@@ -51,14 +51,14 @@ describe('runScript', () => {
     const {
       fakeSpawnChildProcess,
       fakeCreateJsonFile,
-      fakeGogenPDFFunction
+      fakeGogenCallbackFunction
     } = setup();
 
     runScript(
       state,
       fakeSpawnChildProcess,
       fakeCreateJsonFile,
-      fakeGogenPDFFunction
+      fakeGogenCallbackFunction
     );
 
     const { args } = fakeSpawnChildProcess.getCall(0);
@@ -105,14 +105,14 @@ describe('runScript', () => {
       const {
         fakeSpawnChildProcess,
         fakeCreateJsonFile,
-        fakeGogenPDFFunction
+        fakeGogenCallbackFunction
       } = setup();
 
       runScript(
         stateWithReductions,
         fakeSpawnChildProcess,
         fakeCreateJsonFile,
-        fakeGogenPDFFunction
+        fakeGogenCallbackFunction
       );
 
       const { args } = fakeCreateJsonFile.getCall(0);
@@ -140,14 +140,14 @@ describe('runScript', () => {
         const {
           fakeSpawnChildProcess,
           fakeCreateJsonFile,
-          fakeGogenPDFFunction
+          fakeGogenCallbackFunction
         } = setup();
 
         runScript(
           stateWithRelief,
           fakeSpawnChildProcess,
           fakeCreateJsonFile,
-          fakeGogenPDFFunction
+          fakeGogenCallbackFunction
         );
 
         const { args } = fakeCreateJsonFile.getCall(0);
@@ -197,14 +197,14 @@ describe('runScript', () => {
         const {
           fakeSpawnChildProcess,
           fakeCreateJsonFile,
-          fakeGogenPDFFunction
+          fakeGogenCallbackFunction
         } = setup();
 
         runScript(
           stateWithoutRelief,
           fakeSpawnChildProcess,
           fakeCreateJsonFile,
-          fakeGogenPDFFunction
+          fakeGogenCallbackFunction
         );
 
         const { args } = fakeCreateJsonFile.getCall(0);
@@ -214,5 +214,26 @@ describe('runScript', () => {
         expect(args[0].additionalRelief.yearsCrimeFreeThreshold).toBe(0);
       });
     });
+  });
+});
+
+describe('writeSummaryOutput', () => {
+  beforeEach(() => {
+    const gogenOutput = 'output with &&&&&&this is the summary data we want';
+    fs.writeFileSync('tmp.txt', gogenOutput);
+    const outputPath = '/tmp/';
+    writeSummaryOutput(outputPath);
+  });
+  afterEach(() => {
+    fs.unlinkSync('/tmp/summaryOutput.txt');
+  });
+
+  it('creates summaryOutput.txt with summary data and without the console progress bar', () => {
+    const outputFromTmpFile = fs.readFileSync('/tmp/summaryOutput.txt', 'utf8');
+    expect(outputFromTmpFile).toEqual('this is the summary data we want');
+  });
+
+  it('deletes the tmp file after reading', () => {
+    expect(fs.existsSync('tmp.txt')).toEqual(false);
   });
 });

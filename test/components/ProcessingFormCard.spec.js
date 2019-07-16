@@ -1,3 +1,4 @@
+import fs from 'fs';
 import sinon from 'sinon';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
@@ -15,9 +16,10 @@ function setup() {
 
   const component = shallow(
     <ProcessingFormCard
-      dojFilePath="path"
+      dojFilePath="/tmp/path"
+      outputFilePath="./test"
       getFileSize={getFileSizeSpy}
-      runScript={runScriptSpy}
+      runScriptInOptions={runScriptSpy}
       onStartOver={startOverSpy}
       resetOutputPath={resetOutputPathSpy}
     />
@@ -25,14 +27,18 @@ function setup() {
 
   return {
     component,
-    getFileSizeSpy,
-    runScriptSpy,
     startOverSpy,
     resetOutputPathSpy
   };
 }
+
+beforeEach(() => {
+  fs.writeFileSync('tmp.txt', 'hello world &&&&&& goodbye');
+});
+
 afterEach(() => {
   sandbox.restore();
+  fs.unlinkSync('./test/summaryOutput.txt');
 });
 
 describe('ProcessingFormCard component', () => {

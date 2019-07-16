@@ -90,7 +90,9 @@ export function runScript(
   ]);
 
   goProcess.stdout.on('data', data => {
-    console.log(data.toString());
+    const dataString = data.toString();
+    console.log('stdout: ', dataString);
+    fs.appendFileSync('tmp.txt', data);
   });
 
   goProcess.on('close', childFinishedCallback);
@@ -102,4 +104,13 @@ export function runScript(
   goProcess.stderr.on('data', data => {
     console.log(`stderr: ${data}`);
   });
+}
+
+export function writeSummaryOutput(outputFilePath) {
+  const filename = 'summaryOutput.txt';
+  const pathToOutputFile = path.join(outputFilePath, filename);
+  const fullOutputText = fs.readFileSync('tmp.txt', 'utf8');
+  const summaryText = fullOutputText.split('&&&&&&')[1];
+  fs.writeFileSync(pathToOutputFile, summaryText, 'utf8');
+  fs.unlinkSync('tmp.txt');
 }
