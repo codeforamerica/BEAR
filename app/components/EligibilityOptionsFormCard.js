@@ -75,6 +75,11 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
                 { codeSection: '11357(c)', description: '11357 (c) felonies' },
                 { codeSection: '11357(d)', description: '11357 (d) felonies' },
                 {
+                  codeSection: '11357(no-sub-section)',
+                  description:
+                    '11357 felonies (when no sub-section is specified)'
+                },
+                {
                   codeSection: '11358',
                   description: '11358 felonies including all subsections'
                 },
