@@ -22,6 +22,10 @@ type Props = {
 };
 
 export default class AdditionalReliefFormCard extends Component<Props> {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   onContinue = () => {
     const { onOptionsConfirm, updateDate } = this.props;
     onOptionsConfirm();

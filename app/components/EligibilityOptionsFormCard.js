@@ -23,6 +23,10 @@ type Props = {
 };
 
 export default class EligibilityOptionsFormCard extends Component<Props> {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   onContinue = () => {
     const { onOptionsConfirm, updateDate, isAllDismiss } = this.props;
 

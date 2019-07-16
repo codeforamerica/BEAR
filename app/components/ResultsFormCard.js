@@ -18,6 +18,10 @@ type Props = {
 };
 
 export default class ResultsFormCard extends Component<Props> {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   openResultsFolder = () => {
     const { openFolder, outputFolder } = this.props;
     openFolder(outputFolder);
