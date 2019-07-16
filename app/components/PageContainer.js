@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PageFooter from './PageFooter';
 import PageHeader from './PageHeader';
 import PageContent from './PageContent';
 
@@ -15,10 +14,9 @@ export default class PageContainer extends Component<Props, State> {
       <div className="slab">
         <PageHeader />
         <PageContent>{children[currentScreen]}</PageContent>
-        <PageFooter />
       </div>
     );
   }
 }
 
-export { PageFooter, PageContent, PageHeader };
+export { PageContent, PageHeader };

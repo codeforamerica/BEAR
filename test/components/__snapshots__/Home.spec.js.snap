@@ -112,11 +112,6 @@ exports[`Home component should match exact snapshot 1`] = `
         />
       </div>
     </div>
-    <footer>
-      <div>
-        Clear My Record is a service delivered by Code for America on behalf of the people of California.
-      </div>
-    </footer>
   </div>
 </div>
 `;
