@@ -16,7 +16,10 @@ export default class DojFileInput extends Component<Props> {
   render() {
     return (
       <div className="file-upload">
-        <label className="button file-upload__label" htmlFor="doj-file-input">
+        <label
+          className={`${styles.noBottomMargin} button file-upload__label`}
+          htmlFor="doj-file-input"
+        >
           <input
             onChange={this.handleFileSelection}
             type="file"

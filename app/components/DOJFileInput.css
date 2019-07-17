@@ -1,4 +1,11 @@
 .emptyMessage {
   display: inline-block;
   padding-left: 10px;
+  font-size: 1.6rem;
+  line-height: 1.5em;
+  color: #5f5854;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
 }

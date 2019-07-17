@@ -10,6 +10,7 @@ import FormCard, {
   FormCardHeader
 } from './FormCard';
 import GoBackButton from './GoBackButton';
+import styles from './DojFileSelectFormCard.css';
 
 type Props = {
   dojFilePath: string,
@@ -27,7 +28,11 @@ export default class DojFileSelectFormCard extends Component<Props> {
     const { dojFilePath, updateFilePath } = this.props;
     if (dojFilePath !== '') {
       return (
-        <DojFileItem filePath={dojFilePath} onFileRemove={updateFilePath} />
+        <DojFileItem
+          className={styles.outlineBox}
+          filePath={dojFilePath}
+          onFileRemove={updateFilePath}
+        />
       );
     }
     return <DojFileInput onFileSelect={updateFilePath} />;
@@ -42,8 +47,8 @@ export default class DojFileSelectFormCard extends Component<Props> {
           Import Prop 64 bulk conviction data file
         </FormCardHeader>
         <FormCardContent>
-          <p>Select a .dat file to import</p>
-          {this.renderCardContent()}
+          <p className={styles.semibold}>Choose a .dat file to import</p>
+          <div className={styles.outlineBox}>{this.renderCardContent()}</div>
         </FormCardContent>
         <FormCardFooter>
           <div className="buttons">

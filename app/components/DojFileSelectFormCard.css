@@ -1,0 +1,8 @@
+.semibold {
+  font-weight: 500;
+}
+
+.outlineBox {
+  padding: 20px;
+  border: 2px solid #f7f5f4;
+}

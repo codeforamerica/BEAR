@@ -5,7 +5,7 @@ exports[`DojFileInput component should match exact snapshot 1`] = `
   className="file-upload"
 >
   <label
-    className="button file-upload__label"
+    className="noBottomMargin button file-upload__label"
     htmlFor="doj-file-input"
   >
     <input

@@ -17,23 +17,29 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
     <div
       className="form-card__content"
     >
-      <p>
-        Select a .dat file to import
+      <p
+        className="semibold"
+      >
+        Choose a .dat file to import
       </p>
       <div
-        className="doj-file"
+        className="outlineBox"
       >
-        <p
-          className="fileName"
+        <div
+          className="doj-file"
         >
-          File imported: 
-          file
-          <i
-            className="fileRemove icon-close"
-            onClick={[Function]}
-            role="button"
-          />
-        </p>
+          <p
+            className="fileName"
+          >
+            File imported: 
+            file
+            <i
+              className="fileRemove icon-close"
+              onClick={[Function]}
+              role="button"
+            />
+          </p>
+        </div>
       </div>
     </div>
     <div
@@ -86,31 +92,37 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
     <div
       className="form-card__content"
     >
-      <p>
-        Select a .dat file to import
+      <p
+        className="semibold"
+      >
+        Choose a .dat file to import
       </p>
       <div
-        className="file-upload"
+        className="outlineBox"
       >
-        <label
-          className="button file-upload__label"
-          htmlFor="doj-file-input"
+        <div
+          className="file-upload"
         >
-          <input
-            accept=".dat, .csv"
-            className="file-upload__input"
-            id="doj-file-input"
-            name="doj-file-input"
-            onChange={[Function]}
-            type="file"
-          />
-          Select file
-        </label>
-        <p
-          className="emptyMessage"
-        >
-          No file selected
-        </p>
+          <label
+            className="noBottomMargin button file-upload__label"
+            htmlFor="doj-file-input"
+          >
+            <input
+              accept=".dat, .csv"
+              className="file-upload__input"
+              id="doj-file-input"
+              name="doj-file-input"
+              onChange={[Function]}
+              type="file"
+            />
+            Select file
+          </label>
+          <p
+            className="emptyMessage"
+          >
+            No file selected
+          </p>
+        </div>
       </div>
     </div>
     <div
