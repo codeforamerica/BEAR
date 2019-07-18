@@ -84,6 +84,7 @@
       ]
     },
     "win": {
+      "icon": "app/assets/icons/win/cfa.png",
       "target": [
         "nsis"
       ]
