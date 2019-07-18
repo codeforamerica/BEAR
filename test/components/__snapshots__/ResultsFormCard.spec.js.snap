@@ -14,8 +14,11 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
         <div
           className="text--centered"
         >
+          <div
+            className="completedIcon"
+          />
           <h2
-            className="resultsHeader"
+            className="resultsHeader nudge--med"
           >
             Your files are ready!
           </h2>

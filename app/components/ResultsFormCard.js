@@ -40,7 +40,10 @@ export default class ResultsFormCard extends Component<Props> {
       <FormCard>
         <FormCardHeader>
           <div className="text--centered">
-            <h2 className={styles.resultsHeader}>Your files are ready!</h2>
+            <div className={styles.completedIcon} />
+            <h2 className={`${styles.resultsHeader} nudge--med`}>
+              Your files are ready!
+            </h2>
             <p
               className={styles.resultsSubheader}
             >{`We have generated results for ${county.name} County`}</p>
