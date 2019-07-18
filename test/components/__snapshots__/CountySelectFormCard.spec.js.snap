@@ -27,7 +27,7 @@ exports[`CountySelectFormCard component should match exact snapshot 1`] = `
           className="select"
         >
           <select
-            className="select__element"
+            className="countySelect select__element"
             id="county-select"
             onChange={[Function]}
             value=""
