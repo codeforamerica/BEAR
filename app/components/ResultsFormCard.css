@@ -2,3 +2,12 @@
   padding-left: 4em;
   padding-right: 4em;
 }
+
+.resultsHeader {
+  font-weight: lighter !important;
+}
+
+.resultsSubheader {
+  font-weight: lighter !important;
+  font-size: 1.9rem;
+}
