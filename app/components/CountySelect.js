@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from 'react';
+import styles from './CountySelect.css';
 
 import counties from '../constants/californiaCounties';
 
@@ -24,7 +25,7 @@ export default class CountySelect extends Component<Props> {
         <p className="form-question">Select your county</p>
         <div className="select">
           <select
-            className="select__element"
+            className={`${styles.countySelect} select__element`}
             onChange={this.handleCountySelect}
             id="county-select"
             value={selectedCounty}
