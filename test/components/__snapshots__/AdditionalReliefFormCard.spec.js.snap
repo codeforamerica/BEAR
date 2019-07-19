@@ -29,7 +29,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           Dismiss all Prop 64 convictions if the conviction happened when the person was 21 or younger.
         </div>
         <label
-          className="shift-fourth-fifths checkbox"
+          className="shift-fourth-fifths checkbox checkbox"
           htmlFor="true_subjectUnder21AtConviction"
         >
           <span
@@ -205,7 +205,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           </div>
         </div>
         <label
-          className="shift-fourth-fifths checkbox"
+          className="shift-fourth-fifths checkbox checkbox"
           htmlFor="true_dismissOlderThanAgeThreshold"
         >
           <span
@@ -326,7 +326,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           </div>
         </div>
         <label
-          className="shift-fourth-fifths checkbox"
+          className="shift-fourth-fifths checkbox checkbox"
           htmlFor="true_dismissYearsSinceConvictionThreshold"
         >
           <span
@@ -446,7 +446,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           </div>
         </div>
         <label
-          className="shift-fourth-fifths checkbox"
+          className="shift-fourth-fifths checkbox checkbox"
           htmlFor="true_dismissYearsCrimeFreeThreshold"
         >
           <span
@@ -472,7 +472,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           Dismiss all HS 11357, HS 11358, HS 11359, or HS 11360 convictions if those are the only convictions on an individual's record.
         </div>
         <label
-          className="shift-fourth-fifths checkbox"
+          className="shift-fourth-fifths checkbox checkbox"
           htmlFor="true_subjectHasOnlyProp64Charges"
         >
           <span
@@ -499,7 +499,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           Dismiss all Prop 64 convictions if the individual is deceased.
         </div>
         <label
-          className="shift-fourth-fifths checkbox"
+          className="shift-fourth-fifths checkbox checkbox"
           htmlFor="true_subjectIsDeceased"
         >
           <span

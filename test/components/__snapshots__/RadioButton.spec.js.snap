@@ -2,7 +2,7 @@
 
 exports[`RadioButton component should match exact snapshot 1`] = `
 <input
-  className="radioButton"
+  className="radioButton radio-button"
   id="whatever_nihilists"
   name="nihilists"
   onChange={[Function]}

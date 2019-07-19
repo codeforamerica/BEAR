@@ -47,7 +47,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={true}
                 id="misdemeanor_infraction_no_reduce_option"
                 name="no_reduce_option"
@@ -65,7 +65,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={true}
                 id="dismiss_11357(a)"
                 name="11357(a)"
@@ -75,7 +75,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="reduce_11357(a)"
                 name="11357(a)"
@@ -92,7 +92,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="dismiss_11357(b)"
                 name="11357(b)"
@@ -102,7 +102,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="reduce_11357(b)"
                 name="11357(b)"
@@ -119,7 +119,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="dismiss_11357(c)"
                 name="11357(c)"
@@ -129,7 +129,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="reduce_11357(c)"
                 name="11357(c)"
@@ -146,7 +146,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="dismiss_11357(d)"
                 name="11357(d)"
@@ -156,7 +156,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="reduce_11357(d)"
                 name="11357(d)"
@@ -173,7 +173,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="dismiss_11357(no-sub-section)"
                 name="11357(no-sub-section)"
@@ -183,7 +183,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="reduce_11357(no-sub-section)"
                 name="11357(no-sub-section)"
@@ -200,7 +200,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="dismiss_11358"
                 name="11358"
@@ -210,7 +210,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="reduce_11358"
                 name="11358"
@@ -227,7 +227,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="dismiss_11359"
                 name="11359"
@@ -237,7 +237,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="reduce_11359"
                 name="11359"
@@ -254,7 +254,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="dismiss_11360"
                 name="11360"
@@ -264,7 +264,7 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
             </td>
             <td>
               <input
-                className="radioButton"
+                className="radioButton radio-button"
                 defaultChecked={false}
                 id="reduce_11360"
                 name="11360"

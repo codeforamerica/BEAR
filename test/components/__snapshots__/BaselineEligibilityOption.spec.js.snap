@@ -9,7 +9,7 @@ exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
   </td>
   <td>
     <input
-      className="radioButton"
+      className="radioButton radio-button"
       defaultChecked={true}
       id="dismiss_11357(a)"
       name="11357(a)"
@@ -19,7 +19,7 @@ exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
   </td>
   <td>
     <input
-      className="radioButton"
+      className="radioButton radio-button"
       defaultChecked={false}
       id="reduce_11357(a)"
       name="11357(a)"

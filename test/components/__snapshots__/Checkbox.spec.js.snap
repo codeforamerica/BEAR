@@ -10,7 +10,7 @@ exports[`Checkbox component should match exact snapshot 1`] = `
     This is a checkbox
   </div>
   <label
-    className="shift-fourth-fifths checkbox"
+    className="shift-fourth-fifths checkbox checkbox"
     htmlFor="true_nihilists"
   >
     <span

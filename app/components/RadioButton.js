@@ -21,7 +21,7 @@ export default class RadioButton extends Component<Props> {
       <input
         defaultChecked={selected}
         type="radio"
-        className={styles.radioButton}
+        className={`${styles.radioButton} radio-button`}
         name={group}
         id={`${value}_${group}`}
         onChange={this.handleSelect}

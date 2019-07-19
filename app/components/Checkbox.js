@@ -26,7 +26,7 @@ export default class Checkbox extends Component<Props> {
         </div>
         <label
           htmlFor={`true_${group}`}
-          className={`shift-fourth-fifths ${styles.checkbox}`}
+          className={`shift-fourth-fifths ${styles.checkbox} checkbox`}
         >
           <span className="sr-only">{labelText}</span>
           <input
