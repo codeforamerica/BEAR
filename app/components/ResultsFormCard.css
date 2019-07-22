@@ -2,3 +2,24 @@
   padding-left: 4em;
   padding-right: 4em;
 }
+
+.resultsHeader {
+  font-weight: lighter !important;
+}
+
+.resultsSubheader {
+  font-weight: lighter !important;
+  font-size: 1.9rem;
+}
+
+.completedIcon {
+  background-color: #009d86;
+  border-radius: 50%;
+  display: inline-block;
+  width: 60px;
+  height: 60px;
+  background-image: url('../assets/images/white_check_large.png');
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: 70%;
+}

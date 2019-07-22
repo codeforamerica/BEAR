@@ -14,9 +14,18 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
         <div
           className="text--centered"
         >
-          Your files are ready!
-          <p>
-            We have generated results for undefined county
+          <div
+            className="completedIcon"
+          />
+          <h2
+            className="resultsHeader nudge--med"
+          >
+            Your files are ready!
+          </h2>
+          <p
+            className="resultsSubheader"
+          >
+            We have generated results for undefined County
           </p>
           <button
             className="button button--primary"
@@ -35,47 +44,97 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
       <h3
         className="text--centered"
       >
-        What's included in the folder:
+        <p>
+          What's included in the folder:
+        </p>
       </h3>
       <div
-        className="sidePadding"
+        className="sidePadding media-box"
       >
-        <p>
-          <b>
-            Full Results File: 
-          </b>
-           CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information.
-        </p>
+        <div
+          className="media-box__media media--icon"
+        >
+          <div
+            className="emoji emoji--med emoji--page-facing-up"
+          />
+        </div>
+        <div
+          className="emojiMediaContent media-box__content"
+        >
+          <p>
+            <b>
+              Full Results File
+              : 
+            </b>
+            CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information.
+          </p>
+        </div>
       </div>
       <div
-        className="sidePadding"
+        className="sidePadding media-box"
       >
-        <p>
-          <b>
-            Condensed Results Files: 
-          </b>
-           CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible.
-        </p>
+        <div
+          className="media-box__media media--icon"
+        >
+          <div
+            className="emoji emoji--med emoji--pencil"
+          />
+        </div>
+        <div
+          className="emojiMediaContent media-box__content"
+        >
+          <p>
+            <b>
+              Condensed Results File
+              : 
+            </b>
+            CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible.
+          </p>
+        </div>
       </div>
       <div
-        className="sidePadding"
+        className="sidePadding media-box"
       >
-        <p>
-          <b>
-            Conviction Results File: 
-          </b>
-           CSV file with only Prop 64 convictions in the county of your choice.
-        </p>
+        <div
+          className="media-box__media media--icon"
+        >
+          <div
+            className="emoji emoji--med emoji--thumbs-up"
+          />
+        </div>
+        <div
+          className="emojiMediaContent media-box__content"
+        >
+          <p>
+            <b>
+              Conviction Results File
+              : 
+            </b>
+            CSV file with only Prop 64 convictions in the county of your choice.
+          </p>
+        </div>
       </div>
       <div
-        className="sidePadding"
+        className="sidePadding media-box"
       >
-        <p>
-          <b>
-            Summary Report: 
-          </b>
-           PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions.
-        </p>
+        <div
+          className="media-box__media media--icon"
+        >
+          <div
+            className="emoji emoji--med emoji--memo"
+          />
+        </div>
+        <div
+          className="emojiMediaContent media-box__content"
+        >
+          <p>
+            <b>
+              Summary Report
+              : 
+            </b>
+            PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions.
+          </p>
+        </div>
       </div>
     </div>
     <div
