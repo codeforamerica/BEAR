@@ -5,6 +5,8 @@ import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ProcessingFormCard from '../../app/components/ProcessingFormCard';
 
+import * as FileUtils from '../../app/utils/fileUtils';
+
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
@@ -12,13 +14,13 @@ function setup() {
   const runScriptSpy = sandbox.spy();
   const startOverSpy = sandbox.spy();
   const resetOutputPathSpy = sandbox.spy();
-  const getFileSizeSpy = sandbox.spy();
+
+  sinon.stub(FileUtils, 'getFileSize').returns(1000);
 
   const component = shallow(
     <ProcessingFormCard
       dojFilePath="/tmp/path"
       outputFilePath="./test"
-      getFileSize={getFileSizeSpy}
       runScriptInOptions={runScriptSpy}
       onStartOver={startOverSpy}
       resetOutputPath={resetOutputPathSpy}
