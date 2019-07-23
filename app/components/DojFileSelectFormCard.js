@@ -26,7 +26,6 @@ export default class DojFileSelectFormCard extends Component<Props> {
 
   isEmptyFilePath = () => {
     const { dojFilePath } = this.props;
-    console.log('is file path empty? ', dojFilePath === '');
     return dojFilePath === '';
   };
 
@@ -34,22 +33,30 @@ export default class DojFileSelectFormCard extends Component<Props> {
     const { dojFilePath, updateFilePath } = this.props;
 
     if (this.isEmptyFilePath()) {
-      return <DojFileInput onFileSelect={updateFilePath} />;
+      return (
+        <DojFileInput
+          onFileSelect={updateFilePath}
+          isFilepathEmpty={this.isEmptyFilePath()}
+        />
+      );
     }
     return (
-      <div className={styles.outlineBox}>
+      <div>
         <DojFileItem
           className={styles.outlineBox}
           filePath={dojFilePath}
           onFileRemove={updateFilePath}
         />
-        <DojFileInput onFileSelect={updateFilePath} />
+        <DojFileInput
+          onFileSelect={updateFilePath}
+          isFilepathEmpty={this.isEmptyFilePath()}
+        />
       </div>
     );
   };
 
   render() {
-    const { dojFilePath, onBack, onFileConfirm } = this.props;
+    const { onBack, onFileConfirm } = this.props;
 
     return (
       <FormCard>
@@ -64,7 +71,7 @@ export default class DojFileSelectFormCard extends Component<Props> {
           <div className="buttons">
             <ContinueButton
               onContinue={onFileConfirm}
-              disabled={dojFilePath === ''}
+              disabled={this.isEmptyFilePath()}
             />
             <GoBackButton onGoBack={onBack} />
           </div>

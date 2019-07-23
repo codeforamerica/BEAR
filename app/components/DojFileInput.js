@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import styles from './DOJFileInput.css';
 
 type Props = {
-  onFileSelect: string => void
+  onFileSelect: string => void,
+  isFilepathEmpty: boolean
 };
 
 export default class DojFileInput extends Component<Props> {
@@ -13,9 +14,17 @@ export default class DojFileInput extends Component<Props> {
     onFileSelect(filePath);
   };
 
+  renderNoFileMessage = () => {
+    const { isFilepathEmpty } = this.props;
+
+    if (isFilepathEmpty) {
+      return <p className={styles.emptyMessage}>No file selected</p>;
+    }
+  };
+
   render() {
     return (
-      <div className="file-upload">
+      <div>
         <label
           className={`${styles.noBottomMargin} button file-upload__label`}
           htmlFor="doj-file-input"
@@ -30,7 +39,7 @@ export default class DojFileInput extends Component<Props> {
           />
           Select file
         </label>
-        <p className={styles.emptyMessage}>No file selected</p>
+        {this.renderNoFileMessage()}
       </div>
     );
   }
