@@ -17,7 +17,6 @@ function setup() {
       county="Alameda"
       outputFolder="/path/to/output"
       openFolder={openFolderSpy}
-      currentScreen={4}
       onStartOver={startOverSpy}
       resetOutputPath={resetOutputPathSpy}
     />
@@ -51,7 +50,6 @@ describe('ResultsFormCard component', () => {
       const { component, resetOutputPathSpy } = setup();
       const startOverButton = component.find('#start_over').at(0);
       startOverButton.simulate('click');
-      expect(component.props().currentScreen).toEqual(4);
       expect(resetOutputPathSpy.called).toBe(true);
       expect(resetOutputPathSpy.callCount).toEqual(1);
     });
@@ -59,7 +57,6 @@ describe('ResultsFormCard component', () => {
       const { component, startOverSpy } = setup();
       const startOverButton = component.find('#start_over').at(0);
       startOverButton.simulate('click');
-      expect(component.props().currentScreen).toEqual(4);
       expect(startOverSpy.called).toBe(true);
       expect(startOverSpy.callCount).toEqual(1);
     });
@@ -68,7 +65,7 @@ describe('ResultsFormCard component', () => {
   it('should match exact snapshot', () => {
     const component = (
       <div>
-        <ResultsFormCard county="Alameda" />
+        <ResultsFormCard county="Alameda" outputFolder="/path/to/output" />
       </div>
     );
 

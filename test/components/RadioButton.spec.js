@@ -50,7 +50,7 @@ describe('RadioButton component', () => {
   });
 
   it('calls onSelect with the group and value when button is clicked', () => {
-    const { component, onSelectSpy } = setup();
+    const { component, onSelectSpy } = setup(false);
     component.simulate('change');
 
     expect(onSelectSpy.called).toEqual(true);
@@ -59,8 +59,15 @@ describe('RadioButton component', () => {
     expect(args[1]).toEqual('whatever');
   });
 
-  it('should match exact snapshot', () => {
-    const { component } = setup();
+  it('should match exact snapshot when selected is false', () => {
+    const { component } = setup(false);
+    const tree = renderer.create(component).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should match exact snapshot when selected is true', () => {
+    const { component } = setup(true);
     const tree = renderer.create(component).toJSON();
 
     expect(tree).toMatchSnapshot();

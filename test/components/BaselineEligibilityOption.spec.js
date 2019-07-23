@@ -1,4 +1,3 @@
-import sinon from 'sinon';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
@@ -7,7 +6,6 @@ import BaselineEligibilityOption from '../../app/components/BaselineEligibilityO
 import RadioButton from '../../app/components/RadioButton';
 
 Enzyme.configure({ adapter: new Adapter() });
-const sandbox = sinon.createSandbox();
 
 function setup() {
   const options = {
@@ -32,10 +30,6 @@ function setup() {
     component2
   };
 }
-
-afterEach(() => {
-  sandbox.restore();
-});
 
 describe('BaselineEligibilityOption component', () => {
   it('if dismissed, reduce should not be selected', () => {

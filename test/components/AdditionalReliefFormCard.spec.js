@@ -53,7 +53,7 @@ describe('AdditionalReliefFormCard component', () => {
       expect(onOptionsConfirmSpy.callCount).toEqual(1);
     });
     it('should call updateDate once', () => {
-      const { component, updateDateSpy } = setup('path/to/file');
+      const { component, updateDateSpy } = setup();
       component.find('#continue').simulate('click');
       expect(updateDateSpy.called).toBe(true);
       expect(updateDateSpy.callCount).toEqual(1);

@@ -25,7 +25,6 @@ function setup(isAllDismiss) {
   const onUpdateDateSpy = sandbox.spy();
   const component = mount(
     <EligibilityOptionsFormCard
-      currentScreen={3}
       baselineEligibilityOptions={options}
       onOptionsConfirm={onOptionsConfirmSpy}
       onBack={onBackSpy}
@@ -47,7 +46,7 @@ afterEach(() => {
 
 describe('EligibilityOptionsFormCard component', () => {
   it('should render each option with the correct selection (dismiss or reduce)', () => {
-    const { component } = setup('');
+    const { component } = setup(false);
     expect(
       component.containsAnyMatchingElements([
         <BaselineEligibilityOption codeSection="11357(a)" />
@@ -87,7 +86,7 @@ describe('EligibilityOptionsFormCard component', () => {
 
   describe('clicking the continue button', () => {
     it('should call onOptionsConfirm once', () => {
-      const { component, onOptionsConfirmSpy } = setup();
+      const { component, onOptionsConfirmSpy } = setup(false);
       component.find('#continue').simulate('click');
       expect(onOptionsConfirmSpy.called).toBe(true);
       expect(onOptionsConfirmSpy.callCount).toEqual(1);
@@ -111,7 +110,7 @@ describe('EligibilityOptionsFormCard component', () => {
 
   describe('clicking the go back button', () => {
     it('should call onBack once', () => {
-      const { component, onBackSpy } = setup('path/to/file');
+      const { component, onBackSpy } = setup(false);
       component.find('#goback').simulate('click');
       expect(onBackSpy.called).toBe(true);
       expect(onBackSpy.callCount).toEqual(1);
@@ -123,8 +122,8 @@ describe('EligibilityOptionsFormCard component', () => {
     const component = (
       <div>
         <EligibilityOptionsFormCard
-          currentScreen={3}
           baselineEligibilityOptions={options}
+          isAllDismiss={true}
         />
       </div>
     );

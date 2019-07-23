@@ -17,7 +17,6 @@ function setup(dojFilePath) {
   const onBackSpy = sandbox.spy();
   const component = mount(
     <DojFileSelectFormCard
-      currentScreen={2}
       updateFilePath={fakeUpdateFilePath}
       onFileConfirm={onFileConfirmSpy}
       dojFilePath={dojFilePath}
@@ -104,7 +103,7 @@ describe('DojFileSelectFormCard component', () => {
   it('should match exact snapshot when file has not been selected', () => {
     const component = (
       <div>
-        <DojFileSelectFormCard currentScreen={2} dojFilePath="" />
+        <DojFileSelectFormCard dojFilePath="" />
       </div>
     );
 
@@ -116,7 +115,7 @@ describe('DojFileSelectFormCard component', () => {
   it('should match exact snapshot when file has been selected', () => {
     const component = (
       <div>
-        <DojFileSelectFormCard currentScreen={2} dojFilePath="path/to/file" />
+        <DojFileSelectFormCard dojFilePath="path/to/file" />
       </div>
     );
 

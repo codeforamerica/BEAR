@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Checkbox component should match exact snapshot 1`] = `
+exports[`Checkbox component should match exact snapshot when NOT checked 1`] = `
 <div
   className="form-group grid"
 >
@@ -19,6 +19,37 @@ exports[`Checkbox component should match exact snapshot 1`] = `
       Caterine Vauban
     </span>
     <input
+      defaultChecked={false}
+      id="true_nihilists"
+      name="nihilists"
+      onChange={[Function]}
+      type="checkbox"
+      value={true}
+    />
+  </label>
+</div>
+`;
+
+exports[`Checkbox component should match exact snapshot when checked 1`] = `
+<div
+  className="form-group grid"
+>
+  <div
+    className="form-question grid__item width-two-thirds"
+  >
+    This is a checkbox
+  </div>
+  <label
+    className="shift-fourth-fifths checkbox checkbox"
+    htmlFor="true_nihilists"
+  >
+    <span
+      className="sr-only"
+    >
+      Caterine Vauban
+    </span>
+    <input
+      defaultChecked={true}
       id="true_nihilists"
       name="nihilists"
       onChange={[Function]}

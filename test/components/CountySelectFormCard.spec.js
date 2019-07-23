@@ -14,7 +14,6 @@ function setup(selectedCounty) {
   const component = mount(
     <CountySelectFormCard
       selectedCounty={selectedCounty}
-      currentScreen={1}
       onCountySelect={fakeOnCountySelect}
       onCountyConfirm={fakeOnCountyConfirm}
     />
