@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`DojFileInput component should match exact snapshot 1`] = `
-<div
-  className="file-upload"
->
+<div>
   <label
     className="noBottomMargin button file-upload__label"
     htmlFor="doj-file-input"
@@ -12,16 +10,12 @@ exports[`DojFileInput component should match exact snapshot 1`] = `
       accept=".dat, .csv"
       className="file-upload__input"
       id="doj-file-input"
+      multiple={true}
       name="doj-file-input"
       onChange={[Function]}
       type="file"
     />
     Select file
   </label>
-  <p
-    className="emptyMessage"
-  >
-    No file selected
-  </p>
 </div>
 `;

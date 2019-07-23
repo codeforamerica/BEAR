@@ -6,7 +6,6 @@ import renderer from 'react-test-renderer';
 import DojFileSelectFormCard from '../../app/components/DojFileSelectFormCard';
 import ContinueButton from '../../app/components/ContinueButton';
 import DojFileItem from '../../app/components/DojFileItem';
-import DojFileInput from '../../app/components/DojFileInput';
 
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
@@ -26,7 +25,6 @@ function setup(dojFilePath) {
   );
   return {
     component,
-    fakeUpdateFilePath,
     onFileConfirmSpy,
     onBackSpy
   };
@@ -37,22 +35,6 @@ afterEach(() => {
 });
 
 describe('DojFileSelectFormCard component', () => {
-  describe('the Upload button', () => {
-    it('should appear if the file path is empty', () => {
-      const { component } = setup('');
-      expect(component.containsAnyMatchingElements([<DojFileInput />])).toEqual(
-        true
-      );
-    });
-
-    it('should NOT appear if the file path is not empty', () => {
-      const { component } = setup('path/to/file');
-      expect(component.containsAnyMatchingElements([<DojFileInput />])).toEqual(
-        false
-      );
-    });
-  });
-
   describe('the Continue button', () => {
     it('should appear as disabled if the file path is empty', () => {
       const { component } = setup('');
