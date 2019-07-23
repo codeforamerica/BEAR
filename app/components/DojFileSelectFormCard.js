@@ -42,11 +42,16 @@ export default class DojFileSelectFormCard extends Component<Props> {
     }
     return (
       <div>
-        <DojFileItem
-          className={styles.outlineBox}
-          filePath={dojFilePath}
-          onFileRemove={updateFilePath}
-        />
+        {[dojFilePath].map(path => {
+          return (
+            <DojFileItem
+              key={path}
+              className={styles.outlineBox}
+              filePath={path}
+              onFileRemove={updateFilePath}
+            />
+          );
+        })}
         <DojFileInput
           onFileSelect={updateFilePath}
           isFilepathEmpty={this.isEmptyFilePath()}
