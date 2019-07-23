@@ -11,9 +11,9 @@ export default class DojFileInput extends Component<Props> {
   handleFileSelection = (event: SyntheticEvent<HTMLInputElement>) => {
     const { onFileSelect } = this.props;
     const selectedFilesArray = event.currentTarget.files;
-    console.log('selected Files', selectedFilesArray);
-    const filePath = event.currentTarget.files[0].path;
-    onFileSelect(filePath);
+    Array.from(selectedFilesArray).forEach(file => {
+      onFileSelect(file.path);
+    });
   };
 
   renderNoFileMessage = () => {

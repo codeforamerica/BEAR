@@ -49,12 +49,11 @@ export function runScript(
     gogenPath,
     dateTime,
     county,
-    dojFilePath,
+    dojFilePaths,
     baselineEligibilityOptions,
     additionalReliefOptions,
     outputFilePath
   } = state;
-
   if (!fs.existsSync(outputFilePath)) {
     fs.mkdirSync(outputFilePath, { recursive: true }, err => {
       if (err) throw err;
@@ -63,7 +62,6 @@ export function runScript(
   }
   const JsonFileName = `eligibilityConfig_${dateTime}.json`;
   const pathToEligibilityOptions = path.join(outputFilePath, JsonFileName);
-
   const formattedEligibilityOptions = transformBaselineEligibilityOptions(
     baselineEligibilityOptions
   );
@@ -83,7 +81,7 @@ export function runScript(
   const goProcess = spawnChildProcess(gogenPath, [
     `run`,
     `--date-for-file-name=${dateTime}`,
-    `--input-doj=${dojFilePath}`,
+    `--input-doj=${dojFilePaths}`,
     `--outputs=${outputFilePath}`,
     `--county=${countyCode}`,
     `--eligibility-options=${pathToEligibilityOptions}`

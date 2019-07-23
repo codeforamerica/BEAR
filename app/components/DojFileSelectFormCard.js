@@ -13,7 +13,7 @@ import GoBackButton from './GoBackButton';
 import styles from './DojFileSelectFormCard.css';
 
 type Props = {
-  dojFilePath: string,
+  dojFilePaths: Array<string>,
   updateFilePath: string => void,
   onFileConfirm: void => void,
   onBack: void => void
@@ -25,12 +25,12 @@ export default class DojFileSelectFormCard extends Component<Props> {
   }
 
   isEmptyFilePath = () => {
-    const { dojFilePath } = this.props;
-    return dojFilePath === '';
+    const { dojFilePaths } = this.props;
+    return dojFilePaths.length === 0;
   };
 
   renderCardContent = () => {
-    const { dojFilePath, updateFilePath } = this.props;
+    const { dojFilePaths, updateFilePath } = this.props;
 
     if (this.isEmptyFilePath()) {
       return (
@@ -42,7 +42,7 @@ export default class DojFileSelectFormCard extends Component<Props> {
     }
     return (
       <div>
-        {[dojFilePath].map(path => {
+        {dojFilePaths.map(path => {
           return (
             <DojFileItem
               key={path}

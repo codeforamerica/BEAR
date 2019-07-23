@@ -44,7 +44,7 @@ describe('runScript', () => {
       gogenPath: 'gogenPath',
       dateTime: 'date',
       county: { name: 'Sacramento', code: 'SACRAMENTO' },
-      dojFilePath: '/path/to/doj/file',
+      dojFilePaths: ['/path/to/doj/file'],
       outputFilePath: 'outputPath/outputPath'
     };
 
@@ -172,7 +172,7 @@ describe('runScript', () => {
           gogenPath: 'gogenPath',
           dateTime: 'date',
           county: { name: 'Sacramento', code: 'SACRAMENTO' },
-          dojFilePath: '/path/to/doj/file',
+          dojFilePaths: ['/path/to/doj/file'],
           outputFilePath: 'outputPath/outputPath',
           baselineEligibilityOptions: {
             '11357(a)': 'dismiss',

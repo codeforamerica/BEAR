@@ -1,7 +1,7 @@
 const defaultAnalysisOptions = {
   currentScreen: 0,
   county: { name: '', code: '' },
-  dojFilePath: '',
+  dojFilePaths: [],
   baselineEligibilityOptions: {
     '11357(a)': 'dismiss',
     '11357(b)': 'dismiss',

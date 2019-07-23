@@ -55,6 +55,11 @@ describe('Home component', () => {
       expect(component.state('outputFilePath')).toEqual('');
     });
 
+    it('sets the doj file path to any empty array', () => {
+      const { component } = setup('false');
+      expect(component.state('dojFilePaths')).toEqual([]);
+    });
+
     it('sets the county to an object with an empty name and value', () => {
       const { component } = setup('false');
       const county = component.state('county');
@@ -141,9 +146,9 @@ describe('Home component', () => {
     it('sets the selected file path on the state', () => {
       const { component } = setup('true');
       const filePath = 'path/to/file';
-      expect(component.state('dojFilePath')).toEqual('');
+      expect(component.state('dojFilePaths')).toEqual([]);
       component.instance().updateFilePath(filePath);
-      expect(component.state('dojFilePath')).toEqual(filePath);
+      expect(component.state('dojFilePaths')).toEqual([filePath]);
     });
   });
 
@@ -226,7 +231,7 @@ describe('Home component', () => {
   describe('resetOutputPath', () => {
     it('resets the date after restart', () => {
       const { component } = setup('true');
-      expect(component.state('dojFilePath')).toEqual('');
+      expect(component.state('outputFilePath')).toEqual('');
       component.instance().updateStateWithEligibilityOptions();
       component.instance().resetOutputPath();
       expect(component.state('outputFilePath')).toEqual(

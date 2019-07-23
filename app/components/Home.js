@@ -20,7 +20,7 @@ type State = {
   dateTime: string,
   currentScreen: number,
   county: County,
-  dojFilePath: string,
+  dojFilePaths: Array<string>,
   baselineEligibilityOptions: BaselineEligibilityOptions,
   additionalReliefOptions: AdditionalReliefOptions,
   outputPathPrefix: string,
@@ -78,7 +78,10 @@ export default class Home extends Component<Props, State> {
   };
 
   updateFilePath = (dojFilePath: string) => {
-    this.setState({ dojFilePath });
+    const { dojFilePaths } = this.state;
+    const updatedFilePath = dojFilePaths;
+    updatedFilePath.push(dojFilePath);
+    this.setState({ dojFilePaths: updatedFilePath });
   };
 
   // eslint-disable-next-line flowtype/no-weak-types
@@ -169,7 +172,7 @@ export default class Home extends Component<Props, State> {
     const {
       currentScreen,
       county,
-      dojFilePath,
+      dojFilePaths,
       outputFilePath,
       baselineEligibilityOptions,
       additionalReliefOptions
@@ -185,7 +188,7 @@ export default class Home extends Component<Props, State> {
         <DojFileSelectFormCard
           countyName={county.name}
           updateFilePath={this.updateFilePath}
-          dojFilePath={dojFilePath}
+          dojFilePaths={dojFilePaths}
           onFileConfirm={this.nextScreen}
           onBack={this.previousScreen}
         />
@@ -205,7 +208,7 @@ export default class Home extends Component<Props, State> {
           onBack={this.previousScreen}
         />
         <ProcessingFormCard
-          dojFilePath={dojFilePath}
+          dojFilePath={dojFilePaths[0]}
           outputFilePath={outputFilePath}
           onComplete={this.nextScreen}
           runScriptInOptions={this.runScriptInOptions}
