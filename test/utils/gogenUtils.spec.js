@@ -3,8 +3,16 @@ import fs from 'fs';
 import { runScript, writeSummaryOutput } from '../../app/utils/gogenUtils';
 import defaultAnalysisOptions from '../../app/constants/defaultAnalysisOptions';
 
+import * as FileUtils from '../../app/utils/fileUtils';
+
+const sandbox = sinon.createSandbox();
+
+afterEach(() => {
+  sandbox.restore();
+});
+
 describe('runScript', () => {
-  const sandbox = sinon.createSandbox();
+  let fakeCreateJsonFile;
 
   function createFakeSpawnChildProcess() {
     const fakeSpawnResponse = {
@@ -21,19 +29,20 @@ describe('runScript', () => {
 
   function setup() {
     const fakeSpawnChildProcess = createFakeSpawnChildProcess();
-    const fakeCreateJsonFile = sandbox.spy();
     const fakeGogenCallbackFunction = sandbox.spy();
 
     return {
       fakeSpawnChildProcess,
-      fakeCreateJsonFile,
       fakeGogenCallbackFunction
     };
   }
 
-  afterEach(() => {
-    sandbox.restore();
+  beforeEach(() => {
+    fakeCreateJsonFile = sandbox.spy();
+    FileUtils.createJsonFile = fakeCreateJsonFile;
+  });
 
+  afterEach(() => {
     fs.rmdirSync('outputPath/outputPath');
     fs.rmdirSync('outputPath');
   });
@@ -48,18 +57,9 @@ describe('runScript', () => {
       outputFilePath: 'outputPath/outputPath'
     };
 
-    const {
-      fakeSpawnChildProcess,
-      fakeCreateJsonFile,
-      fakeGogenCallbackFunction
-    } = setup();
+    const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
-    runScript(
-      state,
-      fakeSpawnChildProcess,
-      fakeCreateJsonFile,
-      fakeGogenCallbackFunction
-    );
+    runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
 
     const { args } = fakeSpawnChildProcess.getCall(0);
     expect(args[0]).toEqual('gogenPath');
@@ -102,16 +102,11 @@ describe('runScript', () => {
         }
       };
 
-      const {
-        fakeSpawnChildProcess,
-        fakeCreateJsonFile,
-        fakeGogenCallbackFunction
-      } = setup();
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
       runScript(
         stateWithReductions,
         fakeSpawnChildProcess,
-        fakeCreateJsonFile,
         fakeGogenCallbackFunction
       );
 
@@ -137,16 +132,11 @@ describe('runScript', () => {
           ...defaultAnalysisOptions
         };
 
-        const {
-          fakeSpawnChildProcess,
-          fakeCreateJsonFile,
-          fakeGogenCallbackFunction
-        } = setup();
+        const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
         runScript(
           stateWithRelief,
           fakeSpawnChildProcess,
-          fakeCreateJsonFile,
           fakeGogenCallbackFunction
         );
 
@@ -196,16 +186,11 @@ describe('runScript', () => {
           }
         };
 
-        const {
-          fakeSpawnChildProcess,
-          fakeCreateJsonFile,
-          fakeGogenCallbackFunction
-        } = setup();
+        const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
         runScript(
           stateWithoutRelief,
           fakeSpawnChildProcess,
-          fakeCreateJsonFile,
           fakeGogenCallbackFunction
         );
 
@@ -226,6 +211,7 @@ describe('writeSummaryOutput', () => {
     const outputPath = '/tmp/';
     writeSummaryOutput(outputPath);
   });
+
   afterEach(() => {
     fs.unlinkSync('/tmp/summaryOutput.txt');
   });
