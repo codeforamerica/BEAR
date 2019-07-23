@@ -44,7 +44,7 @@ describe('runScript', () => {
       gogenPath: 'gogenPath',
       dateTime: 'date',
       county: { name: 'Sacramento', code: 'SACRAMENTO' },
-      dojFilePaths: ['/path/to/doj/file'],
+      dojFilePaths: ['/path/to/doj/file', 'second/path'],
       outputFilePath: 'outputPath/outputPath'
     };
 
@@ -73,13 +73,40 @@ describe('runScript', () => {
     ]);
   });
 
+  it('calls child process n times, where n is the length of the dojFilePaths array', () => {
+    const state = {
+      ...defaultAnalysisOptions,
+      gogenPath: 'gogenPath',
+      dateTime: 'date',
+      county: { name: 'Sacramento', code: 'SACRAMENTO' },
+      dojFilePaths: ['zero/path', 'one/path', 'two/path'],
+      outputFilePath: 'outputPath/outputPath'
+    };
+
+    const {
+      fakeSpawnChildProcess,
+      fakeCreateJsonFile,
+      fakeGogenCallbackFunction
+    } = setup();
+
+    runScript(
+      state,
+      fakeSpawnChildProcess,
+      fakeCreateJsonFile,
+      fakeGogenCallbackFunction
+    );
+
+    expect(fakeSpawnChildProcess.called).toBe(true);
+    expect(fakeSpawnChildProcess.callCount).toEqual(3);
+  });
+
   describe('transforming eligibility options for consumption by gogen', () => {
     it('transforms the baseline eligibility options before creating the json file', () => {
       const stateWithReductions = {
         gogenPath: 'gogenPath',
         dateTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
-        dojFilePath: '/path/to/doj/file',
+        dojFilePaths: ['/path/to/doj/file', 'hello'],
         outputFilePath: 'outputPath/outputPath',
         baselineEligibilityOptions: {
           '11357(a)': 'reduce',
@@ -132,7 +159,7 @@ describe('runScript', () => {
           gogenPath: 'gogenPath',
           dateTime: 'date',
           county: { name: 'Sacramento', code: 'SACRAMENTO' },
-          dojFilePath: '/path/to/doj/file',
+          dojFilePaths: ['/path/to/doj/file'],
           outputFilePath: 'outputPath/outputPath',
           ...defaultAnalysisOptions
         };

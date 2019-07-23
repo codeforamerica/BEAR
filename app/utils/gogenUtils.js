@@ -78,29 +78,31 @@ export function runScript(
 
   createJsonFile(eligibilityLogicConfig, pathToEligibilityOptions);
   const countyCode = county.code;
-  const goProcess = spawnChildProcess(gogenPath, [
-    `run`,
-    `--date-for-file-name=${dateTime}`,
-    `--input-doj=${dojFilePaths}`,
-    `--outputs=${outputFilePath}`,
-    `--county=${countyCode}`,
-    `--eligibility-options=${pathToEligibilityOptions}`
-  ]);
 
-  goProcess.stdout.on('data', data => {
-    const dataString = data.toString();
-    console.log('stdout: ', dataString);
-    fs.appendFileSync('tmp.txt', data);
-  });
+  dojFilePaths.forEach(filePath => {
+    const goProcess = spawnChildProcess(gogenPath, [
+      `run`,
+      `--date-for-file-name=${dateTime}`,
+      `--input-doj=${filePath}`,
+      `--outputs=${outputFilePath}`,
+      `--county=${countyCode}`,
+      `--eligibility-options=${pathToEligibilityOptions}`
+    ]);
+    goProcess.stdout.on('data', data => {
+      const dataString = data.toString();
+      console.log('stdout: ', dataString);
+      fs.appendFileSync('tmp.txt', data);
+    });
 
-  goProcess.on('close', childFinishedCallback);
-  goProcess.on('error', error => {
-    console.error(error);
-    childFinishedCallback();
-  });
+    goProcess.on('close', childFinishedCallback);
+    goProcess.on('error', error => {
+      console.error(error);
+      childFinishedCallback();
+    });
 
-  goProcess.stderr.on('data', data => {
-    console.log(`stderr: ${data}`);
+    goProcess.stderr.on('data', data => {
+      console.log(`stderr: ${data}`);
+    });
   });
 }
 
