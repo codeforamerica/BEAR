@@ -24,18 +24,28 @@ export default class DojFileSelectFormCard extends Component<Props> {
     window.scrollTo(0, 0);
   }
 
+  isEmptyFilePath = () => {
+    const { dojFilePath } = this.props;
+    console.log('is file path empty? ', dojFilePath === '');
+    return dojFilePath === '';
+  };
+
   renderCardContent = () => {
     const { dojFilePath, updateFilePath } = this.props;
-    if (dojFilePath !== '') {
-      return (
+
+    if (this.isEmptyFilePath()) {
+      return <DojFileInput onFileSelect={updateFilePath} />;
+    }
+    return (
+      <div className={styles.outlineBox}>
         <DojFileItem
           className={styles.outlineBox}
           filePath={dojFilePath}
           onFileRemove={updateFilePath}
         />
-      );
-    }
-    return <DojFileInput onFileSelect={updateFilePath} />;
+        <DojFileInput onFileSelect={updateFilePath} />
+      </div>
+    );
   };
 
   render() {
