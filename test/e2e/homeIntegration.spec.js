@@ -1,4 +1,3 @@
-import fs from 'fs';
 import sleep from '../../app/utils/testHelpers';
 
 const { Application } = require('spectron');
@@ -13,7 +12,6 @@ describe('The happy path', () => {
       path: electronPath,
       args: [path.join(__dirname, '../..')]
     });
-    fs.writeFileSync('tmp.txt', 'hello world &&&&&& goodbye');
     return app.start();
   });
 

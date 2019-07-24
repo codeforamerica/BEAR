@@ -32,10 +32,6 @@ function setup() {
   };
 }
 
-beforeEach(() => {
-  fs.writeFileSync('tmp.txt', 'hello world &&&&&& goodbye');
-});
-
 afterEach(() => {
   sandbox.restore();
   fs.unlinkSync('./test/summaryOutput.txt');

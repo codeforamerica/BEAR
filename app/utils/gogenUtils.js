@@ -54,12 +54,7 @@ export function runScript(
     additionalReliefOptions,
     outputFilePath
   } = state;
-  if (!fs.existsSync(outputFilePath)) {
-    fs.mkdirSync(outputFilePath, { recursive: true }, err => {
-      if (err) throw err;
-      console.log('error making path:', path);
-    });
-  }
+  makeDirectory(outputFilePath);
   const JsonFileName = `eligibilityConfig_${dateTime}.json`;
   const pathToEligibilityOptions = path.join(outputFilePath, JsonFileName);
   const formattedEligibilityOptions = transformBaselineEligibilityOptions(
@@ -79,19 +74,30 @@ export function runScript(
   createJsonFile(eligibilityLogicConfig, pathToEligibilityOptions);
   const countyCode = county.code;
 
+  let filePathNum = 0;
   dojFilePaths.forEach(filePath => {
+    filePathNum += 1;
+    let updatedFilePath = '';
+    let updatedDateTime = '';
+    if (dojFilePaths.length > 1) {
+      updatedFilePath = `${outputFilePath}/#${filePathNum}`;
+      updatedDateTime = `#${filePathNum}_${dateTime}`;
+    } else {
+      updatedFilePath = outputFilePath;
+      updatedDateTime = dateTime;
+    }
+    makeDirectory(updatedFilePath);
     const goProcess = spawnChildProcess(gogenPath, [
       `run`,
-      `--date-for-file-name=${dateTime}`,
+      `--date-for-file-name=${updatedDateTime}`,
       `--input-doj=${filePath}`,
-      `--outputs=${outputFilePath}`,
+      `--outputs=${updatedFilePath}`,
       `--county=${countyCode}`,
       `--eligibility-options=${pathToEligibilityOptions}`
     ]);
     goProcess.stdout.on('data', data => {
       const dataString = data.toString();
-      console.log('stdout: ', dataString);
-      fs.appendFileSync('tmp.txt', data);
+      console.log(`stdout for ${filePathNum}: `, dataString);
     });
 
     goProcess.on('close', childFinishedCallback);
@@ -109,8 +115,14 @@ export function runScript(
 export function writeSummaryOutput(outputFilePath) {
   const filename = 'summaryOutput.txt';
   const pathToOutputFile = path.join(outputFilePath, filename);
-  const fullOutputText = fs.readFileSync('tmp.txt', 'utf8');
-  const summaryText = fullOutputText.split('&&&&&&')[1];
-  fs.writeFileSync(pathToOutputFile, summaryText, 'utf8');
-  fs.unlinkSync('tmp.txt');
+  fs.writeFileSync(pathToOutputFile, 'this is summary text', 'utf8');
+}
+
+function makeDirectory(pathToDirectory) {
+  if (!fs.existsSync(pathToDirectory)) {
+    fs.mkdirSync(pathToDirectory, { recursive: true }, err => {
+      if (err) throw err;
+      console.log('error making path:', path);
+    });
+  }
 }
