@@ -1,8 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`RadioButton component should match exact snapshot 1`] = `
+exports[`RadioButton component should match exact snapshot when selected is false 1`] = `
 <input
   className="radioButton radio-button"
+  defaultChecked={false}
+  id="whatever_nihilists"
+  name="nihilists"
+  onChange={[Function]}
+  type="radio"
+/>
+`;
+
+exports[`RadioButton component should match exact snapshot when selected is true 1`] = `
+<input
+  className="radioButton radio-button"
+  defaultChecked={true}
   id="whatever_nihilists"
   name="nihilists"
   onChange={[Function]}

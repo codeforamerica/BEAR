@@ -64,7 +64,7 @@ describe('Checkbox component', () => {
   });
 
   it('calls onChange with the group and value when checkbox is clicked', () => {
-    const { component, onChangeSpy } = setup();
+    const { component, onChangeSpy } = setup(false);
     component.find('input').simulate('change');
 
     expect(onChangeSpy.called).toEqual(true);
@@ -72,8 +72,15 @@ describe('Checkbox component', () => {
     expect(args[0]).toEqual('nihilists');
   });
 
-  it('should match exact snapshot', () => {
-    const { component } = setup();
+  it('should match exact snapshot when checked', () => {
+    const { component } = setup(true);
+    const tree = renderer.create(component).toJSON();
+
+    expect(tree).toMatchSnapshot();
+  });
+
+  it('should match exact snapshot when NOT checked', () => {
+    const { component } = setup(false);
     const tree = renderer.create(component).toJSON();
 
     expect(tree).toMatchSnapshot();
