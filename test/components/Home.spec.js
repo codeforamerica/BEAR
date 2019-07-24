@@ -5,8 +5,12 @@ import renderer from 'react-test-renderer';
 import sinon from 'sinon';
 import Home from '../../app/components/Home';
 
+import * as GogenUtils from '../../app/utils/gogenUtils';
+import * as FileUtils from '../../app/utils/fileUtils';
+
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
+let runScriptSpy;
 
 function setup(isPackaged, platform = 'windows') {
   process.env.HOME = '/tmp/test/home/path';
@@ -14,10 +18,9 @@ function setup(isPackaged, platform = 'windows') {
   process.env.IS_PACKAGED = isPackaged;
   process.env.PLATFORM = platform;
   const spawnChildProcessSpy = createFakeSpawnChildProcess();
-  sinon.useFakeTimers(new Date(2011, 0, 1).getTime());
 
   const component = shallow(<Home spawnChildProcess={spawnChildProcessSpy} />);
-  return { component };
+  return { component, spawnChildProcessSpy };
 }
 
 function createFakeSpawnChildProcess() {
@@ -32,6 +35,13 @@ function createFakeSpawnChildProcess() {
   };
   return sandbox.fake.returns(fakeSpawnResponse);
 }
+
+beforeEach(() => {
+  sandbox.stub(FileUtils, 'getDateTime').returns('Jan_1_2011_0.00.00.AM');
+  runScriptSpy = sandbox.spy();
+  GogenUtils.runScript = runScriptSpy;
+});
+
 afterEach(() => {
   sandbox.restore();
 });
@@ -137,7 +147,7 @@ describe('Home component', () => {
     });
   });
 
-  describe('updateDojFilePath', () => {
+  describe('updateFilePath', () => {
     it('sets the selected file path on the state', () => {
       const { component } = setup('true');
       const filePath = 'path/to/file';
@@ -147,51 +157,18 @@ describe('Home component', () => {
     });
   });
 
-  describe('nextScreen', () => {
-    it('increments state.currentScreen', () => {
+  describe('updateAdditionalReliefOptions', () => {
+    it('updates state.additionalReliefOptions for the given option and value', () => {
       const { component } = setup('true');
-      expect(component.state('currentScreen')).toEqual(0);
-      component.instance().nextScreen();
-      expect(component.state('currentScreen')).toEqual(1);
-    });
-  });
-
-  describe('previousScreen', () => {
-    it('decrements state.currentScreen', () => {
-      const { component } = setup('true');
-      component.instance().setState({ currentScreen: 3 });
-      expect(component.state('currentScreen')).toEqual(3);
-      component.instance().previousScreen();
-      expect(component.state('currentScreen')).toEqual(2);
-    });
-  });
-
-  describe('eligibilityOptionsNextScreen', () => {
-    it('Adds 1 to state.currentScreen if at least one charge is reduced', () => {
-      const { component } = setup('true');
-      component.setState({
-        currentScreen: 3,
-        baselineEligibilityOptions: {
-          '11357(a)': 'reduce',
-          '11357(b)': 'dismiss',
-          '11357(c)': 'dismiss',
-          '11357(d)': 'dismiss',
-          '11358': 'dismiss',
-          '11359': 'dismiss',
-          '11360': 'dismiss'
-        }
-      });
-      expect(component.state('currentScreen')).toEqual(3);
-      component.instance().eligibilityOptionsNextScreen();
-      expect(component.state('currentScreen')).toEqual(4);
-    });
-
-    it('Adds 2 to state.currentScreen if all charges are dismissed', () => {
-      const { component } = setup('true');
-      component.setState({ currentScreen: 3 });
-      expect(component.state('currentScreen')).toEqual(3);
-      component.instance().eligibilityOptionsNextScreen();
-      expect(component.state('currentScreen')).toEqual(5);
+      expect(
+        component.state('additionalReliefOptions').subjectAgeThreshold
+      ).toEqual(40);
+      component
+        .instance()
+        .updateAdditionalReliefOptions('subjectAgeThreshold', 55);
+      expect(
+        component.state('additionalReliefOptions').subjectAgeThreshold
+      ).toEqual(55);
     });
   });
 
@@ -232,6 +209,70 @@ describe('Home component', () => {
       expect(component.state('outputFilePath')).toEqual(
         component.state('outputPathPrefix')
       );
+    });
+  });
+
+  describe('nextScreen', () => {
+    it('increments state.currentScreen', () => {
+      const { component } = setup('true');
+      expect(component.state('currentScreen')).toEqual(0);
+      component.instance().nextScreen();
+      expect(component.state('currentScreen')).toEqual(1);
+    });
+  });
+
+  describe('eligibilityOptionsNextScreen', () => {
+    it('Adds 1 to state.currentScreen if at least one charge is reduced', () => {
+      const { component } = setup('true');
+      component.setState({
+        currentScreen: 3,
+        baselineEligibilityOptions: {
+          '11357(a)': 'reduce',
+          '11357(b)': 'dismiss',
+          '11357(c)': 'dismiss',
+          '11357(d)': 'dismiss',
+          '11358': 'dismiss',
+          '11359': 'dismiss',
+          '11360': 'dismiss'
+        }
+      });
+      expect(component.state('currentScreen')).toEqual(3);
+      component.instance().eligibilityOptionsNextScreen();
+      expect(component.state('currentScreen')).toEqual(4);
+    });
+
+    it('Adds 2 to state.currentScreen if all charges are dismissed', () => {
+      const { component } = setup('true');
+      component.setState({ currentScreen: 3 });
+      expect(component.state('currentScreen')).toEqual(3);
+      component.instance().eligibilityOptionsNextScreen();
+      expect(component.state('currentScreen')).toEqual(5);
+    });
+  });
+
+  describe('previousScreen', () => {
+    it('decrements state.currentScreen', () => {
+      const { component } = setup('true');
+      component.instance().setState({ currentScreen: 3 });
+      expect(component.state('currentScreen')).toEqual(3);
+      component.instance().previousScreen();
+      expect(component.state('currentScreen')).toEqual(2);
+    });
+  });
+
+  describe('runScriptInOptions', () => {
+    it('calls GogenUtils.runScript with the entire state, the provided callback, and spawnChildProcess', () => {
+      const { component, spawnChildProcessSpy } = setup('true');
+      const componentState = component.state();
+      const callback = sandbox.spy();
+      component.instance().runScriptInOptions(callback);
+
+      expect(runScriptSpy.called).toEqual(true);
+      expect(runScriptSpy.callCount).toEqual(1);
+      const { args } = runScriptSpy.getCall(0);
+      expect(args[0]).toEqual(componentState);
+      expect(args[1]).toEqual(spawnChildProcessSpy);
+      expect(args[2]).toEqual(callback);
     });
   });
 

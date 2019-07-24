@@ -1,10 +1,22 @@
 import sinon from 'sinon';
 import fs from 'fs';
 import { runScript, writeSummaryOutput } from '../../app/utils/gogenUtils';
+
 import defaultAnalysisOptions from '../../app/constants/defaultAnalysisOptions';
 
+import * as FileUtils from '../../app/utils/fileUtils';
+
+jest.mock('fs');
+
+const sandbox = sinon.createSandbox();
+
+afterEach(() => {
+  sandbox.restore();
+  jest.clearAllMocks();
+});
+
 describe('runScript', () => {
-  const sandbox = sinon.createSandbox();
+  let fakeCreateJsonFile;
 
   function createFakeSpawnChildProcess() {
     const fakeSpawnResponse = {
@@ -21,21 +33,17 @@ describe('runScript', () => {
 
   function setup() {
     const fakeSpawnChildProcess = createFakeSpawnChildProcess();
-    const fakeCreateJsonFile = sandbox.spy();
     const fakeGogenCallbackFunction = sandbox.spy();
 
     return {
       fakeSpawnChildProcess,
-      fakeCreateJsonFile,
       fakeGogenCallbackFunction
     };
   }
 
-  afterEach(() => {
-    sandbox.restore();
-
-    fs.rmdirSync('outputPath/outputPath');
-    fs.rmdirSync('outputPath');
+  beforeEach(() => {
+    fakeCreateJsonFile = sandbox.spy();
+    FileUtils.createJsonFile = fakeCreateJsonFile;
   });
 
   it('calls child process with values from state', () => {
@@ -48,18 +56,9 @@ describe('runScript', () => {
       outputFilePath: 'outputPath/outputPath'
     };
 
-    const {
-      fakeSpawnChildProcess,
-      fakeCreateJsonFile,
-      fakeGogenCallbackFunction
-    } = setup();
+    const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
-    runScript(
-      state,
-      fakeSpawnChildProcess,
-      fakeCreateJsonFile,
-      fakeGogenCallbackFunction
-    );
+    runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
 
     const { args } = fakeSpawnChildProcess.getCall(0);
     expect(args[0]).toEqual('gogenPath');
@@ -71,6 +70,53 @@ describe('runScript', () => {
       `--county=SACRAMENTO`,
       `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`
     ]);
+  });
+
+  describe('when the output file path already exists', () => {
+    beforeEach(() => {
+      fs.__setExistsSync(true);
+    });
+
+    it('does not try to create it', () => {
+      const state = {
+        ...defaultAnalysisOptions,
+        gogenPath: 'gogenPath',
+        dateTime: 'date',
+        county: { name: 'Sacramento', code: 'SACRAMENTO' },
+        dojFilePath: '/path/to/doj/file',
+        outputFilePath: 'outputPath/outputPath'
+      };
+
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+
+      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+
+      expect(fs.mkdirSync.mock.calls.length).toEqual(0);
+    });
+  });
+
+  describe('when the output file path does NOT exist', () => {
+    beforeEach(() => {
+      fs.__setExistsSync(false);
+    });
+
+    it('creates it', () => {
+      const state = {
+        ...defaultAnalysisOptions,
+        gogenPath: 'gogenPath',
+        dateTime: 'date',
+        county: { name: 'Sacramento', code: 'SACRAMENTO' },
+        dojFilePath: '/path/to/doj/file',
+        outputFilePath: 'outputPath/outputPath'
+      };
+
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+
+      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+
+      expect(fs.mkdirSync.mock.calls.length).toEqual(1);
+      expect(fs.mkdirSync.mock.calls[0][0]).toEqual('outputPath/outputPath');
+    });
   });
 
   describe('transforming eligibility options for consumption by gogen', () => {
@@ -102,16 +148,11 @@ describe('runScript', () => {
         }
       };
 
-      const {
-        fakeSpawnChildProcess,
-        fakeCreateJsonFile,
-        fakeGogenCallbackFunction
-      } = setup();
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
       runScript(
         stateWithReductions,
         fakeSpawnChildProcess,
-        fakeCreateJsonFile,
         fakeGogenCallbackFunction
       );
 
@@ -137,16 +178,11 @@ describe('runScript', () => {
           ...defaultAnalysisOptions
         };
 
-        const {
-          fakeSpawnChildProcess,
-          fakeCreateJsonFile,
-          fakeGogenCallbackFunction
-        } = setup();
+        const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
         runScript(
           stateWithRelief,
           fakeSpawnChildProcess,
-          fakeCreateJsonFile,
           fakeGogenCallbackFunction
         );
 
@@ -196,16 +232,11 @@ describe('runScript', () => {
           }
         };
 
-        const {
-          fakeSpawnChildProcess,
-          fakeCreateJsonFile,
-          fakeGogenCallbackFunction
-        } = setup();
+        const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
         runScript(
           stateWithoutRelief,
           fakeSpawnChildProcess,
-          fakeCreateJsonFile,
           fakeGogenCallbackFunction
         );
 
@@ -222,20 +253,27 @@ describe('runScript', () => {
 describe('writeSummaryOutput', () => {
   beforeEach(() => {
     const gogenOutput = 'output with &&&&&&this is the summary data we want';
-    fs.writeFileSync('tmp.txt', gogenOutput);
+    fs.__setFileContent(gogenOutput);
     const outputPath = '/tmp/';
     writeSummaryOutput(outputPath);
   });
-  afterEach(() => {
-    fs.unlinkSync('/tmp/summaryOutput.txt');
+
+  it('reads the contents of a file named tmp.txt in the project root', () => {
+    expect(fs.readFileSync.mock.calls.length).toEqual(1);
+    expect(fs.readFileSync.mock.calls[0]).toEqual(['tmp.txt', 'utf8']);
   });
 
   it('creates summaryOutput.txt with summary data and without the console progress bar', () => {
-    const outputFromTmpFile = fs.readFileSync('/tmp/summaryOutput.txt', 'utf8');
-    expect(outputFromTmpFile).toEqual('this is the summary data we want');
+    expect(fs.writeFileSync.mock.calls.length).toEqual(1);
+    expect(fs.writeFileSync.mock.calls[0]).toEqual([
+      '/tmp/summaryOutput.txt',
+      'this is the summary data we want',
+      'utf8'
+    ]);
   });
 
   it('deletes the tmp file after reading', () => {
-    expect(fs.existsSync('tmp.txt')).toEqual(false);
+    expect(fs.unlinkSync.mock.calls.length).toEqual(1);
+    expect(fs.unlinkSync.mock.calls[0]).toEqual(['tmp.txt']);
   });
 });

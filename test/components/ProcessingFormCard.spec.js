@@ -1,24 +1,27 @@
-import fs from 'fs';
 import sinon from 'sinon';
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import ProcessingFormCard from '../../app/components/ProcessingFormCard';
 
+import * as FileUtils from '../../app/utils/fileUtils';
+import * as GogenUtils from '../../app/utils/gogenUtils';
+
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
+let writeReportSpy;
 
 function setup() {
   const runScriptSpy = sandbox.spy();
   const startOverSpy = sandbox.spy();
   const resetOutputPathSpy = sandbox.spy();
-  const getFileSizeSpy = sandbox.spy();
+
+  sandbox.stub(FileUtils, 'getFileSize').returns(1000);
 
   const component = shallow(
     <ProcessingFormCard
       dojFilePath="/tmp/path"
       outputFilePath="./test"
-      getFileSize={getFileSizeSpy}
       runScriptInOptions={runScriptSpy}
       onStartOver={startOverSpy}
       resetOutputPath={resetOutputPathSpy}
@@ -33,12 +36,12 @@ function setup() {
 }
 
 beforeEach(() => {
-  fs.writeFileSync('tmp.txt', 'hello world &&&&&& goodbye');
+  writeReportSpy = sandbox.spy();
+  GogenUtils.writeSummaryOutput = writeReportSpy;
 });
 
 afterEach(() => {
   sandbox.restore();
-  fs.unlinkSync('./test/summaryOutput.txt');
 });
 
 describe('ProcessingFormCard component', () => {
@@ -48,6 +51,16 @@ describe('ProcessingFormCard component', () => {
       expect(component.state().gogenComplete).toEqual(false);
       component.instance().onGogenComplete(0, 'OK');
       expect(component.state().gogenComplete).toEqual(true);
+    });
+
+    it('should call writeSummaryReport with the correct path', () => {
+      const { component } = setup();
+      expect(component.state().gogenComplete).toEqual(false);
+      component.instance().onGogenComplete();
+      expect(writeReportSpy.called).toEqual(true);
+      expect(writeReportSpy.callCount).toEqual(1);
+      const { args } = writeReportSpy.getCall(0);
+      expect(args[0]).toEqual('./test');
     });
   });
 });

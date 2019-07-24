@@ -12,7 +12,7 @@ import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import IntroductionFormCard from './IntroductionFormCard';
 import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
-import { createJsonFile, getDateTime, getFileSize } from '../utils/fileUtils';
+import { getDateTime } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
 
 type State = {
@@ -162,7 +162,7 @@ export default class Home extends Component<Props, State> {
 
   runScriptInOptions = (callbackFunction: function) => {
     const { spawnChildProcess } = this.props;
-    runScript(this.state, spawnChildProcess, createJsonFile, callbackFunction);
+    runScript(this.state, spawnChildProcess, callbackFunction);
   };
 
   render() {
@@ -209,7 +209,6 @@ export default class Home extends Component<Props, State> {
           outputFilePath={outputFilePath}
           onComplete={this.nextScreen}
           runScriptInOptions={this.runScriptInOptions}
-          getFileSize={getFileSize}
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
         />

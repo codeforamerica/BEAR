@@ -8,6 +8,7 @@
     }
   },
   "rules": {
-    "react/jsx-boolean-value": "off"
+    "react/jsx-boolean-value": "off",
+    "no-underscore-dangle": "off"
   }
 }

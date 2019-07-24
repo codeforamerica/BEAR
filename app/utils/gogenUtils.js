@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import fs from 'fs';
 import path from 'path';
+import { createJsonFile } from './fileUtils';
 
 function transformBaselineEligibilityOptions(eligibilityOptions) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
@@ -42,7 +43,6 @@ function transformOptionalReliefValues(additionalReliefOptions) {
 export function runScript(
   state,
   spawnChildProcess,
-  createJsonFile,
   childFinishedCallback: function
 ) {
   const {
