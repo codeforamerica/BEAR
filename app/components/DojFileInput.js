@@ -20,7 +20,11 @@ export default class DojFileInput extends Component<Props> {
     const { isFilepathEmpty } = this.props;
 
     if (isFilepathEmpty) {
-      return <p className={styles.emptyMessage}>No file selected</p>;
+      return (
+        <p id="no-error-message" className={styles.emptyMessage}>
+          No file selected
+        </p>
+      );
     }
   };
 

@@ -137,6 +137,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
           </label>
           <p
             className="emptyMessage"
+            id="no-error-message"
           >
             No file selected
           </p>

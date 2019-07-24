@@ -84,6 +84,14 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePaths: updatedFilePath });
   };
 
+  clearFilePath = (removedFilePath: string) => {
+    const { dojFilePaths } = this.state;
+    const newPathsArray = dojFilePaths.filter(
+      dojFilePath => dojFilePath !== removedFilePath
+    );
+    this.setState({ dojFilePaths: newPathsArray });
+  };
+
   // eslint-disable-next-line flowtype/no-weak-types
   updateAdditionalReliefOptions = (reliefOption: string, value: any) => {
     const { additionalReliefOptions } = this.state;
@@ -190,6 +198,7 @@ export default class Home extends Component<Props, State> {
           updateFilePath={this.updateFilePath}
           dojFilePaths={dojFilePaths}
           onFileConfirm={this.nextScreen}
+          onFileRemove={this.clearFilePath}
           onBack={this.previousScreen}
         />
         <EligibilityOptionsFormCard

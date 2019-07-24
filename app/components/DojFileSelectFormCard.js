@@ -16,6 +16,7 @@ type Props = {
   dojFilePaths: Array<string>,
   updateFilePath: string => void,
   onFileConfirm: void => void,
+  onFileRemove: string => void,
   onBack: void => void
 };
 
@@ -24,13 +25,8 @@ export default class DojFileSelectFormCard extends Component<Props> {
     window.scrollTo(0, 0);
   }
 
-  isEmptyFilePath = () => {
-    const { dojFilePaths } = this.props;
-    return dojFilePaths.length === 0;
-  };
-
   renderCardContent = () => {
-    const { dojFilePaths, updateFilePath } = this.props;
+    const { dojFilePaths, updateFilePath, onFileRemove } = this.props;
 
     if (this.isEmptyFilePath()) {
       return (
@@ -48,7 +44,7 @@ export default class DojFileSelectFormCard extends Component<Props> {
               key={path}
               className={styles.outlineBox}
               filePath={path}
-              onFileRemove={updateFilePath}
+              onFileRemove={onFileRemove}
             />
           );
         })}
@@ -58,6 +54,11 @@ export default class DojFileSelectFormCard extends Component<Props> {
         />
       </div>
     );
+  };
+
+  isEmptyFilePath = () => {
+    const { dojFilePaths } = this.props;
+    return dojFilePaths.length === 0;
   };
 
   render() {
