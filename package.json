@@ -55,8 +55,8 @@
   },
   "main": "./app/main.prod.js",
   "build": {
-    "productName": "BEAR",
-    "appId": "org.develar.BEAR",
+    "appId": "org.codeforamerica.BEAR",
+    "productName": "Clear my Record BEAR",
     "files": [
       "app/dist/",
       "app/app.html",
