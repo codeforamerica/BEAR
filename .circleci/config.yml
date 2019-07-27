@@ -77,6 +77,10 @@ workflows:
           type: approval
           requires:
             - build
+          filters:
+            branches:
+              only:
+                - master
       - package:
           requires:
             - hold
