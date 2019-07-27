@@ -3,8 +3,9 @@ import React, { Component } from 'react';
 
 type Props = {
   fileSizeInBytes: number,
-  onCompleteCallback: void => void,
-  isComplete: boolean
+  onCompleteCallback: number => void,
+  isComplete: boolean,
+  gogenExitCode: number
 };
 
 type State = {
@@ -38,13 +39,16 @@ export default class ProgressBar extends Component<Props, State> {
   }
 
   tick() {
-    const { isComplete } = this.props;
+    const { isComplete, gogenExitCode, onCompleteCallback } = this.props;
     const { stepSize, fill } = this.state;
+    if (gogenExitCode > 0) {
+      onCompleteCallback(gogenExitCode);
+      return;
+    }
     if (isComplete) {
       if (fill === MAX_FILL) {
         clearInterval(this.timerID);
-        const { onCompleteCallback } = this.props;
-        onCompleteCallback();
+        onCompleteCallback(0);
         return;
       }
       if (stepSize !== MAX_FILL / MAX_STEP_SIZE) {

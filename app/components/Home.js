@@ -14,6 +14,7 @@ import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 import { getDateTime } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
+import ErrorFormCard from './ErrorFormCard';
 
 type State = {
   gogenPath: string,
@@ -151,6 +152,15 @@ export default class Home extends Component<Props, State> {
     }
   };
 
+  processingNextScreen = (code: number) => {
+    if (code === 0) {
+      this.nextScreen();
+    } else {
+      // TODO Fix magic
+      this.setState({ currentScreen: 7 });
+    }
+  };
+
   previousScreen = () => {
     const { currentScreen } = this.state;
     this.setState({ currentScreen: currentScreen - 1 });
@@ -207,7 +217,7 @@ export default class Home extends Component<Props, State> {
         <ProcessingFormCard
           dojFilePath={dojFilePath}
           outputFilePath={outputFilePath}
-          onComplete={this.nextScreen}
+          onComplete={this.processingNextScreen}
           runScriptInOptions={this.runScriptInOptions}
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
@@ -219,6 +229,7 @@ export default class Home extends Component<Props, State> {
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
         />
+        <ErrorFormCard onStartOver={this.resetInitialState} />
       </PageContainer>
     );
   }

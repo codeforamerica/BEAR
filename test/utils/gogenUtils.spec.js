@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import fs from 'fs';
-import { runScript, writeSummaryOutput } from '../../app/utils/gogenUtils';
+import { runScript } from '../../app/utils/gogenUtils';
 
 import defaultAnalysisOptions from '../../app/constants/defaultAnalysisOptions';
 
@@ -247,33 +247,5 @@ describe('runScript', () => {
         expect(args[0].additionalRelief.yearsCrimeFreeThreshold).toBe(0);
       });
     });
-  });
-});
-
-describe('writeSummaryOutput', () => {
-  beforeEach(() => {
-    const gogenOutput = 'output with &&&&&&this is the summary data we want';
-    fs.__setFileContent(gogenOutput);
-    const outputPath = '/tmp/';
-    writeSummaryOutput(outputPath);
-  });
-
-  it('reads the contents of a file named tmp.txt in the project root', () => {
-    expect(fs.readFileSync.mock.calls.length).toEqual(1);
-    expect(fs.readFileSync.mock.calls[0]).toEqual(['tmp.txt', 'utf8']);
-  });
-
-  it('creates summaryOutput.txt with summary data and without the console progress bar', () => {
-    expect(fs.writeFileSync.mock.calls.length).toEqual(1);
-    expect(fs.writeFileSync.mock.calls[0]).toEqual([
-      '/tmp/summaryOutput.txt',
-      'this is the summary data we want',
-      'utf8'
-    ]);
-  });
-
-  it('deletes the tmp file after reading', () => {
-    expect(fs.unlinkSync.mock.calls.length).toEqual(1);
-    expect(fs.unlinkSync.mock.calls[0]).toEqual(['tmp.txt']);
   });
 });

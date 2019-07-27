@@ -40,6 +40,7 @@ function transformOptionalReliefValues(additionalReliefOptions) {
   return transformedOptions;
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export function runScript(
   state,
   spawnChildProcess,
@@ -89,28 +90,5 @@ export function runScript(
     `--eligibility-options=${pathToEligibilityOptions}`
   ]);
 
-  goProcess.stdout.on('data', data => {
-    const dataString = data.toString();
-    console.log('stdout: ', dataString);
-    fs.appendFileSync('tmp.txt', data);
-  });
-
-  goProcess.on('close', childFinishedCallback);
-  goProcess.on('error', error => {
-    console.error(error);
-    childFinishedCallback();
-  });
-
-  goProcess.stderr.on('data', data => {
-    console.log(`stderr: ${data}`);
-  });
-}
-
-export function writeSummaryOutput(outputFilePath) {
-  const filename = 'summaryOutput.txt';
-  const pathToOutputFile = path.join(outputFilePath, filename);
-  const fullOutputText = fs.readFileSync('tmp.txt', 'utf8');
-  const summaryText = fullOutputText.split('&&&&&&')[1];
-  fs.writeFileSync(pathToOutputFile, summaryText, 'utf8');
-  fs.unlinkSync('tmp.txt');
+  goProcess.on('exit', childFinishedCallback);
 }
