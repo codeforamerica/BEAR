@@ -3,7 +3,7 @@
 exports[`Home component should match exact snapshot 1`] = `
 <div>
   <div
-    className="slab"
+    className="pageContainer slab"
   >
     <header
       className="main-header"
@@ -112,6 +112,61 @@ exports[`Home component should match exact snapshot 1`] = `
         />
       </div>
     </div>
+    <footer
+      className="footer"
+    >
+      <div
+        className="footerMedia media-box media-box--reversed"
+      >
+        <div
+          className="media-box__media media--icon"
+        >
+          <div
+            className="logo illustration--cfa-logo__dark"
+          />
+        </div>
+        <div
+          className="footerContent media-box__content"
+        >
+          <div
+            className="footerLinks"
+          >
+            <a
+              className="footerLink link--subtle"
+              href="#"
+            >
+              Frequently Asked Questions
+            </a>
+            <a
+              className="footerLink link--subtle"
+              href="#"
+            >
+              Terms of Service
+            </a>
+            <a
+              className="footerLink link--subtle"
+              href="#"
+            >
+              Help Documents
+            </a>
+          </div>
+          <div
+            className="footerMessage"
+          >
+            Clear My Record is a service delivered by
+             
+            <a
+              className="link--subtle"
+              href="https://www.codeforamerica.org"
+            >
+              Code for America
+            </a>
+             
+            on behalf of the people of California.
+          </div>
+        </div>
+      </div>
+    </footer>
   </div>
 </div>
 `;

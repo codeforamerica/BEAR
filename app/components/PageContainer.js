@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PageHeader from './PageHeader';
 import PageContent from './PageContent';
+import PageFooter from './PageFooter';
+import styles from './PageContainer.css';
 
 type Props = {
   children: [Component],
@@ -11,12 +13,13 @@ export default class PageContainer extends Component<Props, State> {
   render() {
     const { children, currentScreen } = this.props;
     return (
-      <div className="slab">
+      <div className={`${styles.pageContainer} slab`}>
         <PageHeader />
         <PageContent>{children[currentScreen]}</PageContent>
+        <PageFooter />
       </div>
     );
   }
 }
 
-export { PageContent, PageHeader };
+export { PageFooter, PageContent, PageHeader };
