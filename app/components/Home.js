@@ -168,7 +168,7 @@ export default class Home extends Component<Props, State> {
   };
 
   resetInitialState = () => {
-    this.setState(defaultAnalysisOptions);
+    this.setState({ ...defaultAnalysisOptions, dojFilePaths: [] });
   };
 
   runScriptInOptions = (callbackFunction: function) => {

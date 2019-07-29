@@ -240,6 +240,63 @@ describe('Home component', () => {
     });
   });
 
+  describe('resetInitialState', () => {
+    it('resets the state to the initial state', () => {
+      const { component } = setup('true');
+      component.instance().setState({
+        currentScreen: 3,
+        county: { name: 'Eternia', code: 'ETERNIA' },
+        dojFilePaths: ['path/to/file#1', 'path/to/file#2'],
+        baselineEligibilityOptions: {
+          '11357(a)': 'dismiss',
+          '11357(b)': 'reduce',
+          '11357(c)': 'reduce',
+          '11357(d)': 'dismiss',
+          '11357(no-sub-section)': 'dismiss',
+          '11358': 'dismiss',
+          '11359': 'reduce',
+          '11360': 'dismiss'
+        },
+        additionalReliefOptions: {
+          subjectUnder21AtConviction: false,
+          dismissOlderThanAgeThreshold: true,
+          subjectAgeThreshold: 60,
+          dismissYearsSinceConvictionThreshold: true,
+          yearsSinceConvictionThreshold: 10,
+          dismissYearsCrimeFreeThreshold: true,
+          yearsCrimeFreeThreshold: 10,
+          subjectHasOnlyProp64Charges: true,
+          subjectIsDeceased: false
+        }
+      });
+      component.instance().resetInitialState();
+      expect(component.state('currentScreen')).toEqual(0);
+      expect(component.state('county')).toEqual({ name: '', code: '' });
+      expect(component.state('dojFilePaths')).toEqual([]);
+      expect(component.state('baselineEligibilityOptions')).toEqual({
+        '11357(a)': 'dismiss',
+        '11357(b)': 'dismiss',
+        '11357(c)': 'dismiss',
+        '11357(d)': 'dismiss',
+        '11357(no-sub-section)': 'dismiss',
+        '11358': 'dismiss',
+        '11359': 'dismiss',
+        '11360': 'dismiss'
+      });
+      expect(component.state('additionalReliefOptions')).toEqual({
+        subjectUnder21AtConviction: true,
+        dismissOlderThanAgeThreshold: true,
+        subjectAgeThreshold: 40,
+        dismissYearsSinceConvictionThreshold: true,
+        yearsSinceConvictionThreshold: 5,
+        dismissYearsCrimeFreeThreshold: true,
+        yearsCrimeFreeThreshold: 5,
+        subjectHasOnlyProp64Charges: true,
+        subjectIsDeceased: true
+      });
+    });
+  });
+
   it('should match exact snapshot', () => {
     const counter = (
       <div>
