@@ -25,7 +25,8 @@ type State = {
   baselineEligibilityOptions: BaselineEligibilityOptions,
   additionalReliefOptions: AdditionalReliefOptions,
   outputPathPrefix: string,
-  outputFilePath: string
+  outputFilePath: string,
+  gogenFailureValidation: boolean
 };
 
 type Props = {
@@ -157,7 +158,8 @@ export default class Home extends Component<Props, State> {
       this.nextScreen();
     } else {
       // TODO Fix magic
-      this.setState({ currentScreen: 7 });
+      this.setState({ currentScreen: 7, gogenFailureValidation: code === 2 });
+      console.log(this.state);
     }
   };
 
@@ -182,7 +184,8 @@ export default class Home extends Component<Props, State> {
       dojFilePath,
       outputFilePath,
       baselineEligibilityOptions,
-      additionalReliefOptions
+      additionalReliefOptions,
+      gogenFailureValidation
     } = this.state;
     return (
       <PageContainer currentScreen={currentScreen}>
@@ -229,7 +232,11 @@ export default class Home extends Component<Props, State> {
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
         />
-        <ErrorFormCard onStartOver={this.resetInitialState} />
+        <ErrorFormCard
+          onStartOver={this.resetInitialState}
+          gogenFailureValidation={gogenFailureValidation}
+          errorText="Bad stuff"
+        />
       </PageContainer>
     );
   }
