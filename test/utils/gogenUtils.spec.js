@@ -64,7 +64,7 @@ describe('runScript', () => {
     expect(args[0]).toEqual('gogenPath');
     expect(args[1]).toEqual([
       `run`,
-      `--date-for-file-name=date`,
+      `--file-name-suffix=date`,
       `--input-doj=/path/to/doj/file`,
       `--outputs=outputPath/outputPath`,
       `--county=SACRAMENTO`,
