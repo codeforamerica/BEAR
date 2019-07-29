@@ -1,6 +1,6 @@
 {
-  "name": "bear",
-  "productName": "Clear my Record BEAR",
+  "name": "clearmyrecord-bear",
+  "productName": "BEAR",
   "version": "0.1.0",
   "description": "Bulk Expungement Analysis of Records (BEAR). Electron app to configure eligibility logic and identify convictions eligible for Prop 64 relief",
   "scripts": {
@@ -56,7 +56,7 @@
   "main": "./app/main.prod.js",
   "build": {
     "appId": "org.codeforamerica.BEAR",
-    "productName": "Clear my Record BEAR",
+    "productName": "BEAR",
     "files": [
       "app/dist/",
       "app/app.html",
