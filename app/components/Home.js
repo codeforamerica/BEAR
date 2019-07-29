@@ -26,7 +26,8 @@ type State = {
   additionalReliefOptions: AdditionalReliefOptions,
   outputPathPrefix: string,
   outputFilePath: string,
-  gogenFailureValidation: boolean
+  gogenFailureValidation: boolean,
+  errorText: string
 };
 
 type Props = {
@@ -153,13 +154,16 @@ export default class Home extends Component<Props, State> {
     }
   };
 
-  processingNextScreen = (code: number) => {
+  processingNextScreen = (code: number, errorText: string) => {
     if (code === 0) {
       this.nextScreen();
     } else {
       // TODO Fix magic
-      this.setState({ currentScreen: 7, gogenFailureValidation: code === 2 });
-      console.log(this.state);
+      this.setState({
+        currentScreen: 7,
+        gogenFailureValidation: code === 2,
+        errorText
+      });
     }
   };
 
@@ -185,7 +189,8 @@ export default class Home extends Component<Props, State> {
       outputFilePath,
       baselineEligibilityOptions,
       additionalReliefOptions,
-      gogenFailureValidation
+      gogenFailureValidation,
+      errorText
     } = this.state;
     return (
       <PageContainer currentScreen={currentScreen}>
@@ -235,7 +240,7 @@ export default class Home extends Component<Props, State> {
         <ErrorFormCard
           onStartOver={this.resetInitialState}
           gogenFailureValidation={gogenFailureValidation}
-          errorText="Bad stuff"
+          errorText={errorText}
         />
       </PageContainer>
     );

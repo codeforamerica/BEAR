@@ -90,5 +90,14 @@ export function runScript(
     `--eligibility-options=${pathToEligibilityOptions}`
   ]);
 
-  goProcess.on('exit', childFinishedCallback);
+  goProcess.on('exit', code => {
+    let errorText = '';
+    if (code !== 0) {
+      errorText = fs.readFileSync(
+        `${outputFilePath}/gogen_${dateTime}.err`,
+        'utf8'
+      );
+    }
+    childFinishedCallback(code, errorText);
+  });
 }

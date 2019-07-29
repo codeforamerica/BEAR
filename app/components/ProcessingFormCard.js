@@ -12,15 +12,16 @@ import { getFileSize } from '../utils/fileUtils';
 
 type Props = {
   dojFilePath: string,
-  onComplete: number => void,
-  runScriptInOptions: ((number) => void) => void,
+  onComplete: (number, string) => void,
+  runScriptInOptions: ((number, string) => void) => void,
   onStartOver: void => void,
   resetOutputPath: void => void
 };
 
 type State = {
   gogenComplete: boolean,
-  gogenExitCode: number
+  gogenExitCode: number,
+  errorText: string
 };
 
 export default class ProcessingFormCard extends Component<Props, State> {
@@ -28,7 +29,8 @@ export default class ProcessingFormCard extends Component<Props, State> {
     super(props);
     this.state = {
       gogenComplete: false,
-      gogenExitCode: -1
+      gogenExitCode: -1,
+      errorText: ''
     };
   }
 
@@ -44,13 +46,13 @@ export default class ProcessingFormCard extends Component<Props, State> {
     onStartOver();
   };
 
-  onGogenComplete = (code: number) => {
-    this.setState({ gogenComplete: true, gogenExitCode: code });
+  onGogenComplete = (code: number, errorText: string) => {
+    this.setState({ gogenComplete: true, gogenExitCode: code, errorText });
   };
 
   render() {
     const { dojFilePath, onComplete } = this.props;
-    const { gogenComplete, gogenExitCode } = this.state;
+    const { gogenComplete, gogenExitCode, errorText } = this.state;
     return (
       <FormCard>
         <FormCardHeader />
@@ -63,6 +65,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
               onCompleteCallback={onComplete}
               isComplete={gogenComplete}
               gogenExitCode={gogenExitCode}
+              errorText={errorText}
             />
             <StartOverButton onStartOver={this.onClickStartOver} />
           </div>
