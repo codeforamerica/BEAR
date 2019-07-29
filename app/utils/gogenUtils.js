@@ -93,7 +93,8 @@ export function runScript(
       `--input-doj=${filePath}`,
       `--outputs=${updatedFilePath}`,
       `--county=${countyCode}`,
-      `--eligibility-options=${pathToEligibilityOptions}`
+      `--eligibility-options=${pathToEligibilityOptions}`,
+      `--compute-at=2020-07-01`
     ]);
     goProcess.stdout.on('data', data => {
       const dataString = data.toString();

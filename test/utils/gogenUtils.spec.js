@@ -69,7 +69,8 @@ describe('runScript', () => {
         `--input-doj=/first/path`,
         `--outputs=outputPath/outputPath`,
         `--county=SACRAMENTO`,
-        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`
+        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`,
+        `--compute-at=2020-07-01`
       ]);
     });
   });
