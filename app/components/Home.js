@@ -20,7 +20,7 @@ type State = {
   dateTime: string,
   currentScreen: number,
   county: County,
-  dojFilePath: string,
+  dojFilePaths: Array<string>,
   baselineEligibilityOptions: BaselineEligibilityOptions,
   additionalReliefOptions: AdditionalReliefOptions,
   outputPathPrefix: string,
@@ -69,6 +69,7 @@ export default class Home extends Component<Props, State> {
       dateTime: '',
       outputPathPrefix: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
       outputFilePath: '',
+      dojFilePaths: [],
       ...defaultAnalysisOptions
     };
   }
@@ -78,7 +79,18 @@ export default class Home extends Component<Props, State> {
   };
 
   updateFilePath = (dojFilePath: string) => {
-    this.setState({ dojFilePath });
+    const { dojFilePaths } = this.state;
+    const updatedFilePath = dojFilePaths;
+    updatedFilePath.push(dojFilePath);
+    this.setState({ dojFilePaths: updatedFilePath });
+  };
+
+  clearFilePath = (removedFilePath: string) => {
+    const { dojFilePaths } = this.state;
+    const newPathsArray = dojFilePaths.filter(
+      dojFilePath => dojFilePath !== removedFilePath
+    );
+    this.setState({ dojFilePaths: newPathsArray });
   };
 
   // eslint-disable-next-line flowtype/no-weak-types
@@ -157,7 +169,7 @@ export default class Home extends Component<Props, State> {
   };
 
   resetInitialState = () => {
-    this.setState(defaultAnalysisOptions);
+    this.setState({ ...defaultAnalysisOptions, dojFilePaths: [] });
   };
 
   runScriptInOptions = (callbackFunction: function) => {
@@ -169,7 +181,7 @@ export default class Home extends Component<Props, State> {
     const {
       currentScreen,
       county,
-      dojFilePath,
+      dojFilePaths,
       outputFilePath,
       baselineEligibilityOptions,
       additionalReliefOptions
@@ -185,8 +197,9 @@ export default class Home extends Component<Props, State> {
         <DojFileSelectFormCard
           countyName={county.name}
           updateFilePath={this.updateFilePath}
-          dojFilePath={dojFilePath}
+          dojFilePaths={dojFilePaths}
           onFileConfirm={this.nextScreen}
+          onFileRemove={this.clearFilePath}
           onBack={this.previousScreen}
         />
         <EligibilityOptionsFormCard
@@ -205,7 +218,7 @@ export default class Home extends Component<Props, State> {
           onBack={this.previousScreen}
         />
         <ProcessingFormCard
-          dojFilePath={dojFilePath}
+          dojFilePath={dojFilePaths[0]}
           outputFilePath={outputFilePath}
           onComplete={this.nextScreen}
           runScriptInOptions={this.runScriptInOptions}

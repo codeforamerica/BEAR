@@ -14,20 +14,20 @@ export default class DojFileItem extends Component<Props> {
     return filePath.split(path.sep).pop();
   };
 
-  handleFileRemove = () => {
-    const { onFileRemove } = this.props;
-    onFileRemove('');
+  fileRemove = () => {
+    const { filePath, onFileRemove } = this.props;
+    onFileRemove(filePath);
   };
 
   render() {
     return (
-      <div className="doj-file">
+      <div className={`${styles.addPadding} doj-file`}>
         <p className={styles.fileName}>
           File imported: {this.formatFileName()}
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}
           <i
             className={`${styles.fileRemove} icon-close`}
-            onClick={this.handleFileRemove}
+            onClick={this.fileRemove}
             role="button"
           />
         </p>

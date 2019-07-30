@@ -30,12 +30,12 @@ describe('DojFileItem component', () => {
     expect(fileName.text()).toEqual('File imported: file.dat');
   });
 
-  it('should call onFileRemove with empty string when the close icon is clicked', () => {
+  it('should call onFileRemove with the clicked path when the close icon is clicked', () => {
     const { component, onFileRemoveSpy } = setup('path/to/file.dat');
     component.find('.icon-close').simulate('click');
     expect(onFileRemoveSpy.called).toBe(true);
     const { args } = onFileRemoveSpy.getCall(0);
-    expect(args[0]).toEqual('');
+    expect(args[0]).toEqual('path/to/file.dat');
   });
 
   it('should match exact snapshot', () => {

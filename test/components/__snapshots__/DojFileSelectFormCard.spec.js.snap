@@ -25,20 +25,39 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       <div
         className="outlineBox"
       >
-        <div
-          className="doj-file"
-        >
-          <p
-            className="fileName"
+        <div>
+          <div
+            className="addPadding doj-file"
           >
-            File imported: 
-            file
-            <i
-              className="fileRemove icon-close"
-              onClick={[Function]}
-              role="button"
-            />
-          </p>
+            <p
+              className="fileName"
+            >
+              File imported: 
+              file
+              <i
+                className="fileRemove icon-close"
+                onClick={[Function]}
+                role="button"
+              />
+            </p>
+          </div>
+          <div>
+            <label
+              className="noBottomMargin button file-upload__label"
+              htmlFor="doj-file-input"
+            >
+              <input
+                accept=".dat, .csv"
+                className="file-upload__input"
+                id="doj-file-input"
+                multiple={true}
+                name="doj-file-input"
+                onChange={[Function]}
+                type="file"
+              />
+              Select file
+            </label>
+          </div>
         </div>
       </div>
     </div>
@@ -100,9 +119,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       <div
         className="outlineBox"
       >
-        <div
-          className="file-upload"
-        >
+        <div>
           <label
             className="noBottomMargin button file-upload__label"
             htmlFor="doj-file-input"
@@ -111,6 +128,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
               accept=".dat, .csv"
               className="file-upload__input"
               id="doj-file-input"
+              multiple={true}
               name="doj-file-input"
               onChange={[Function]}
               type="file"
@@ -119,6 +137,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
           </label>
           <p
             className="emptyMessage"
+            id="no-error-message"
           >
             No file selected
           </p>

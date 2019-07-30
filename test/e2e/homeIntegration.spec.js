@@ -1,4 +1,3 @@
-import fs from 'fs';
 import sleep from '../../app/utils/testHelpers';
 
 const { Application } = require('spectron');
@@ -13,7 +12,6 @@ describe('The happy path', () => {
       path: electronPath,
       args: [path.join(__dirname, '../..')]
     });
-    fs.writeFileSync('tmp.txt', 'hello world &&&&&& goodbye');
     return app.start();
   });
 
@@ -84,8 +82,8 @@ describe('The happy path', () => {
     await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
     await app.client.click('.icon-close');
 
-    const buttonText = await app.client.getText('.file-upload__label');
-    expect(buttonText).toEqual('Select file');
+    const fileName = await app.client.getText('#no-error-message');
+    expect(fileName).toEqual('No file selected');
   });
 
   it('can select doj file and continue to eligibility options screen', async () => {

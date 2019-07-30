@@ -2,7 +2,7 @@
 
 exports[`DojFileItem component should match exact snapshot 1`] = `
 <div
-  className="doj-file"
+  className="addPadding doj-file"
 >
   <p
     className="fileName"

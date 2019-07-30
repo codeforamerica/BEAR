@@ -13,9 +13,10 @@ import GoBackButton from './GoBackButton';
 import styles from './DojFileSelectFormCard.css';
 
 type Props = {
-  dojFilePath: string,
+  dojFilePaths: Array<string>,
   updateFilePath: string => void,
   onFileConfirm: void => void,
+  onFileRemove: string => void,
   onBack: void => void
 };
 
@@ -25,21 +26,43 @@ export default class DojFileSelectFormCard extends Component<Props> {
   }
 
   renderCardContent = () => {
-    const { dojFilePath, updateFilePath } = this.props;
-    if (dojFilePath !== '') {
+    const { dojFilePaths, updateFilePath, onFileRemove } = this.props;
+
+    if (this.isEmptyFilePath()) {
       return (
-        <DojFileItem
-          className={styles.outlineBox}
-          filePath={dojFilePath}
-          onFileRemove={updateFilePath}
+        <DojFileInput
+          onFileSelect={updateFilePath}
+          isFilepathEmpty={this.isEmptyFilePath()}
         />
       );
     }
-    return <DojFileInput onFileSelect={updateFilePath} />;
+    return (
+      <div>
+        {dojFilePaths.map(path => {
+          return (
+            <DojFileItem
+              key={path}
+              className={styles.outlineBox}
+              filePath={path}
+              onFileRemove={onFileRemove}
+            />
+          );
+        })}
+        <DojFileInput
+          onFileSelect={updateFilePath}
+          isFilepathEmpty={this.isEmptyFilePath()}
+        />
+      </div>
+    );
+  };
+
+  isEmptyFilePath = () => {
+    const { dojFilePaths } = this.props;
+    return dojFilePaths.length === 0;
   };
 
   render() {
-    const { dojFilePath, onBack, onFileConfirm } = this.props;
+    const { onBack, onFileConfirm } = this.props;
 
     return (
       <FormCard>
@@ -54,7 +77,7 @@ export default class DojFileSelectFormCard extends Component<Props> {
           <div className="buttons">
             <ContinueButton
               onContinue={onFileConfirm}
-              disabled={dojFilePath === ''}
+              disabled={this.isEmptyFilePath()}
             />
             <GoBackButton onGoBack={onBack} />
           </div>

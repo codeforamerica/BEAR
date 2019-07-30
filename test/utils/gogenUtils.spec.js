@@ -46,30 +46,112 @@ describe('runScript', () => {
     FileUtils.createJsonFile = fakeCreateJsonFile;
   });
 
-  it('calls child process with values from state', () => {
+  describe('running gogen on a single file', () => {
+    it('sets outputPath equal to state', () => {
+      const state = {
+        ...defaultAnalysisOptions,
+        gogenPath: 'gogenPath',
+        dateTime: 'date',
+        county: { name: 'Sacramento', code: 'SACRAMENTO' },
+        dojFilePaths: ['/first/path'],
+        outputFilePath: 'outputPath/outputPath'
+      };
+
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+
+      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+
+      const { args } = fakeSpawnChildProcess.getCall(0);
+      expect(args[0]).toEqual('gogenPath');
+      expect(args[1]).toEqual([
+        `run`,
+        `--file-name-suffix=date`,
+        `--input-doj=/first/path`,
+        `--outputs=outputPath/outputPath`,
+        `--county=SACRAMENTO`,
+        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`
+      ]);
+    });
+  });
+  describe('running gogen on multiple files', () => {
+    it('calls child process with values from state on item 0 & makes numbered folders', () => {
+      const state = {
+        ...defaultAnalysisOptions,
+        gogenPath: 'gogenPath',
+        dateTime: 'date',
+        county: { name: 'Sacramento', code: 'SACRAMENTO' },
+        dojFilePaths: ['/first/path', '/last/path'],
+        outputFilePath: 'outputPath/outputPath'
+      };
+
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+
+      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+
+      const { args } = fakeSpawnChildProcess.getCall(0);
+      expect(args[0]).toEqual('gogenPath');
+      expect(args[1]).toEqual([
+        `run`,
+        `--file-name-suffix=#1_date`,
+        `--input-doj=/first/path`,
+        `--outputs=outputPath/outputPath/#1`,
+        `--county=SACRAMENTO`,
+        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`
+      ]);
+    });
+
+    it('calls child process with values from state on item 1', () => {
+      const state = {
+        ...defaultAnalysisOptions,
+        gogenPath: 'gogenPath',
+        dateTime: 'date',
+        county: { name: 'Sacramento', code: 'SACRAMENTO' },
+        dojFilePaths: ['/first/path', '/last/path'],
+        outputFilePath: 'outputPath/outputPath'
+      };
+
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+
+      runScript(
+        state,
+        fakeSpawnChildProcess,
+        fakeCreateJsonFile,
+        fakeGogenCallbackFunction
+      );
+      const { args } = fakeSpawnChildProcess.getCall(1);
+      expect(args[0]).toEqual('gogenPath');
+      expect(args[1]).toEqual([
+        `run`,
+        `--file-name-suffix=#2_date`,
+        `--input-doj=/last/path`,
+        `--outputs=outputPath/outputPath/#2`,
+        `--county=SACRAMENTO`,
+        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`
+      ]);
+    });
+  });
+
+  it('calls child process n times, where n is the length of the dojFilePaths array', () => {
     const state = {
       ...defaultAnalysisOptions,
       gogenPath: 'gogenPath',
       dateTime: 'date',
       county: { name: 'Sacramento', code: 'SACRAMENTO' },
-      dojFilePath: '/path/to/doj/file',
+      dojFilePaths: ['zero/path', 'one/path', 'two/path'],
       outputFilePath: 'outputPath/outputPath'
     };
 
     const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
-    runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+    runScript(
+      state,
+      fakeSpawnChildProcess,
+      fakeCreateJsonFile,
+      fakeGogenCallbackFunction
+    );
 
-    const { args } = fakeSpawnChildProcess.getCall(0);
-    expect(args[0]).toEqual('gogenPath');
-    expect(args[1]).toEqual([
-      `run`,
-      `--file-name-suffix=date`,
-      `--input-doj=/path/to/doj/file`,
-      `--outputs=outputPath/outputPath`,
-      `--county=SACRAMENTO`,
-      `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`
-    ]);
+    expect(fakeSpawnChildProcess.called).toBe(true);
+    expect(fakeSpawnChildProcess.callCount).toEqual(3);
   });
 
   describe('when the output file path already exists', () => {
@@ -83,7 +165,7 @@ describe('runScript', () => {
         gogenPath: 'gogenPath',
         dateTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
-        dojFilePath: '/path/to/doj/file',
+        dojFilePaths: ['/path/to/doj/file'],
         outputFilePath: 'outputPath/outputPath'
       };
 
@@ -106,14 +188,13 @@ describe('runScript', () => {
         gogenPath: 'gogenPath',
         dateTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
-        dojFilePath: '/path/to/doj/file',
+        dojFilePaths: ['/path/to/doj/file'],
         outputFilePath: 'outputPath/outputPath'
       };
 
       const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
       runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
-
       expect(fs.mkdirSync.mock.calls.length).toEqual(1);
       expect(fs.mkdirSync.mock.calls[0][0]).toEqual('outputPath/outputPath');
     });
@@ -125,7 +206,7 @@ describe('runScript', () => {
         gogenPath: 'gogenPath',
         dateTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
-        dojFilePath: '/path/to/doj/file',
+        dojFilePaths: ['/path/to/doj/file', 'hello'],
         outputFilePath: 'outputPath/outputPath',
         baselineEligibilityOptions: {
           '11357(a)': 'reduce',
@@ -173,7 +254,7 @@ describe('runScript', () => {
           gogenPath: 'gogenPath',
           dateTime: 'date',
           county: { name: 'Sacramento', code: 'SACRAMENTO' },
-          dojFilePath: '/path/to/doj/file',
+          dojFilePaths: ['/path/to/doj/file'],
           outputFilePath: 'outputPath/outputPath',
           ...defaultAnalysisOptions
         };
@@ -208,7 +289,7 @@ describe('runScript', () => {
           gogenPath: 'gogenPath',
           dateTime: 'date',
           county: { name: 'Sacramento', code: 'SACRAMENTO' },
-          dojFilePath: '/path/to/doj/file',
+          dojFilePaths: ['/path/to/doj/file'],
           outputFilePath: 'outputPath/outputPath',
           baselineEligibilityOptions: {
             '11357(a)': 'dismiss',
@@ -252,28 +333,16 @@ describe('runScript', () => {
 
 describe('writeSummaryOutput', () => {
   beforeEach(() => {
-    const gogenOutput = 'output with &&&&&&this is the summary data we want';
-    fs.__setFileContent(gogenOutput);
+    fs.__writeFileSync('this is summary text');
     const outputPath = '/tmp/';
     writeSummaryOutput(outputPath);
   });
-
-  it('reads the contents of a file named tmp.txt in the project root', () => {
-    expect(fs.readFileSync.mock.calls.length).toEqual(1);
-    expect(fs.readFileSync.mock.calls[0]).toEqual(['tmp.txt', 'utf8']);
+  afterEach(() => {
+    fs.unlinkSync('/tmp/summaryOutput.txt');
   });
 
   it('creates summaryOutput.txt with summary data and without the console progress bar', () => {
-    expect(fs.writeFileSync.mock.calls.length).toEqual(1);
-    expect(fs.writeFileSync.mock.calls[0]).toEqual([
-      '/tmp/summaryOutput.txt',
-      'this is the summary data we want',
-      'utf8'
-    ]);
-  });
-
-  it('deletes the tmp file after reading', () => {
-    expect(fs.unlinkSync.mock.calls.length).toEqual(1);
-    expect(fs.unlinkSync.mock.calls[0]).toEqual(['tmp.txt']);
+    const outputFromTmpFile = fs.readFileSync('/tmp/summaryOutput.txt', 'utf8');
+    expect(outputFromTmpFile).toEqual('this is summary text');
   });
 });
