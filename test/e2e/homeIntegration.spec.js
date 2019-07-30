@@ -6,6 +6,22 @@ const { Application } = require('spectron');
 const electronPath = require('electron'); // Require Electron from the binaries included in node_modules.
 const path = require('path');
 
+let outputDirectory;
+
+function removeDirectory(dirPath) {
+  if (fs.existsSync(dirPath)) {
+    fs.readdirSync(dirPath).forEach(function(entry) {
+      const entryPath = path.join(dirPath, entry);
+      fs.unlinkSync(entryPath);
+    });
+    fs.rmdirSync(dirPath);
+  }
+}
+
+function getOutputDirectoryPath(dateTime) {
+  return `${process.env.HOME}/Desktop/Clear_My_Record_output/CMR_output_${dateTime}`;
+}
+
 describe('The happy path', () => {
   let app;
 
@@ -19,6 +35,7 @@ describe('The happy path', () => {
   });
 
   afterEach(() => {
+    removeDirectory(outputDirectory);
     if (app && app.isRunning()) {
       return app.stop();
     }
@@ -133,6 +150,7 @@ describe('The happy path', () => {
     await app.client.click('#continue');
 
     await app.client.click('#continue');
+    outputDirectory = getOutputDirectoryPath(getDateTime());
 
     const processingCardContent = await app.client.getText(
       '.form-card__content h3'
@@ -194,7 +212,7 @@ describe('The happy path', () => {
 
     await app.client.click('#continue');
 
-    const outputDirectory = `../../Desktop/Clear_My_Record_output/CMR_output_${getDateTime()}`;
+    outputDirectory = getOutputDirectoryPath(getDateTime());
     const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
 
     const eligibilityConfigFileContents = fs.readFileSync(
@@ -255,7 +273,7 @@ describe('The happy path', () => {
   //   await app.client.click('#true_subjectHasOnlyProp64Charges');
   //   await app.client.click('#continue');
   //
-  //   const outputDirectory = `../../Desktop/Clear_My_Record_output/CMR_output_${getDateTime()}`;
+  //   outputDirectory = getOutputDirectoryPath(getDateTime());
   //   const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
   //
   //   const eligibilityConfigFileContents = fs.readFileSync(
@@ -303,6 +321,7 @@ describe('The happy path', () => {
     await app.client.click('#continue');
 
     await app.client.click('#continue');
+    outputDirectory = getOutputDirectoryPath(getDateTime());
 
     await sleep(11);
     const resultsFormCardContent = await app.client.getText(
