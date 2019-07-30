@@ -1,5 +1,6 @@
 import fs from 'fs';
 import sleep from '../../app/utils/testHelpers';
+import { getDateTime } from '../../app/utils/fileUtils';
 
 const { Application } = require('spectron');
 const electronPath = require('electron'); // Require Electron from the binaries included in node_modules.
@@ -179,6 +180,115 @@ describe('The happy path', () => {
   //     '.form-card__title'
   //   );
   //   expect(resultsFormCardContent).toContain('Your files are ready!');
+  // });
+
+  it('can generate correct eligibility config file if all eligibility options are dismiss', async () => {
+    await app.client.click('#begin');
+
+    const countySelect = app.client.$('#county-select');
+    await countySelect.selectByVisibleText('Sacramento');
+    await app.client.click('#continue');
+
+    await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
+    await app.client.click('#continue');
+
+    await app.client.click('#continue');
+
+    const outputDirectory = `../../Desktop/Clear_My_Record_output/CMR_output_${getDateTime()}`;
+    const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
+
+    const eligibilityConfigFileContents = fs.readFileSync(
+      eligibilityConfigFilePath,
+      'utf8'
+    );
+    const eligibilityConfig = JSON.parse(eligibilityConfigFileContents);
+
+    expect(eligibilityConfig).toEqual({
+      baselineEligibility: {
+        dismiss: [
+          '11357(a)',
+          '11357(b)',
+          '11357(c)',
+          '11357(d)',
+          '11357(no-sub-section)',
+          '11358',
+          '11359',
+          '11360'
+        ],
+        reduce: []
+      },
+      additionalRelief: {
+        subjectUnder21AtConviction: true,
+        dismissOlderThanAgeThreshold: true,
+        subjectAgeThreshold: 40,
+        dismissYearsSinceConvictionThreshold: true,
+        yearsSinceConvictionThreshold: 5,
+        dismissYearsCrimeFreeThreshold: true,
+        yearsCrimeFreeThreshold: 5,
+        subjectHasOnlyProp64Charges: true,
+        subjectIsDeceased: true
+      }
+    });
+  });
+
+  // TODO Must fix ability to click a reduce option for this test to work
+  // it('can generate correct eligibility config file if some code sections are reduced and additional relief is chosen', async () => {
+  //   await app.client.click('#begin');
+  //
+  //   const countySelect = app.client.$('#county-select');
+  //   await countySelect.selectByVisibleText('Sacramento');
+  //   await app.client.click('#continue');
+  //
+  //   await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
+  //   await app.client.click('#continue');
+  //
+  //   await app.client.click('#reduce_11360');
+  //   await app.client.click('#continue');
+  //
+  //   await app.client.click('#true_subjectUnder21AtConviction');
+  //   const ageSelect = app.client.$('#subjectAgeThreshold-select');
+  //   await ageSelect.selectByVisibleText('45');
+  //
+  //   const yearSelect = app.client.$('#yearsSinceConvictionThreshold-select');
+  //   await yearSelect.selectByVisibleText('3');
+  //
+  //   await app.client.click('#true_subjectHasOnlyProp64Charges');
+  //   await app.client.click('#continue');
+  //
+  //   const outputDirectory = `../../Desktop/Clear_My_Record_output/CMR_output_${getDateTime()}`;
+  //   const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
+  //
+  //   const eligibilityConfigFileContents = fs.readFileSync(
+  //     eligibilityConfigFilePath,
+  //     'utf8'
+  //   );
+  //   const eligibilityConfig = JSON.parse(eligibilityConfigFileContents);
+  //
+  //   expect(eligibilityConfig).toEqual({
+  //     baselineEligibility: {
+  //       dismiss: [
+  //         '11357(a)',
+  //         '11357(b)',
+  //         '11357(c)',
+  //         '11357(d)',
+  //         '11357(no-sub-section)',
+  //         '11358',
+  //         '11359'
+  //       ],
+  //       reduce: ['11360']
+  //     },
+  //     additionalRelief: {
+  //       subjectUnder21AtConviction: false,
+  //       dismissOlderThanAgeThreshold: true,
+  //       subjectAgeThreshold: 45,
+  //       dismissYearsSinceConvictionThreshold: true,
+  //       yearsSinceConvictionThreshold: 3,
+  //       dismissYearsCrimeFreeThreshold: true,
+  //       yearsCrimeFreeThreshold: 5,
+  //       subjectHasOnlyProp64Charges: false,
+  //       subjectIsDeceased: true
+  //     }
+  //   });
   // });
 
   it('can complete process and display results page', async () => {
