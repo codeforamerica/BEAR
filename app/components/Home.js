@@ -219,7 +219,6 @@ export default class Home extends Component<Props, State> {
         />
         <ProcessingFormCard
           dojFilePath={dojFilePaths[0]}
-          outputFilePath={outputFilePath}
           onComplete={this.nextScreen}
           runScriptInOptions={this.runScriptInOptions}
           onStartOver={this.resetInitialState}

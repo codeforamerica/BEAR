@@ -5,11 +5,9 @@ import Adapter from 'enzyme-adapter-react-16';
 import ProcessingFormCard from '../../app/components/ProcessingFormCard';
 
 import * as FileUtils from '../../app/utils/fileUtils';
-import * as GogenUtils from '../../app/utils/gogenUtils';
 
 Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
-let writeReportSpy;
 
 function setup() {
   const runScriptSpy = sandbox.spy();
@@ -21,7 +19,6 @@ function setup() {
   const component = mount(
     <ProcessingFormCard
       dojFilePath="/tmp/path"
-      outputFilePath="./test"
       runScriptInOptions={runScriptSpy}
       onStartOver={startOverSpy}
       resetOutputPath={resetOutputPathSpy}
@@ -34,11 +31,6 @@ function setup() {
     resetOutputPathSpy
   };
 }
-
-beforeEach(() => {
-  writeReportSpy = sandbox.spy();
-  GogenUtils.writeSummaryOutput = writeReportSpy;
-});
 
 afterEach(() => {
   sandbox.restore();
@@ -67,16 +59,6 @@ describe('ProcessingFormCard component', () => {
       startOverButton.simulate('click');
       expect(startOverSpy.called).toBe(true);
       expect(startOverSpy.callCount).toEqual(1);
-    });
-
-    it('should call writeSummaryReport with the correct path', () => {
-      const { component } = setup();
-      expect(component.state().gogenComplete).toEqual(false);
-      component.instance().onGogenComplete();
-      expect(writeReportSpy.called).toEqual(true);
-      expect(writeReportSpy.callCount).toEqual(1);
-      const { args } = writeReportSpy.getCall(0);
-      expect(args[0]).toEqual('./test');
     });
   });
 });

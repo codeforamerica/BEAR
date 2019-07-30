@@ -1,6 +1,6 @@
 import sinon from 'sinon';
 import fs from 'fs';
-import { runScript, writeSummaryOutput } from '../../app/utils/gogenUtils';
+import { runScript } from '../../app/utils/gogenUtils';
 
 import defaultAnalysisOptions from '../../app/constants/defaultAnalysisOptions';
 
@@ -114,12 +114,7 @@ describe('runScript', () => {
 
       const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
-      runScript(
-        state,
-        fakeSpawnChildProcess,
-        fakeCreateJsonFile,
-        fakeGogenCallbackFunction
-      );
+      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
       const { args } = fakeSpawnChildProcess.getCall(1);
       expect(args[0]).toEqual('gogenPath');
       expect(args[1]).toEqual([
@@ -132,29 +127,52 @@ describe('runScript', () => {
         `--compute-at=2020-07-01`
       ]);
     });
-  });
 
-  it('calls child process n times, where n is the length of the dojFilePaths array', () => {
-    const state = {
-      ...defaultAnalysisOptions,
-      gogenPath: 'gogenPath',
-      dateTime: 'date',
-      county: { name: 'Sacramento', code: 'SACRAMENTO' },
-      dojFilePaths: ['zero/path', 'one/path', 'two/path'],
-      outputFilePath: 'outputPath/outputPath'
-    };
+    it('calls child process n times, where n is the length of the dojFilePaths array', () => {
+      const state = {
+        ...defaultAnalysisOptions,
+        gogenPath: 'gogenPath',
+        dateTime: 'date',
+        county: { name: 'Sacramento', code: 'SACRAMENTO' },
+        dojFilePaths: ['zero/path', 'one/path', 'two/path'],
+        outputFilePath: 'outputPath/outputPath'
+      };
 
-    const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
 
-    runScript(
-      state,
-      fakeSpawnChildProcess,
-      fakeCreateJsonFile,
-      fakeGogenCallbackFunction
-    );
+      runScript(
+        state,
+        fakeSpawnChildProcess,
+        fakeCreateJsonFile,
+        fakeGogenCallbackFunction
+      );
 
-    expect(fakeSpawnChildProcess.called).toBe(true);
-    expect(fakeSpawnChildProcess.callCount).toEqual(3);
+      expect(fakeSpawnChildProcess.called).toBe(true);
+      expect(fakeSpawnChildProcess.callCount).toEqual(3);
+    });
+
+    it('calls writeSummaryOutput n times, where n is the length of the dojFilePaths array', () => {
+      const state = {
+        ...defaultAnalysisOptions,
+        gogenPath: 'gogenPath',
+        dateTime: 'date',
+        county: { name: 'Sacramento', code: 'SACRAMENTO' },
+        dojFilePaths: ['zero/path', 'one/path', 'two/path'],
+        outputFilePath: 'outputPath/outputPath'
+      };
+
+      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+
+      runScript(
+        state,
+        fakeSpawnChildProcess,
+        fakeCreateJsonFile,
+        fakeGogenCallbackFunction
+      );
+
+      expect(fakeSpawnChildProcess.called).toBe(true);
+      expect(fakeSpawnChildProcess.callCount).toEqual(3);
+    });
   });
 
   describe('when the output file path already exists', () => {
@@ -331,21 +349,5 @@ describe('runScript', () => {
         expect(args[0].additionalRelief.yearsCrimeFreeThreshold).toBe(0);
       });
     });
-  });
-});
-
-describe('writeSummaryOutput', () => {
-  beforeEach(() => {
-    fs.__writeFileSync('this is summary text');
-    const outputPath = '/tmp/';
-    writeSummaryOutput(outputPath);
-  });
-  afterEach(() => {
-    fs.unlinkSync('/tmp/summaryOutput.txt');
-  });
-
-  it('creates summaryOutput.txt with summary data and without the console progress bar', () => {
-    const outputFromTmpFile = fs.readFileSync('/tmp/summaryOutput.txt', 'utf8');
-    expect(outputFromTmpFile).toEqual('this is summary text');
   });
 });

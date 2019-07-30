@@ -2,6 +2,7 @@
 import fs from 'fs';
 import path from 'path';
 import { createJsonFile } from './fileUtils';
+import { writeSummaryOutput } from './writeSummaryOutputUtils';
 
 function transformBaselineEligibilityOptions(eligibilityOptions) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
@@ -40,6 +41,7 @@ function transformOptionalReliefValues(additionalReliefOptions) {
   return transformedOptions;
 }
 
+// eslint-disable-next-line import/prefer-default-export
 export function runScript(
   state,
   spawnChildProcess,
@@ -78,18 +80,18 @@ export function runScript(
   dojFilePaths.forEach(filePath => {
     filePathNum += 1;
     let updatedFilePath = '';
-    let updatedDateTime = '';
+    let fileNameSuffix = '';
     if (dojFilePaths.length > 1) {
       updatedFilePath = `${outputFilePath}/#${filePathNum}`;
-      updatedDateTime = `#${filePathNum}_${dateTime}`;
+      fileNameSuffix = `#${filePathNum}_${dateTime}`;
       makeDirectory(updatedFilePath);
     } else {
       updatedFilePath = outputFilePath;
-      updatedDateTime = dateTime;
+      fileNameSuffix = dateTime;
     }
     const goProcess = spawnChildProcess(gogenPath, [
       `run`,
-      `--file-name-suffix=${updatedDateTime}`,
+      `--file-name-suffix=${fileNameSuffix}`,
       `--input-doj=${filePath}`,
       `--outputs=${updatedFilePath}`,
       `--county=${countyCode}`,
@@ -101,7 +103,10 @@ export function runScript(
       console.log(`stdout for ${filePathNum}: `, dataString);
     });
 
-    goProcess.on('close', childFinishedCallback);
+    goProcess.on('close', () => {
+      writeSummaryOutput(outputFilePath, updatedFilePath, fileNameSuffix);
+      childFinishedCallback();
+    });
     goProcess.on('error', error => {
       console.error(error);
       childFinishedCallback();
@@ -111,12 +116,6 @@ export function runScript(
       console.log(`stderr: ${data}`);
     });
   });
-}
-
-export function writeSummaryOutput(outputFilePath) {
-  const filename = 'summaryOutput.txt';
-  const pathToOutputFile = path.join(outputFilePath, filename);
-  fs.writeFileSync(pathToOutputFile, 'this is summary text', 'utf8');
 }
 
 function makeDirectory(pathToDirectory) {

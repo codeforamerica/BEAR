@@ -8,12 +8,10 @@ import FormCard, {
 } from './FormCard';
 import ProgressBar from './ProgressBar';
 import StartOverButton from './StartOverButton';
-import { writeSummaryOutput } from '../utils/gogenUtils';
 import { getFileSize } from '../utils/fileUtils';
 
 type Props = {
   dojFilePath: string,
-  outputFilePath: string,
   onComplete: void => void,
   runScriptInOptions: ((void) => void) => void,
   onStartOver: void => void,
@@ -45,8 +43,6 @@ export default class ProcessingFormCard extends Component<Props, State> {
   };
 
   onGogenComplete = () => {
-    const { outputFilePath } = this.props;
-    writeSummaryOutput(outputFilePath);
     this.setState({ gogenComplete: true });
   };
 
