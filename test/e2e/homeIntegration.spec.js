@@ -1,3 +1,4 @@
+import fs from 'fs';
 import sleep from '../../app/utils/testHelpers';
 import { getDateTime } from '../../app/utils/fileUtils';
 
