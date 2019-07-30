@@ -27,7 +27,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       >
         <div>
           <div
-            className="doj-file"
+            className="addPadding doj-file"
           >
             <p
               className="fileName"

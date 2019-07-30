@@ -69,6 +69,7 @@ export default class Home extends Component<Props, State> {
       dateTime: '',
       outputPathPrefix: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
       outputFilePath: '',
+      dojFilePaths: [],
       ...defaultAnalysisOptions
     };
   }

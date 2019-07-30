@@ -246,7 +246,6 @@ describe('Home component', () => {
       component.instance().setState({
         currentScreen: 3,
         county: { name: 'Eternia', code: 'ETERNIA' },
-        dojFilePaths: ['path/to/file#1', 'path/to/file#2'],
         baselineEligibilityOptions: {
           '11357(a)': 'dismiss',
           '11357(b)': 'reduce',
@@ -272,7 +271,6 @@ describe('Home component', () => {
       component.instance().resetInitialState();
       expect(component.state('currentScreen')).toEqual(0);
       expect(component.state('county')).toEqual({ name: '', code: '' });
-      expect(component.state('dojFilePaths')).toEqual([]);
       expect(component.state('baselineEligibilityOptions')).toEqual({
         '11357(a)': 'dismiss',
         '11357(b)': 'dismiss',

@@ -21,7 +21,7 @@ export default class DojFileItem extends Component<Props> {
 
   render() {
     return (
-      <div className="doj-file">
+      <div className={`${styles.addPadding} doj-file`}>
         <p className={styles.fileName}>
           File imported: {this.formatFileName()}
           {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events,jsx-a11y/interactive-supports-focus */}
