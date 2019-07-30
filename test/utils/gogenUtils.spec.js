@@ -97,7 +97,8 @@ describe('runScript', () => {
         `--input-doj=/first/path`,
         `--outputs=outputPath/outputPath/#1`,
         `--county=SACRAMENTO`,
-        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`
+        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`,
+        `--compute-at=2020-07-01`
       ]);
     });
 
@@ -127,7 +128,8 @@ describe('runScript', () => {
         `--input-doj=/last/path`,
         `--outputs=outputPath/outputPath/#2`,
         `--county=SACRAMENTO`,
-        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`
+        `--eligibility-options=outputPath/outputPath/eligibilityConfig_date.json`,
+        `--compute-at=2020-07-01`
       ]);
     });
   });
