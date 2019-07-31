@@ -96,10 +96,10 @@ To package the app for Windows:
 $ yarn package-win
 ```
 
-To package the app for Windows and automatically publish to Github (this should only be done as part of a successful CI build):
+To package the app for both Windows and Mac, and automatically publish to Github (this should only be done as part of a successful CI build):
 
 ```bash
-$ yarn package-publish-win
+$ yarn package-publish
 ```
 
 ### Including the gogen binary in the packaged app

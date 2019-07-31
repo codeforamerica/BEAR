@@ -67,7 +67,7 @@ jobs:
           name: Build and Publish for Windows
           command: |
             export GH_TOKEN=$GITHUB_ACCESS_TOKEN
-            yarn package-publish-win
+            yarn package-publish
 
 workflows:
   version: 2
