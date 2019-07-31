@@ -78,7 +78,8 @@ For information about how to include the gogen binary when packaging BEAR for pr
 
 ## Packaging for Production
 
-BEAR can be automatically packaged and published to Github as part of the CircleCI workflow. This process uses the gogen binary that is currently released to Github.
+BEAR can be automatically packaged and published to Github as part of the CircleCI workflow. In this case, it will use the version of the gogen binary specified in `.gogen-version`, retrieved from [Github](https://github.com/codeforamerica/gogen/releases).
+
 We recommend using the CI release process when possible, but if you need to package the app on your local machine, instructions can be found below.
 
 We use [electron-builder](https://github.com/electron-userland/electron-builder) to package and publish the app.

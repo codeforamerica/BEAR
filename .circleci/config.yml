@@ -14,7 +14,7 @@ jobs:
           command: |
             export TOKEN=$GITHUB_ACCESS_TOKEN
             mkdir -p ~/go/bin
-            bash ~/bear/.circleci/github_download_release.sh "latest" ~/go/bin/gogen
+            bash ~/bear/.circleci/github_download_release.sh "$(cat ~/bear/.gogen-version)" ~/go/bin/gogen
             chmod +x ~/go/bin/gogen
 
       - restore_cache:
@@ -50,7 +50,7 @@ jobs:
           command: |
             export TOKEN=$GITHUB_ACCESS_TOKEN
             export FILE=gogen_win.exe
-            bash ~/bear/.circleci/github_download_release.sh "latest" ./gogen.exe
+            bash ~/bear/.circleci/github_download_release.sh "$(cat ~/bear/.gogen-version)" ./gogen.exe
 
       - restore_cache:
           keys:
