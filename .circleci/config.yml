@@ -36,7 +36,7 @@ jobs:
           name: Run end-to-end tests
           command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
 
-  package:
+  package-and-draft:
     docker:
       - image: codeforamerica/bear-ci
 
@@ -64,7 +64,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-          name: Build and Publish for Windows
+          name: Build and Publish Draft for Windows and Mac
           command: |
             export GH_TOKEN=$GITHUB_ACCESS_TOKEN
             yarn package-publish
