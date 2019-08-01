@@ -64,10 +64,10 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
 
       - run:
-          name: Build and Publish Draft for Windows and Mac
+          name: Build and Publish Draft for Windows
           command: |
             export GH_TOKEN=$GITHUB_ACCESS_TOKEN
-            yarn package-publish
+            yarn package-publish-win
 
 workflows:
   version: 2
