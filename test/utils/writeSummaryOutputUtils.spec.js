@@ -1,38 +1,28 @@
 import fs from 'fs';
-import path from 'path';
 import { writeSummaryOutput } from '../../app/utils/writeSummaryOutputUtils';
+
+jest.mock('fs');
 
 describe('writeSummaryOutput', () => {
   const outputPath = '/tmp/';
-  const numberedOutputPath = '/tmp/#1/';
-  const fileNameSuffix = 'suffix';
-  const pathToGogenOutput = path.join(numberedOutputPath, 'gogen_suffix.out');
-  const pathToSummaryOutput = '/tmp/summaryOutput.txt';
-  afterEach(() => {
-    fs.unlinkSync('/tmp/summaryOutput.txt');
-  });
+  const numberedOutputPath = `${outputPath}/#1/`;
+
   it('creates summaryOutput.txt with summary data and without the console progress bar', () => {
-    fs.writeFileSync(pathToGogenOutput, '&&&&&& this is summary text');
-    writeSummaryOutput(outputPath, numberedOutputPath, fileNameSuffix);
+    fs.__setFileContent('&&&&&& this is summary text');
+    writeSummaryOutput(outputPath, numberedOutputPath, 'suffix');
+    expect(fs.readFileSync.mock.calls.length).toEqual(1);
+    expect(fs.readFileSync.mock.calls[0]).toEqual([
+      '/tmp/#1/gogen_suffix.out',
+      'utf8'
+    ]);
 
-    const outputFromTmpFile = fs.readFileSync('/tmp/summaryOutput.txt', 'utf8');
-    expect(outputFromTmpFile).toEqual('&&&&&& this is summary text');
-  });
+    expect(fs.unlinkSync.mock.calls.length).toEqual(1);
+    expect(fs.unlinkSync.mock.calls[0]).toEqual(['/tmp/#1/gogen_suffix.out']);
 
-  it('can append data to summaryOutput.txt when it already has data in it', () => {
-    fs.writeFileSync(
-      pathToSummaryOutput,
-      '&&&&&& this is the first output text'
-    );
-    fs.writeFileSync(
-      pathToGogenOutput,
-      '&&&&&& this is the second output text'
-    );
-    writeSummaryOutput(outputPath, numberedOutputPath, fileNameSuffix);
-
-    const outputFromTmpFile = fs.readFileSync(pathToSummaryOutput, 'utf8');
-    expect(outputFromTmpFile).toEqual(
-      '&&&&&& this is the first output text&&&&&& this is the second output text'
-    );
+    expect(fs.appendFileSync.mock.calls.length).toEqual(1);
+    expect(fs.appendFileSync.mock.calls[0]).toEqual([
+      '/tmp/summaryOutput.txt',
+      '&&&&&& this is summary text'
+    ]);
   });
 });
