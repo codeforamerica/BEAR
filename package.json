@@ -33,6 +33,7 @@
     "test-update-snapshots": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest -u test/components",
     "test-all": "yarn lint && yarn flow && yarn build && yarn test && yarn build-e2e && yarn test-e2e",
     "test-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest test/e2e",
+    "test-ci-e2e": "cross-env NODE_ENV=test BABEL_DISABLE_CACHE=1 jest test/ci-e2e",
     "test-watch": "yarn test --watch"
   },
   "lint-staged": {

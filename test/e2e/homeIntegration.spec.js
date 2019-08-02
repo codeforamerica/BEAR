@@ -22,8 +22,9 @@ function getOutputDirectoryPath(dateTime) {
   return `${process.env.HOME}/Desktop/Clear_My_Record_output/CMR_output_${dateTime}`;
 }
 
-describe('The happy path', () => {
+describe('The primary user flow', () => {
   let app;
+  let pageTitle;
 
   beforeEach(() => {
     app = new Application({
@@ -40,29 +41,12 @@ describe('The happy path', () => {
     }
   });
 
-  it('loads the information page', async () => {
-    const text = await app.client.getText('.form-card__content');
-    expect(text[0]).toContain('Using Clear my Record will expedite');
-  });
-
-  it('can select county and continue to next screen', async () => {
-    await app.client.click('#begin');
-    const text = await app.client.getText('.form-card__title');
-    expect(text).toEqual('CA County Selection');
-    const countySelect = app.client.$('#county-select');
-    await countySelect.selectByVisibleText('Sacramento');
-    await app.client.click('#continue');
-
-    const pageTitle = await app.client.getText('.form-card__title');
-    expect(pageTitle).toEqual('Import Prop 64 bulk conviction data file');
-  });
-
   it('does NOT continue to next screen if county is not selected', async () => {
     await app.client.click('#begin');
 
     await app.client.click('#continue');
 
-    const pageTitle = await app.client.getText('.form-card__title');
+    pageTitle = await app.client.getText('.form-card__title');
     expect(pageTitle).toEqual('CA County Selection');
   });
 
@@ -87,7 +71,7 @@ describe('The happy path', () => {
 
     await app.client.click('#goback');
 
-    const pageTitle = await app.client.getText('.form-card__title');
+    pageTitle = await app.client.getText('.form-card__title');
     expect(pageTitle).toEqual('CA County Selection');
   });
 
@@ -105,215 +89,104 @@ describe('The happy path', () => {
     expect(fileName).toEqual('No file selected');
   });
 
-  it('can select doj file and continue to eligibility options screen', async () => {
-    await app.client.click('#begin');
+  describe('when the user chooses to dismiss all code sections', () => {
+    it('skips additional relief page', async () => {
+      const text = await app.client.getText('.form-card__content');
+      expect(text[0]).toContain('Using Clear my Record will expedite');
 
-    const countySelect = app.client.$('#county-select');
-    await countySelect.selectByVisibleText('Sacramento');
-    await app.client.click('#continue');
+      await app.client.click('#begin');
 
-    await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
-    await app.client.click('#continue');
+      const countySelect = app.client.$('#county-select');
+      await countySelect.selectByVisibleText('Sacramento');
+      await app.client.click('#continue');
 
-    const pageTitle = await app.client.getText('.form-card__title');
-    expect(pageTitle).toContain('Baseline eligibility');
-  });
+      await app.client.chooseFile(
+        '#doj-file-input',
+        './test/fixtures/file.dat'
+      );
+      await app.client.click('#continue');
 
-  it('can select eligibility options and display additional relief page', async () => {
-    await app.client.click('#begin');
+      await app.client.click('#continue');
+      outputDirectory = getOutputDirectoryPath(getDateTime());
 
-    const countySelect = app.client.$('#county-select');
-    await countySelect.selectByVisibleText('Sacramento');
-    await app.client.click('#continue');
-
-    await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
-    await app.client.click('#continue');
-
-    await app.client.click('#reduce_11358');
-    await app.client.click('#continue');
-
-    const cardContent = await app.client.getText('.form-card__title');
-    expect(cardContent).toContain('Additional relief');
-  });
-
-  it('can skip additional relief page if all eligibility options are dismiss', async () => {
-    await app.client.click('#begin');
-
-    const countySelect = app.client.$('#county-select');
-    await countySelect.selectByVisibleText('Sacramento');
-    await app.client.click('#continue');
-
-    await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
-    await app.client.click('#continue');
-
-    await app.client.click('#continue');
-    outputDirectory = getOutputDirectoryPath(getDateTime());
-
-    const processingCardContent = await app.client.getText(
-      '.form-card__content h3'
-    );
-    expect(processingCardContent).toContain(
-      'Reading and preparing your files ...'
-    );
-  });
-
-  it('can select additional relief options and display processing page', async () => {
-    await app.client.click('#begin');
-
-    const countySelect = app.client.$('#county-select');
-    await countySelect.selectByVisibleText('Sacramento');
-    await app.client.click('#continue');
-
-    await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
-    await app.client.click('#continue');
-
-    await app.client.click('#reduce_11360');
-    await app.client.click('#continue');
-
-    await app.client.click('#true_subjectUnder21AtConviction');
-    const ageSelect = app.client.$('#subjectAgeThreshold-select');
-    await ageSelect.selectByVisibleText('45');
-
-    const yearSelect = app.client.$('#yearsSinceConvictionThreshold-select');
-    await yearSelect.selectByVisibleText('3');
-
-    await app.client.click('#true_subjectHasOnlyProp64Charges');
-    await app.client.click('#continue');
-
-    const processingCardContent = await app.client.getText(
-      '.form-card__content h3'
-    );
-    expect(processingCardContent).toContain(
-      'Reading and preparing your files ...'
-    );
-  });
-
-  it('can generate correct eligibility config file if all eligibility options are dismiss', async () => {
-    await app.client.click('#begin');
-
-    const countySelect = app.client.$('#county-select');
-    await countySelect.selectByVisibleText('Sacramento');
-    await app.client.click('#continue');
-
-    await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
-    await app.client.click('#continue');
-
-    await app.client.click('#continue');
-
-    outputDirectory = getOutputDirectoryPath(getDateTime());
-    const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
-
-    const eligibilityConfigFileContents = fs.readFileSync(
-      eligibilityConfigFilePath,
-      'utf8'
-    );
-    const eligibilityConfig = JSON.parse(eligibilityConfigFileContents);
-
-    expect(eligibilityConfig).toEqual({
-      baselineEligibility: {
-        dismiss: [
-          '11357(a)',
-          '11357(b)',
-          '11357(c)',
-          '11357(d)',
-          '11357(no-sub-section)',
-          '11358',
-          '11359',
-          '11360'
-        ],
-        reduce: []
-      },
-      additionalRelief: {
-        subjectUnder21AtConviction: true,
-        dismissOlderThanAgeThreshold: true,
-        subjectAgeThreshold: 40,
-        dismissYearsSinceConvictionThreshold: true,
-        yearsSinceConvictionThreshold: 5,
-        dismissYearsCrimeFreeThreshold: true,
-        yearsCrimeFreeThreshold: 5,
-        subjectHasOnlyProp64Charges: true,
-        subjectIsDeceased: true
-      }
+      pageTitle = await app.client.getText('.form-card__title');
+      expect(pageTitle).not.toContain('Additional relief');
     });
-  });
 
-  it('can generate correct eligibility config file if some code sections are reduced and additional relief is chosen', async () => {
-    await app.client.click('#begin');
+    it('can complete the full flow and generate correct eligibility config', async () => {
+      jest.setTimeout(30000);
 
-    const countySelect = app.client.$('#county-select');
-    await countySelect.selectByVisibleText('Sacramento');
-    await app.client.click('#continue');
+      await app.client.click('#begin');
 
-    await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
-    await app.client.click('#continue');
+      pageTitle = await app.client.getText('.form-card__title');
+      expect(pageTitle).toEqual('CA County Selection');
 
-    await app.client.click('#reduce_11360');
-    await app.client.click('#continue');
+      const countySelect = app.client.$('#county-select');
+      await countySelect.selectByVisibleText('Sacramento');
+      await app.client.click('#continue');
 
-    await app.client.click('#true_subjectUnder21AtConviction');
-    const ageSelect = app.client.$('#subjectAgeThreshold-select');
-    await ageSelect.selectByVisibleText('45');
+      pageTitle = await app.client.getText('.form-card__title');
+      expect(pageTitle).toEqual('Import Prop 64 bulk conviction data file');
 
-    const yearSelect = app.client.$('#yearsSinceConvictionThreshold-select');
-    await yearSelect.selectByVisibleText('3');
+      await app.client.chooseFile(
+        '#doj-file-input',
+        './test/fixtures/file.dat'
+      );
+      await app.client.click('#continue');
 
-    await app.client.click('#true_subjectHasOnlyProp64Charges');
-    await app.client.click('#continue');
+      pageTitle = await app.client.getText('.form-card__title');
+      expect(pageTitle).toContain('Baseline eligibility');
 
-    outputDirectory = getOutputDirectoryPath(getDateTime());
-    const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
+      await app.client.click('#continue');
 
-    const eligibilityConfigFileContents = fs.readFileSync(
-      eligibilityConfigFilePath,
-      'utf8'
-    );
-    const eligibilityConfig = JSON.parse(eligibilityConfigFileContents);
+      outputDirectory = getOutputDirectoryPath(getDateTime());
+      const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
 
-    expect(eligibilityConfig).toEqual({
-      baselineEligibility: {
-        dismiss: [
-          '11357(a)',
-          '11357(b)',
-          '11357(c)',
-          '11357(d)',
-          '11357(no-sub-section)',
-          '11358',
-          '11359'
-        ],
-        reduce: ['11360']
-      },
-      additionalRelief: {
-        subjectUnder21AtConviction: false,
-        dismissOlderThanAgeThreshold: true,
-        subjectAgeThreshold: 45,
-        dismissYearsSinceConvictionThreshold: true,
-        yearsSinceConvictionThreshold: 3,
-        dismissYearsCrimeFreeThreshold: true,
-        yearsCrimeFreeThreshold: 5,
-        subjectHasOnlyProp64Charges: false,
-        subjectIsDeceased: true
-      }
+      const eligibilityConfigFileContents = fs.readFileSync(
+        eligibilityConfigFilePath,
+        'utf8'
+      );
+      const eligibilityConfig = JSON.parse(eligibilityConfigFileContents);
+
+      expect(eligibilityConfig).toEqual({
+        baselineEligibility: {
+          dismiss: [
+            '11357(a)',
+            '11357(b)',
+            '11357(c)',
+            '11357(d)',
+            '11357(no-sub-section)',
+            '11358',
+            '11359',
+            '11360'
+          ],
+          reduce: []
+        },
+        additionalRelief: {
+          subjectUnder21AtConviction: true,
+          dismissOlderThanAgeThreshold: true,
+          subjectAgeThreshold: 40,
+          dismissYearsSinceConvictionThreshold: true,
+          yearsSinceConvictionThreshold: 5,
+          dismissYearsCrimeFreeThreshold: true,
+          yearsCrimeFreeThreshold: 5,
+          subjectHasOnlyProp64Charges: true,
+          subjectIsDeceased: true
+        }
+      });
+
+      const processingCardContent = await app.client.getText(
+        '.form-card__content h3'
+      );
+      expect(processingCardContent).toContain(
+        'Reading and preparing your files ...'
+      );
+
+      await sleep(11);
+      const resultsFormCardContent = await app.client.getText(
+        '.form-card__title'
+      );
+      expect(resultsFormCardContent).toContain('Your files are ready!');
     });
-  });
-
-  it('can complete process and display results page', async () => {
-    jest.setTimeout(30000);
-    await app.client.click('#begin');
-
-    const countySelect = app.client.$('#county-select');
-    await countySelect.selectByVisibleText('Sacramento');
-    await app.client.click('#continue');
-
-    await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
-    await app.client.click('#continue');
-
-    await app.client.click('#continue');
-    outputDirectory = getOutputDirectoryPath(getDateTime());
-
-    await sleep(11);
-    const resultsFormCardContent = await app.client.getText(
-      '.form-card__title'
-    );
-    expect(resultsFormCardContent).toContain('Your files are ready!');
   });
 });

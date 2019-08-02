@@ -34,7 +34,7 @@ jobs:
 
       - run:
           name: Run end-to-end tests
-          command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e
+          command: START_MINIMIZED=true yarn build-e2e && yarn test-e2e && yarn test-ci-e2e
 
   package-and-draft:
     docker:
