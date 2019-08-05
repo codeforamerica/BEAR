@@ -1,11 +1,13 @@
 // @flow
 import React, { Component } from 'react';
 
+import ReactPDF from '@react-pdf/renderer';
 import FormCard, {
   FormCardContent,
   FormCardFooter,
   FormCardHeader
 } from './FormCard';
+import SummaryReportPdf from './SummaryReportPdf';
 import ProgressBar from './ProgressBar';
 import StartOverButton from './StartOverButton';
 import { getFileSize } from '../utils/fileUtils';
@@ -78,3 +80,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
     );
   }
 }
+ReactPDF.render(
+  <SummaryReportPdf county="Yolo" dateTime={Date.now()} />,
+  `/Users/newuser/Desktop/example.pdf`
+);
