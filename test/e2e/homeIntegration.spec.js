@@ -182,7 +182,7 @@ describe('The primary user flow', () => {
         'Reading and preparing your files ...'
       );
 
-      await sleep(11);
+      await sleep(6);
       const resultsFormCardContent = await app.client.getText(
         '.form-card__title'
       );

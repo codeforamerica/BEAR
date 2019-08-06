@@ -13,8 +13,9 @@ type State = {
 };
 
 export const PROCESSING_RATE = 10000000;
-export const MAX_STEP_SIZE = 10;
 export const MAX_FILL = 100;
+export const MIN_PROCESSING_TIME = 5;
+export const MAX_STEP_SIZE = MAX_FILL / MIN_PROCESSING_TIME;
 
 export default class ProgressBar extends Component<Props, State> {
   timerID: IntervalID;
@@ -47,7 +48,7 @@ export default class ProgressBar extends Component<Props, State> {
         onCompleteCallback();
         return;
       }
-      if (stepSize !== MAX_FILL / MAX_STEP_SIZE) {
+      if (stepSize !== MAX_STEP_SIZE) {
         this.setState({
           fill: MAX_FILL
         });

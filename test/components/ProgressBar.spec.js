@@ -5,7 +5,8 @@ import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import ProgressBar, {
   PROCESSING_RATE,
-  MAX_STEP_SIZE
+  MAX_STEP_SIZE,
+  MAX_FILL
 } from '../../app/components/ProgressBar';
 import sleep from '../../app/utils/testHelpers';
 
@@ -50,13 +51,43 @@ describe('ProgressBar component', () => {
   });
 
   describe('tick', () => {
-    it('increases fill by the stepSize amount', () => {
-      const { component } = setup();
-      const instance = component.instance();
-      instance.tick();
-      expect(instance.state.fill).toEqual(10);
-      instance.tick();
-      expect(instance.state.fill).toEqual(20);
+    describe('when the gogen process is complete', () => {
+      describe('when the progress bar is full', () => {
+        it('calls the gogen complete callback', () => {
+          const { component, onCompleteCallbackSpy } = setup();
+          component.setProps({ isComplete: true });
+          component.setState({ fill: MAX_FILL });
+
+          const instance = component.instance();
+          instance.tick();
+
+          expect(onCompleteCallbackSpy.called).toBe(true);
+        });
+      });
+
+      describe('when the bar is not full and the file takes LESS than the minimum processing time', () => {
+        it('increases fill by the stepSize amount', () => {
+          const { component } = setup();
+          component.setProps({ isComplete: true });
+
+          const instance = component.instance();
+          instance.tick();
+          expect(instance.state.fill).toEqual(20);
+          instance.tick();
+          expect(instance.state.fill).toEqual(40);
+        });
+      });
+
+      describe('when the bar is not full and the file takes MORE than the minimum processing time', () => {
+        it('sets the bar to full', () => {
+          const { component } = setup(PROCESSING_RATE * 100);
+          component.setProps({ isComplete: true });
+
+          const instance = component.instance();
+          instance.tick();
+          expect(instance.state.fill).toEqual(MAX_FILL);
+        });
+      });
     });
   });
 
