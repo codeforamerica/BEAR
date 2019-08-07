@@ -92,7 +92,7 @@ describe('The primary user flow', () => {
   describe('when the user chooses to dismiss all code sections', () => {
     it('skips additional relief page', async () => {
       const text = await app.client.getText('.form-card__content');
-      expect(text[0]).toContain('Using Clear my Record will expedite');
+      expect(text[0]).toContain('Using Clear My Record will expedite');
 
       await app.client.click('#begin');
 
@@ -126,7 +126,7 @@ describe('The primary user flow', () => {
       await app.client.click('#continue');
 
       pageTitle = await app.client.getText('.form-card__title');
-      expect(pageTitle).toEqual('Import Prop 64 bulk conviction data file');
+      expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
 
       await app.client.chooseFile(
         '#doj-file-input',
@@ -179,7 +179,7 @@ describe('The primary user flow', () => {
         '.form-card__content h3'
       );
       expect(processingCardContent).toContain(
-        'Reading and preparing your files ...'
+        'Reading and preparing files ...'
       );
 
       await sleep(6);

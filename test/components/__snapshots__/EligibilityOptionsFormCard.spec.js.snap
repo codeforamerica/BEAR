@@ -12,12 +12,12 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
         className="form-card__title"
       >
         Baseline eligibility
-        <p
-          className="text--help"
-        >
-          Choose whether to dismiss or reduce Prop 64 convictions.
-        </p>
       </h1>
+      <div
+        className="text--help"
+      >
+        Choose whether to dismiss or reduce Prop 64 convictions.
+      </div>
     </header>
     <div
       className="form-card__content"

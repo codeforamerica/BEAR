@@ -13,6 +13,11 @@ exports[`CountySelectFormCard component should match exact snapshot 1`] = `
       >
         CA County Selection
       </h1>
+      <div
+        className="text--help"
+      >
+        Only convictions in the county you select will be analyzed for eligibility.
+      </div>
     </header>
     <div
       className="form-card__content"
@@ -21,7 +26,7 @@ exports[`CountySelectFormCard component should match exact snapshot 1`] = `
         <p
           className="form-question"
         >
-          Select your county
+          Choose your county
         </p>
         <div
           className="select"

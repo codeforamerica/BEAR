@@ -19,7 +19,7 @@ export default class CountySelectFormCard extends Component<Props> {
         <FormCardContent>
           <div className="text--centered">
             <h1 className={styles.introductionTitle}>
-              Using Clear my Record will expedite the process of determining
+              Using Clear My Record will expedite the process of determining
               which Prop 64 convictions are eligible for relief under H&S §
               11361.9.
             </h1>

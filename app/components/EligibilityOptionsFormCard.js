@@ -44,11 +44,8 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
     } = this.props;
     return (
       <FormCard>
-        <FormCardHeader>
+        <FormCardHeader helpText="Choose whether to dismiss or reduce Prop 64 convictions.">
           Baseline eligibility
-          <p className="text--help">
-            Choose whether to dismiss or reduce Prop 64 convictions.
-          </p>
         </FormCardHeader>
         <FormCardContent>
           <table className="data-table">

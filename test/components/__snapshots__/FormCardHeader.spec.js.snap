@@ -1,0 +1,34 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FormCardHeader component should match exact snapshot 1`] = `
+<div>
+  <header
+    className="form-card__header"
+  >
+    <h1
+      className="form-card__title"
+    >
+      Hello! This is a title.
+    </h1>
+  </header>
+</div>
+`;
+
+exports[`FormCardHeader component with optional helper text should match exact snapshot 1`] = `
+<div>
+  <header
+    className="form-card__header"
+  >
+    <h1
+      className="form-card__title"
+    >
+      Hello! This is a title.
+    </h1>
+    <div
+      className="text--help"
+    >
+      this is some helper text
+    </div>
+  </header>
+</div>
+`;

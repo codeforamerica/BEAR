@@ -66,11 +66,11 @@ export default class DojFileSelectFormCard extends Component<Props> {
 
     return (
       <FormCard>
-        <FormCardHeader>
-          Import Prop 64 bulk conviction data file
+        <FormCardHeader helpText="Import the original .dat files received from the DOJ.">
+          Import Prop 64 bulk conviction data files
         </FormCardHeader>
         <FormCardContent>
-          <p className={styles.semibold}>Choose a .dat file to import</p>
+          <p className={styles.semibold}>Choose .dat files to import</p>
           <div className={styles.outlineBox}>{this.renderCardContent()}</div>
         </FormCardContent>
         <FormCardFooter>

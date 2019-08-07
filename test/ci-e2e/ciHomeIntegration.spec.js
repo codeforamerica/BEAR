@@ -54,7 +54,7 @@ describe('The happy path with additional relief', () => {
     await app.client.click('#continue');
 
     pageTitle = await app.client.getText('.form-card__title');
-    expect(pageTitle).toEqual('Import Prop 64 bulk conviction data file');
+    expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
 
     await app.client.chooseFile('#doj-file-input', './test/fixtures/file.dat');
     await app.client.click('#continue');

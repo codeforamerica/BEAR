@@ -11,8 +11,13 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       <h1
         className="form-card__title"
       >
-        Import Prop 64 bulk conviction data file
+        Import Prop 64 bulk conviction data files
       </h1>
+      <div
+        className="text--help"
+      >
+        Import the original .dat files received from the DOJ.
+      </div>
     </header>
     <div
       className="form-card__content"
@@ -20,7 +25,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       <p
         className="semibold"
       >
-        Choose a .dat file to import
+        Choose .dat files to import
       </p>
       <div
         className="outlineBox"
@@ -105,8 +110,13 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       <h1
         className="form-card__title"
       >
-        Import Prop 64 bulk conviction data file
+        Import Prop 64 bulk conviction data files
       </h1>
+      <div
+        className="text--help"
+      >
+        Import the original .dat files received from the DOJ.
+      </div>
     </header>
     <div
       className="form-card__content"
@@ -114,7 +124,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       <p
         className="semibold"
       >
-        Choose a .dat file to import
+        Choose .dat files to import
       </p>
       <div
         className="outlineBox"

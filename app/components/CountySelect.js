@@ -22,7 +22,7 @@ export default class CountySelect extends Component<Props> {
     const { selectedCounty } = this.props;
     return (
       <div>
-        <p className="form-question">Select your county</p>
+        <p className="form-question">Choose your county</p>
         <div className="select">
           <select
             className={`${styles.countySelect} select__element`}

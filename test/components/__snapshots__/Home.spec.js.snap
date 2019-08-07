@@ -33,7 +33,7 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
             <h1
               className="introductionTitle"
             >
-              Using Clear my Record will expedite the process of determining which Prop 64 convictions are eligible for relief under H&S § 11361.9.
+              Using Clear My Record will expedite the process of determining which Prop 64 convictions are eligible for relief under H&S § 11361.9.
             </h1>
             <p>
               Here's what you need to do:

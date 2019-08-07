@@ -55,7 +55,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
         <FormCardContent>
           <div className="box-wrapper text--centered">
             <div className="emoji emoji--huge emoji--woman-detective-medium-dark-skin-tone" />
-            <h3>Reading and preparing your files ...</h3>
+            <h3>Reading and preparing files ...</h3>
             <ProgressBar
               fileSizeInBytes={getFileSize(dojFilePath)}
               onCompleteCallback={onComplete}

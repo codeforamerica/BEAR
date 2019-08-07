@@ -144,7 +144,7 @@ To package the app for Windows and create a draft release on Github (this should
 $ yarn package-publish-win
 ```
 
-To package the app for Mac and create a draft release on Github (this should only be done locally after a successful CI build):
+To package the app for Mac and create a draft release on Github (this should only be done locally after a successful CI build, and will require you to manually download the correct version of gogen):
 
 ```bash
 $ yarn package-publish-mac

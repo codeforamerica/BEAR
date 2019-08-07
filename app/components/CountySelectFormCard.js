@@ -20,7 +20,9 @@ export default class CountySelectFormCard extends Component<Props> {
     const { onCountySelect, onCountyConfirm, selectedCounty } = this.props;
     return (
       <FormCard>
-        <FormCardHeader>CA County Selection</FormCardHeader>
+        <FormCardHeader helpText="Only convictions in the county you select will be analyzed for eligibility.">
+          CA County Selection
+        </FormCardHeader>
         <FormCardContent>
           <CountySelect
             onCountySelect={onCountySelect}

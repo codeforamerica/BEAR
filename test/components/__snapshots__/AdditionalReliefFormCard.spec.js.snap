@@ -12,10 +12,12 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
         className="form-card__title"
       >
         Additional relief
-        <p>
-          Choose from the following options to expand relief.
-        </p>
       </h1>
+      <div
+        className="text--help"
+      >
+        Choose from the following options to expand relief. These options will only apply to convictions you chose to reduce in the previous page.
+      </div>
     </header>
     <div
       className="form-card__content"
@@ -26,7 +28,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
         <div
           className="form-question grid__item width-two-thirds"
         >
-          Dismiss all Prop 64 convictions if the conviction happened when the person was 21 or younger.
+          Dismiss all Prop 64 convictions if the conviction happened when the individual was 21 or younger.
         </div>
         <label
           className="shift-fourth-fifths checkbox checkbox"
@@ -35,7 +37,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
           <span
             className="sr-only"
           >
-            Select to dismiss all Prop 64 convictions if the conviction happened when the person was 21 or younger.
+            Select to dismiss all Prop 64 convictions if the conviction happened when the individual was 21 or younger.
           </span>
           <input
             defaultChecked={true}
@@ -469,7 +471,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
         <div
           className="form-question grid__item width-two-thirds"
         >
-          Dismiss all HS 11357, HS 11358, HS 11359, or HS 11360 convictions if those are the only convictions on an individual's record.
+          Dismiss all H&S § 11357, H&S § 11358, H&S § 11359, or H&S § 11360 convictions if those are the only convictions on an individual's record.
         </div>
         <label
           className="shift-fourth-fifths checkbox checkbox"

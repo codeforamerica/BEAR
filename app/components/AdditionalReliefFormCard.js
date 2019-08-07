@@ -48,20 +48,18 @@ export default class AdditionalReliefFormCard extends Component<Props> {
     const { additionalReliefOptions, onBack } = this.props;
     return (
       <FormCard>
-        <FormCardHeader>
+        <FormCardHeader helpText="Choose from the following options to expand relief. These options will only apply to convictions you chose to reduce in the previous page.">
           Additional relief
-          <p>Choose from the following options to expand relief.</p>
         </FormCardHeader>
         <FormCardContent>
           <Checkbox
             checked={additionalReliefOptions.subjectUnder21AtConviction}
-            labelText="Select to dismiss all Prop 64 convictions if the conviction happened when the
-            person was 21 or younger."
+            labelText="Select to dismiss all Prop 64 convictions if the conviction happened when the individual was 21 or younger."
             group="subjectUnder21AtConviction"
             onChange={this.handleToggleChecked}
           >
             Dismiss all Prop 64 convictions if the conviction happened when the
-            person was 21 or younger.
+            individual was 21 or younger.
           </Checkbox>
           <Checkbox
             checked={additionalReliefOptions.dismissOlderThanAgeThreshold}
@@ -122,8 +120,9 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             group="subjectHasOnlyProp64Charges"
             onChange={this.handleToggleChecked}
           >
-            Dismiss all HS 11357, HS 11358, HS 11359, or HS 11360 convictions if
-            those are the only convictions on an individual's record.
+            Dismiss all H&S § 11357, H&S § 11358, H&S § 11359, or H&S § 11360
+            convictions if those are the only convictions on an individual's
+            record.
           </Checkbox>
           <Checkbox
             checked={additionalReliefOptions.subjectIsDeceased}

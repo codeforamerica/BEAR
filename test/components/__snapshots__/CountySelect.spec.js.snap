@@ -5,7 +5,7 @@ exports[`CountySelect component should match exact snapshot 1`] = `
   <p
     className="form-question"
   >
-    Select your county
+    Choose your county
   </p>
   <div
     className="select"
