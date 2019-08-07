@@ -74,14 +74,10 @@ workflows:
   pipeline:
     jobs:
       - build
-      - hold:
-          type: approval
+      - package-and-draft:
           requires:
             - build
           filters:
             branches:
               only:
                 - master
-      - package-and-draft:
-          requires:
-            - hold
