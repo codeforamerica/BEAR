@@ -76,13 +76,61 @@ $ cp gogen ~/go/bin/gogen
 You must repeat this process any time you make changes to the gogen code, if you want to see those changes reflected when running BEAR in development mode.
 For information about how to include the gogen binary when packaging BEAR for production, see the next section.
 
-## Packaging for Production
+## Releasing a New Version of BEAR
 
-BEAR can be automatically packaged and published to Github as part of the CircleCI workflow. In this case, it will use the version of the gogen binary specified in `.gogen-version`, retrieved from [Github](https://github.com/codeforamerica/gogen/releases).
+### Development Workflow
 
-We recommend using the CI release process when possible, but if you need to package the app on your local machine, instructions can be found below.
+1. On finishing a feature in [gogen](https://github.com/codeforamerica/gogen):
 
-We use [electron-builder](https://github.com/electron-userland/electron-builder) to package and publish the app.
+- Increase the version number in `gogen.go`
+- Commit, push Gogen to master (will trigger a Github release)
+
+2. On finishing a feature in BEAR:
+
+- Increase the version number in `package.json`
+- If new version of Gogen is needed, update Gogen version in `.gogen-version`
+- Commit, push BEAR to master. This will trigger the following CI flow:
+  - Run tests
+  - Hold (will still need to approve manually—useful if we complete BEAR work before required version of Gogen is released)
+  - Create a versioned draft release on Github of BEAR with Windows binary
+
+3. When approved by Product, publish the draft release:
+
+- Publish the draft release on Github:
+  - Log into Github and visit the [releases page](https://github.com/codeforamerica/BEAR/releases)
+  - Find the draft release corresponding to the story that was accepted
+  - Click “edit” and then “publish release”. If we're pre-1.0.0, also check the "Pre-release" box.
+- SOON: Sign the approved binary and make publicly available on S3
+  - Download the Windows artifact from the published Github release above
+  - On Windows laptop:
+    - Plug in DigiCert USB token
+    - Open Command Prompt
+    - Run the following commend: `signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a "c:\path\to\file_to_sign.exe"`. **Note**: This command is also available in `commands to sign.txt` on the Desktop.
+    - When prompted, enter the password in the "DigiCert EV Certificate" shared note in LastPass
+    - Add the signed binary to the Github release:
+      - Log into Github and visit the [releases page](https://github.com/codeforamerica/BEAR/releases)
+      - Edit the corresponding published release and attach the signed binary with unique name (e.g. `clearmyrecord-bear-setup-signed-0.2.2.exe`)
+    - Upload the signed binary to S3:
+      - Sign in to `cfa` AWS account (requires Christa since we have limited access)
+      - In S3, navigate to the `cmr-bear-releases` S3 bucket
+      - Locally, rename the signed binary to `clearmyrecord-HS_11361-setup.exe`.
+      - Upload the renamed file to the bucket. This should create a new version of the existing resource, so people receive the latest file when they visit the URL from the marketing page. You can check by hitting the 'Versions' toggle button, after which you should see a version with a recent 'Last modified' date.
+      - Make the file public. Click on the file you just uploaded and hit the 'Make public' button.
+
+### Publishing a Release
+
+BEAR is automatically packaged and published to Github as part of our CircleCI workflow. We recommend using the CI release process when possible, but if you need to package the app on your local machine, instructions can be found below.
+
+In either process, we create and publish the built executables using [electron-builder](https://github.com/electron-userland/electron-builder).
+
+#### On CI (recommended)
+
+As part of our CI [our workflow](.circleci/config.yml), we:
+
+1. Build a Windows executable using the version of Gogen specified in `.gogen-version`
+2. Create a [draft release on the BEAR Github](https://github.com/codeforamerica/bear/releases) using the BEAR version specified in the `package.json`, with the Windows executable as an attachment.
+
+#### Locally (backup method)
 
 To package the app for Mac:
 
@@ -96,10 +144,16 @@ To package the app for Windows:
 $ yarn package-win
 ```
 
-To package the app for both Windows and Mac, and automatically publish to Github (this should only be done as part of a successful CI build):
+To package the app for Windows and create a draft release on Github (this should only be done as part of a successful CI build):
 
 ```bash
-$ yarn package-publish
+$ yarn package-publish-win
+```
+
+To package the app for Mac and create a draft release on Github (this should only be done locally after a successful CI build):
+
+```bash
+$ yarn package-publish-mac
 ```
 
 ### Including the gogen binary in the packaged app
