@@ -1,26 +1,13 @@
 import fs from 'fs';
 import sleep from '../../app/utils/testHelpers';
 import { getDateTime } from '../../app/utils/fileUtils';
+import { getOutputDirectoryPath, removeOutputDirectory } from '../e2e/helpers';
 
 const { Application } = require('spectron');
 const electronPath = require('electron'); // Require Electron from the binaries included in node_modules.
 const path = require('path');
 
 let outputDirectory;
-
-function removeDirectory(dirPath) {
-  if (fs.existsSync(dirPath)) {
-    fs.readdirSync(dirPath).forEach(function(entry) {
-      const entryPath = path.join(dirPath, entry);
-      fs.unlinkSync(entryPath);
-    });
-    fs.rmdirSync(dirPath);
-  }
-}
-
-function getOutputDirectoryPath(dateTime) {
-  return `${process.env.HOME}/Desktop/Clear_My_Record_output/CMR_output_${dateTime}`;
-}
 
 describe('The happy path with additional relief', () => {
   let app;
@@ -35,7 +22,7 @@ describe('The happy path with additional relief', () => {
   });
 
   afterEach(() => {
-    removeDirectory(outputDirectory);
+    removeOutputDirectory(outputDirectory);
     if (app && app.isRunning()) {
       return app.stop();
     }
