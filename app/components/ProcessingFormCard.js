@@ -81,6 +81,6 @@ export default class ProcessingFormCard extends Component<Props, State> {
   }
 }
 ReactPDF.render(
-  <SummaryReportPdf county="Yolo" dateTime="this is the date" />,
+  <SummaryReportPdf county="Los Angeles" dateTime="this is the date" />,
   `/Users/newuser/Desktop/example.pdf`
 );
