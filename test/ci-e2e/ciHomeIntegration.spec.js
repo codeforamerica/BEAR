@@ -116,9 +116,7 @@ describe('The happy path with additional relief', () => {
     const processingCardContent = await app.client.getText(
       '.form-card__content h3'
     );
-    expect(processingCardContent).toContain(
-      'Reading and preparing your files ...'
-    );
+    expect(processingCardContent).toContain('Reading and preparing files ...');
 
     await sleep(6);
     const resultsFormCardContent = await app.client.getText(
