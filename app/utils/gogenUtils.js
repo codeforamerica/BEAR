@@ -18,15 +18,9 @@ function transformBaselineEligibilityOptions(eligibilityOptions) {
 
 function transformOptionalReliefValues(additionalReliefOptions) {
   const transformedOptions = {
-    subjectAgeThreshold: 0,
     yearsSinceConvictionThreshold: 0,
     yearsCrimeFreeThreshold: 0
   };
-
-  if (additionalReliefOptions.dismissOlderThanAgeThreshold) {
-    transformedOptions.subjectAgeThreshold =
-      additionalReliefOptions.subjectAgeThreshold;
-  }
 
   if (additionalReliefOptions.dismissYearsSinceConvictionThreshold) {
     transformedOptions.yearsSinceConvictionThreshold =

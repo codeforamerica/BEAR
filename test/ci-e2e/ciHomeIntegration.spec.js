@@ -68,10 +68,6 @@ describe('The happy path with additional relief', () => {
     pageTitle = await app.client.getText('.form-card__title');
     expect(pageTitle).toContain('Additional relief');
 
-    await app.client.click('#true_subjectUnder21AtConviction');
-    const ageSelect = app.client.$('#subjectAgeThreshold-select');
-    await ageSelect.selectByVisibleText('45');
-
     const yearSelect = app.client.$('#yearsSinceConvictionThreshold-select');
     await yearSelect.selectByVisibleText('3');
 
@@ -102,14 +98,14 @@ describe('The happy path with additional relief', () => {
       },
       additionalRelief: {
         subjectUnder21AtConviction: false,
-        dismissOlderThanAgeThreshold: true,
-        subjectAgeThreshold: 45,
+        dismissOlderThanAgeThreshold: false,
+        subjectAgeThreshold: 0,
         dismissYearsSinceConvictionThreshold: true,
         yearsSinceConvictionThreshold: 3,
         dismissYearsCrimeFreeThreshold: true,
         yearsCrimeFreeThreshold: 5,
         subjectHasOnlyProp64Charges: false,
-        subjectIsDeceased: true
+        subjectIsDeceased: false
       }
     });
 

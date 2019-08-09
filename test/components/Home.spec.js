@@ -105,15 +105,15 @@ describe('Home component', () => {
         'additionalReliefOptions'
       );
       expect(additionalReliefOptions).toEqual({
-        subjectUnder21AtConviction: true,
-        dismissOlderThanAgeThreshold: true,
-        subjectAgeThreshold: 40,
+        subjectUnder21AtConviction: false,
+        dismissOlderThanAgeThreshold: false,
+        subjectAgeThreshold: 0,
         dismissYearsSinceConvictionThreshold: true,
         yearsSinceConvictionThreshold: 5,
         dismissYearsCrimeFreeThreshold: true,
         yearsCrimeFreeThreshold: 5,
         subjectHasOnlyProp64Charges: true,
-        subjectIsDeceased: true
+        subjectIsDeceased: false
       });
     });
 
@@ -166,14 +166,14 @@ describe('Home component', () => {
     it('updates state.additionalReliefOptions for the given option and value', () => {
       const { component } = setup('true');
       expect(
-        component.state('additionalReliefOptions').subjectAgeThreshold
-      ).toEqual(40);
+        component.state('additionalReliefOptions').yearsSinceConvictionThreshold
+      ).toEqual(5);
       component
         .instance()
-        .updateAdditionalReliefOptions('subjectAgeThreshold', 55);
+        .updateAdditionalReliefOptions('yearsSinceConvictionThreshold', 10);
       expect(
-        component.state('additionalReliefOptions').subjectAgeThreshold
-      ).toEqual(55);
+        component.state('additionalReliefOptions').yearsSinceConvictionThreshold
+      ).toEqual(10);
     });
   });
 
@@ -297,8 +297,8 @@ describe('Home component', () => {
           },
           additionalReliefOptions: {
             subjectUnder21AtConviction: false,
-            dismissOlderThanAgeThreshold: true,
-            subjectAgeThreshold: 60,
+            dismissOlderThanAgeThreshold: false,
+            subjectAgeThreshold: 0,
             dismissYearsSinceConvictionThreshold: true,
             yearsSinceConvictionThreshold: 10,
             dismissYearsCrimeFreeThreshold: true,
@@ -321,15 +321,15 @@ describe('Home component', () => {
           '11360': 'dismiss'
         });
         expect(component.state('additionalReliefOptions')).toEqual({
-          subjectUnder21AtConviction: true,
-          dismissOlderThanAgeThreshold: true,
-          subjectAgeThreshold: 40,
+          subjectUnder21AtConviction: false,
+          dismissOlderThanAgeThreshold: false,
+          subjectAgeThreshold: 0,
           dismissYearsSinceConvictionThreshold: true,
           yearsSinceConvictionThreshold: 5,
           dismissYearsCrimeFreeThreshold: true,
           yearsCrimeFreeThreshold: 5,
           subjectHasOnlyProp64Charges: true,
-          subjectIsDeceased: true
+          subjectIsDeceased: false
         });
       });
     });

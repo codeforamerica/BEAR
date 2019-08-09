@@ -241,7 +241,7 @@ describe('runScript', () => {
         additionalReliefOptions: {
           subjectUnder21AtConviction: false,
           dismissOlderThanAgeThreshold: false,
-          subjectAgeThreshold: 50,
+          subjectAgeThreshold: 0,
           dismissYearsSinceConvictionThreshold: false,
           yearsSinceConvictionThreshold: 5,
           dismissYearsCrimeFreeThreshold: false,
@@ -291,15 +291,15 @@ describe('runScript', () => {
         const { args } = fakeCreateJsonFile.getCall(0);
 
         expect(args[0].additionalRelief).toEqual({
-          subjectUnder21AtConviction: true,
-          dismissOlderThanAgeThreshold: true,
-          subjectAgeThreshold: 40,
+          subjectUnder21AtConviction: false,
+          dismissOlderThanAgeThreshold: false,
+          subjectAgeThreshold: 0,
           dismissYearsSinceConvictionThreshold: true,
           yearsSinceConvictionThreshold: 5,
           dismissYearsCrimeFreeThreshold: true,
           yearsCrimeFreeThreshold: 5,
           subjectHasOnlyProp64Charges: true,
-          subjectIsDeceased: true
+          subjectIsDeceased: false
         });
       });
     });
@@ -324,7 +324,7 @@ describe('runScript', () => {
           additionalReliefOptions: {
             subjectUnder21AtConviction: false,
             dismissOlderThanAgeThreshold: false,
-            subjectAgeThreshold: 50,
+            subjectAgeThreshold: 0,
             dismissYearsSinceConvictionThreshold: false,
             yearsSinceConvictionThreshold: 5,
             dismissYearsCrimeFreeThreshold: false,

@@ -163,15 +163,15 @@ describe('The primary user flow', () => {
           reduce: []
         },
         additionalRelief: {
-          subjectUnder21AtConviction: true,
-          dismissOlderThanAgeThreshold: true,
-          subjectAgeThreshold: 40,
+          subjectUnder21AtConviction: false,
+          dismissOlderThanAgeThreshold: false,
+          subjectAgeThreshold: 0,
           dismissYearsSinceConvictionThreshold: true,
           yearsSinceConvictionThreshold: 5,
           dismissYearsCrimeFreeThreshold: true,
           yearsCrimeFreeThreshold: 5,
           subjectHasOnlyProp64Charges: true,
-          subjectIsDeceased: true
+          subjectIsDeceased: false
         }
       });
 

@@ -53,31 +53,6 @@ export default class AdditionalReliefFormCard extends Component<Props> {
         </FormCardHeader>
         <FormCardContent>
           <Checkbox
-            checked={additionalReliefOptions.subjectUnder21AtConviction}
-            labelText="Select to dismiss all Prop 64 convictions if the conviction happened when the individual was 21 or younger."
-            group="subjectUnder21AtConviction"
-            onChange={this.handleToggleChecked}
-          >
-            Dismiss all Prop 64 convictions if the conviction happened when the
-            individual was 21 or younger.
-          </Checkbox>
-          <Checkbox
-            checked={additionalReliefOptions.dismissOlderThanAgeThreshold}
-            labelText="Select to dismiss convictions for people who are older than specified age."
-            group="dismissOlderThanAgeThreshold"
-            onChange={this.handleToggleChecked}
-          >
-            Dismiss convictions for people who are older than X:
-            <NumberSelect
-              labelText="Choose a minimum age to consider people eligible for dismissal."
-              group="subjectAgeThreshold"
-              minNumber={40}
-              maxNumber={65}
-              onNumberSelect={this.handleNumberSelect}
-              selectedNumber={additionalReliefOptions.subjectAgeThreshold}
-            />
-          </Checkbox>
-          <Checkbox
             checked={
               additionalReliefOptions.dismissYearsSinceConvictionThreshold
             }
@@ -123,14 +98,6 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             Dismiss all H&S § 11357, H&S § 11358, H&S § 11359, or H&S § 11360
             convictions if those are the only convictions on an individual's
             record.
-          </Checkbox>
-          <Checkbox
-            checked={additionalReliefOptions.subjectIsDeceased}
-            labelText="Select to dismiss all Prop 64 convictions if an individual is deceased "
-            group="subjectIsDeceased"
-            onChange={this.handleToggleChecked}
-          >
-            Dismiss all Prop 64 convictions if the individual is deceased.
           </Checkbox>
         </FormCardContent>
         <FormCardFooter>

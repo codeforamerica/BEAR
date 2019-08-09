@@ -96,65 +96,6 @@ describe('AdditionalReliefFormCard component', () => {
     });
   });
 
-  describe('clicking the checkbox for convictions that occurred when under 21', () => {
-    it('should call onOptionChange with the correct arguments', () => {
-      const { component, onOptionChangeSpy } = setup();
-      component.find('#true_subjectUnder21AtConviction').simulate('change');
-      expect(onOptionChangeSpy.called).toBe(true);
-      expect(onOptionChangeSpy.callCount).toEqual(1);
-      const { args } = onOptionChangeSpy.getCall(0);
-      expect(args[0]).toEqual('subjectUnder21AtConviction');
-      expect(args[1]).toEqual(false);
-    });
-  });
-
-  describe('clicking the checkbox for subjects over a certain age', () => {
-    it('should call onOptionChange with the correct arguments', () => {
-      const { component, onOptionChangeSpy } = setup();
-      expect(
-        component.props().additionalReliefOptions.dismissOlderThanAgeThreshold
-      ).toEqual(true);
-
-      const checkbox = component.find('#true_dismissOlderThanAgeThreshold');
-      const fakeEvent = {
-        currentTarget: {
-          name: 'dismissOlderThanAgeThreshold'
-        }
-      };
-      checkbox.simulate('change', fakeEvent);
-
-      expect(onOptionChangeSpy.called).toBe(true);
-      expect(onOptionChangeSpy.callCount).toEqual(1);
-      const { args } = onOptionChangeSpy.getCall(0);
-      expect(args[0]).toEqual('dismissOlderThanAgeThreshold');
-      expect(args[1]).toEqual(false);
-    });
-  });
-
-  describe('selecting a minimum age for subjects', () => {
-    it('should call onOptionChange with the correct arguments', () => {
-      const { component, onOptionChangeSpy } = setup();
-      expect(
-        component.props().additionalReliefOptions.subjectAgeThreshold
-      ).toEqual(40);
-
-      const ageSelect = component.find('#subjectAgeThreshold-select');
-      const fakeEvent = {
-        currentTarget: {
-          value: '60',
-          selectedOptions: [{ text: '60' }]
-        }
-      };
-      ageSelect.simulate('change', fakeEvent);
-      expect(onOptionChangeSpy.called).toBe(true);
-      expect(onOptionChangeSpy.callCount).toEqual(1);
-      const { args } = onOptionChangeSpy.getCall(0);
-      expect(args[0]).toEqual('subjectAgeThreshold');
-      // Event above isn't propagating with correct value; not sure why. Below is failing as result.
-      // expect(args[1]).toEqual(60);
-    });
-  });
-
   describe('clicking the checkbox for number of years since conviction', () => {
     it('should call onOptionChange with the correct arguments', () => {
       const { component, onOptionChangeSpy } = setup();
@@ -226,29 +167,6 @@ describe('AdditionalReliefFormCard component', () => {
       expect(onOptionChangeSpy.callCount).toEqual(1);
       const { args } = onOptionChangeSpy.getCall(0);
       expect(args[0]).toEqual('subjectHasOnlyProp64Charges');
-      expect(args[1]).toEqual(false);
-    });
-  });
-
-  describe('clicking the checkbox for dismiss if subject is deceased', () => {
-    it('should call onOptionChange with the correct arguments', () => {
-      const { component, onOptionChangeSpy } = setup();
-      expect(
-        component.props().additionalReliefOptions.subjectIsDeceased
-      ).toEqual(true);
-
-      const checkbox = component.find('#true_subjectIsDeceased');
-      const fakeEvent = {
-        currentTarget: {
-          name: 'subjectIsDeceased'
-        }
-      };
-      checkbox.simulate('change', fakeEvent);
-
-      expect(onOptionChangeSpy.called).toBe(true);
-      expect(onOptionChangeSpy.callCount).toEqual(1);
-      const { args } = onOptionChangeSpy.getCall(0);
-      expect(args[0]).toEqual('subjectIsDeceased');
       expect(args[1]).toEqual(false);
     });
   });
