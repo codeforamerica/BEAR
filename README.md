@@ -94,20 +94,20 @@ For information about how to include the gogen binary when packaging BEAR for pr
       1. Log into Github and visit the [releases page](https://github.com/codeforamerica/BEAR/releases)
       1. Find the draft release corresponding to the story that was accepted
       1. Click “edit” and then “publish release”. If we're pre-1.0.0, also check the "Pre-release" box.
-   1. SOON: Sign the approved binary and make publicly available on S3. On Windows laptop:
+   1. Sign the approved binary and make publicly available on S3. On Windows laptop:
       1. Sign the binary:
          1. Download the Windows artifact from the published Github release above
+         1. Rename the signed binary to `clearmyrecord-HS_11361-setup.exe`.
          1. Plug in DigiCert USB token
          1. Open Command Prompt
-         1. Run the following commend: `signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a "c:\path\to\file_to_sign.exe"`. **Note**: This command is also available in `commands to sign.txt` on the Desktop.
+         1. Run the following commend: `signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a "c:\path\to\Downloads\clearmyrecord-HS_11361-setup.exe"`. **Note**: This command is also available in `commands to sign.txt` on the Desktop.
          1. When prompted, enter the password in the "DigiCert EV Certificate" shared note in LastPass
       1. Add the signed binary to the Github release:
          1. Log into Github and visit the [releases page](https://github.com/codeforamerica/BEAR/releases)
-         1. Edit the corresponding published release and attach the signed binary with unique name (e.g. `clearmyrecord-bear-setup-signed-0.2.2.exe`)
+         1. Attach the signed binary and save the release
       1. Upload the signed binary to S3:
          1. Sign in to `cfa` AWS account (requires Christa since we have limited access)
          1. In S3, navigate to the `cmr-bear-releases` S3 bucket
-         1. Locally, rename the signed binary to `clearmyrecord-HS_11361-setup.exe`.
          1. Upload the renamed file to the bucket. This should create a new version of the existing resource, so people receive the latest file when they visit the URL from the marketing page. You can check by hitting the 'Versions' toggle button, after which you should see a version with a recent 'Last modified' date.
          1. Make the file public. Click on the file you just uploaded and hit the 'Make public' button.
 
