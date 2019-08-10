@@ -11,7 +11,7 @@ import StartOverButton from './StartOverButton';
 import { getFileSize } from '../utils/fileUtils';
 
 type Props = {
-  dojFilePath: string,
+  dojFilePaths: Array<string>,
   onComplete: void => void,
   runScriptInOptions: ((void) => void) => void,
   onStartOver: void => void,
@@ -46,8 +46,17 @@ export default class ProcessingFormCard extends Component<Props, State> {
     this.setState({ gogenComplete: true });
   };
 
+  calculateFileSizes = () => {
+    const { dojFilePaths } = this.props;
+    let totalSize = 0;
+    dojFilePaths.forEach(path => {
+      totalSize += getFileSize(path);
+    });
+    return totalSize;
+  };
+
   render() {
-    const { dojFilePath, onComplete } = this.props;
+    const { onComplete } = this.props;
     const { gogenComplete } = this.state;
     return (
       <FormCard>
@@ -57,7 +66,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
             <div className="emoji emoji--huge emoji--woman-detective-medium-dark-skin-tone" />
             <h3>Reading and preparing files ...</h3>
             <ProgressBar
-              fileSizeInBytes={getFileSize(dojFilePath)}
+              fileSizeInBytes={this.calculateFileSizes()}
               onCompleteCallback={onComplete}
               isComplete={gogenComplete}
             />

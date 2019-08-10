@@ -166,7 +166,7 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
           </div>
           <div>
             v
-            0.2.6
+            0.2.7
           </div>
         </div>
       </div>

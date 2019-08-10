@@ -218,7 +218,7 @@ export default class Home extends Component<Props, State> {
           onBack={this.previousScreen}
         />
         <ProcessingFormCard
-          dojFilePath={dojFilePaths[0]}
+          dojFilePaths={dojFilePaths}
           onComplete={this.nextScreen}
           runScriptInOptions={this.runScriptInOptions}
           onStartOver={this.resetInitialState}

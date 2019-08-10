@@ -18,7 +18,7 @@ function setup() {
 
   const component = mount(
     <ProcessingFormCard
-      dojFilePath="/tmp/path"
+      dojFilePaths={['file.one', 'file.two', 'file.three']}
       runScriptInOptions={runScriptSpy}
       onStartOver={startOverSpy}
       resetOutputPath={resetOutputPathSpy}
@@ -45,6 +45,14 @@ describe('ProcessingFormCard component', () => {
       expect(component.state().gogenComplete).toEqual(true);
     });
   });
+
+  describe('calculateFileSizes', () => {
+    it('returns total size of all provided files', () => {
+      const { component } = setup();
+      expect(component.instance().calculateFileSizes()).toEqual(3000);
+    });
+  });
+
   describe('clicking the Start Over button', () => {
     it('should call resetOutputPath', () => {
       const { component, resetOutputPathSpy } = setup();
