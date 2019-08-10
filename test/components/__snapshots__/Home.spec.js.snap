@@ -164,6 +164,10 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
              
             on behalf of the people of California.
           </div>
+          <div>
+            v
+            0.2.6
+          </div>
         </div>
       </div>
     </footer>

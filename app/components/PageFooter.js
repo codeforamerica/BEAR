@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { version } from '../../package.json';
 import styles from './PageFooter.css';
 
 export default class PageFooter extends Component<Props, State> {
@@ -28,6 +29,7 @@ export default class PageFooter extends Component<Props, State> {
               </a>{' '}
               on behalf of the people of California.
             </div>
+            <div>v{version}</div>
           </div>
         </div>
       </footer>
