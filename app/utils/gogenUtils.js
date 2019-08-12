@@ -2,7 +2,10 @@
 import fs from 'fs';
 import path from 'path';
 import { createJsonFile } from './fileUtils';
-import { writeSummaryOutput } from './writeSummaryOutputUtils';
+import { parseGogenOutput } from './writeSummaryOutputUtils';
+import ReactPDF from '@react-pdf/renderer';
+import SummaryReportPdf from '../components/SummaryReportPdf';
+import React from 'react';
 
 function transformBaselineEligibilityOptions(eligibilityOptions) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
@@ -87,7 +90,12 @@ export function runScript(
   });
 
   goProcess.on('close', () => {
-    writeSummaryOutput(outputFilePath, fileNameSuffix, dojFilePaths.length);
+    ReactPDF.render(
+      <SummaryReportPdf
+        summaryData={parseGogenOutput(outputFilePath, fileNameSuffix)}
+        inputFileCount={dojFilePaths.length} />,
+      path.join(outputFilePath, 'CMR_summary_report.pdf')
+    );
     childFinishedCallback();
   });
   goProcess.on('error', error => {
