@@ -1,19 +1,16 @@
 import path from 'path';
 import fs from 'fs';
 
-//eslint-disable-next-line import/prefer-default-export
+// eslint-disable-next-line import/prefer-default-export
 
-export function parseGogenOutput(
-  outputFilePath,
-  fileNameSuffix
-) {
+export function parseGogenOutput(outputFilePath, fileNameSuffix) {
   const pathToGogenOutput = path.join(
     outputFilePath,
     `gogen_${fileNameSuffix}.json`
   );
   const gogenOutputData = fs.readFileSync(pathToGogenOutput, 'utf8');
-  // fs.unlinkSync(pathToGogenOutput);
-  return gogenOutputData;
+  fs.unlinkSync(pathToGogenOutput);
+  return JSON.parse(gogenOutputData);
 }
 
 export function formatCountsByCodeSection(convictionCounts) {
@@ -38,5 +35,11 @@ export function formatDateTime() {
     day: 'numeric',
     hour: 'numeric',
     minute: 'numeric'
+  });
+}
+
+export function toTitleCase(str) {
+  return str.replace(/\w\S*/g, function(txt) {
+    return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
 }

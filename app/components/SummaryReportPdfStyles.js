@@ -1,14 +1,13 @@
-import { StyleSheet, Font } from '@react-pdf/renderer';
-import path from 'path';
+import { StyleSheet } from '@react-pdf/renderer';
 
-Font.register({
-  family: 'Roboto',
-  src: path.join(__dirname, '/assets/fonts/Roboto-Medium.ttf')
-});
-Font.register({
-  family: 'Roboto-Bold',
-  src: path.join(__dirname, '/assets/fonts/Roboto-Bold.ttf')
-});
+// Font.register({
+//   family: 'Roboto',
+//   src: path.join(__dirname, '/assets/fonts/Roboto-Medium.ttf')
+// });
+// Font.register({
+//   family: 'Roboto-Bold',
+//   src: path.join(__dirname, '/assets/fonts/Roboto-Bold.ttf')
+// });
 
 const styles = StyleSheet.create({
   logoImage: {
@@ -42,28 +41,28 @@ const styles = StyleSheet.create({
   },
   h1: {
     marginBottom: 8,
-    fontSize: 24,
-    fontFamily: 'Roboto-Bold'
+    fontSize: 24
+    // fontFamily: 'Roboto-Bold'
   },
   h2: {
     marginTop: 16,
     marginBottom: 12,
     color: '#008060',
-    fontSize: 14,
-    fontFamily: 'Roboto-Bold'
+    fontSize: 14
+    // fontFamily: 'Roboto-Bold'
   },
   h3: {
     marginVertical: 10,
     color: '#008060',
-    fontSize: 12,
-    fontFamily: 'Roboto-Bold'
+    fontSize: 12
+    // fontFamily: 'Roboto-Bold'
   },
   text: {
     fontSize: 12
   },
   boldText: {
-    fontSize: 12,
-    fontFamily: 'Roboto-Bold'
+    fontSize: 12
+    // fontFamily: 'Roboto-Bold'
   },
   listItem: {
     fontSize: 12,
