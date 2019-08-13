@@ -8,27 +8,31 @@ import { getFileSize } from '../utils/fileUtils';
 
 type Props = {
   dojFilePaths: Array<string>,
-  onComplete: void => void,
-  runScriptInOptions: ((void) => void) => void,
+  onComplete: (number, string) => void,
+  runScriptInOptions: ((number, string) => void) => void,
   onStartOver: void => void,
   resetOutputPath: void => void
 };
 
 type State = {
-  gogenComplete: boolean
+  gogenComplete: boolean,
+  gogenExitCode: number,
+  errorText: string
 };
 
 export default class ProcessingFormCard extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      gogenComplete: false
+      gogenComplete: false,
+      gogenExitCode: -1,
+      errorText: ''
     };
   }
 
   componentDidMount() {
     const { runScriptInOptions } = this.props;
-    runScriptInOptions(this.onGogenComplete);
+    runScriptInOptions(this.onScriptComplete);
     window.scrollTo(0, 0);
   }
 
@@ -38,8 +42,8 @@ export default class ProcessingFormCard extends Component<Props, State> {
     onStartOver();
   };
 
-  onGogenComplete = () => {
-    this.setState({ gogenComplete: true });
+  onScriptComplete = (code: number, errorText: string) => {
+    this.setState({ gogenComplete: true, gogenExitCode: code, errorText });
   };
 
   calculateFileSizes = () => {
@@ -53,7 +57,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
 
   render() {
     const { onComplete } = this.props;
-    const { gogenComplete } = this.state;
+    const { gogenComplete, gogenExitCode, errorText } = this.state;
     return (
       <FormCard>
         <FormCardContent>
@@ -64,6 +68,8 @@ export default class ProcessingFormCard extends Component<Props, State> {
               fileSizeInBytes={this.calculateFileSizes()}
               onCompleteCallback={onComplete}
               isComplete={gogenComplete}
+              gogenExitCode={gogenExitCode}
+              errorText={errorText}
             />
             <StartOverButton onStartOver={this.onClickStartOver} />
           </div>

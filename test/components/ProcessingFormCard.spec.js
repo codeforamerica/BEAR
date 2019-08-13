@@ -37,11 +37,11 @@ afterEach(() => {
 });
 
 describe('ProcessingFormCard component', () => {
-  describe('onGogenComplete', () => {
+  describe('onScriptComplete', () => {
     it('should set state when Gogen was successful', () => {
       const { component } = setup();
       expect(component.state().gogenComplete).toEqual(false);
-      component.instance().onGogenComplete(0, 'OK');
+      component.instance().onScriptComplete(0, 'OK');
       expect(component.state().gogenComplete).toEqual(true);
     });
   });

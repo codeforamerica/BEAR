@@ -1,6 +1,7 @@
 // These numbers depend on the order in which the non-linear screens are rendered inside the page container in the home component
 const nonLinearScreenNumbers = {
-  privacyPolicy: 7
+  privacyPolicy: 7,
+  errorScreen: 8
 };
 
 export default nonLinearScreenNumbers;

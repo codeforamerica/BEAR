@@ -15,6 +15,8 @@ import { runScript } from '../utils/gogenUtils';
 import { getDateTime } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
 import PrivacyPolicyFormCard from './PrivacyPolicyFormCard';
+import ErrorFormCard from './ErrorFormCard';
+import nonLinearScreenNumbers from '../constants/nonLinearScreenNumbers';
 
 type State = {
   gogenPath: string,
@@ -26,7 +28,8 @@ type State = {
   baselineEligibilityOptions: BaselineEligibilityOptions,
   additionalReliefOptions: AdditionalReliefOptions,
   outputPathPrefix: string,
-  outputFilePath: string
+  outputFilePath: string,
+  errorText: string
 };
 
 type Props = {
@@ -163,6 +166,17 @@ export default class Home extends Component<Props, State> {
     this.goToScreen(currentScreen + 1);
   };
 
+  processingNextScreen = (code: number, errorText: string) => {
+    if (code === 0) {
+      this.nextScreenInFlow();
+    } else {
+      this.setState({
+        currentScreen: nonLinearScreenNumbers.errorScreen,
+        errorText
+      });
+    }
+  };
+
   isAllDismiss = () => {
     const { baselineEligibilityOptions } = this.state;
     return Object.values(baselineEligibilityOptions).every(
@@ -201,7 +215,8 @@ export default class Home extends Component<Props, State> {
       dojFilePaths,
       outputFilePath,
       baselineEligibilityOptions,
-      additionalReliefOptions
+      additionalReliefOptions,
+      errorText
     } = this.state;
     return (
       <PageContainer currentScreen={currentScreen} goToScreen={this.goToScreen}>
@@ -236,7 +251,7 @@ export default class Home extends Component<Props, State> {
         />
         <ProcessingFormCard
           dojFilePaths={dojFilePaths}
-          onComplete={this.nextScreenInFlow}
+          onComplete={this.processingNextScreen}
           runScriptInOptions={this.runScriptInOptions}
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
@@ -249,6 +264,10 @@ export default class Home extends Component<Props, State> {
           resetOutputPath={this.resetOutputPath}
         />
         <PrivacyPolicyFormCard onBack={this.goToPreviousScreen} />
+        <ErrorFormCard
+          onStartOver={this.resetInitialState}
+          errorText={errorText}
+        />
       </PageContainer>
     );
   }

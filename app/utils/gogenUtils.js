@@ -88,31 +88,27 @@ export function runScript(
     `--eligibility-options=${pathToEligibilityOptions}`,
     `--compute-at=2020-07-01`
   ]);
-  goProcess.stdout.on('data', data => {
-    const dataString = data.toString();
-    console.log(`stdout for gogen process: `, dataString);
-  });
 
-  goProcess.on('close', () => {
-    ReactPDF.render(
-      <SummaryReportPdf
-        summaryData={parseGogenOutput(outputFilePath, fileNameSuffix)}
-        inputFileCount={dojFilePaths.length}
-        allEligibleConvictionsDismissed={allEligibleConvictionsDismissed(
-          formattedEligibilityOptions
-        )}
-      />,
-      path.join(outputFilePath, 'CMR_summary_report.pdf')
-    );
-    childFinishedCallback();
-  });
-  goProcess.on('error', error => {
-    console.error(error);
-    childFinishedCallback();
-  });
-
-  goProcess.stderr.on('data', data => {
-    console.log(`stderr: ${data}`);
+  goProcess.on('exit', code => {
+    let errorText = '';
+    if (code !== 0) {
+      errorText = fs.readFileSync(
+        `${outputFilePath}/gogen_${dateTime}.err`,
+        'utf8'
+      );
+    } else {
+      ReactPDF.render(
+        <SummaryReportPdf
+          summaryData={parseGogenOutput(outputFilePath, fileNameSuffix)}
+          inputFileCount={dojFilePaths.length}
+          allEligibleConvictionsDismissed={allEligibleConvictionsDismissed(
+            formattedEligibilityOptions
+          )}
+        />,
+        path.join(outputFilePath, 'CMR_summary_report.pdf')
+      );
+    }
+    childFinishedCallback(code, errorText);
   });
 }
 
