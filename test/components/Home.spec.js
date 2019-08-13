@@ -88,11 +88,7 @@ describe('Home component', () => {
         'baselineEligibilityOptions'
       );
       expect(baselineEligibilityOptions).toEqual({
-        '11357(a)': 'dismiss',
-        '11357(b)': 'dismiss',
-        '11357(c)': 'dismiss',
-        '11357(d)': 'dismiss',
-        '11357(no-sub-section)': 'dismiss',
+        '11357': 'dismiss',
         '11358': 'dismiss',
         '11359': 'dismiss',
         '11360': 'dismiss'
@@ -180,13 +176,11 @@ describe('Home component', () => {
   describe('updateStateWithEligibilityOptions', () => {
     it('updates state.baselineEligibilityOptions for the given code section and option', () => {
       const { component } = setup('true');
-      expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
+      expect(component.state('baselineEligibilityOptions')['11357']).toEqual(
         'dismiss'
       );
-      component
-        .instance()
-        .updateStateWithEligibilityOptions('11357(a)', 'reduce');
-      expect(component.state('baselineEligibilityOptions')['11357(a)']).toEqual(
+      component.instance().updateStateWithEligibilityOptions('11357', 'reduce');
+      expect(component.state('baselineEligibilityOptions')['11357']).toEqual(
         'reduce'
       );
     });
@@ -242,10 +236,7 @@ describe('Home component', () => {
       component.setState({
         currentScreen: 3,
         baselineEligibilityOptions: {
-          '11357(a)': 'reduce',
-          '11357(b)': 'dismiss',
-          '11357(c)': 'dismiss',
-          '11357(d)': 'dismiss',
+          '11357': 'reduce',
           '11358': 'dismiss',
           '11359': 'dismiss',
           '11360': 'dismiss'
@@ -286,11 +277,7 @@ describe('Home component', () => {
           currentScreen: 3,
           county: { name: 'Eternia', code: 'ETERNIA' },
           baselineEligibilityOptions: {
-            '11357(a)': 'dismiss',
-            '11357(b)': 'reduce',
-            '11357(c)': 'reduce',
-            '11357(d)': 'dismiss',
-            '11357(no-sub-section)': 'dismiss',
+            '11357': 'dismiss',
             '11358': 'dismiss',
             '11359': 'reduce',
             '11360': 'dismiss'
@@ -311,11 +298,7 @@ describe('Home component', () => {
         expect(component.state('currentScreen')).toEqual(0);
         expect(component.state('county')).toEqual({ name: '', code: '' });
         expect(component.state('baselineEligibilityOptions')).toEqual({
-          '11357(a)': 'dismiss',
-          '11357(b)': 'dismiss',
-          '11357(c)': 'dismiss',
-          '11357(d)': 'dismiss',
-          '11357(no-sub-section)': 'dismiss',
+          '11357': 'dismiss',
           '11358': 'dismiss',
           '11359': 'dismiss',
           '11360': 'dismiss'

@@ -137,16 +137,7 @@ describe('The primary user flow', () => {
 
       expect(eligibilityConfig).toEqual({
         baselineEligibility: {
-          dismiss: [
-            '11357(a)',
-            '11357(b)',
-            '11357(c)',
-            '11357(d)',
-            '11357(no-sub-section)',
-            '11358',
-            '11359',
-            '11360'
-          ],
+          dismiss: ['11357', '11358', '11359', '11360'],
           reduce: []
         },
         additionalRelief: {

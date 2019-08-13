@@ -60,42 +60,15 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
           <tr>
             <td>
               <p>
-                H&S § 11357 (a) felonies
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={true}
-                id="dismiss_11357(a)"
-                name="11357(a)"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="reduce_11357(a)"
-                name="11357(a)"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                H&S § 11357 (b) felonies
+                H&S § 11357 felonies including all subsections
               </p>
             </td>
             <td>
               <input
                 className="radioButton radio-button"
                 defaultChecked={false}
-                id="dismiss_11357(b)"
-                name="11357(b)"
+                id="dismiss_11357"
+                name="11357"
                 onChange={[Function]}
                 type="radio"
               />
@@ -104,89 +77,8 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
               <input
                 className="radioButton radio-button"
                 defaultChecked={false}
-                id="reduce_11357(b)"
-                name="11357(b)"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                H&S § 11357 (c) felonies
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="dismiss_11357(c)"
-                name="11357(c)"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="reduce_11357(c)"
-                name="11357(c)"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                H&S § 11357 (d) felonies
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="dismiss_11357(d)"
-                name="11357(d)"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="reduce_11357(d)"
-                name="11357(d)"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
-                H&S § 11357 felonies (when no sub-section is specified)
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="dismiss_11357(no-sub-section)"
-                name="11357(no-sub-section)"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="reduce_11357(no-sub-section)"
-                name="11357(no-sub-section)"
+                id="reduce_11357"
+                name="11357"
                 onChange={[Function]}
                 type="radio"
               />

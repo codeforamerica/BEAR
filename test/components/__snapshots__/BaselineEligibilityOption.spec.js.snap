@@ -11,8 +11,8 @@ exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
     <input
       className="radioButton radio-button"
       defaultChecked={true}
-      id="dismiss_11357(a)"
-      name="11357(a)"
+      id="dismiss_11357"
+      name="11357"
       onChange={[Function]}
       type="radio"
     />
@@ -21,8 +21,8 @@ exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
     <input
       className="radioButton radio-button"
       defaultChecked={false}
-      id="reduce_11357(a)"
-      name="11357(a)"
+      id="reduce_11357"
+      name="11357"
       onChange={[Function]}
       type="radio"
     />

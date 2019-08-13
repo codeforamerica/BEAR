@@ -72,15 +72,7 @@ describe('The happy path with additional relief', () => {
 
     expect(eligibilityConfig).toEqual({
       baselineEligibility: {
-        dismiss: [
-          '11357(a)',
-          '11357(b)',
-          '11357(c)',
-          '11357(d)',
-          '11357(no-sub-section)',
-          '11358',
-          '11359'
-        ],
+        dismiss: ['11357', '11358', '11359'],
         reduce: ['11360']
       },
       additionalRelief: {
