@@ -1,0 +1,72 @@
+.formCard {
+  max-width: 960px;
+  margin-top: 20px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.formCardFooter {
+  margin-top: 0;
+}
+
+.formCardContentFullWidth {
+  margin-left: -38px !important;
+  margin-right: -38px !important;
+}
+
+.formCardNoBottomMargin {
+  margin-bottom: -40px;
+}
+
+.dataTable {
+  margin-top: -2em;
+}
+
+/* hacky thing to get table in place */
+.dataTableFirst {
+  margin-top: -2.1em;
+  margin-bottom: 1.6em;
+}
+
+.dataTableSecond {
+  margin-bottom: 0;
+}
+
+.dataTableContent {
+  padding-top: 1.6em !important;
+  padding-bottom: 1.6em !important;
+}
+
+.dataTable thead {
+  border-bottom: none !important;
+}
+
+.dataTable th {
+  border-bottom: 2px solid #f7f5f4 !important;
+}
+
+.dataTable tbody {
+  border-bottom: 2px solid #f7f5f4 !important;
+}
+
+.dataTable caption {
+  color: black !important;
+  font-weight: 600 !important;
+  border-bottom: 2px solid #f7f5f4 !important;
+  border-top: 2px solid #eaeae9 !important;
+  background-color: #f7f5f4 !important;
+  display: block-start;
+  text-align: left;
+  padding-left: 40px;
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+}
+
+.dataTable td {
+  line-height: initial !important;
+  border: none !important;
+}
+
+.dataTable td:first-child {
+  font-weight: normal !important;
+}

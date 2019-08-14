@@ -18,9 +18,7 @@ export default class BaselineEligibilityOption extends Component<Props> {
     } = this.props;
     return (
       <tr>
-        <td>
-          <p>{`H&S § ${codeSectionDescription}`}</p>
-        </td>
+        <td>{`H&S § ${codeSectionDescription}`}</td>
         <td>
           <RadioButton
             selected={baselineEligibilityOptions[codeSection] === 'dismiss'}

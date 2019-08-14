@@ -3,7 +3,7 @@
 exports[`ResultsFormCard component should match exact snapshot 1`] = `
 <div>
   <div
-    className="form-card"
+    className="form-card formCard"
   >
     <header
       className="form-card__header"
@@ -39,7 +39,7 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
       </h1>
     </header>
     <div
-      className="form-card__content"
+      className="form-card__content "
     >
       <h3
         className="text--centered"

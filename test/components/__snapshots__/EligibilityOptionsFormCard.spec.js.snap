@@ -3,7 +3,7 @@
 exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = `
 <div>
   <div
-    className="form-card"
+    className="form-card formCard"
   >
     <header
       className="form-card__header"
@@ -20,153 +20,194 @@ exports[`EligibilityOptionsFormCard component should match exact snapshot 1`] = 
       </div>
     </header>
     <div
-      className="form-card__content"
+      className="form-card__content formCardContentFullWidth formCardNoBottomMargin"
     >
-      <table
-        className="data-table"
+      <div
+        className="dataTableFirst"
       >
-        <thead>
-          <tr>
-            <th>
-              Type of convictions
-            </th>
-            <th>
-              Dismiss
-            </th>
-            <th>
-              Reduce
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <p>
-                All Prop 64 misdemeanors and infractions
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={true}
-                id="misdemeanor_infraction_no_reduce_option"
-                name="no_reduce_option"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td />
-          </tr>
-          <tr>
-            <td>
-              <p>
+        <table
+          className="data-table dataTable"
+        >
+          <caption>
+            Misdemeanors and Infractions
+          </caption>
+          <tbody>
+            <tr>
+              <td
+                className="dataTableContent"
+              >
+                All misdemeanors and infractions will be marked as eligible for dismissal.
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div
+        className="dataTableSecond"
+      >
+        <table
+          className="data-table dataTable"
+        >
+          <caption>
+            Felonies
+          </caption>
+          <thead>
+            <tr>
+              <th>
+                Type of convictions
+              </th>
+              <th>
+                Dismiss
+              </th>
+              <th>
+                Reduce
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
                 H&S § 11357 felonies including all subsections
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="dismiss_11357"
-                name="11357"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="reduce_11357"
-                name="11357"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+              </td>
+              <td>
+                <label
+                  className="radioButtonWrapper "
+                  htmlFor="dismiss_11357"
+                >
+                  <input
+                    className="radioButton radio-button"
+                    defaultChecked={false}
+                    id="dismiss_11357"
+                    name="11357"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                </label>
+              </td>
+              <td>
+                <label
+                  className="radioButtonWrapper "
+                  htmlFor="reduce_11357"
+                >
+                  <input
+                    className="radioButton radio-button"
+                    defaultChecked={false}
+                    id="reduce_11357"
+                    name="11357"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>
                 H&S § 11358 felonies including all subsections
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="dismiss_11358"
-                name="11358"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="reduce_11358"
-                name="11358"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+              </td>
+              <td>
+                <label
+                  className="radioButtonWrapper "
+                  htmlFor="dismiss_11358"
+                >
+                  <input
+                    className="radioButton radio-button"
+                    defaultChecked={false}
+                    id="dismiss_11358"
+                    name="11358"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                </label>
+              </td>
+              <td>
+                <label
+                  className="radioButtonWrapper "
+                  htmlFor="reduce_11358"
+                >
+                  <input
+                    className="radioButton radio-button"
+                    defaultChecked={false}
+                    id="reduce_11358"
+                    name="11358"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>
                 H&S § 11359 felonies including all subsections
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="dismiss_11359"
-                name="11359"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="reduce_11359"
-                name="11359"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <p>
+              </td>
+              <td>
+                <label
+                  className="radioButtonWrapper "
+                  htmlFor="dismiss_11359"
+                >
+                  <input
+                    className="radioButton radio-button"
+                    defaultChecked={false}
+                    id="dismiss_11359"
+                    name="11359"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                </label>
+              </td>
+              <td>
+                <label
+                  className="radioButtonWrapper "
+                  htmlFor="reduce_11359"
+                >
+                  <input
+                    className="radioButton radio-button"
+                    defaultChecked={false}
+                    id="reduce_11359"
+                    name="11359"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                </label>
+              </td>
+            </tr>
+            <tr>
+              <td>
                 H&S § 11360 felonies including all subsections
-              </p>
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="dismiss_11360"
-                name="11360"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-            <td>
-              <input
-                className="radioButton radio-button"
-                defaultChecked={false}
-                id="reduce_11360"
-                name="11360"
-                onChange={[Function]}
-                type="radio"
-              />
-            </td>
-          </tr>
-        </tbody>
-      </table>
+              </td>
+              <td>
+                <label
+                  className="radioButtonWrapper "
+                  htmlFor="dismiss_11360"
+                >
+                  <input
+                    className="radioButton radio-button"
+                    defaultChecked={false}
+                    id="dismiss_11360"
+                    name="11360"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                </label>
+              </td>
+              <td>
+                <label
+                  className="radioButtonWrapper "
+                  htmlFor="reduce_11360"
+                >
+                  <input
+                    className="radioButton radio-button"
+                    defaultChecked={false}
+                    id="reduce_11360"
+                    name="11360"
+                    onChange={[Function]}
+                    type="radio"
+                  />
+                </label>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
     <div
       className="form-card__footer"

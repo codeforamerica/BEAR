@@ -18,14 +18,21 @@ export default class RadioButton extends Component<Props> {
     const { selected, value, group } = this.props;
 
     return (
-      <input
-        defaultChecked={selected}
-        type="radio"
-        className={`${styles.radioButton} radio-button`}
-        name={group}
-        id={`${value}_${group}`}
-        onChange={this.handleSelect}
-      />
+      <label
+        htmlFor={`${value}_${group}`}
+        className={`${styles.radioButtonWrapper} ${
+          selected ? styles.selected : ''
+        }`}
+      >
+        <input
+          defaultChecked={selected}
+          type="radio"
+          className={`${styles.radioButton} radio-button`}
+          name={group}
+          id={`${value}_${group}`}
+          onChange={this.handleSelect}
+        />
+      </label>
     );
   }
 }

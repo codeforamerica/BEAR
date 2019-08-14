@@ -79,7 +79,7 @@ describe('The primary user flow', () => {
   describe('when the user chooses to dismiss all code sections', () => {
     it('skips additional relief page', async () => {
       const text = await app.client.getText('.form-card__content');
-      expect(text[0]).toContain('Using Clear My Record will expedite');
+      expect(text).toContain('Using Clear My Record will expedite');
 
       await app.client.click('#begin');
 
@@ -96,8 +96,8 @@ describe('The primary user flow', () => {
       await app.client.click('#continue');
       outputDirectory = getOutputDirectoryPath(getDateTime());
 
-      pageTitle = await app.client.getText('.form-card__title');
-      expect(pageTitle).not.toContain('Additional relief');
+      const pageBody = await app.client.getText('body');
+      expect(pageBody).not.toContain('Additional relief');
     });
 
     it('can complete the full flow and generate correct eligibility config', async () => {
