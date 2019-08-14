@@ -118,7 +118,7 @@ export default class SummaryReportPdf extends Component<Props> {
               <Text style={styles.listItem}>
                 For the above convictions,{' '}
                 {summaryData.prop64FelonyConvictionsCountInCounty} were felonies
-                and {summaryData.prop64MisdemeanorConvictionsCountInCounty} were
+                and {summaryData.prop64NonFelonyConvictionsCountInCounty} were
                 misdemeanors
               </Text>
             </View>
@@ -137,18 +137,44 @@ export default class SummaryReportPdf extends Component<Props> {
                   summaryData.convictionDismissalCountByCodeSection
                 )}
               </Text>
-              <Text style={styles.listItem}>
-                Reductions:{' '}
-                {formatCountsByCodeSection(
-                  summaryData.convictionReductionCountByCodeSection
-                )}
-              </Text>
-              <Text style={styles.listItem}>
-                Dismissals based on additional relief:{' '}
-                {formatCountsByAdditionalRelief(
-                  summaryData.convictionDismissalCountByAdditionalRelief
-                )}
-              </Text>
+              <View
+                render={() => {
+                  if (
+                    Object.keys(
+                      summaryData.convictionReductionCountByCodeSection
+                    ).length > 0
+                  ) {
+                    console.log('reduction');
+                    return (
+                      <Text style={styles.listItem}>
+                        Reductions:{' '}
+                        {formatCountsByCodeSection(
+                          summaryData.convictionReductionCountByCodeSection
+                        )}
+                      </Text>
+                    );
+                  }
+                }}
+              />
+              <View
+                render={() => {
+                  if (
+                    Object.keys(
+                      summaryData.convictionDismissalCountByAdditionalRelief
+                    ).length > 0
+                  ) {
+                    console.log('additional relief dismissals');
+                    return (
+                      <Text style={styles.listItem}>
+                        Dismissals based on additional relief:{' '}
+                        {formatCountsByAdditionalRelief(
+                          summaryData.convictionDismissalCountByAdditionalRelief
+                        )}
+                      </Text>
+                    );
+                  }
+                }}
+              />
               <Text style={styles.listItem}>
                 {summaryData.subjectsWithSomeReliefCount} individuals will get
                 some type of relief

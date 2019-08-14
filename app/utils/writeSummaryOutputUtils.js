@@ -15,14 +15,14 @@ export function parseGogenOutput(outputFilePath, fileNameSuffix) {
 
 export function formatCountsByCodeSection(convictionCounts) {
   const countPhrases = Object.entries(convictionCounts).map(entry => {
-    return `H&S § ${entry[0]}: ${entry[1]} convictions`;
+    return `H&S § ${entry[0]}: ${pluralize(entry[1])}`;
   });
   return countPhrases.join('; ');
 }
 
 export function formatCountsByAdditionalRelief(convictionCounts) {
   const countPhrases = Object.entries(convictionCounts).map(entry => {
-    return `${entry[0]}: ${entry[1]} convictions`;
+    return `${entry[0]}: ${pluralize(entry[1])}`;
   });
   return countPhrases.join('; ');
 }
@@ -42,4 +42,11 @@ export function toTitleCase(str) {
   return str.replace(/\w\S*/g, function(txt) {
     return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
   });
+}
+
+function pluralize(item) {
+  if (item === 1) {
+    return `1 conviction`;
+  }
+  return `${item} convictions`;
 }
