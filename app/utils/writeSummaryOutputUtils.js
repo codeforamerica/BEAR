@@ -50,3 +50,24 @@ function pluralize(item) {
   }
   return `${item} convictions`;
 }
+
+export function convertTimestamp(timestamp) {
+  const monthNames = {
+    1: 'January',
+    2: 'February',
+    3: 'March',
+    4: 'April',
+    5: 'May',
+    6: 'June',
+    7: 'July',
+    8: 'August',
+    9: 'September',
+    10: 'October',
+    11: 'November',
+    12: 'December'
+  };
+  const dateArray = timestamp.split(' ')[0].split('-');
+  const monthNumber = parseInt(dateArray[1], 10);
+  const dayNumber = parseInt(dateArray[2], 10);
+  return `${monthNames[monthNumber]} ${dayNumber}, ${dateArray[0]}`;
+}
