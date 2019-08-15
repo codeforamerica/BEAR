@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
     paddingBottom: 65,
     paddingHorizontal: 35
   },
+  textWithPadding: {
+    paddingTop: 8
+  },
   h1: {
     marginBottom: 8,
     fontSize: 24
