@@ -165,6 +165,9 @@ describe('The primary user flow', () => {
         '.form-card__title'
       );
       expect(resultsFormCardContent).toContain('Your files are ready!');
+
+      const outputPdfFile = `${outputDirectory}/CMR_summary_report.pdf`;
+      expect(fs.existsSync(outputPdfFile)).toEqual(true);
     });
   });
 });

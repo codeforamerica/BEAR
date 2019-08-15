@@ -250,6 +250,7 @@
     "yarn": "^1.15.2"
   },
   "dependencies": {
+    "@react-pdf/renderer": "^1.6.3",
     "cfa-styleguide": "codeforamerica/cfa-styleguide-npm",
     "connected-react-router": "^6.3.2",
     "core-js": "2",
