@@ -9,19 +9,19 @@ Enzyme.configure({ adapter: new Adapter() });
 
 function setup() {
   const options = {
-    '11357(a)': 'dismiss',
-    '11357(b)': 'reduce'
+    '11357': 'dismiss',
+    '11358': 'reduce'
   };
   const component1 = shallow(
     <BaselineEligibilityOption
-      codeSection="11357(a)"
+      codeSection="11357"
       baselineEligibilityOptions={options}
     />
   );
 
   const component2 = shallow(
     <BaselineEligibilityOption
-      codeSection="11357(b)"
+      codeSection="11358"
       baselineEligibilityOptions={options}
     />
   );

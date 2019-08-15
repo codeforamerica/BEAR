@@ -18,14 +18,12 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
         </div>
       </div>
     </header>
-    <div
-      className="form-card__content"
-    >
+    <div>
       <div
-        className="form-card"
+        className="form-card formCard"
       >
         <div
-          className="form-card__content"
+          className="form-card__content "
         >
           <div
             className="text--centered"
@@ -97,7 +95,7 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
               className="box nudge--large"
             >
               <button
-                className="button button--primary"
+                className="button button--primary button--large"
                 id="begin"
                 onClick={[Function]}
                 type="button"
@@ -107,66 +105,68 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
             </div>
           </div>
         </div>
-        <div
-          className="form-card__footer"
-        />
       </div>
     </div>
     <footer
       className="footer"
     >
       <div
-        className="footerMedia media-box media-box--reversed"
+        className="footerContent"
       >
         <div
-          className="media-box__media media--icon"
+          className="media-box media-box--reversed"
         >
           <div
-            className="logo illustration--cfa-logo__dark"
-          />
-        </div>
-        <div
-          className="footerContent media-box__content"
-        >
-          <div
-            className="footerLinks"
+            className="media-box__media media--large"
           >
-            <a
-              className="footerLink link--subtle"
-              href="#"
-            >
-              Frequently Asked Questions
-            </a>
-            <a
-              className="footerLink link--subtle"
-              href="#"
-            >
-              Terms of Service
-            </a>
-            <a
-              className="footerLink link--subtle"
-              href="#"
-            >
-              Help Documents
-            </a>
+            <img
+              alt="Clear My Record logo"
+              src="test-file-stub"
+            />
           </div>
           <div
-            className="footerMessage"
+            className="media-box__content"
           >
-            Clear My Record is a service delivered by
-             
-            <a
-              className="link--subtle"
-              href="https://www.codeforamerica.org"
+            <div
+              className="footerLinks"
             >
-              Code for America
-            </a>
-             
-            on behalf of the people of California.
-          </div>
-          <div>
-            v
-            0.2.7
+              <a
+                className="footerLink link--subtle"
+                href="#"
+              >
+                Frequently Asked Questions
+              </a>
+              <a
+                className="footerLink link--subtle"
+                href="#"
+              >
+                Terms of Service
+              </a>
+              <a
+                className="footerLink link--subtle"
+                href="#"
+              >
+                Help Documents
+              </a>
+            </div>
+            <div
+              className="footerMessage"
+            >
+              Clear My Record is a service delivered by
+               
+              <a
+                className="link--subtle"
+                href="https://www.codeforamerica.org"
+              >
+                Code for America
+              </a>
+               
+              on behalf of the people of California.
+            </div>
+            <div>
+              v
+              0.2.12
+            </div>
           </div>
         </div>
       </div>

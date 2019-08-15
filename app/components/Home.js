@@ -81,8 +81,10 @@ export default class Home extends Component<Props, State> {
   updateFilePath = (dojFilePath: string) => {
     const { dojFilePaths } = this.state;
     const updatedFilePath = dojFilePaths;
-    updatedFilePath.push(dojFilePath);
-    this.setState({ dojFilePaths: updatedFilePath });
+    if (!dojFilePaths.includes(dojFilePath)) {
+      updatedFilePath.push(dojFilePath);
+      this.setState({ dojFilePaths: updatedFilePath });
+    }
   };
 
   clearFilePath = (removedFilePath: string) => {

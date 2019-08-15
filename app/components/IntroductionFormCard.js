@@ -1,6 +1,6 @@
 // @flow
 import React, { Component } from 'react';
-import FormCard, { FormCardContent, FormCardFooter } from './FormCard';
+import FormCard, { FormCardContent } from './FormCard';
 import styles from './IntroductionFormCard.css';
 
 type Props = {
@@ -56,7 +56,7 @@ export default class CountySelectFormCard extends Component<Props> {
             </div>
             <div className="box nudge--large">
               <button
-                className="button button--primary"
+                className="button button--primary button--large"
                 onClick={onBegin}
                 type="button"
                 id="begin"
@@ -66,7 +66,6 @@ export default class CountySelectFormCard extends Component<Props> {
             </div>
           </div>
         </FormCardContent>
-        <FormCardFooter />
       </FormCard>
     );
   }

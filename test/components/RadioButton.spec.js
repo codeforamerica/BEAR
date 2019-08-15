@@ -51,7 +51,7 @@ describe('RadioButton component', () => {
 
   it('calls onSelect with the group and value when button is clicked', () => {
     const { component, onSelectSpy } = setup(false);
-    component.simulate('change');
+    component.find('input').simulate('change');
 
     expect(onSelectSpy.called).toEqual(true);
     const { args } = onSelectSpy.getCall(0);

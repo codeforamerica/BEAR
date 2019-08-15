@@ -49,22 +49,7 @@ describe('EligibilityOptionsFormCard component', () => {
     const { component } = setup(false);
     expect(
       component.containsAnyMatchingElements([
-        <BaselineEligibilityOption codeSection="11357(a)" />
-      ])
-    ).toEqual(true);
-    expect(
-      component.containsAnyMatchingElements([
-        <BaselineEligibilityOption codeSection="11357(b)" />
-      ])
-    ).toEqual(true);
-    expect(
-      component.containsAnyMatchingElements([
-        <BaselineEligibilityOption codeSection="11357(c)" />
-      ])
-    ).toEqual(true);
-    expect(
-      component.containsAnyMatchingElements([
-        <BaselineEligibilityOption codeSection="11357(d)" />
+        <BaselineEligibilityOption codeSection="11357" />
       ])
     ).toEqual(true);
     expect(

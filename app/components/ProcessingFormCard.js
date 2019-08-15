@@ -1,13 +1,7 @@
 // @flow
 import React, { Component } from 'react';
 
-import ReactPDF from '@react-pdf/renderer';
-import FormCard, {
-  FormCardContent,
-  FormCardFooter,
-  FormCardHeader
-} from './FormCard';
-import SummaryReportPdf from './SummaryReportPdf';
+import FormCard, { FormCardContent } from './FormCard';
 import ProgressBar from './ProgressBar';
 import StartOverButton from './StartOverButton';
 import { getFileSize } from '../utils/fileUtils';
@@ -62,7 +56,6 @@ export default class ProcessingFormCard extends Component<Props, State> {
     const { gogenComplete } = this.state;
     return (
       <FormCard>
-        <FormCardHeader />
         <FormCardContent>
           <div className="box-wrapper text--centered">
             <div className="emoji emoji--huge emoji--woman-detective-medium-dark-skin-tone" />
@@ -75,7 +68,6 @@ export default class ProcessingFormCard extends Component<Props, State> {
             <StartOverButton onStartOver={this.onClickStartOver} />
           </div>
         </FormCardContent>
-        <FormCardFooter />
       </FormCard>
     );
   }

@@ -16,6 +16,10 @@ type Props = {
 };
 
 export default class CountySelectFormCard extends Component<Props> {
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     const { onCountySelect, onCountyConfirm, selectedCounty } = this.props;
     return (

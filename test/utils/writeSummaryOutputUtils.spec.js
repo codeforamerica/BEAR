@@ -27,7 +27,7 @@ describe('writeSummaryOutput', () => {
     },
     subjectsWithProp64ConvictionCountInCounty: 8,
     prop64FelonyConvictionsCountInCounty: 12,
-    prop64MisdemeanorConvictionsCountInCounty: 4,
+    prop64NonFelonyConvictionsCountInCounty: 4,
     subjectsWithSomeReliefCount: 8,
     convictionDismissalCountByCodeSection: {
       '11357(a)': 2,

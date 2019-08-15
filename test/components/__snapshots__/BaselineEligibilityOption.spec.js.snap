@@ -3,29 +3,37 @@
 exports[`BaselineEligibilityOption component should match exact snapshot 1`] = `
 <tr>
   <td>
-    <p>
-      H&S § undefined
-    </p>
+    H&S § undefined
   </td>
   <td>
-    <input
-      className="radioButton radio-button"
-      defaultChecked={true}
-      id="dismiss_11357(a)"
-      name="11357(a)"
-      onChange={[Function]}
-      type="radio"
-    />
+    <label
+      className="radioButtonWrapper selected"
+      htmlFor="dismiss_11357"
+    >
+      <input
+        className="radioButton radio-button"
+        defaultChecked={true}
+        id="dismiss_11357"
+        name="11357"
+        onChange={[Function]}
+        type="radio"
+      />
+    </label>
   </td>
   <td>
-    <input
-      className="radioButton radio-button"
-      defaultChecked={false}
-      id="reduce_11357(a)"
-      name="11357(a)"
-      onChange={[Function]}
-      type="radio"
-    />
+    <label
+      className="radioButtonWrapper "
+      htmlFor="reduce_11357"
+    >
+      <input
+        className="radioButton radio-button"
+        defaultChecked={false}
+        id="reduce_11357"
+        name="11357"
+        onChange={[Function]}
+        type="radio"
+      />
+    </label>
   </td>
 </tr>
 `;
