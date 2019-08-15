@@ -156,6 +156,16 @@ describe('Home component', () => {
       component.instance().updateFilePath(filePath);
       expect(component.state('dojFilePaths')).toEqual([filePath]);
     });
+
+    it('does not add a duplicate filename to the state', () => {
+      const { component } = setup('true');
+      const filePath = 'path/to/file';
+      expect(component.state('dojFilePaths')).toEqual([]);
+      component.instance().updateFilePath(filePath);
+      expect(component.state('dojFilePaths')).toEqual([filePath]);
+      component.instance().updateFilePath(filePath);
+      expect(component.state('dojFilePaths')).toEqual([filePath]);
+    });
   });
 
   describe('updateAdditionalReliefOptions', () => {
