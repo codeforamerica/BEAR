@@ -121,7 +121,7 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
           >
             <img
               alt="Clear My Record logo"
-              src="./assets/images/cmr_black_logo.png"
+              src="test-file-stub"
             />
           </div>
           <div
@@ -165,7 +165,7 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
             </div>
             <div>
               v
-              0.2.10
+              0.2.11
             </div>
           </div>
         </div>

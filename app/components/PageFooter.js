@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { version } from '../../package.json';
 import styles from './PageFooter.css';
+import cmrLogo from '../assets/images/cmr_black_logo.png';
 
 export default class PageFooter extends Component<Props, State> {
   render() {
@@ -9,10 +10,7 @@ export default class PageFooter extends Component<Props, State> {
         <div className={styles.footerContent}>
           <div className="media-box media-box--reversed">
             <div className="media-box__media media--large">
-              <img
-                src="./assets/images/cmr_black_logo.png"
-                alt="Clear My Record logo"
-              />
+              <img src={cmrLogo} alt="Clear My Record logo" />
             </div>
             <div className="media-box__content">
               <div className={styles.footerLinks}>
