@@ -10,6 +10,7 @@ import {
   toTitleCase,
   convertTimestamp
 } from '../utils/writeSummaryOutputUtils';
+import cmrLogo from '../assets/images/cmr_black_logo.png';
 
 type Props = {
   summaryData: Object,
@@ -23,7 +24,7 @@ export default class SummaryReportPdf extends Component<Props> {
     const { summaryData, inputFileCount } = this.props;
     const totalProp64Convictions =
       summaryData.prop64FelonyConvictionsCountInCounty +
-      summaryData.prop64MisdemeanorConvictionsCountInCounty;
+      summaryData.prop64NonFelonyConvictionsCountInCounty;
     const formattedCountyName = toTitleCase(summaryData.county);
     const earliestConviction = convertTimestamp(summaryData.earliestConviction);
     return (
@@ -31,7 +32,7 @@ export default class SummaryReportPdf extends Component<Props> {
         <Page>
           <View style={styles.header}>
             <Image
-              src={path.join(imageDirectory, 'cmr_logo_black_cropped.png')}
+              src={cmrLogo}
               style={styles.logoImage}
               safePath={imageDirectory}
             />
@@ -117,7 +118,7 @@ export default class SummaryReportPdf extends Component<Props> {
               </Text>
               <Text style={styles.listItem}>
                 # of Prop 64 convictions in {formattedCountyName} County:
-                {totalProp64Convictions}
+                {totalProp64Convictions};{' '}
                 {formatCountsByCodeSection(
                   summaryData.prop64ConvictionsCountInCountyByCodeSection
                 )}
