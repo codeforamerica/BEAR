@@ -87,7 +87,7 @@ export default class Home extends Component<Props, State> {
     }
   };
 
-  clearFilePath = (removedFilePath: string) => {
+  removeFilePath = (removedFilePath: string) => {
     const { dojFilePaths } = this.state;
     const newPathsArray = dojFilePaths.filter(
       dojFilePath => dojFilePath !== removedFilePath
@@ -201,7 +201,7 @@ export default class Home extends Component<Props, State> {
           updateFilePath={this.updateFilePath}
           dojFilePaths={dojFilePaths}
           onFileConfirm={this.nextScreen}
-          onFileRemove={this.clearFilePath}
+          onFileRemove={this.removeFilePath}
           onBack={this.previousScreen}
         />
         <EligibilityOptionsFormCard

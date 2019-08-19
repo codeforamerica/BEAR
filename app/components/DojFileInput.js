@@ -14,6 +14,8 @@ export default class DojFileInput extends Component<Props> {
     Array.from(selectedFilesArray).forEach(file => {
       onFileSelect(file.path);
     });
+    // eslint-disable-next-line no-param-reassign
+    event.currentTarget.value = '';
   };
 
   renderNoFileMessage = () => {

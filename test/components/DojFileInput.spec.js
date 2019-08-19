@@ -36,6 +36,20 @@ describe('DojFileInput component', () => {
     expect(args[0]).toEqual('path/to/file');
   });
 
+  describe('handleFileSelection', () => {
+    it('clears the input value', () => {
+      const { component } = setup();
+      const fakeEvent = {
+        currentTarget: {
+          value: 'path/to/file',
+          files: [{ path: 'path/to/file' }]
+        }
+      };
+      component.instance().handleFileSelection(fakeEvent);
+      expect(fakeEvent.currentTarget.value).toEqual('');
+    });
+  });
+
   it('should match exact snapshot', () => {
     const { component } = setup();
     const tree = renderer.create(component).toJSON();
