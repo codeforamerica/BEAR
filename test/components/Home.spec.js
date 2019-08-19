@@ -53,6 +53,11 @@ describe('Home component', () => {
       expect(component.state('currentScreen')).toEqual(0);
     });
 
+    it('sets the previousScreen to 0', () => {
+      const { component } = setup('false');
+      expect(component.state('previousScreen')).toEqual(0);
+    });
+
     it('sets the initial file path to HOME/desktop', () => {
       const { component } = setup('false');
       expect(component.state('outputPathPrefix')).toEqual(
@@ -221,22 +226,53 @@ describe('Home component', () => {
     });
   });
 
-  describe('nextScreen', () => {
-    it('increments state.currentScreen', () => {
-      const { component } = setup('true');
+  describe('goToScreen', () => {
+    it('sets the currentScreen to the provided value', () => {
+      const { component } = setup();
       expect(component.state('currentScreen')).toEqual(0);
-      component.instance().nextScreen();
-      expect(component.state('currentScreen')).toEqual(1);
+      component.instance().goToScreen(3);
+      expect(component.state('currentScreen')).toEqual(3);
+    });
+
+    it('stores the current value of currentScreen as previousScreen', () => {
+      const { component } = setup();
+      component.setState({ currentScreen: 2 });
+      component.instance().goToScreen(3);
+      expect(component.state('previousScreen')).toEqual(2);
     });
   });
 
-  describe('previousScreen', () => {
-    it('decrements state.currentScreen', () => {
-      const { component } = setup('true');
-      component.instance().setState({ currentScreen: 3 });
-      expect(component.state('currentScreen')).toEqual(3);
-      component.instance().previousScreen();
-      expect(component.state('currentScreen')).toEqual(2);
+  describe('goToPreviousScreen', () => {
+    it('calls goToScreen with the value of previousScreen', () => {
+      const { component } = setup();
+      const fakeGoToScreen = sandbox.spy();
+      component.setState({ currentScreen: 2 });
+      component.setState({ previousScreen: 5 });
+      component.instance().goToScreen = fakeGoToScreen;
+      component.instance().goToPreviousScreen();
+      expect(fakeGoToScreen.getCall(0).args[0]).toEqual(5);
+    });
+  });
+
+  describe('nextScreenInFlow', () => {
+    it('calls goToScreen with state.currentScreen + 1', () => {
+      const { component } = setup();
+      const fakeGoToScreen = sandbox.spy();
+      component.setState({ currentScreen: 2 });
+      component.instance().goToScreen = fakeGoToScreen;
+      component.instance().nextScreenInFlow();
+      expect(fakeGoToScreen.getCall(0).args[0]).toEqual(3);
+    });
+  });
+
+  describe('previousScreenInFlow', () => {
+    it('calls goToScreen with state.currentScreen - 1', () => {
+      const { component } = setup();
+      const fakeGoToScreen = sandbox.spy();
+      component.setState({ currentScreen: 2 });
+      component.instance().goToScreen = fakeGoToScreen;
+      component.instance().previousScreenInFlow();
+      expect(fakeGoToScreen.getCall(0).args[0]).toEqual(1);
     });
   });
 

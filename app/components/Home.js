@@ -14,11 +14,13 @@ import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 import { getDateTime } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
+import PrivacyPolicyFormCard from './PrivacyPolicyFormCard';
 
 type State = {
   gogenPath: string,
   dateTime: string,
   currentScreen: number,
+  previousScreen: number,
   county: County,
   dojFilePaths: Array<string>,
   baselineEligibilityOptions: BaselineEligibilityOptions,
@@ -143,9 +145,22 @@ export default class Home extends Component<Props, State> {
     });
   };
 
-  nextScreen = () => {
+  goToScreen = (screenNumber: number) => {
     const { currentScreen } = this.state;
-    this.setState({ currentScreen: currentScreen + 1 });
+    this.setState({
+      currentScreen: screenNumber,
+      previousScreen: currentScreen
+    });
+  };
+
+  goToPreviousScreen = () => {
+    const { previousScreen } = this.state;
+    this.goToScreen(previousScreen);
+  };
+
+  nextScreenInFlow = () => {
+    const { currentScreen } = this.state;
+    this.goToScreen(currentScreen + 1);
   };
 
   isAllDismiss = () => {
@@ -161,13 +176,13 @@ export default class Home extends Component<Props, State> {
     if (this.isAllDismiss()) {
       this.setState({ currentScreen: currentScreen + 2 });
     } else {
-      this.nextScreen();
+      this.nextScreenInFlow();
     }
   };
 
-  previousScreen = () => {
+  previousScreenInFlow = () => {
     const { currentScreen } = this.state;
-    this.setState({ currentScreen: currentScreen - 1 });
+    this.goToScreen(currentScreen - 1);
   };
 
   resetInitialState = () => {
@@ -189,39 +204,39 @@ export default class Home extends Component<Props, State> {
       additionalReliefOptions
     } = this.state;
     return (
-      <PageContainer currentScreen={currentScreen}>
-        <IntroductionFormCard onBegin={this.nextScreen} />
+      <PageContainer currentScreen={currentScreen} goToScreen={this.goToScreen}>
+        <IntroductionFormCard onBegin={this.nextScreenInFlow} />
         <CountySelectFormCard
           selectedCounty={county}
           onCountySelect={this.updateCounty}
-          onCountyConfirm={this.nextScreen}
+          onCountyConfirm={this.nextScreenInFlow}
         />
         <DojFileSelectFormCard
           countyName={county.name}
           updateFilePath={this.updateFilePath}
           dojFilePaths={dojFilePaths}
-          onFileConfirm={this.nextScreen}
+          onFileConfirm={this.nextScreenInFlow}
           onFileRemove={this.removeFilePath}
-          onBack={this.previousScreen}
+          onBack={this.previousScreenInFlow}
         />
         <EligibilityOptionsFormCard
           baselineEligibilityOptions={baselineEligibilityOptions}
           onEligibilityOptionSelect={this.updateStateWithEligibilityOptions}
           onOptionsConfirm={this.eligibilityOptionsNextScreen}
           updateDate={this.updateDateForPath}
-          onBack={this.previousScreen}
+          onBack={this.previousScreenInFlow}
           isAllDismiss={this.isAllDismiss()}
         />
         <AdditionalReliefFormCard
           additionalReliefOptions={additionalReliefOptions}
           onReliefOptionSelect={this.updateAdditionalReliefOptions}
           updateDate={this.updateDateForPath}
-          onOptionsConfirm={this.nextScreen}
-          onBack={this.previousScreen}
+          onOptionsConfirm={this.nextScreenInFlow}
+          onBack={this.previousScreenInFlow}
         />
         <ProcessingFormCard
           dojFilePaths={dojFilePaths}
-          onComplete={this.nextScreen}
+          onComplete={this.nextScreenInFlow}
           runScriptInOptions={this.runScriptInOptions}
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
@@ -233,6 +248,7 @@ export default class Home extends Component<Props, State> {
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
         />
+        <PrivacyPolicyFormCard onBack={this.goToPreviousScreen} />
       </PageContainer>
     );
   }

@@ -6,17 +6,18 @@ import styles from './PageContainer.css';
 
 type Props = {
   children: [Component],
+  goToScreen: () => {},
   currentScreen: number
 };
 
 export default class PageContainer extends Component<Props, State> {
   render() {
-    const { children, currentScreen } = this.props;
+    const { children, goToScreen, currentScreen } = this.props;
     return (
       <div className={`${styles.pageContainer} slab`}>
         <PageHeader />
         <PageContent>{children[currentScreen]}</PageContent>
-        <PageFooter />
+        <PageFooter goToScreen={goToScreen} />
       </div>
     );
   }

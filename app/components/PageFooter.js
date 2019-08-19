@@ -1,9 +1,19 @@
 import React, { Component } from 'react';
 import { version } from '../../package.json';
+import nonLinearScreenNumbers from '../constants/nonLinearScreenNumbers';
 import styles from './PageFooter.css';
 import cmrLogo from '../assets/images/cmr_black_logo.png';
 
+type Props = {
+  goToScreen: () => {}
+};
+
 export default class PageFooter extends Component<Props, State> {
+  goToPrivacyPolicy = () => {
+    const { goToScreen } = this.props;
+    goToScreen(nonLinearScreenNumbers.privacyPolicy);
+  };
+
   render() {
     return (
       <footer className={`${styles.footer}`}>
@@ -16,6 +26,14 @@ export default class PageFooter extends Component<Props, State> {
               <div className={styles.footerLinks}>
                 <a href="#" className={`${styles.footerLink} link--subtle`}>
                   Frequently Asked Questions
+                </a>
+                <a
+                  href="#"
+                  id="privacy"
+                  className={`${styles.footerLink} link--subtle`}
+                  onClick={this.goToPrivacyPolicy}
+                >
+                  Privacy Policy
                 </a>
                 <a href="#" className={`${styles.footerLink} link--subtle`}>
                   Terms of Service

@@ -139,6 +139,14 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
               <a
                 className="footerLink link--subtle"
                 href="#"
+                id="privacy"
+                onClick={[Function]}
+              >
+                Privacy Policy
+              </a>
+              <a
+                className="footerLink link--subtle"
+                href="#"
               >
                 Terms of Service
               </a>

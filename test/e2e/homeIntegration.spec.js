@@ -79,6 +79,32 @@ describe('The primary user flow', () => {
     expect(fileName).toEqual('No file selected');
   });
 
+  it('can go to the privacy policy page and then return to the main flow', async () => {
+    await app.client.click('#begin');
+
+    const countySelect = app.client.$('#county-select');
+    await countySelect.selectByVisibleText('Sacramento');
+    await app.client.click('#continue');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
+
+    await app.client.click('#privacy');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('Privacy Policy');
+
+    await app.client.click('#goback');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
+
+    await app.client.click('#goback');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('CA County Selection');
+  });
+
   describe('when the user chooses to dismiss all code sections', () => {
     it('skips additional relief page', async () => {
       const text = await app.client.getText('.form-card__content');
