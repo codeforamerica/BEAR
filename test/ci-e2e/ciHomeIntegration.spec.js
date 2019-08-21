@@ -1,7 +1,10 @@
 import fs from 'fs';
 import sleep from '../../app/utils/testHelpers';
-import { getDateTime } from '../../app/utils/fileUtils';
-import { getOutputDirectoryPath, removeOutputDirectory } from '../e2e/helpers';
+import {
+  getEligibilityConfigFilePath,
+  getOutputDirectoryPath,
+  removeOutputDirectory
+} from '../e2e/helpers';
 
 const { Application } = require('spectron');
 const electronPath = require('electron'); // Require Electron from the binaries included in node_modules.
@@ -61,11 +64,9 @@ describe('The happy path with additional relief', () => {
     await app.client.click('#true_subjectHasOnlyProp64Charges');
     await app.client.click('#continue');
 
-    outputDirectory = getOutputDirectoryPath(getDateTime());
-    const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
-
+    outputDirectory = getOutputDirectoryPath();
     const eligibilityConfigFileContents = fs.readFileSync(
-      eligibilityConfigFilePath,
+      getEligibilityConfigFilePath(),
       'utf8'
     );
     const eligibilityConfig = JSON.parse(eligibilityConfigFileContents);

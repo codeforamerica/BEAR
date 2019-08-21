@@ -1,7 +1,10 @@
 import fs from 'fs';
 import sleep from '../../app/utils/testHelpers';
-import { getDateTime } from '../../app/utils/fileUtils';
-import { getOutputDirectoryPath, removeOutputDirectory } from './helpers';
+import {
+  getEligibilityConfigFilePath,
+  getOutputDirectoryPath,
+  removeOutputDirectory
+} from './helpers';
 
 const { Application } = require('spectron');
 const electronPath = require('electron'); // Require Electron from the binaries included in node_modules.
@@ -94,7 +97,7 @@ describe('The primary user flow', () => {
       await app.client.click('#continue');
 
       await app.client.click('#continue');
-      outputDirectory = getOutputDirectoryPath(getDateTime());
+      outputDirectory = getOutputDirectoryPath();
 
       const pageBody = await app.client.getText('body');
       expect(pageBody).not.toContain('Additional relief');
@@ -126,8 +129,8 @@ describe('The primary user flow', () => {
 
       await app.client.click('#continue');
 
-      outputDirectory = getOutputDirectoryPath(getDateTime());
-      const eligibilityConfigFilePath = `${outputDirectory}/eligibilityConfig_${getDateTime()}.json`;
+      outputDirectory = getOutputDirectoryPath();
+      const eligibilityConfigFilePath = getEligibilityConfigFilePath();
 
       const eligibilityConfigFileContents = fs.readFileSync(
         eligibilityConfigFilePath,
