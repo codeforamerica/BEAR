@@ -1,6 +1,9 @@
 import sinon from 'sinon';
 import fs from 'fs';
-import { runScript } from '../../app/utils/gogenUtils';
+import {
+  allEligibleConvictionsDismissed,
+  runScript
+} from '../../app/utils/gogenUtils';
 
 import defaultAnalysisOptions from '../../app/constants/defaultAnalysisOptions';
 
@@ -13,6 +16,30 @@ const sandbox = sinon.createSandbox();
 afterEach(() => {
   sandbox.restore();
   jest.clearAllMocks();
+});
+
+describe('allEligibleConvictionsDismissed', () => {
+  describe('when baseline eligibility specifies to dismiss all', () => {
+    it('returns true', () => {
+      const transformedEligibilityOptions = {
+        baselineEligibility: { dismiss: ['11357'], reduce: [] }
+      };
+      expect(
+        allEligibleConvictionsDismissed(transformedEligibilityOptions)
+      ).toEqual(true);
+    });
+  });
+
+  describe('when baseline eligibility specifies to reduce at least one code', () => {
+    it('returns false', () => {
+      const transformedEligibilityOptions = {
+        baselineEligibility: { dismiss: [], reduce: ['11357'] }
+      };
+      expect(
+        allEligibleConvictionsDismissed(transformedEligibilityOptions)
+      ).toEqual(false);
+    });
+  });
 });
 
 describe('runScript', () => {
@@ -160,10 +187,7 @@ describe('runScript', () => {
         dojFilePaths: ['/path/to/doj/file', 'hello'],
         outputFilePath: 'outputPath/outputPath',
         baselineEligibilityOptions: {
-          '11357(a)': 'reduce',
-          '11357(b)': 'dismiss',
-          '11357(c)': 'dismiss',
-          '11357(d)': 'dismiss',
+          '11357': 'dismiss',
           '11358': 'reduce',
           '11359': 'dismiss',
           '11360': 'dismiss'
@@ -190,13 +214,11 @@ describe('runScript', () => {
 
       const { args } = fakeCreateJsonFile.getCall(0);
       expect(args[0].baselineEligibility.dismiss).toEqual([
-        '11357(b)',
-        '11357(c)',
-        '11357(d)',
+        '11357',
         '11359',
         '11360'
       ]);
-      expect(args[0].baselineEligibility.reduce).toEqual(['11357(a)', '11358']);
+      expect(args[0].baselineEligibility.reduce).toEqual(['11358']);
     });
 
     describe('when additional relief options are selected', () => {
@@ -243,10 +265,7 @@ describe('runScript', () => {
           dojFilePaths: ['/path/to/doj/file'],
           outputFilePath: 'outputPath/outputPath',
           baselineEligibilityOptions: {
-            '11357(a)': 'dismiss',
-            '11357(b)': 'dismiss',
-            '11357(c)': 'dismiss',
-            '11357(d)': 'dismiss',
+            '11357': 'dismiss',
             '11358': 'dismiss',
             '11359': 'dismiss',
             '11360': 'dismiss'

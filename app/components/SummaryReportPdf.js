@@ -15,14 +15,19 @@ import { version } from '../../package.json';
 
 type Props = {
   summaryData: Object,
-  inputFileCount: number
+  inputFileCount: number,
+  allEligibleConvictionsDismissed: boolean
 };
 
 const imageDirectory = path.join(__dirname, '/assets/images/');
 
 export default class SummaryReportPdf extends Component<Props> {
   render() {
-    const { summaryData, inputFileCount } = this.props;
+    const {
+      summaryData,
+      inputFileCount,
+      allEligibleConvictionsDismissed
+    } = this.props;
     const totalProp64Convictions =
       summaryData.prop64FelonyConvictionsCountInCounty +
       summaryData.prop64NonFelonyConvictionsCountInCounty;
@@ -190,24 +195,27 @@ export default class SummaryReportPdf extends Component<Props> {
           </View>
           <View style={styles.body}>
             <View>
-              <Text style={styles.text}>
-                If the {formattedCountyName} DA’s office were to instead dismiss
-                all convictions under Prop 64,{' '}
-                {summaryData.reliefWithDismissAllProp64.CountSubjectsNoFelony}{' '}
-                people will no longer have any felonies on their CA record,{' '}
-                {
-                  summaryData.reliefWithDismissAllProp64
-                    .CountSubjectsNoConvictionLast7Years
-                }{' '}
-                people will no longer have any convictions on their CA record in
-                the past 7 years, and{' '}
-                {
-                  summaryData.reliefWithDismissAllProp64
-                    .CountSubjectsNoConviction
-                }{' '}
-                people will no longer have any convictions on their CA record at
-                all.
-              </Text>
+              <View
+                render={() => {
+                  if (!allEligibleConvictionsDismissed) {
+                    return (
+                      <Text style={styles.text}>
+                        If the {formattedCountyName} DA’s office were to instead
+                        dismiss all convictions under Prop 64,{' '}
+                        {summaryData.reliefWithDismissAllProp64.CountSubjectsNoFelony.toString()}{' '}
+                        people will no longer have any felonies on their CA
+                        record,{' '}
+                        {summaryData.reliefWithDismissAllProp64.CountSubjectsNoConvictionLast7Years.toString()}{' '}
+                        people will no longer have any convictions on their CA
+                        record in the past 7 years, and{' '}
+                        {summaryData.reliefWithDismissAllProp64.CountSubjectsNoConviction.toString()}{' '}
+                        people will no longer have any convictions on their CA
+                        record at all.
+                      </Text>
+                    );
+                  }
+                }}
+              />
               <View style={styles.pageBreak} />
               <Text style={styles.h2}>
                 Understanding the Clear My Record output files:

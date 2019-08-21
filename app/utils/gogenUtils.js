@@ -7,6 +7,10 @@ import { createJsonFile } from './fileUtils';
 import { parseGogenOutput } from './writeSummaryOutputUtils';
 import SummaryReportPdf from '../components/SummaryReportPdf';
 
+export function allEligibleConvictionsDismissed(transformedEligibilityOptions) {
+  return transformedEligibilityOptions.baselineEligibility.reduce.length === 0;
+}
+
 function transformBaselineEligibilityOptions(eligibilityOptions) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
   Object.keys(eligibilityOptions)
@@ -94,6 +98,9 @@ export function runScript(
       <SummaryReportPdf
         summaryData={parseGogenOutput(outputFilePath, fileNameSuffix)}
         inputFileCount={dojFilePaths.length}
+        allEligibleConvictionsDismissed={allEligibleConvictionsDismissed(
+          formattedEligibilityOptions
+        )}
       />,
       path.join(outputFilePath, 'CMR_summary_report.pdf')
     );
