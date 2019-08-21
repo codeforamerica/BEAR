@@ -272,7 +272,7 @@ export default class SummaryReportPdf extends Component<Props> {
                 Share this summary report with Code for America at
                 clearmyrecord@codeforamerica.org. Our team will send you back a
                 marketing document with the above relevant summary statistics
-                that your office can then share with the entire community in
+                that your office can then share with the entire community in{' '}
                 {formattedCountyName} County
               </Text>
               <Text style={styles.text}>
