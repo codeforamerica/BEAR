@@ -25,24 +25,19 @@ export function removeOutputDirectory(dirPath) {
 
 export function getMostRecentlyCreatedOutputDirectoryTime() {
   const creationTimes = [];
-  const outputDirectories = [];
-  fs.readdir(baseOutputDirectory, (err, files) => {
-    files.forEach(file => {
-      if (file.startsWith('CMR_output_')) {
-        outputDirectories.push(file);
-      }
-    });
+  const files = fs.readdirSync(baseOutputDirectory);
 
-    outputDirectories.forEach(file => {
+  files.forEach(file => {
+    if (file.startsWith('CMR_output_')) {
       const timeCreated = fs
         .statSync(path.join(baseOutputDirectory, file))
         .mtime.getTime();
-
-      creationTimes.push(Date.parse(timeCreated));
-    });
-
-    return creationTimes.sort()[-1];
+      creationTimes.push(timeCreated);
+    }
   });
+
+  const fileTimestampsNewestToOldest = creationTimes.sort().reverse();
+  return new Date(fileTimestampsNewestToOldest[0]);
 }
 
 export function getOutputDirectoryPath() {
@@ -55,7 +50,7 @@ export function getOutputDirectoryPath() {
 export function getEligibilityConfigFilePath() {
   const runTime = getMostRecentlyCreatedOutputDirectoryTime();
   return path.join(
-    getOutputDirectoryPath(runTime),
+    getOutputDirectoryPath(),
     `eligibilityConfig_${getDateTime(runTime)}.json`
   );
 }
