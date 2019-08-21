@@ -165,4 +165,4 @@ See their [docs and guides here](https://electron-react-boilerplate.js.org/docs/
 
 ## License
 
-TBD
+MIT. Please see LICENSE and NOTICES.md.
