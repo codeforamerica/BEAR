@@ -2,7 +2,7 @@
   "name": "clearmyrecord-hs_11361",
   "productName": "Clear My Record",
   "version": "0.2.16",
-  "description": "Bulk Expungement Analysis of Records (BEAR). Electron app to configure eligibility logic and identify convictions eligible for Prop 64 relief",
+  "description": "Electron app to configure eligibility logic and identify convictions eligible for CA Prop 64 relief",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
     "build-dll": "cross-env NODE_ENV=development webpack --config ./configs/webpack.config.renderer.dev.dll.babel.js --colors",
@@ -120,21 +120,11 @@
     "email": "clearmyrecord@codeforamerica.org",
     "url": "https://codeforamerica.org"
   },
-  "contributors": [],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/codeforamerica/BEAR/issues"
   },
-  "keywords": [
-    "electron",
-    "react",
-    "flow",
-    "sass",
-    "webpack",
-    "hot",
-    "reload"
-  ],
-  "homepage": "https://github.com/codeforamerica/BEAR#readme",
+  "homepage": "https://info.codeforamerica.org/clear-my-record-toolkit",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
