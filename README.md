@@ -85,40 +85,9 @@ $ yarn test-update-snapshots
 
 We create and publish built executables using [electron-builder](https://github.com/electron-userland/electron-builder).
 
-BEAR is automatically packaged and released in draft to Github as part of our CircleCI workflow. Publishing the draft release on Github, and signing a release and making it available for public download, are manual steps.
+BEAR is automatically packaged and released in draft to Github as part of our CircleCI workflow.
 
-### Development Workflow
-
-1. On finishing a feature in [gogen](https://github.com/codeforamerica/gogen-configurable):
-   1. Increase the version number in `gogen.go`
-   1. Commit, push Gogen to master (will trigger a Github release)
-1. On finishing a feature in BEAR:
-   1. Increase the version number in `package.json`
-   1. If new version of Gogen is needed, update Gogen version in `.gogen-version`
-   1. Commit, push BEAR to master. This will trigger the following CI flow:
-      1. Run tests
-      1. Create a versioned draft release on Github of BEAR with Windows binary
-1. When approved by Product, publish the draft release:
-   1. Publish the draft release on Github:
-      1. Log into Github and visit the [releases page](https://github.com/codeforamerica/BEAR/releases)
-      1. Find the draft release corresponding to the story that was accepted
-      1. Click “edit” and then “publish release”. If we're pre-1.0.0, also check the "Pre-release" box.
-   1. Sign the approved binary and make publicly available on S3. On Windows laptop:
-      1. Sign the binary:
-         1. Download the Windows artifact from the published Github release above
-         1. Rename the signed binary to `clearmyrecord-HS_11361-setup.exe`.
-         1. Plug in DigiCert USB token
-         1. Open Command Prompt
-         1. Run the following commend: `signtool sign /tr http://timestamp.digicert.com /td sha256 /fd sha256 /a "c:\path\to\Downloads\clearmyrecord-HS_11361-setup.exe"`. **Note**: This command is also available in `commands to sign.txt` on the Desktop.
-         1. When prompted, enter the password in the "DigiCert EV Certificate" shared note in LastPass
-      1. Add the signed binary to the Github release:
-         1. Log into Github and visit the [releases page](https://github.com/codeforamerica/BEAR/releases)
-         1. Attach the signed binary and save the release
-      1. Upload the signed binary to S3:
-         1. Sign in to `cfa` AWS account (requires Christa since we have limited access)
-         1. In S3, navigate to the `cmr-bear-releases` S3 bucket
-         1. Upload the renamed file to the bucket. This should create a new version of the existing resource, so people receive the latest file when they visit the URL from the marketing page. You can check by hitting the 'Versions' toggle button, after which you should see a version with a recent 'Last modified' date.
-         1. Make the file public. Click on the file you just uploaded and hit the 'Make public' button.
+Publishing the draft release on Github, and signing a release and making it available for public download, are manual steps. For instructions on how to do this, [see the BEAR Release Process in Google Drive](https://docs.google.com/document/d/1P4nR7UPCLYFuVVz57geN5z6adkv2y2eA8FyMuoH4f3Q/edit).
 
 ### Packaging and Publishing from a Local Machine
 
