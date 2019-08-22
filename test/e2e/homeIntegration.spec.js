@@ -79,7 +79,7 @@ describe('The primary user flow', () => {
     expect(fileName).toEqual('No file selected');
   });
 
-  it('can go to the privacy policy page and then return to the main flow', async () => {
+  it('can go to the non-linear pages and then return to the main flow', async () => {
     await app.client.click('#begin');
 
     const countySelect = app.client.$('#county-select');
@@ -98,6 +98,16 @@ describe('The primary user flow', () => {
 
     pageTitle = await app.client.getText('.form-card__title');
     expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
+
+    await app.client.click('#goback');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('CA County Selection');
+
+    await app.client.click('#faq');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toContain('Frequently asked questions');
 
     await app.client.click('#goback');
 

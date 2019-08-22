@@ -14,6 +14,11 @@ export default class PageFooter extends Component<Props, State> {
     goToScreen(nonLinearScreenNumbers.privacyPolicy);
   };
 
+  goToFaq = () => {
+    const { goToScreen } = this.props;
+    goToScreen(nonLinearScreenNumbers.faq);
+  };
+
   render() {
     return (
       <footer className={`${styles.footer}`}>
@@ -24,7 +29,12 @@ export default class PageFooter extends Component<Props, State> {
             </div>
             <div className="media-box__content">
               <div className={styles.footerLinks}>
-                <a href="#" className={`${styles.footerLink} link--subtle`}>
+                <a
+                  href="#"
+                  id="faq"
+                  className={`${styles.footerLink} link--subtle`}
+                  onClick={this.goToFaq}
+                >
                   Frequently Asked Questions
                 </a>
                 <a

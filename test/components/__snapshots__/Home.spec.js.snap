@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
+exports[`Home component should match exact snapshot 1`] = `
 <div>
   <div
     className="pageContainer slab"
@@ -133,6 +133,8 @@ exports[`Home component runScriptInOptions should match exact snapshot 1`] = `
               <a
                 className="footerLink link--subtle"
                 href="#"
+                id="faq"
+                onClick={[Function]}
               >
                 Frequently Asked Questions
               </a>

@@ -362,17 +362,17 @@ describe('Home component', () => {
         });
       });
     });
+  });
 
-    it('should match exact snapshot', () => {
-      const counter = (
-        <div>
-          <Home />
-        </div>
-      );
+  it('should match exact snapshot', () => {
+    const counter = (
+      <div>
+        <Home />
+      </div>
+    );
 
-      const tree = renderer.create(counter).toJSON();
+    const tree = renderer.create(counter).toJSON();
 
-      expect(tree).toMatchSnapshot();
-    });
+    expect(tree).toMatchSnapshot();
   });
 });

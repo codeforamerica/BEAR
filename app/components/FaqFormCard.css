@@ -1,0 +1,45 @@
+.headerText {
+  font-weight: normal;
+  font-size: medium;
+  line-height: 1.4em;
+}
+
+.accordionHeading {
+  text-decoration: underline;
+  color: #008060;
+  cursor: pointer;
+  padding-bottom: 18px;
+}
+
+.accordionHeading:focus {
+  outline: none;
+}
+
+.accordionHeading div:focus {
+  outline: none;
+}
+
+.accordionPanel {
+  padding: 0 0 20px 20px;
+  animation: fadein 0.35s ease-in;
+}
+
+.numberedList {
+  list-style-type: decimal;
+  padding-left: 40px;
+}
+
+.bulletedList {
+  list-style-type: disc;
+  padding-left: 40px;
+}
+
+@keyframes fadein {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

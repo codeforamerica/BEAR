@@ -15,6 +15,7 @@ import { runScript } from '../utils/gogenUtils';
 import { getDateTime } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
 import PrivacyPolicyFormCard from './PrivacyPolicyFormCard';
+import FaqFormCard from './FaqFormCard';
 import ErrorFormCard from './ErrorFormCard';
 import nonLinearScreenNumbers from '../constants/nonLinearScreenNumbers';
 
@@ -264,6 +265,7 @@ export default class Home extends Component<Props, State> {
           resetOutputPath={this.resetOutputPath}
         />
         <PrivacyPolicyFormCard onBack={this.goToPreviousScreen} />
+        <FaqFormCard onBack={this.goToPreviousScreen} />
         <ErrorFormCard
           onStartOver={this.resetInitialState}
           errorText={errorText}
