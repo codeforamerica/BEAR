@@ -198,5 +198,43 @@ describe('The primary user flow', () => {
       const outputPdfFile = `${outputDirectory}/CMR_summary_report.pdf`;
       expect(fs.existsSync(outputPdfFile)).toEqual(true);
     });
+
+    it('shows errors if gogen returns errors', async () => {
+      jest.setTimeout(30000);
+
+      await app.client.click('#begin');
+
+      pageTitle = await app.client.getText('.form-card__title');
+      expect(pageTitle).toEqual('CA County Selection');
+
+      const countySelect = app.client.$('#county-select');
+      await countySelect.selectByVisibleText('Sacramento');
+      await app.client.click('#continue');
+
+      pageTitle = await app.client.getText('.form-card__title');
+      expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
+
+      await app.client.chooseFile(
+        '#doj-file-input',
+        './test/fixtures/bad_csv_file.dat'
+      );
+      await app.client.click('#continue');
+
+      pageTitle = await app.client.getText('.form-card__title');
+      expect(pageTitle).toContain('Baseline eligibility');
+
+      await app.client.click('#continue');
+
+      const processingCardContent = await app.client.getText(
+        '.form-card__content h3'
+      );
+      expect(processingCardContent).toContain(
+        'Reading and preparing files ...'
+      );
+      await sleep(2);
+
+      pageTitle = await app.client.getText('.form-card__content');
+      expect(pageTitle).toContain('Error');
+    });
   });
 });
