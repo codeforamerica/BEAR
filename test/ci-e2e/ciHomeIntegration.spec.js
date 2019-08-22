@@ -65,8 +65,10 @@ describe('The happy path with additional relief', () => {
     await app.client.click('#continue');
 
     outputDirectory = getOutputDirectoryPath();
+
+    const eligibilityConfigFilePath = getEligibilityConfigFilePath();
     const eligibilityConfigFileContents = fs.readFileSync(
-      getEligibilityConfigFilePath(),
+      eligibilityConfigFilePath,
       'utf8'
     );
     const eligibilityConfig = JSON.parse(eligibilityConfigFileContents);

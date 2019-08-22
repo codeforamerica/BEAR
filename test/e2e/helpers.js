@@ -1,5 +1,4 @@
 import fs from 'fs';
-import { getDateTime } from '../../app/utils/fileUtils';
 
 const path = require('path');
 
@@ -23,34 +22,32 @@ export function removeOutputDirectory(dirPath) {
   }
 }
 
-export function getMostRecentlyCreatedOutputDirectoryTime() {
+export function getOutputDirectoryPath() {
   const creationTimes = [];
+  const fileNamesByCreationTime = {};
   const files = fs.readdirSync(baseOutputDirectory);
 
   files.forEach(file => {
     if (file.startsWith('CMR_output_')) {
-      const timeCreated = fs
-        .statSync(path.join(baseOutputDirectory, file))
-        .mtime.getTime();
+      const timeString = fs.statSync(path.join(baseOutputDirectory, file));
+      const timeCreated = timeString.mtime.getTime();
       creationTimes.push(timeCreated);
+      fileNamesByCreationTime[timeCreated] = file;
     }
   });
 
   const fileTimestampsNewestToOldest = creationTimes.sort().reverse();
-  return new Date(fileTimestampsNewestToOldest[0]);
+  const latestTime = fileTimestampsNewestToOldest[0];
+  return `${process.env.HOME}/Desktop/Clear_My_Record_output/${fileNamesByCreationTime[latestTime]}`;
 }
 
-export function getOutputDirectoryPath() {
-  const runTime = getMostRecentlyCreatedOutputDirectoryTime();
-  return `${
-    process.env.HOME
-  }/Desktop/Clear_My_Record_output/CMR_output_${getDateTime(runTime)}`;
+export function getMostRecentlyCreatedOutputDirectoryTimeString() {
+  return getOutputDirectoryPath().split('CMR_output_')[1];
 }
 
 export function getEligibilityConfigFilePath() {
-  const runTime = getMostRecentlyCreatedOutputDirectoryTime();
   return path.join(
     getOutputDirectoryPath(),
-    `eligibilityConfig_${getDateTime(runTime)}.json`
+    `eligibilityConfig_${getMostRecentlyCreatedOutputDirectoryTimeString()}.json`
   );
 }

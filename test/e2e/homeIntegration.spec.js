@@ -156,8 +156,8 @@ describe('The primary user flow', () => {
       await app.client.click('#continue');
 
       outputDirectory = getOutputDirectoryPath();
-      const eligibilityConfigFilePath = getEligibilityConfigFilePath();
 
+      const eligibilityConfigFilePath = getEligibilityConfigFilePath();
       const eligibilityConfigFileContents = fs.readFileSync(
         eligibilityConfigFilePath,
         'utf8'

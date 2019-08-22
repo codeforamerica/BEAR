@@ -5,7 +5,7 @@ export function createJsonFile(jsonData, fileName) {
   fs.writeFileSync(fileName, jsonString);
 }
 
-export function getDateTime(date) {
+export function getDateTime() {
   const months = [];
   months[0] = 'Jan';
   months[1] = 'Feb';
@@ -20,7 +20,7 @@ export function getDateTime(date) {
   months[10] = 'Nov';
   months[11] = 'Dec';
 
-  const dateToConvert = date || new Date();
+  const dateToConvert = new Date();
   const month = months[dateToConvert.getMonth()];
   const day = dateToConvert.getDate();
   const year = dateToConvert.getFullYear();
