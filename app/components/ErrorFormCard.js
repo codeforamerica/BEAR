@@ -8,15 +8,11 @@ import FormCard, {
 } from './FormCard';
 
 import StartOverButton from './StartOverButton';
+import ErrorSection from './ErrorSection';
 
 type Props = {
   onStartOver: void => void,
   errorText: string
-};
-
-const preStyle = {
-  outline: 'auto thin',
-  textAlign: 'left'
 };
 
 export default class ErrorFormCard extends Component<Props> {
@@ -45,16 +41,7 @@ export default class ErrorFormCard extends Component<Props> {
     const errors = this.extractErrors(errorData, parsing);
 
     if (Object.keys(errors).length !== 0) {
-      return (
-        <div>
-          <h4> {title} </h4>
-          <pre style={preStyle}>
-            {Object.keys(errors).map(item => (
-              <p key={item}>{`${item}: ${errors[item].ErrorMessage}`}</p>
-            ))}
-          </pre>
-        </div>
-      );
+      return <ErrorSection title={title} errors={errors} />;
     }
     return null;
   };
