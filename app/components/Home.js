@@ -15,6 +15,7 @@ import { runScript } from '../utils/gogenUtils';
 import { getDateTime } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
 import PrivacyPolicyFormCard from './PrivacyPolicyFormCard';
+import TermsOfServiceFormCard from './TermsOfServiceFormCard';
 import FaqFormCard from './FaqFormCard';
 import ErrorFormCard from './ErrorFormCard';
 import nonLinearScreenNumbers from '../constants/nonLinearScreenNumbers';
@@ -270,6 +271,7 @@ export default class Home extends Component<Props, State> {
           onStartOver={this.resetInitialState}
           errorText={errorText}
         />
+        <TermsOfServiceFormCard onBack={this.goToPreviousScreen} />
       </PageContainer>
     );
   }

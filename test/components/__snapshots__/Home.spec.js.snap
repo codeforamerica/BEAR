@@ -149,6 +149,8 @@ exports[`Home component should match exact snapshot 1`] = `
               <a
                 className="footerLink link--subtle"
                 href="#"
+                id="terms-of-service"
+                onClick={[Function]}
               >
                 Terms of Service
               </a>

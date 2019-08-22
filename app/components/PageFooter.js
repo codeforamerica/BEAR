@@ -8,10 +8,15 @@ type Props = {
   goToScreen: () => {}
 };
 
-export default class PageFooter extends Component<Props, State> {
+export default class PageFooter extends Component<Props> {
   goToPrivacyPolicy = () => {
     const { goToScreen } = this.props;
     goToScreen(nonLinearScreenNumbers.privacyPolicy);
+  };
+
+  goToTermsOfService = () => {
+    const { goToScreen } = this.props;
+    goToScreen(nonLinearScreenNumbers.termsOfService);
   };
 
   goToFaq = () => {
@@ -45,7 +50,12 @@ export default class PageFooter extends Component<Props, State> {
                 >
                   Privacy Policy
                 </a>
-                <a href="#" className={`${styles.footerLink} link--subtle`}>
+                <a
+                  href="#"
+                  id="terms-of-service"
+                  className={`${styles.footerLink} link--subtle`}
+                  onClick={this.goToTermsOfService}
+                >
                   Terms of Service
                 </a>
                 <a href="#" className={`${styles.footerLink} link--subtle`}>

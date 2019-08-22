@@ -2,7 +2,8 @@
 const nonLinearScreenNumbers = {
   privacyPolicy: 7,
   faq: 8,
-  errorScreen: 9
+  errorScreen: 9,
+  termsOfService: 10
 };
 
 export default nonLinearScreenNumbers;

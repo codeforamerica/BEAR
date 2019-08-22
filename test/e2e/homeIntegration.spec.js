@@ -115,6 +115,32 @@ describe('The primary user flow', () => {
     expect(pageTitle).toEqual('CA County Selection');
   });
 
+  it('can go to the terms of service page and then return to the main flow', async () => {
+    await app.client.click('#begin');
+
+    const countySelect = app.client.$('#county-select');
+    await countySelect.selectByVisibleText('Sacramento');
+    await app.client.click('#continue');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
+
+    await app.client.click('#terms-of-service');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('Terms of Service');
+
+    await app.client.click('#goback');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
+
+    await app.client.click('#goback');
+
+    pageTitle = await app.client.getText('.form-card__title');
+    expect(pageTitle).toEqual('CA County Selection');
+  });
+
   describe('when the user chooses to dismiss all code sections', () => {
     it('skips additional relief page', async () => {
       const text = await app.client.getText('.form-card__content');
