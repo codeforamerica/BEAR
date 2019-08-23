@@ -245,6 +245,8 @@ describe('The primary user flow', () => {
 
       pageTitle = await app.client.getText('.form-card__content');
       expect(pageTitle).toContain('Error');
+      expect(pageTitle).toContain('Parsing');
+      expect(pageTitle).not.toContain('Non Parsing');
     });
   });
 });
