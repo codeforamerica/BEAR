@@ -55,7 +55,7 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
           className="media-box__media media--icon"
         >
           <div
-            className="emoji emoji--med emoji--page-facing-up"
+            className="emoji emoji--med emoji--memo"
           />
         </div>
         <div
@@ -63,32 +63,10 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
         >
           <p>
             <b>
-              Full Results File
+              Summary Report
               : 
             </b>
-            CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information.
-          </p>
-        </div>
-      </div>
-      <div
-        className="sidePadding media-box"
-      >
-        <div
-          className="media-box__media media--icon"
-        >
-          <div
-            className="emoji emoji--med emoji--pencil"
-          />
-        </div>
-        <div
-          className="emojiMediaContent media-box__content"
-        >
-          <p>
-            <b>
-              Condensed Results File
-              : 
-            </b>
-            CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible.
+            PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions.
           </p>
         </div>
       </div>
@@ -107,7 +85,7 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
         >
           <p>
             <b>
-              Conviction Results File
+              Prop 64 Results
               : 
             </b>
             CSV file with only Prop 64 convictions in the county of your choice.
@@ -121,7 +99,7 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
           className="media-box__media media--icon"
         >
           <div
-            className="emoji emoji--med emoji--memo"
+            className="emoji emoji--med emoji--pencil"
           />
         </div>
         <div
@@ -129,10 +107,32 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
         >
           <p>
             <b>
-              Summary Report
+              All Results Condensed
               : 
             </b>
-            PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions.
+            CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible.
+          </p>
+        </div>
+      </div>
+      <div
+        className="sidePadding media-box"
+      >
+        <div
+          className="media-box__media media--icon"
+        >
+          <div
+            className="emoji emoji--med emoji--page-facing-up"
+          />
+        </div>
+        <div
+          className="emojiMediaContent media-box__content"
+        >
+          <p>
+            <b>
+              All Results
+              : 
+            </b>
+            CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information.
           </p>
         </div>
       </div>
