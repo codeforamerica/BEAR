@@ -29,7 +29,7 @@ export default class FaqFormCard extends Component<Props, State> {
             If you have more questions, you can refer to the blueprint that
             accompanies our application by downloading it{' '}
             <a
-              href="https://info.codeforamerica.org/clear-my-record-toolkit"
+              href="https://s3-us-west-1.amazonaws.com/codeforamerica-cms1/documents/Blueprint-FINAL.pdf"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -44,8 +44,11 @@ export default class FaqFormCard extends Component<Props, State> {
             >
               here
             </a>
-            . You can also contact us at clearmyrecord@codeforamerica.org for
-            additional support.
+            . You can also contact us at{' '}
+            <a href="mailto:clearmyrecord@codeforamerica.org">
+              clearmyrecord@codeforamerica.org
+            </a>{' '}
+            for additional support.
           </div>
         </FormCardHeader>
         <FormCardContent>
@@ -59,13 +62,13 @@ export default class FaqFormCard extends Component<Props, State> {
               </AccordionItemHeading>
               <AccordionItemPanel className={styles.accordionPanel}>
                 <ol className={styles.numberedList}>
-                  <li>Download the application from our website. </li>
-                  <li>Open the ClearMyRecord-setup-1.0.0.exe file. </li>
+                  <li>Download the application from our website.</li>
+                  <li>Open the clearmyrecord-hs_11361-setup.exe.</li>
                   <li>Select your county.</li>
                   <li>
-                    Import the bulk Prop 64 data file that you received from the
-                    DOJ through their secure ftp portal. Ensure that you have
-                    not edited the file before importing.
+                    Import the bulk Proposition 64 data file that you received
+                    from the DOJ through their secure ftp portal. Ensure that
+                    you have not edited the file before importing.
                   </li>
                   <li>
                     Move through each screen to make eligibility determinations.
@@ -79,7 +82,7 @@ export default class FaqFormCard extends Component<Props, State> {
                     compare the effects of different eligibility criteria. If
                     you run the program multiple times, your results will be
                     saved in a separate folder inside of the main
-                    ‘Clear_My_Record_output’ folder, on your desktop marked with
+                    “Clear_My_Record_output” folder on your desktop, marked with
                     the date and time that you ran the application.
                   </li>
                 </ol>
@@ -92,8 +95,11 @@ export default class FaqFormCard extends Component<Props, State> {
                 >
                   our website
                 </a>{' '}
-                to download the blueprint or contact us at
-                clearmyrecord@codeforamerica.org for additional support.
+                to download the blueprint or contact us at{' '}
+                <a href="mailto:clearmyrecord@codeforamerica.org">
+                  clearmyrecord@codeforamerica.org
+                </a>{' '}
+                for additional support.
               </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
@@ -107,9 +113,10 @@ export default class FaqFormCard extends Component<Props, State> {
                 sheet of any individual with a Prop 64 conviction in your
                 county. For each conviction, it contains all of the information
                 the DOJ has in their internal system. This means that you may
-                see convictions that are not Prop 64 convictions or convictions
-                not in your county. We use all of this information to create our
-                eligibility determinations based on your selected criteria.
+                see convictions that are not Proposition 64 convictions or
+                convictions not in your county. We use all of this information
+                to create our eligibility determinations based on your selected
+                criteria.
               </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
@@ -119,14 +126,14 @@ export default class FaqFormCard extends Component<Props, State> {
                 </AccordionItemButton>
               </AccordionItemHeading>
               <AccordionItemPanel className={styles.accordionPanel}>
-                You should have received an email from the DOJ, with
-                instructions on how to access your data. This includes
-                personalized instructions for your county with an account name
-                and password. You will have to download filezilla, a secure file
-                transfer portal. Once you’ve downloaded filezilla, you can use
-                the instructions in the DOJ email for your personalized portal
-                and download the necessary data. After downloading your data
-                file, delete filezilla serve to ensure security.
+                You should have received an email from the DOJ with instructions
+                on how to access your data. This includes personalized
+                instructions for your county with an account name and password.
+                You will have to download FileZilla, a secure file transfer
+                portal. Once you’ve downloaded FileZilla, you can use the
+                instructions in the DOJ email for your personalized portal and
+                download the necessary data. After downloading your data file,
+                delete FileZilla serve to ensure security.
               </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
@@ -136,14 +143,18 @@ export default class FaqFormCard extends Component<Props, State> {
                 </AccordionItemButton>
               </AccordionItemHeading>
               <AccordionItemPanel className={styles.accordionPanel}>
-                There may be several reasons why your file has not been imported
-                correctly. It may be that the file was opened previously and not
-                saved correctly or a change was made to the file so we can no
-                longer read the information that we need to. Make sure that you
-                have uploaded the correct file, which includes all Prop 64
-                convictions as you received it from the DOJ, without any
-                modifications. If you have additional problems, contact us at
-                clearmyrecord@codeforamerica.org
+                There are several possible reasons why your file has not been
+                imported correctly. It may be that the file was opened
+                previously and not saved correctly, or a change was made to the
+                file so we can no longer read the information that we need to.
+                Make sure that you have uploaded the correct file, which
+                includes all Proposition 64 convictions as you received it from
+                the DOJ, without any modifications. If you have additional
+                problems, contact us at{' '}
+                <a href="mailto:clearmyrecord@codeforamerica.org">
+                  clearmyrecord@codeforamerica.org
+                </a>
+                .
               </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
@@ -162,9 +173,9 @@ export default class FaqFormCard extends Component<Props, State> {
                     impact statistics.
                   </li>
                   <li>
-                    “Prop64_convictions_[timestamp].csv”: Since the DOJ file
+                    “Prop64_results_[timestamp].csv”: Since the DOJ file
                     includes data from the individual&apos;s entire RAP sheet,
-                    this spreadsheet condenses the data only to Prop 64
+                    this spreadsheet condenses the data only to Proposition 64
                     convictions in your county. The first several columns (A
                     through CQ) come straight from the original DOJ file. The
                     remaining columns are generated by Code for America to
@@ -172,19 +183,19 @@ export default class FaqFormCard extends Component<Props, State> {
                     reduction or dismissal decision).
                   </li>
                   <li>
-                    “Full_results_[timestamp].csv”: This spreadsheet is the
-                    entire DOJ file (columns A through CQ) plus all of the
-                    supporting information that Code for America generates.
-                  </li>
-                  <li>
-                    “Condensed_results_[timestamp].csv”: This spreadsheet
+                    “All_Results_Condensed_[timestamp].csv”: This spreadsheet
                     condenses some of the columns from the full results file to
                     make it easier for DA’s offices to review the data on an
                     individual’s entire CA criminal record history.
                   </li>
+                  <li>
+                    “All_Results_[timestamp].csv”: This spreadsheet is the
+                    entire DOJ file (columns A through CQ) plus all of the
+                    supporting information that Code for America generates.
+                  </li>
                 </ol>
                 All of these files will be saved in a folder on your desktop
-                named ‘Clear_My_Record_output’. Each time you run the
+                named “Clear_My_Record_output”. Each time you run the
                 application, a new folder will be created within this folder
                 labeled with a timestamp of when they were created.
               </AccordionItemPanel>
@@ -196,20 +207,26 @@ export default class FaqFormCard extends Component<Props, State> {
                 </AccordionItemButton>
               </AccordionItemHeading>
               <AccordionItemPanel className={styles.accordionPanel}>
-                When you have large data files, you can use the filter function
-                in excel to look only at particular data. For example, this
-                function can help you see only those convictions eligible for
-                dismissal or reduction. To filter, select the data tab, and
-                dropdown arrows should appear in each of the columns. Click on
-                the arrow next to the column you’d like to filter by and a menu
-                should appear allowing you to filter by the relevant inputs of
-                that column. You can then choose the options you are interested
-                in and only see the data relevant to those choices. It may also
-                be useful to freeze the rows in these files to see the header at
-                all times. You can do this by selecting the row right below the
-                row you want to freeze, going to the view tab, and selecting the
-                freeze option. This should allow you to see the headers of the
-                DOJ file even if you are further down in the data file.
+                <p>
+                  When you have large data files, you can use the filter
+                  function in Excel to look only at particular data. For
+                  example, this function can help you see only those convictions
+                  eligible for dismissal or reduction. To filter, select the
+                  Data tab, and dropdown arrows should appear in each of the
+                  columns. Click on the arrow next to the column you’d like to
+                  filter by and a menu should appear allowing you to filter by
+                  the relevant inputs of that column. You can then choose the
+                  options you are interested in and only see the data relevant
+                  to those choices.
+                </p>
+                <p>
+                  It may also be useful to freeze the rows in these files to see
+                  the header at all times. You can do this by selecting the row
+                  right below the row you want to freeze, going to the View tab,
+                  and selecting the Freeze option. This should allow you to see
+                  the headers of the DOJ file even if you are further down in
+                  the data file.
+                </p>
               </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
@@ -222,39 +239,37 @@ export default class FaqFormCard extends Component<Props, State> {
                 We have provided you with output files that have the base
                 information needed for courts to update corresponding
                 convictions in their CMS. The pilot counties we worked with did
-                not need individual motions for each conviction but rather one
-                bulk motion signed by a Presiding Judge. You can refer to our
+                not need individual motions for each conviction, but rather one
+                bulk motion signed by a presiding judge. You can refer to our
                 Blueprint for instructions on providing eligibility
-                determinations to your court, which you can download{' '}
-                <a
-                  href="https://info.codeforamerica.org/clear-my-record-toolkit"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  here
-                </a>
-                .
+                determinations to your court.
               </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
               <AccordionItemHeading className={styles.accordionHeading}>
                 <AccordionItemButton>
-                  How can I share my results publically?
+                  How can I share my results publicly?
                 </AccordionItemButton>
               </AccordionItemHeading>
               <AccordionItemPanel className={styles.accordionPanel}>
                 We provide you with a summary report that has impact statistics
                 based on your eligibility criteria. If you share this report
                 with us (which helps us better understand how counties use the
-                application) we will provide you with a designed report that you
-                can share with the press or community organizations. See an
-                example of the report we’ll create for you{' '}
-                <a href="#" target="_blank" rel="noopener noreferrer">
+                application), we will provide you with a designed report that
+                you can share with the press or community organizations. See an
+                example of this designed report we’ll create for you{' '}
+                <a
+                  href="https://s3-us-west-1.amazonaws.com/codeforamerica-cms1/documents/Clear-My-Record_-Implementation-Application-Impact-Report.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   here
-                </a>{' '}
-                or check it out on the page where you downloaded the
-                application. You can send the summary report to us at
-                clearmyrecord@codeforamerica.org
+                </a>
+                . You can send the summary report to us at{' '}
+                <a href="mailto:clearmyrecord@codeforamerica.org">
+                  clearmyrecord@codeforamerica.org
+                </a>
+                .
               </AccordionItemPanel>
             </AccordionItem>
             <h4>Eligibility criteria</h4>
@@ -268,9 +283,9 @@ export default class FaqFormCard extends Component<Props, State> {
                 H&S § 11361.8 has a presumption of eligibility for those
                 convictions eligible for relief. The eligibility criteria
                 choices within the application are based on the criteria chosen
-                by the District Attorneys in our five county pilot (with San
+                by the district attorneys in our five-county pilot with San
                 Francisco, Sacramento, Contra Costa, San Joaquin, and Los
-                Angeles).
+                Angeles.
               </AccordionItemPanel>
             </AccordionItem>
             <AccordionItem>
@@ -286,22 +301,24 @@ export default class FaqFormCard extends Component<Props, State> {
                 final eligibility determination. This information includes the
                 following:
                 <ul className={styles.bulletedList}>
-                  <li># of convictions on the individual’s record</li>
+                  <li>Number of convictions on the individual’s record</li>
                   <li>
                     Convictions listed under PC 667 or PC 290 or if the
                     individual is registered under PC 290
                   </li>
                   <li>Date of the Proposition 64 conviction</li>
-                  <li># of years since this Proposition 64 conviction</li>
+                  <li>Number of years since this Proposition 64 conviction</li>
                   <li>
-                    # of years since any conviction on the individual’s record
+                    Number of years since any conviction on the individual’s
+                    record
                   </li>
                   <li>
-                    # of H&S § 11357, H&S § 11358, H&S § 11359, and/or H&S §
-                    11360 convictions on the individual’s record
+                    Number of H&S § 11357, H&S § 11358, H&S § 11359, and/or H&S
+                    § 11360 convictions on the individual’s record
                   </li>
                   <li>
-                    Total # of Prop 64 convictions on the individual’s record
+                    Total number of Proposition 64 convictions on the
+                    individual’s record
                   </li>
                   <li>
                     Whether the individual has been marked as deceased in the
@@ -321,7 +338,7 @@ export default class FaqFormCard extends Component<Props, State> {
               </AccordionItemHeading>
               <AccordionItemPanel className={styles.accordionPanel}>
                 This includes all misdemeanors and infractions convicted under
-                H&S § 11357, H&S § 11358, H&S § 11359, and H&S § 11360 and all
+                H&S § 11357, H&S § 11358, H&S § 11359, and H&S § 11360, and all
                 their relevant subsections.
               </AccordionItemPanel>
             </AccordionItem>
@@ -334,9 +351,9 @@ export default class FaqFormCard extends Component<Props, State> {
               <AccordionItemPanel className={styles.accordionPanel}>
                 Our automatic record clearance technology is based off of simple
                 flow-chart logic. We analyze your bulk data file, scanning for
-                and identifying every Prop 64 eligibility conviction based on
-                criteria selected. You can view our code used to create this
-                application, which we have open sourced,{' '}
+                and identifying every Proposition 64 eligibility conviction
+                based on criteria selected. You can view our code used to create
+                this application, which we have open sourced,{' '}
                 <a
                   href="https://github.com/codeforamerica/BEAR"
                   target="_blank"
@@ -384,7 +401,7 @@ export default class FaqFormCard extends Component<Props, State> {
                   comments rather than directly in the data. Because we do not
                   change the DOJ data directly, you can investigate these
                   discrepancies in your output files themselves and speak to the
-                  DOJ and or courts when necessary.
+                  DOJ and/or courts when necessary.
                 </p>
                 <p>
                   You can also find more information about what to do when you
