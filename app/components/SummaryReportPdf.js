@@ -225,9 +225,7 @@ export default class SummaryReportPdf extends Component<Props> {
                 information for each Proposition 64 conviction and surface
                 specific data most helpful for your office’s review.
               </Text>
-              <Text style={styles.h3}>
-                1. “Prop64_convictions_[timestamp].csv”
-              </Text>
+              <Text style={styles.h3}>1. “Prop64_Results_[timestamp].csv”</Text>
               <Text style={styles.text}>
                 a . Since the DOJ file includes data from each individual&apos;s
                 entire RAP Sheet, this spreadsheet condenses the data only to
@@ -239,19 +237,19 @@ export default class SummaryReportPdf extends Component<Props> {
                 Code for America to surface more insights for DAs (the final two
                 being the reduction or dismissal decision).
               </Text>
-              <Text style={styles.h3}>2. “full_results_[timestamp].csv”</Text>
-              <Text style={styles.text}>
-                a. This spreadsheet is the entire DOJ file (columns A through
-                CQ) plus all of the supporting information that Code for America
-                generates.
-              </Text>
               <Text style={styles.h3}>
-                3. “condensed_results_[timestamp].csv”
+                2. “All_Results_Condensed_[timestamp].csv”
               </Text>
               <Text style={styles.text}>
                 a. This spreadsheet condenses some of the columns from the full
                 results file to make it easier for DA’s offices to review the
                 data on an individual’s entire CA criminal record history.
+              </Text>
+              <Text style={styles.h3}>3. “All_Results_[timestamp].csv”</Text>
+              <Text style={styles.text}>
+                a. This spreadsheet is the entire DOJ file (columns A through
+                CQ) plus all of the supporting information that Code for America
+                generates.
               </Text>
               <Text style={styles.text}>
                 Note that the Clear My Record program only generates eligibility

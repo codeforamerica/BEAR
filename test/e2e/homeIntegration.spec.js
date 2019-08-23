@@ -231,7 +231,7 @@ describe('The primary user flow', () => {
       );
       expect(resultsFormCardContent).toContain('Your files are ready!');
 
-      const outputPdfFile = `${outputDirectory}/CMR_summary_report.pdf`;
+      const outputPdfFile = `${outputDirectory}/Summary_Report.pdf`;
       expect(fs.existsSync(outputPdfFile)).toEqual(true);
     });
 

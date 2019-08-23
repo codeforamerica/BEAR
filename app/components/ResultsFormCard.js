@@ -62,27 +62,27 @@ export default class ResultsFormCard extends Component<Props> {
           </h3>
           <EmojiMediaBox
             className={styles.sidePadding}
-            emojiClass="emoji--page-facing-up"
-            title="Full Results File"
-            content="CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information."
-          />
-          <EmojiMediaBox
-            className={styles.sidePadding}
-            emojiClass="emoji--pencil"
-            title="Condensed Results File"
-            content="CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible."
+            emojiClass="emoji--memo"
+            title="Summary_Report.pdf"
+            content="PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions."
           />
           <EmojiMediaBox
             className={styles.sidePadding}
             emojiClass="emoji--thumbs-up"
-            title="Conviction Results File"
+            title="Prop64_Results.csv"
             content="CSV file with only Prop 64 convictions in the county of your choice."
           />
           <EmojiMediaBox
             className={styles.sidePadding}
-            emojiClass="emoji--memo"
-            title="Summary Report"
-            content="PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions."
+            emojiClass="emoji--pencil"
+            title="All_Results_Condensed.csv"
+            content="CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible."
+          />
+          <EmojiMediaBox
+            className={styles.sidePadding}
+            emojiClass="emoji--page-facing-up"
+            title="All_Results.csv"
+            content="CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information."
           />
         </FormCardContent>
         <FormCardFooter>

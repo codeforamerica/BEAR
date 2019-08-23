@@ -105,7 +105,7 @@ export function runScript(
             formattedEligibilityOptions
           )}
         />,
-        path.join(outputFilePath, 'CMR_summary_report.pdf')
+        path.join(outputFilePath, 'Summary_Report.pdf')
       );
     }
     childFinishedCallback(code, errorText);
