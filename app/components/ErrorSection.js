@@ -18,7 +18,7 @@ export default class ErrorSection extends Component<Props> {
         <h4> {title} </h4>
         <pre style={preStyle}>
           {Object.keys(errors).map(item => (
-            <p key={item}>{`${item}: ${errors[item].ErrorMessage}`}</p>
+            <p key={item}>{`${item}: ${errors[item].errorMessage}`}</p>
           ))}
         </pre>
       </div>
