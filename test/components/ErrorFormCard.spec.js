@@ -23,7 +23,7 @@ afterEach(() => {
 
 describe('ErrorFormCard component', () => {
   describe('Displays errors', () => {
-    it('should show Parsing title for parsing errors', () => {
+    it('should show Parsing header for parsing errors', () => {
       const { component } = setup({
         file_1: {
           errorType: 'PARSING',
@@ -32,18 +32,18 @@ describe('ErrorFormCard component', () => {
       });
       expect(
         component.containsAnyMatchingElements([
-          <ErrorSection title="Parsing" />
+          <ErrorSection header="We were not able to read the following files. Please download the original DOJ files and try again." />
         ])
       ).toEqual(true);
 
       expect(
         component.containsAnyMatchingElements([
-          <ErrorSection title="Non Parsing" />
+          <ErrorSection header="We encountered the following errors:" />
         ])
       ).toEqual(false);
     });
 
-    it('should show Non Parsing title for non-parsing errors', () => {
+    it('should show Non Parsing header for non-parsing errors', () => {
       const { component } = setup({
         file_1: {
           errorType: 'OTHER',
@@ -52,13 +52,13 @@ describe('ErrorFormCard component', () => {
       });
       expect(
         component.containsAnyMatchingElements([
-          <ErrorSection title="Parsing" />
+          <ErrorSection header="We were not able to read the following files. Please download the original DOJ files and try again." />
         ])
       ).toEqual(false);
 
       expect(
         component.containsAnyMatchingElements([
-          <ErrorSection title="Non Parsing" />
+          <ErrorSection header="We encountered the following errors:" />
         ])
       ).toEqual(true);
     });
@@ -76,13 +76,13 @@ describe('ErrorFormCard component', () => {
       });
       expect(
         component.containsAnyMatchingElements([
-          <ErrorSection title="Parsing" />
+          <ErrorSection header="We were not able to read the following files. Please download the original DOJ files and try again." />
         ])
       ).toEqual(true);
 
       expect(
         component.containsAnyMatchingElements([
-          <ErrorSection title="Non Parsing" />
+          <ErrorSection header="We encountered the following errors:" />
         ])
       ).toEqual(true);
     });

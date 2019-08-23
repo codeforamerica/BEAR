@@ -270,9 +270,10 @@ describe('The primary user flow', () => {
       await sleep(2);
 
       pageTitle = await app.client.getText('.form-card__content');
-      expect(pageTitle).toContain('Error');
-      expect(pageTitle).toContain('Parsing');
-      expect(pageTitle).not.toContain('Non Parsing');
+      expect(pageTitle).toContain(
+        'We were not able to read the following files. Please download the original DOJ files and try again.'
+      );
+      expect(pageTitle).not.toContain('We encountered the following errors:');
     });
   });
 });
