@@ -24,11 +24,11 @@ export default class ErrorFormCard extends Component<Props> {
     let keys;
     if (fileparsing) {
       keys = Object.keys(errorData).filter(
-        key => errorData[key].ExitCode === 2
+        key => errorData[key].errorType === 'PARSING'
       );
     } else {
       keys = Object.keys(errorData).filter(
-        key => errorData[key].ExitCode !== 2
+        key => errorData[key].errorType !== 'PARSING'
       );
     }
     return keys.reduce(

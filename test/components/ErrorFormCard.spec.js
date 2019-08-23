@@ -26,8 +26,8 @@ describe('ErrorFormCard component', () => {
     it('should show Parsing title for parsing errors', () => {
       const { component } = setup({
         file_1: {
-          ExitCode: 2,
-          ErrorMessage: 'record on line 2: wrong number of fields'
+          errorType: 'PARSING',
+          errorMessage: 'record on line 2: wrong number of fields'
         }
       });
       expect(
@@ -46,8 +46,8 @@ describe('ErrorFormCard component', () => {
     it('should show Non Parsing title for non-parsing errors', () => {
       const { component } = setup({
         file_1: {
-          ExitCode: 1,
-          ErrorMessage: 'Cannot open file'
+          errorType: 'OTHER',
+          errorMessage: 'Cannot open file'
         }
       });
       expect(
@@ -66,12 +66,12 @@ describe('ErrorFormCard component', () => {
     it('should show both Parsing & Non Parsing titles for mixed errors', () => {
       const { component } = setup({
         file_1: {
-          ExitCode: 1,
-          ErrorMessage: 'Cannot open file'
+          errorType: 'OTHER',
+          errorMessage: 'Cannot open file'
         },
         file_2: {
-          ExitCode: 2,
-          ErrorMessage: 'record on line 2: wrong number of fields'
+          errorType: 'PARSING',
+          errorMessage: 'record on line 2: wrong number of fields'
         }
       });
       expect(
