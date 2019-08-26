@@ -108,7 +108,7 @@
       "provider": "github",
       "owner": "codeforamerica",
       "repo": "BEAR",
-      "private": true
+      "releaseType": "prerelease"
     }
   },
   "repository": {
