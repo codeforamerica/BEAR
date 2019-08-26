@@ -12,9 +12,8 @@ jobs:
       - run:
           name: Fetch gogen binary
           command: |
-            export TOKEN=$GITHUB_ACCESS_TOKEN
             mkdir -p ~/go/bin
-            bash ~/bear/.circleci/github_download_release.sh "$(cat ~/bear/.gogen-version)" ~/go/bin/gogen
+            curl -Ls https://github.com/codeforamerica/gogen/releases/download/"$(cat ~/bear/.gogen-version)"/gogen_linux -o ~/go/bin/gogen
             chmod +x ~/go/bin/gogen
 
       - restore_cache:
@@ -48,9 +47,7 @@ jobs:
       - run:
           name: Fetch gogen binary
           command: |
-            export TOKEN=$GITHUB_ACCESS_TOKEN
-            export FILE=gogen_win.exe
-            bash ~/bear/.circleci/github_download_release.sh "$(cat ~/bear/.gogen-version)" ./gogen.exe
+            curl -Ls https://github.com/codeforamerica/gogen/releases/download/"$(cat ~/bear/.gogen-version)"/gogen__win./exe -o ./gogen.exe
 
       - restore_cache:
           keys:
