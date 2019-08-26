@@ -177,7 +177,7 @@ exports[`Home component should match exact snapshot 1`] = `
             </div>
             <div>
               v
-              0.2.18
+              0.2.19
             </div>
           </div>
         </div>
