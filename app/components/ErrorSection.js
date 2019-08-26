@@ -1,24 +1,34 @@
 import React, { Component } from 'react';
 
 type Props = {
-  title: string,
-  errors: Object
+  header: string,
+  errors: Object,
+  showFile: boolean
 };
 
 const preStyle = {
   outline: 'auto thin',
+  textAlign: 'left',
+  whiteSpace: 'pre-wrap'
+};
+
+const headerStyle = {
   textAlign: 'left'
 };
 
 export default class ErrorSection extends Component<Props> {
   render() {
-    const { title, errors } = this.props;
+    const { header, errors, showFile } = this.props;
     return (
       <div>
-        <h4> {title} </h4>
+        <p style={headerStyle}> {header} </p>
         <pre style={preStyle}>
           {Object.keys(errors).map(item => (
-            <p key={item}>{`${item}: ${errors[item].errorMessage}`}</p>
+            <p key={item}>
+              {showFile
+                ? `${item}: ${errors[item].errorMessage}`
+                : `${errors[item].errorMessage}`}
+            </p>
           ))}
         </pre>
       </div>
