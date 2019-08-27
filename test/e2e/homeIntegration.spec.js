@@ -89,10 +89,10 @@ describe('The primary user flow', () => {
     pageTitle = await app.client.getText('.form-card__title');
     expect(pageTitle).toEqual('Import Prop 64 bulk conviction data files');
 
-    await app.client.click('#privacy');
+    await app.client.click('#terms-of-service');
 
     pageTitle = await app.client.getText('.form-card__title');
-    expect(pageTitle).toEqual('Privacy Policy');
+    expect(pageTitle).toEqual('Terms of Service');
 
     await app.client.click('#goback');
 

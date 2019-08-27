@@ -141,14 +141,6 @@ exports[`Home component should match exact snapshot 1`] = `
               <a
                 className="footerLink link--subtle"
                 href="#"
-                id="privacy"
-                onClick={[Function]}
-              >
-                Privacy Policy
-              </a>
-              <a
-                className="footerLink link--subtle"
-                href="#"
                 id="terms-of-service"
                 onClick={[Function]}
               >

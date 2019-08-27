@@ -44,14 +44,6 @@ export default class PageFooter extends Component<Props> {
                 </a>
                 <a
                   href="#"
-                  id="privacy"
-                  className={`${styles.footerLink} link--subtle`}
-                  onClick={this.goToPrivacyPolicy}
-                >
-                  Privacy Policy
-                </a>
-                <a
-                  href="#"
                   id="terms-of-service"
                   className={`${styles.footerLink} link--subtle`}
                   onClick={this.goToTermsOfService}
