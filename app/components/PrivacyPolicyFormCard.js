@@ -48,16 +48,18 @@ export default class PrivacyPolicyFormCard extends Component<Props, State> {
           <p>
             We may access, preserve, and disclose your information if we believe
             doing so is required or appropriate to:
-            <ul>
-              <li>
-                (a) comply with law enforcement requests and legal process, such
-                as a court order or subpoena;
-              </li>
-              <li>(b) respond to your requests; or </li>
-              <li>
-                (c) protect your, our, or others’ rights, property, or safety.
-              </li>
-            </ul>
+          </p>
+          <ul>
+            <li>
+              (a) comply with law enforcement requests and legal process, such
+              as a court order or subpoena;
+            </li>
+            <li>(b) respond to your requests; or </li>
+            <li>
+              (c) protect your, our, or others’ rights, property, or safety.
+            </li>
+          </ul>
+          <p>
             For the avoidance of doubt, the disclosure of your information may
             occur if you post any objectionable content on or through the Site.
           </p>
