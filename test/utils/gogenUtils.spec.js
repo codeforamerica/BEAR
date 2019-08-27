@@ -78,7 +78,7 @@ describe('runScript', () => {
       const state = {
         ...defaultAnalysisOptions,
         gogenPath: 'gogenPath',
-        dateTime: 'date',
+        formattedGogenRunTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
         dojFilePaths: ['/first/path'],
         outputFilePath: 'outputPath/outputPath'
@@ -107,7 +107,7 @@ describe('runScript', () => {
       const state = {
         ...defaultAnalysisOptions,
         gogenPath: 'gogenPath',
-        dateTime: 'date',
+        formattedGogenRunTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
         dojFilePaths: ['/first/path', '/last/path'],
         outputFilePath: 'outputPath/outputPath'
@@ -141,7 +141,7 @@ describe('runScript', () => {
       const state = {
         ...defaultAnalysisOptions,
         gogenPath: 'gogenPath',
-        dateTime: 'date',
+        formattedGogenRunTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
         dojFilePaths: ['/path/to/doj/file'],
         outputFilePath: 'outputPath/outputPath'
@@ -164,7 +164,7 @@ describe('runScript', () => {
       const state = {
         ...defaultAnalysisOptions,
         gogenPath: 'gogenPath',
-        dateTime: 'date',
+        formattedGogenRunTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
         dojFilePaths: ['/path/to/doj/file'],
         outputFilePath: 'outputPath/outputPath'
@@ -182,7 +182,7 @@ describe('runScript', () => {
     it('transforms the baseline eligibility options before creating the json file', () => {
       const stateWithReductions = {
         gogenPath: 'gogenPath',
-        dateTime: 'date',
+        formattedGogenRunTime: 'date',
         county: { name: 'Sacramento', code: 'SACRAMENTO' },
         dojFilePaths: ['/path/to/doj/file', 'hello'],
         outputFilePath: 'outputPath/outputPath',
@@ -225,7 +225,7 @@ describe('runScript', () => {
       it('passes the selected value of each option to createJsonFile', () => {
         const stateWithRelief = {
           gogenPath: 'gogenPath',
-          dateTime: 'date',
+          formattedGogenRunTime: 'date',
           county: { name: 'Sacramento', code: 'SACRAMENTO' },
           dojFilePaths: ['/path/to/doj/file'],
           outputFilePath: 'outputPath/outputPath',
@@ -260,7 +260,7 @@ describe('runScript', () => {
       it('passes 0 for value of each option to createJsonFile', () => {
         const stateWithoutRelief = {
           gogenPath: 'gogenPath',
-          dateTime: 'date',
+          formattedGogenRunTime: 'date',
           county: { name: 'Sacramento', code: 'SACRAMENTO' },
           dojFilePaths: ['/path/to/doj/file'],
           outputFilePath: 'outputPath/outputPath',

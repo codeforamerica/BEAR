@@ -81,10 +81,10 @@ describe('Home component', () => {
       expect(county).toEqual({ name: '', code: '' });
     });
 
-    it('sets the dateTime to an empty string', () => {
+    it('sets the formattedGogenRunTime to an empty string', () => {
       const { component } = setup('false');
-      const dateTime = component.state('dateTime');
-      expect(dateTime).toEqual('');
+      const formattedGogenRunTime = component.state('formattedGogenRunTime');
+      expect(formattedGogenRunTime).toEqual('');
     });
 
     it('sets the baseline eligibility options to an object with all options set to dismiss', () => {
@@ -202,15 +202,17 @@ describe('Home component', () => {
   });
 
   describe('updateDateForPath', () => {
-    it('updates state.dateTime and outputFilePath', () => {
+    it('updates state.formattedGogenRunTime and outputFilePath', () => {
       const { component } = setup('true');
       expect(component.state('outputFilePath')).toEqual('');
-      expect(component.state('dateTime')).toEqual('');
+      expect(component.state('formattedGogenRunTime')).toEqual('');
       component.instance().updateDateForPath();
       expect(component.state('outputFilePath')).toEqual(
         '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output_01_01_2011_00.00.AM'
       );
-      expect(component.state('dateTime')).toEqual('01_01_2011_00.00.AM');
+      expect(component.state('formattedGogenRunTime')).toEqual(
+        '01_01_2011_00.00.AM'
+      );
     });
   });
 

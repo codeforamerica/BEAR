@@ -50,7 +50,7 @@ export function runScript(
 ) {
   const {
     gogenPath,
-    dateTime,
+    formattedGogenRunTime,
     county,
     dojFilePaths,
     baselineEligibilityOptions,
@@ -58,7 +58,7 @@ export function runScript(
     outputFilePath
   } = state;
   makeDirectory(outputFilePath);
-  const JsonFileName = `eligibilityConfig_${dateTime}.json`;
+  const JsonFileName = `eligibilityConfig_${formattedGogenRunTime}.json`;
   const pathToEligibilityOptions = path.join(outputFilePath, JsonFileName);
   const formattedEligibilityOptions = transformBaselineEligibilityOptions(
     baselineEligibilityOptions
@@ -77,7 +77,7 @@ export function runScript(
   createJsonFile(eligibilityLogicConfig, pathToEligibilityOptions);
   const countyCode = county.code;
 
-  const fileNameSuffix = dateTime;
+  const fileNameSuffix = formattedGogenRunTime;
 
   const goProcess = spawnChildProcess(gogenPath, [
     `run`,
@@ -93,7 +93,7 @@ export function runScript(
     let errorText = '';
     if (code !== 0) {
       errorText = fs.readFileSync(
-        `${outputFilePath}/gogen_${dateTime}.err`,
+        `${outputFilePath}/gogen_${formattedGogenRunTime}.err`,
         'utf8'
       );
     } else {
@@ -104,6 +104,7 @@ export function runScript(
           allEligibleConvictionsDismissed={allEligibleConvictionsDismissed(
             formattedEligibilityOptions
           )}
+          formattedGogenRunTime={formattedGogenRunTime}
         />,
         path.join(outputFilePath, 'Summary_Report.pdf')
       );

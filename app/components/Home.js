@@ -22,7 +22,7 @@ import nonLinearScreenNumbers from '../constants/nonLinearScreenNumbers';
 
 type State = {
   gogenPath: string,
-  dateTime: string,
+  formattedGogenRunTime: string,
   currentScreen: number,
   previousScreen: number,
   county: County,
@@ -73,7 +73,7 @@ export default class Home extends Component<Props, State> {
     }
     this.state = {
       gogenPath,
-      dateTime: '',
+      formattedGogenRunTime: '',
       outputPathPrefix: `${home}/Desktop/Clear_My_Record_output/CMR_output`,
       outputFilePath: '',
       dojFilePaths: [],
@@ -138,7 +138,7 @@ export default class Home extends Component<Props, State> {
     const newOutputFilePath = `${outputPathPrefix}_${date}`;
 
     this.setState({
-      dateTime: date,
+      formattedGogenRunTime: date,
       outputFilePath: newOutputFilePath
     });
   };

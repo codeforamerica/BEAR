@@ -16,7 +16,8 @@ import { version } from '../../package.json';
 type Props = {
   summaryData: Object,
   inputFileCount: number,
-  allEligibleConvictionsDismissed: boolean
+  allEligibleConvictionsDismissed: boolean,
+  formattedGogenRunTime: string
 };
 
 const imageDirectory = path.join(__dirname, '/assets/images/');
@@ -26,7 +27,8 @@ export default class SummaryReportPdf extends Component<Props> {
     const {
       summaryData,
       inputFileCount,
-      allEligibleConvictionsDismissed
+      allEligibleConvictionsDismissed,
+      formattedGogenRunTime
     } = this.props;
     const totalProp64Convictions =
       summaryData.prop64FelonyConvictionsCountInCounty +
@@ -225,7 +227,10 @@ export default class SummaryReportPdf extends Component<Props> {
                 information for each Proposition 64 conviction and surface
                 specific data most helpful for your office’s review.
               </Text>
-              <Text style={styles.h3}>1. “Prop64_Results_[timestamp].csv”</Text>
+              <Text style={styles.h3}>
+                {`1. “Prop64_Results_${formattedGogenRunTime}.csv”`}
+                {inputFileCount === 1 ? '' : ` [1-${inputFileCount}]`}
+              </Text>
               <Text style={styles.text}>
                 a . Since the DOJ file includes data from each individual&apos;s
                 entire RAP Sheet, this spreadsheet condenses the data only to
@@ -238,14 +243,18 @@ export default class SummaryReportPdf extends Component<Props> {
                 being the reduction or dismissal decision).
               </Text>
               <Text style={styles.h3}>
-                2. “All_Results_Condensed_[timestamp].csv”
+                {`2. “All_Results_Condensed_${formattedGogenRunTime}.csv”`}
+                {inputFileCount === 1 ? '' : ` [1-${inputFileCount}]`}
               </Text>
               <Text style={styles.text}>
                 a. This spreadsheet condenses some of the columns from the full
                 results file to make it easier for DA’s offices to review the
                 data on an individual’s entire CA criminal record history.
               </Text>
-              <Text style={styles.h3}>3. “All_Results_[timestamp].csv”</Text>
+              <Text style={styles.h3}>
+                {`3. “All_Results_${formattedGogenRunTime}.csv”`}
+                {inputFileCount === 1 ? '' : ` [1-${inputFileCount}]`}
+              </Text>
               <Text style={styles.text}>
                 a. This spreadsheet is the entire DOJ file (columns A through
                 CQ) plus all of the supporting information that Code for America
