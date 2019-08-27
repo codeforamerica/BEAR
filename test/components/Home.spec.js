@@ -37,7 +37,7 @@ function createFakeSpawnChildProcess() {
 }
 
 beforeEach(() => {
-  sandbox.stub(FileUtils, 'getDateTime').returns('Jan_1_2011_0.00.00.AM');
+  sandbox.stub(FileUtils, 'getDateTime').returns('01_01_2011_00.00.AM');
   runScriptSpy = sandbox.spy();
   GogenUtils.runScript = runScriptSpy;
 });
@@ -208,9 +208,9 @@ describe('Home component', () => {
       expect(component.state('dateTime')).toEqual('');
       component.instance().updateDateForPath();
       expect(component.state('outputFilePath')).toEqual(
-        '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output_Jan_1_2011_0.00.00.AM'
+        '/tmp/test/home/path/Desktop/Clear_My_Record_output/CMR_output_01_01_2011_00.00.AM'
       );
-      expect(component.state('dateTime')).toEqual('Jan_1_2011_0.00.00.AM');
+      expect(component.state('dateTime')).toEqual('01_01_2011_00.00.AM');
     });
   });
 

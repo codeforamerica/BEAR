@@ -134,7 +134,7 @@ export default class Home extends Component<Props, State> {
   updateDateForPath = () => {
     const { outputPathPrefix } = this.state;
 
-    const date = getDateTime();
+    const date = getDateTime(new Date());
     const newOutputFilePath = `${outputPathPrefix}_${date}`;
 
     this.setState({

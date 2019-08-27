@@ -1,5 +1,5 @@
 import fs from 'fs';
-import { createJsonFile } from '../../app/utils/fileUtils';
+import { createJsonFile, getDateTime } from '../../app/utils/fileUtils';
 
 jest.mock('fs');
 
@@ -15,5 +15,14 @@ describe('createJsonFile', () => {
       './file',
       '{"hello":"goodbye"}'
     ]);
+  });
+});
+
+describe('getDateTime', () => {
+  it('converts date to formatted string without seconds', () => {
+    const date = new Date(2019, 1, 2, 1, 20, 30);
+    const convertedDate = getDateTime(date);
+
+    expect(convertedDate).toMatch('01_02_2019_01.20.AM');
   });
 });
