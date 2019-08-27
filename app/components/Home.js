@@ -35,6 +35,7 @@ type State = {
 };
 
 type Props = {
+  preserveEligibilityConfig: boolean,
   spawnChildProcess: (
     path: string,
     options: Array<string>
@@ -206,8 +207,13 @@ export default class Home extends Component<Props, State> {
   };
 
   runScriptInOptions = (callbackFunction: function) => {
-    const { spawnChildProcess } = this.props;
-    runScript(this.state, spawnChildProcess, callbackFunction);
+    const { spawnChildProcess, preserveEligibilityConfig } = this.props;
+    runScript(
+      this.state,
+      spawnChildProcess,
+      callbackFunction,
+      preserveEligibilityConfig
+    );
   };
 
   render() {

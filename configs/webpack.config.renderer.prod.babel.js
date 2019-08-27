@@ -199,7 +199,8 @@ export default merge.smart(baseConfig, {
      * development checks
      */
     new webpack.EnvironmentPlugin({
-      NODE_ENV: 'production'
+      NODE_ENV: 'production',
+      PRESERVE_ELIGIBILITY_CONFIG: process.env.E2E_BUILD
     }),
 
     new MiniCssExtractPlugin({

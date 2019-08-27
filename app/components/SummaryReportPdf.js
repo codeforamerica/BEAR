@@ -9,7 +9,7 @@ import {
   formatDateTime,
   toTitleCase,
   convertTimestamp
-} from '../utils/writeSummaryOutputUtils';
+} from '../utils/formatSummaryOutputUtils';
 import cmrLogo from '../assets/images/cmr_black_logo.png';
 import { version } from '../../package.json';
 

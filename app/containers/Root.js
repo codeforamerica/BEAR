@@ -7,6 +7,13 @@ type Props = {};
 
 export default class Root extends Component<Props> {
   render() {
-    return <Home spawnChildProcess={spawn} />;
+    const preserveEligibilityConfig =
+      process.env.PRESERVE_ELIGIBILITY_CONFIG === 'true';
+    return (
+      <Home
+        spawnChildProcess={spawn}
+        preserveEligibilityConfig={preserveEligibilityConfig}
+      />
+    );
   }
 }

@@ -1,13 +1,11 @@
 import sinon from 'sinon';
 import fs from 'fs';
-import {
-  allEligibleConvictionsDismissed,
-  runScript
-} from '../../app/utils/gogenUtils';
+import { runScript } from '../../app/utils/gogenUtils';
 
 import defaultAnalysisOptions from '../../app/constants/defaultAnalysisOptions';
 
 import * as FileUtils from '../../app/utils/fileUtils';
+import * as writeSummaryOutputUtils from '../../app/utils/writeSummaryOutputUtils';
 
 jest.mock('fs');
 
@@ -18,34 +16,13 @@ afterEach(() => {
   jest.clearAllMocks();
 });
 
-describe('allEligibleConvictionsDismissed', () => {
-  describe('when baseline eligibility specifies to dismiss all', () => {
-    it('returns true', () => {
-      const transformedEligibilityOptions = {
-        baselineEligibility: { dismiss: ['11357'], reduce: [] }
-      };
-      expect(
-        allEligibleConvictionsDismissed(transformedEligibilityOptions)
-      ).toEqual(true);
-    });
-  });
-
-  describe('when baseline eligibility specifies to reduce at least one code', () => {
-    it('returns false', () => {
-      const transformedEligibilityOptions = {
-        baselineEligibility: { dismiss: [], reduce: ['11357'] }
-      };
-      expect(
-        allEligibleConvictionsDismissed(transformedEligibilityOptions)
-      ).toEqual(false);
-    });
-  });
-});
-
 describe('runScript', () => {
   let fakeCreateJsonFile;
+  let fakeDeleteDirectory;
+  let fakeWriteSummaryReport;
 
-  function createFakeSpawnChildProcess() {
+  function createFakeSpawnChildProcess(exitCode) {
+    const callBackHandler = sandbox.fake.yields(exitCode);
     const fakeSpawnResponse = {
       stdout: {
         on: () => {}
@@ -53,24 +30,28 @@ describe('runScript', () => {
       stderr: {
         on: () => {}
       },
-      on: () => {}
+      on: callBackHandler
     };
     return sandbox.fake.returns(fakeSpawnResponse);
   }
 
-  function setup() {
-    const fakeSpawnChildProcess = createFakeSpawnChildProcess();
-    const fakeGogenCallbackFunction = sandbox.spy();
+  function setup(exitCode = 0) {
+    const fakeSpawnChildProcess = createFakeSpawnChildProcess(exitCode);
+    const fakeOnGogenComplete = sandbox.spy();
 
     return {
       fakeSpawnChildProcess,
-      fakeGogenCallbackFunction
+      fakeOnGogenComplete
     };
   }
 
   beforeEach(() => {
     fakeCreateJsonFile = sandbox.spy();
+    fakeDeleteDirectory = sandbox.spy();
+    fakeWriteSummaryReport = sandbox.spy();
     FileUtils.createJsonFile = fakeCreateJsonFile;
+    FileUtils.deleteDirectoryRecursive = fakeDeleteDirectory;
+    writeSummaryOutputUtils.writeSummaryReport = fakeWriteSummaryReport;
   });
 
   describe('running gogen on a single file', () => {
@@ -84,9 +65,9 @@ describe('runScript', () => {
         outputFilePath: 'outputPath/outputPath'
       };
 
-      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
 
-      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+      runScript(state, fakeSpawnChildProcess, fakeOnGogenComplete);
 
       const { args } = fakeSpawnChildProcess.getCall(0);
       expect(args[0]).toEqual('gogenPath');
@@ -113,9 +94,9 @@ describe('runScript', () => {
         outputFilePath: 'outputPath/outputPath'
       };
 
-      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
 
-      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+      runScript(state, fakeSpawnChildProcess, fakeOnGogenComplete);
 
       expect(fakeSpawnChildProcess.callCount).toEqual(1);
       const { args } = fakeSpawnChildProcess.getCall(0);
@@ -147,9 +128,9 @@ describe('runScript', () => {
         outputFilePath: 'outputPath/outputPath'
       };
 
-      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
 
-      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+      runScript(state, fakeSpawnChildProcess, fakeOnGogenComplete);
 
       expect(fs.mkdirSync.mock.calls.length).toEqual(0);
     });
@@ -170,9 +151,9 @@ describe('runScript', () => {
         outputFilePath: 'outputPath/outputPath'
       };
 
-      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
 
-      runScript(state, fakeSpawnChildProcess, fakeGogenCallbackFunction);
+      runScript(state, fakeSpawnChildProcess, fakeOnGogenComplete);
       expect(fs.mkdirSync.mock.calls.length).toEqual(1);
       expect(fs.mkdirSync.mock.calls[0][0]).toEqual('outputPath/outputPath');
     });
@@ -204,12 +185,12 @@ describe('runScript', () => {
         }
       };
 
-      const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
 
       runScript(
         stateWithReductions,
         fakeSpawnChildProcess,
-        fakeGogenCallbackFunction
+        fakeOnGogenComplete
       );
 
       const { args } = fakeCreateJsonFile.getCall(0);
@@ -232,13 +213,9 @@ describe('runScript', () => {
           ...defaultAnalysisOptions
         };
 
-        const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+        const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
 
-        runScript(
-          stateWithRelief,
-          fakeSpawnChildProcess,
-          fakeGogenCallbackFunction
-        );
+        runScript(stateWithRelief, fakeSpawnChildProcess, fakeOnGogenComplete);
 
         const { args } = fakeCreateJsonFile.getCall(0);
 
@@ -283,12 +260,12 @@ describe('runScript', () => {
           }
         };
 
-        const { fakeSpawnChildProcess, fakeGogenCallbackFunction } = setup();
+        const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
 
         runScript(
           stateWithoutRelief,
           fakeSpawnChildProcess,
-          fakeGogenCallbackFunction
+          fakeOnGogenComplete
         );
 
         const { args } = fakeCreateJsonFile.getCall(0);
@@ -296,6 +273,162 @@ describe('runScript', () => {
         expect(args[0].additionalRelief.subjectAgeThreshold).toBe(0);
         expect(args[0].additionalRelief.yearsSinceConvictionThreshold).toBe(0);
         expect(args[0].additionalRelief.yearsCrimeFreeThreshold).toBe(0);
+      });
+    });
+  });
+
+  describe('when gogen completes', () => {
+    describe('when there were no errors', () => {
+      let state;
+      let fakeSpawnChildProcess;
+      let fakeOnGogenComplete;
+      let preserveEligibilityConfig = false;
+
+      beforeEach(() => {
+        state = {
+          ...defaultAnalysisOptions,
+          gogenPath: 'gogenPath',
+          formattedGogenRunTime: 'date',
+          county: { name: 'Sacramento', code: 'SACRAMENTO' },
+          dojFilePaths: ['/first/path', '/last/path'],
+          outputFilePath: 'outputPath/outputPath'
+        };
+
+        ({ fakeSpawnChildProcess, fakeOnGogenComplete } = setup(0));
+      });
+
+      it('writes the summary report', () => {
+        runScript(
+          state,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          preserveEligibilityConfig
+        );
+
+        expect(fakeWriteSummaryReport.callCount).toEqual(1);
+        const { args } = fakeWriteSummaryReport.getCall(0);
+        expect(args[0]).toEqual('outputPath/outputPath');
+        expect(args[1]).toEqual('date');
+        expect(args[2]).toEqual(['/first/path', '/last/path']);
+        expect(args[3]).toEqual({
+          baselineEligibility: {
+            dismiss: ['11357', '11358', '11359', '11360'],
+            reduce: []
+          }
+        });
+      });
+
+      it('deletes the eligibility config file if PRESERVE_ELIGIBILITY_CONFIG is false', () => {
+        runScript(
+          state,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          preserveEligibilityConfig
+        );
+
+        expect(fs.unlinkSync.mock.calls.length).toEqual(1);
+        const args = fs.unlinkSync.mock.calls[0];
+        expect(args[0]).toEqual(
+          'outputPath/outputPath/eligibilityConfig_date.json'
+        );
+      });
+
+      it('does NOT delete the eligibility config file if PRESERVE_ELIGIBILITY_CONFIG is true', () => {
+        preserveEligibilityConfig = true;
+
+        runScript(
+          state,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          preserveEligibilityConfig
+        );
+
+        expect(fs.unlinkSync.mock.calls.length).toEqual(0);
+      });
+
+      it('does NOT delete the results folders', () => {
+        runScript(
+          state,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          preserveEligibilityConfig
+        );
+
+        expect(fakeDeleteDirectory.callCount).toEqual(0);
+      });
+
+      it('calls the completion callback', () => {
+        runScript(
+          state,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          preserveEligibilityConfig
+        );
+
+        expect(fakeOnGogenComplete.callCount).toEqual(1);
+        const { args } = fakeOnGogenComplete.getCall(0);
+        expect(args[0]).toEqual(0);
+        expect(args[1]).toEqual('');
+      });
+    });
+
+    describe('when gogen returned errors', () => {
+      let errorText;
+      let fakeSpawnChildProcess;
+      let fakeOnGogenComplete;
+
+      beforeEach(() => {
+        errorText = 'error text';
+        fs.__setFileContent(errorText);
+        const preserveEligibilityConfig = false;
+
+        const state = {
+          ...defaultAnalysisOptions,
+          gogenPath: 'gogenPath',
+          formattedGogenRunTime: 'date',
+          county: { name: 'Sacramento', code: 'SACRAMENTO' },
+          dojFilePaths: ['/first/path', '/last/path'],
+          outputFilePath: 'outputPath/outputPath'
+        };
+
+        ({ fakeSpawnChildProcess, fakeOnGogenComplete } = setup(1));
+
+        runScript(
+          state,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          preserveEligibilityConfig
+        );
+      });
+
+      it('parses the errors', () => {
+        expect(fs.readFileSync.mock.calls.length).toEqual(1);
+        const args = fs.readFileSync.mock.calls[0];
+        expect(args[0]).toEqual('outputPath/outputPath/gogen_date.err');
+        expect(args[1]).toEqual('utf8');
+      });
+
+      it('deletes the results folders for each DOJ input file', () => {
+        expect(fakeDeleteDirectory.callCount).toEqual(2);
+        const args1 = fakeDeleteDirectory.getCall(0).args;
+        expect(args1[0]).toEqual(
+          'outputPath/outputPath/DOJ_Input_File_1_Results_date'
+        );
+        const args2 = fakeDeleteDirectory.getCall(1).args;
+        expect(args2[0]).toEqual(
+          'outputPath/outputPath/DOJ_Input_File_2_Results_date'
+        );
+      });
+
+      it('does NOT delete the eligibility config file', () => {
+        expect(fs.unlinkSync.mock.calls.length).toEqual(0);
+      });
+
+      it('calls the completion callback with parsed errors', () => {
+        expect(fakeOnGogenComplete.callCount).toEqual(1);
+        const { args } = fakeOnGogenComplete.getCall(0);
+        expect(args[0]).toEqual(1);
+        expect(args[1]).toEqual(errorText);
       });
     });
   });

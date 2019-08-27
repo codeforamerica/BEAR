@@ -1,15 +1,12 @@
 /* eslint-disable no-unused-expressions */
 import fs from 'fs';
 import path from 'path';
-import ReactPDF from '@react-pdf/renderer';
-import React from 'react';
-import { createJsonFile } from './fileUtils';
-import { parseGogenOutput } from './writeSummaryOutputUtils';
-import SummaryReportPdf from '../components/SummaryReportPdf';
-
-export function allEligibleConvictionsDismissed(transformedEligibilityOptions) {
-  return transformedEligibilityOptions.baselineEligibility.reduce.length === 0;
-}
+import {
+  createJsonFile,
+  makeDirectory,
+  deleteDirectoryRecursive
+} from './fileUtils';
+import { writeSummaryReport } from './writeSummaryOutputUtils';
 
 function transformBaselineEligibilityOptions(eligibilityOptions) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
@@ -42,11 +39,31 @@ function transformOptionalReliefValues(additionalReliefOptions) {
   return transformedOptions;
 }
 
+function readGogenErrors(outputFilePath, fileNameSuffix) {
+  const pathToErrors = path.join(outputFilePath, `gogen_${fileNameSuffix}.err`);
+  return fs.readFileSync(pathToErrors, 'utf8');
+}
+
+function removeResultsDirectories(
+  dojFilePaths,
+  outputFilePath,
+  fileNameSuffix
+) {
+  dojFilePaths.forEach((_, index) => {
+    const resultDirectory = path.join(
+      outputFilePath,
+      `DOJ_Input_File_${index + 1}_Results_${fileNameSuffix}`
+    );
+    deleteDirectoryRecursive(resultDirectory);
+  });
+}
+
 // eslint-disable-next-line import/prefer-default-export
 export function runScript(
   state,
   spawnChildProcess,
-  childFinishedCallback: function
+  onGogenComplete: function,
+  preserveEligibilityConfig: boolean
 ) {
   const {
     gogenPath,
@@ -92,32 +109,20 @@ export function runScript(
   goProcess.on('exit', code => {
     let errorText = '';
     if (code !== 0) {
-      errorText = fs.readFileSync(
-        `${outputFilePath}/gogen_${formattedGogenRunTime}.err`,
-        'utf8'
-      );
+      errorText = readGogenErrors(outputFilePath, fileNameSuffix);
+      removeResultsDirectories(dojFilePaths, outputFilePath, fileNameSuffix);
     } else {
-      ReactPDF.render(
-        <SummaryReportPdf
-          summaryData={parseGogenOutput(outputFilePath, fileNameSuffix)}
-          inputFileCount={dojFilePaths.length}
-          allEligibleConvictionsDismissed={allEligibleConvictionsDismissed(
-            formattedEligibilityOptions
-          )}
-          formattedGogenRunTime={formattedGogenRunTime}
-        />,
-        path.join(outputFilePath, 'Summary_Report.pdf')
+      writeSummaryReport(
+        outputFilePath,
+        fileNameSuffix,
+        dojFilePaths,
+        formattedEligibilityOptions,
+        formattedGogenRunTime
       );
+      if (!preserveEligibilityConfig) {
+        fs.unlinkSync(pathToEligibilityOptions);
+      }
     }
-    childFinishedCallback(code, errorText);
+    onGogenComplete(code, errorText);
   });
-}
-
-function makeDirectory(pathToDirectory) {
-  if (!fs.existsSync(pathToDirectory)) {
-    fs.mkdirSync(pathToDirectory, { recursive: true }, err => {
-      if (err) throw err;
-      console.log('error making path:', path);
-    });
-  }
 }

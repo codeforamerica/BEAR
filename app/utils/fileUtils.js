@@ -1,4 +1,5 @@
 import fs from 'fs';
+import path from 'path';
 
 export function createJsonFile(jsonData, fileName) {
   const jsonString = JSON.stringify(jsonData);
@@ -32,4 +33,27 @@ function twoDigitString(int) {
 
 export function getFileSize(pathname) {
   return fs.statSync(pathname).size;
+}
+
+export function makeDirectory(pathToDirectory) {
+  if (!fs.existsSync(pathToDirectory)) {
+    fs.mkdirSync(pathToDirectory, { recursive: true }, err => {
+      if (err) throw err;
+      console.log('error making path:', path);
+    });
+  }
+}
+
+export function deleteDirectoryRecursive(directoryPath) {
+  if (fs.existsSync(directoryPath)) {
+    fs.readdirSync(directoryPath).forEach(function(file) {
+      const curPath = `${directoryPath}/${file}`;
+      if (fs.lstatSync(curPath).isDirectory()) {
+        deleteDirectoryRecursive(curPath);
+      } else {
+        fs.unlinkSync(curPath);
+      }
+    });
+    fs.rmdirSync(directoryPath);
+  }
 }
