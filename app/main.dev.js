@@ -9,7 +9,7 @@
  *
  * @flow
  */
-import { app, BrowserWindow } from 'electron';
+import { app, shell, BrowserWindow } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
 
@@ -95,6 +95,11 @@ app.on('ready', async () => {
       mainWindow.show();
       mainWindow.focus();
     }
+  });
+
+  mainWindow.webContents.on('new-window', (event, url) => {
+    event.preventDefault();
+    shell.openExternal(url).catch(console.log);
   });
 
   mainWindow.on('closed', () => {

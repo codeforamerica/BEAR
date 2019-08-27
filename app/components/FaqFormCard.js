@@ -45,7 +45,11 @@ export default class FaqFormCard extends Component<Props, State> {
               here
             </a>
             . You can also contact us at{' '}
-            <a href="mailto:clearmyrecord@codeforamerica.org">
+            <a
+              href="mailto:clearmyrecord@codeforamerica.org"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               clearmyrecord@codeforamerica.org
             </a>{' '}
             for additional support.
@@ -96,7 +100,11 @@ export default class FaqFormCard extends Component<Props, State> {
                   our website
                 </a>{' '}
                 to download the blueprint or contact us at{' '}
-                <a href="mailto:clearmyrecord@codeforamerica.org">
+                <a
+                  href="mailto:clearmyrecord@codeforamerica.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   clearmyrecord@codeforamerica.org
                 </a>{' '}
                 for additional support.
@@ -151,7 +159,11 @@ export default class FaqFormCard extends Component<Props, State> {
                 includes all Proposition 64 convictions as you received it from
                 the DOJ, without any modifications. If you have additional
                 problems, contact us at{' '}
-                <a href="mailto:clearmyrecord@codeforamerica.org">
+                <a
+                  href="mailto:clearmyrecord@codeforamerica.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   clearmyrecord@codeforamerica.org
                 </a>
                 .
@@ -266,7 +278,11 @@ export default class FaqFormCard extends Component<Props, State> {
                   here
                 </a>
                 . You can send the summary report to us at{' '}
-                <a href="mailto:clearmyrecord@codeforamerica.org">
+                <a
+                  href="mailto:clearmyrecord@codeforamerica.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   clearmyrecord@codeforamerica.org
                 </a>
                 .

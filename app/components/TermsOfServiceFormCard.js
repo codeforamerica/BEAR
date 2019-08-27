@@ -221,11 +221,19 @@ export default class TermsOfServiceFormCard extends Component<Props> {
                 </li>
                 <li>
                   (c) Open-Source license disclosures may be found at:{' '}
-                  <a href="https://github.com/codeforamerica/BEAR/blob/master/NOTICES.md">
+                  <a
+                    href="https://github.com/codeforamerica/BEAR/blob/master/NOTICES.md"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     BEAR
                   </a>
                   ,{' '}
-                  <a href="https://github.com/codeforamerica/gogen/blob/master/NOTICE.md">
+                  <a
+                    href="https://github.com/codeforamerica/gogen/blob/master/NOTICE.md"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
                     Gogen
                   </a>
                 </li>
@@ -611,11 +619,17 @@ export default class TermsOfServiceFormCard extends Component<Props> {
                   <b>AAA</b>”) under tis Consumer Arbitration Rules
                   (collectively, “<b>AAA Rules</b>”) as modified by this
                   Agreement. The AAA Rules and filing forms are available at{' '}
-                  <a href="www.adr.org">www.adr.org</a>, by calling the AAA at
-                  1-800-778-7879, or by contacting Licensor. The arbitrator has
-                  exclusive authority to resolve any dispute relating to the
-                  interpretation, applicability, or enforceability of this
-                  binding arbitration agreement.
+                  <a
+                    href="https://www.adr.org"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    www.adr.org
+                  </a>
+                  , by calling the AAA at 1-800-778-7879, or by contacting
+                  Licensor. The arbitrator has exclusive authority to resolve
+                  any dispute relating to the interpretation, applicability, or
+                  enforceability of this binding arbitration agreement.
                 </li>
                 <li>
                   (e) <u>Notice of Arbitration; Process</u>. A party who intends

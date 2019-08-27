@@ -161,6 +161,8 @@ exports[`Home component should match exact snapshot 1`] = `
               <a
                 className="link--subtle"
                 href="https://www.codeforamerica.org"
+                rel="noopener noreferrer"
+                target="_blank"
               >
                 Code for America
               </a>

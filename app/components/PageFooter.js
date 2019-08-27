@@ -59,6 +59,8 @@ export default class PageFooter extends Component<Props> {
                 <a
                   className="link--subtle"
                   href="https://www.codeforamerica.org"
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   Code for America
                 </a>{' '}
