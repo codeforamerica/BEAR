@@ -24,12 +24,6 @@ describe('runScript', () => {
   function createFakeSpawnChildProcess(exitCode) {
     const callBackHandler = sandbox.fake.yields(exitCode);
     const fakeSpawnResponse = {
-      stdout: {
-        on: () => {}
-      },
-      stderr: {
-        on: () => {}
-      },
       on: callBackHandler
     };
     return sandbox.fake.returns(fakeSpawnResponse);
@@ -364,6 +358,8 @@ describe('runScript', () => {
           fakeOnGogenComplete,
           preserveEligibilityConfig
         );
+        console.log(fakeOnGogenComplete.firstCall);
+        console.log(fakeOnGogenComplete.secondCall);
 
         expect(fakeOnGogenComplete.callCount).toEqual(1);
         const { args } = fakeOnGogenComplete.getCall(0);
