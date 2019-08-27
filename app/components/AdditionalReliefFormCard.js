@@ -48,7 +48,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
     const { additionalReliefOptions, onBack } = this.props;
     return (
       <FormCard>
-        <FormCardHeader helpText="Choose from the following options to expand relief. These options will only apply to convictions you chose to reduce in the previous page.">
+        <FormCardHeader helpText="Choose from the following options to expand relief. These options will only apply to convictions you chose to reduce in the previous page. All dates will be calculated as of 7/1/2020.">
           Additional relief
         </FormCardHeader>
         <FormCardContent>

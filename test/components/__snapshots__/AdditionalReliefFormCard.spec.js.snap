@@ -16,7 +16,7 @@ exports[`AdditionalReliefFormCard component should match exact snapshot 1`] = `
       <div
         className="text--help"
       >
-        Choose from the following options to expand relief. These options will only apply to convictions you chose to reduce in the previous page.
+        Choose from the following options to expand relief. These options will only apply to convictions you chose to reduce in the previous page. All dates will be calculated as of 7/1/2020.
       </div>
     </header>
     <div
