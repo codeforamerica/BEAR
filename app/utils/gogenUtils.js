@@ -96,15 +96,19 @@ export function runScript(
 
   const fileNameSuffix = formattedGogenRunTime;
 
-  const goProcess = spawnChildProcess(gogenPath, [
-    `run`,
-    `--file-name-suffix=${fileNameSuffix}`,
-    `--input-doj=${dojFilePaths.join(',')}`,
-    `--outputs=${outputFilePath}`,
-    `--county=${countyCode}`,
-    `--eligibility-options=${pathToEligibilityOptions}`,
-    `--compute-at=2020-07-01`
-  ]);
+  const goProcess = spawnChildProcess(
+    gogenPath,
+    [
+      `run`,
+      `--file-name-suffix=${fileNameSuffix}`,
+      `--input-doj=${dojFilePaths.join(',')}`,
+      `--outputs=${outputFilePath}`,
+      `--county=${countyCode}`,
+      `--eligibility-options=${pathToEligibilityOptions}`,
+      `--compute-at=2020-07-01`
+    ],
+    { stdio: 'ignore' }
+  );
 
   goProcess.on('exit', code => {
     let errorText = '';
