@@ -9,21 +9,21 @@ Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
 function setup() {
-  const openFolderSpy = sandbox.spy();
+  const showFileInFolderSpy = sandbox.spy();
   const startOverSpy = sandbox.spy();
   const resetOutputPathSpy = sandbox.spy();
   const component = mount(
     <ResultsFormCard
       county="Alameda"
       outputFolder="/path/to/output"
-      openFolder={openFolderSpy}
+      showFileInFolder={showFileInFolderSpy}
       onStartOver={startOverSpy}
       resetOutputPath={resetOutputPathSpy}
     />
   );
   return {
     component,
-    openFolderSpy,
+    showFileInFolderSpy,
     startOverSpy,
     resetOutputPathSpy
   };
@@ -35,13 +35,13 @@ afterEach(() => {
 
 describe('ResultsFormCard component', () => {
   describe('clicking the Open Folder button', () => {
-    it('should call the openResultsFolder function', () => {
-      const { component, openFolderSpy } = setup();
-      const openFolderButton = component.find('#view_results').at(0);
-      openFolderButton.simulate('click');
-      expect(openFolderSpy.called).toBe(true);
-      const { args } = openFolderSpy.getCall(0);
-      expect(args[0]).toEqual('/path/to/output');
+    it('should call the openResultsFolder function with path to summary report', () => {
+      const { component, showFileInFolderSpy } = setup();
+      const showFileInFolderButton = component.find('#view_results').at(0);
+      showFileInFolderButton.simulate('click');
+      expect(showFileInFolderSpy.called).toBe(true);
+      const { args } = showFileInFolderSpy.getCall(0);
+      expect(args[0]).toEqual('/path/to/output/Summary_Report.pdf');
     });
   });
 
