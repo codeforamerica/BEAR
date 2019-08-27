@@ -110,6 +110,13 @@ export function runScript(
     { stdio: 'ignore' }
   );
 
+  goProcess.on('error', err => {
+    onGogenComplete(
+      1,
+      JSON.stringify({ '': { errorType: 1, errorMessage: err.message } })
+    );
+  });
+
   goProcess.on('exit', code => {
     let errorText = '';
     if (code !== 0) {
