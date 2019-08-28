@@ -1,0 +1,12 @@
+.mainHeader {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+.logoLink {
+  display: inline-block;
+}
+
+.mainHeaderLogo {
+  height: 80px;
+}

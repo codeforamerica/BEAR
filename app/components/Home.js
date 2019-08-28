@@ -144,13 +144,6 @@ export default class Home extends Component<Props, State> {
     });
   };
 
-  resetOutputPath = () => {
-    const { outputPathPrefix } = this.state;
-    this.setState({
-      outputFilePath: outputPathPrefix
-    });
-  };
-
   goToScreen = (screenNumber: number) => {
     const { currentScreen } = this.state;
     const screenIsOutsideFlow = Object.values(nonLinearScreenNumbers).includes(
@@ -212,7 +205,11 @@ export default class Home extends Component<Props, State> {
   };
 
   resetInitialState = () => {
-    this.setState({ ...defaultAnalysisOptions, dojFilePaths: [] });
+    this.setState({
+      ...defaultAnalysisOptions,
+      dojFilePaths: [],
+      outputFilePath: ''
+    });
   };
 
   runScriptInOptions = (callbackFunction: function) => {
@@ -236,7 +233,11 @@ export default class Home extends Component<Props, State> {
       errorText
     } = this.state;
     return (
-      <PageContainer currentScreen={currentScreen} goToScreen={this.goToScreen}>
+      <PageContainer
+        currentScreen={currentScreen}
+        goToScreen={this.goToScreen}
+        onStartOver={this.resetInitialState}
+      >
         <IntroductionFormCard onBegin={this.nextScreenInFlow} />
         <CountySelectFormCard
           selectedCounty={county}
@@ -271,14 +272,12 @@ export default class Home extends Component<Props, State> {
           onComplete={this.processingNextScreen}
           runScriptInOptions={this.runScriptInOptions}
           onStartOver={this.resetInitialState}
-          resetOutputPath={this.resetOutputPath}
         />
         <ResultsFormCard
           county={county}
           outputFolder={outputFilePath}
           showFileInFolder={showFileInFolder}
           onStartOver={this.resetInitialState}
-          resetOutputPath={this.resetOutputPath}
         />
         <PrivacyPolicyFormCard onBack={this.goToPreviousScreenInFlow} />
         <FaqFormCard onBack={this.goToPreviousScreenInFlow} />

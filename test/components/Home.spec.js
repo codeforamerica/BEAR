@@ -216,18 +216,6 @@ describe('Home component', () => {
     });
   });
 
-  describe('resetOutputPath', () => {
-    it('resets the date after restart', () => {
-      const { component } = setup('true');
-      expect(component.state('dojFilePaths')).toEqual([]);
-      component.instance().updateStateWithEligibilityOptions();
-      component.instance().resetOutputPath();
-      expect(component.state('outputFilePath')).toEqual(
-        component.state('outputPathPrefix')
-      );
-    });
-  });
-
   describe('goToScreen', () => {
     it('sets the currentScreen to the provided value', () => {
       const { component } = setup();
@@ -352,7 +340,9 @@ describe('Home component', () => {
             yearsCrimeFreeThreshold: 10,
             subjectHasOnlyProp64Charges: true,
             subjectIsDeceased: false
-          }
+          },
+          outputFilePath: 'output/path',
+          outputPathPrefix: 'output-path'
         });
         component.instance().resetInitialState();
         expect(component.state('currentScreen')).toEqual(0);
@@ -374,6 +364,7 @@ describe('Home component', () => {
           subjectHasOnlyProp64Charges: true,
           subjectIsDeceased: false
         });
+        expect(component.state('outputFilePath')).toEqual('');
       });
     });
   });

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 type Props = {
-  onStartOver: () => {}
+  onStartOver: () => void
 };
 
 export default class StartOverButton extends Component<Props> {

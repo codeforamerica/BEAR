@@ -9,11 +9,17 @@ Enzyme.configure({ adapter: new Adapter() });
 const sandbox = sinon.createSandbox();
 
 function setup(errorData) {
+  const startOverSpy = sandbox.spy();
+
   const component = mount(
-    <ErrorFormCard errorText={JSON.stringify(errorData)} />
+    <ErrorFormCard
+      errorText={JSON.stringify(errorData)}
+      onStartOver={startOverSpy}
+    />
   );
   return {
-    component
+    component,
+    startOverSpy
   };
 }
 

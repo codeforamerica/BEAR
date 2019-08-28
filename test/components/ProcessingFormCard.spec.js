@@ -21,7 +21,6 @@ function setup() {
       dojFilePaths={['file.one', 'file.two', 'file.three']}
       runScriptInOptions={runScriptSpy}
       onStartOver={startOverSpy}
-      resetOutputPath={resetOutputPathSpy}
     />
   );
 
@@ -54,13 +53,6 @@ describe('ProcessingFormCard component', () => {
   });
 
   describe('clicking the Start Over button', () => {
-    it('should call resetOutputPath', () => {
-      const { component, resetOutputPathSpy } = setup();
-      const startOverButton = component.find('#start_over').at(0);
-      startOverButton.simulate('click');
-      expect(resetOutputPathSpy.called).toBe(true);
-      expect(resetOutputPathSpy.callCount).toEqual(1);
-    });
     it('should call onStartOver and return the user to the home page', () => {
       const { component, startOverSpy } = setup();
       const startOverButton = component.find('#start_over').at(0);

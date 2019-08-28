@@ -6,15 +6,25 @@ exports[`Home component should match exact snapshot 1`] = `
     className="pageContainer slab"
   >
     <header
-      className="main-header"
+      className="main-header mainHeader"
     >
       <div
         className="toolbar"
       >
         <div
-          className="main-header__title"
+          className="toolbar__left"
         >
-          Clear My Record
+          <a
+            className="logoLink"
+            href="#"
+            onClick={[Function]}
+          >
+            <img
+              alt="Clear My Record logo"
+              className="mainHeaderLogo"
+              src="test-file-stub"
+            />
+          </a>
         </div>
       </div>
     </header>
@@ -119,10 +129,16 @@ exports[`Home component should match exact snapshot 1`] = `
           <div
             className="media-box__media media--large"
           >
-            <img
-              alt="Clear My Record logo"
-              src="test-file-stub"
-            />
+            <a
+              className="logoLink"
+              href="#"
+              onClick={[Function]}
+            >
+              <img
+                alt="Clear My Record logo"
+                src="test-file-stub"
+              />
+            </a>
           </div>
           <div
             className="media-box__content"
@@ -171,7 +187,7 @@ exports[`Home component should match exact snapshot 1`] = `
             </div>
             <div>
               v
-              0.4.0-rc3
+              0.4.0-rc4
             </div>
           </div>
         </div>

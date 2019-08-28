@@ -7,17 +7,18 @@ import styles from './PageContainer.css';
 type Props = {
   children: [Component],
   goToScreen: () => {},
-  currentScreen: number
+  currentScreen: number,
+  onStartOver: () => void
 };
 
 export default class PageContainer extends Component<Props, State> {
   render() {
-    const { children, goToScreen, currentScreen } = this.props;
+    const { children, goToScreen, currentScreen, onStartOver } = this.props;
     return (
       <div className={`${styles.pageContainer} slab`}>
-        <PageHeader />
+        <PageHeader onStartOver={onStartOver} />
         <PageContent>{children[currentScreen]}</PageContent>
-        <PageFooter goToScreen={goToScreen} />
+        <PageFooter goToScreen={goToScreen} onStartOver={onStartOver} />
       </div>
     );
   }

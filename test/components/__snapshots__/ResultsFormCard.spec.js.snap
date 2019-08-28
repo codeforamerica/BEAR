@@ -146,7 +146,6 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
         <button
           className="button"
           id="start_over"
-          onClick={[Function]}
           type="button"
         >
           Start Over

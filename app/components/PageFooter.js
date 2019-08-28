@@ -5,7 +5,8 @@ import styles from './PageFooter.css';
 import cmrLogo from '../assets/images/cmr_black_logo.png';
 
 type Props = {
-  goToScreen: () => {}
+  goToScreen: () => {},
+  onStartOver: () => void
 };
 
 export default class PageFooter extends Component<Props> {
@@ -24,13 +25,25 @@ export default class PageFooter extends Component<Props> {
     goToScreen(nonLinearScreenNumbers.faq);
   };
 
+  onClickStartOver = event => {
+    const { onStartOver } = this.props;
+    event.preventDefault();
+    onStartOver();
+  };
+
   render() {
     return (
       <footer className={`${styles.footer}`}>
         <div className={styles.footerContent}>
           <div className="media-box media-box--reversed">
             <div className="media-box__media media--large">
-              <img src={cmrLogo} alt="Clear My Record logo" />
+              <a
+                href="#"
+                className={styles.logoLink}
+                onClick={this.onClickStartOver}
+              >
+                <img src={cmrLogo} alt="Clear My Record logo" />
+              </a>
             </div>
             <div className="media-box__content">
               <div className={styles.footerLinks}>

@@ -11,7 +11,7 @@ import StartOverButton from './StartOverButton';
 import ErrorSection from './ErrorSection';
 
 type Props = {
-  onStartOver: void => void,
+  onStartOver: () => void,
   errorText: string
 };
 
@@ -52,13 +52,8 @@ export default class ErrorFormCard extends Component<Props> {
     return null;
   };
 
-  onClickStartOver = () => {
-    const { onStartOver } = this.props;
-    onStartOver();
-  };
-
   render() {
-    const { errorText } = this.props;
+    const { errorText, onStartOver } = this.props;
     const errorData = JSON.parse(errorText);
 
     return (
@@ -93,7 +88,7 @@ export default class ErrorFormCard extends Component<Props> {
                 'We encountered the following errors:'
               )}
             </div>
-            <StartOverButton onStartOver={this.onClickStartOver} />
+            <StartOverButton onStartOver={onStartOver} />
           </div>
         </FormCardContent>
         <FormCardFooter />

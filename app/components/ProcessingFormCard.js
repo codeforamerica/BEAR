@@ -10,8 +10,7 @@ type Props = {
   dojFilePaths: Array<string>,
   onComplete: (number, string) => void,
   runScriptInOptions: ((number, string) => void) => void,
-  onStartOver: void => void,
-  resetOutputPath: void => void
+  onStartOver: () => void
 };
 
 type State = {
@@ -36,12 +35,6 @@ export default class ProcessingFormCard extends Component<Props, State> {
     window.scrollTo(0, 0);
   }
 
-  onClickStartOver = () => {
-    const { onStartOver, resetOutputPath } = this.props;
-    resetOutputPath();
-    onStartOver();
-  };
-
   onScriptComplete = (code: number, errorText: string) => {
     this.setState({ gogenComplete: true, gogenExitCode: code, errorText });
   };
@@ -56,7 +49,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
   };
 
   render() {
-    const { onComplete } = this.props;
+    const { onComplete, onStartOver } = this.props;
     const { gogenComplete, gogenExitCode, errorText } = this.state;
     return (
       <FormCard>
@@ -71,7 +64,7 @@ export default class ProcessingFormCard extends Component<Props, State> {
               gogenExitCode={gogenExitCode}
               errorText={errorText}
             />
-            <StartOverButton onStartOver={this.onClickStartOver} />
+            <StartOverButton onStartOver={onStartOver} />
           </div>
         </FormCardContent>
       </FormCard>

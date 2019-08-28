@@ -14,8 +14,7 @@ type Props = {
   county: County,
   outputFolder: string,
   showFileInFolder: string => void,
-  onStartOver: void => void,
-  resetOutputPath: void => void
+  onStartOver: () => void
 };
 
 export default class ResultsFormCard extends Component<Props> {
@@ -28,14 +27,8 @@ export default class ResultsFormCard extends Component<Props> {
     showFileInFolder(path.join(outputFolder, 'Summary_Report.pdf'));
   };
 
-  onClickStartOver = () => {
-    const { onStartOver, resetOutputPath } = this.props;
-    resetOutputPath();
-    onStartOver();
-  };
-
   render() {
-    const { county } = this.props;
+    const { county, onStartOver } = this.props;
     return (
       <FormCard>
         <FormCardHeader>
@@ -88,7 +81,7 @@ export default class ResultsFormCard extends Component<Props> {
         </FormCardContent>
         <FormCardFooter>
           <div className="text--centered">
-            <StartOverButton onStartOver={this.onClickStartOver} />
+            <StartOverButton onStartOver={onStartOver} />
           </div>
         </FormCardFooter>
       </FormCard>
