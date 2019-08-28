@@ -136,6 +136,20 @@ This project was built on top of [Electron React Boilerplate](https://github.com
 
 See their [docs and guides here](https://electron-react-boilerplate.js.org/docs/installation)
 
+## Updating the Docker image for CI
+
+We use a Dockerfile on Circle CI to package and publish our binary to Github. It periodically needs updates—here's how to make them:
+
+```bash
+$ docker login --username=<username>
+// Make updates to Dockerfile
+$ docker build .
+// View built images and copy the image ID we want to push
+$ docker images
+$ docker tag <image id> codeforamerica/bear-ci:latest
+$ docker push codeforamerica/bear-ci
+```
+
 ## License
 
 MIT. Please see LICENSE and NOTICES.md.

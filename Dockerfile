@@ -1,4 +1,4 @@
-FROM circleci/node:11.14-browsers
+FROM circleci/node:12.9-browsers
 
 RUN sudo dpkg --add-architecture i386
 RUN whoami
