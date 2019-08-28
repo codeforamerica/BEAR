@@ -2,6 +2,7 @@ import fs from 'fs';
 import sleep from '../../app/utils/testHelpers';
 import {
   getEligibilityConfigFilePath,
+  getSummaryOutputFilePath,
   getOutputDirectoryPath,
   removeOutputDirectory
 } from './helpers';
@@ -231,7 +232,7 @@ describe('The primary user flow', () => {
       );
       expect(resultsFormCardContent).toContain('Your files are ready!');
 
-      const outputPdfFile = `${outputDirectory}/Summary_Report.pdf`;
+      const outputPdfFile = `${getSummaryOutputFilePath()}`;
       expect(fs.existsSync(outputPdfFile)).toEqual(true);
     });
 

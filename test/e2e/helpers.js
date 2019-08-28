@@ -51,3 +51,10 @@ export function getEligibilityConfigFilePath() {
     `eligibilityConfig_${getMostRecentlyCreatedOutputDirectoryTimeString()}.json`
   );
 }
+
+export function getSummaryOutputFilePath() {
+  return path.join(
+    getOutputDirectoryPath(),
+    `Summary_Report_${getMostRecentlyCreatedOutputDirectoryTimeString()}.pdf`
+  );
+}

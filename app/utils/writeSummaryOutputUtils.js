@@ -20,7 +20,7 @@ export function writeSummaryReport(
       )}
       formattedGogenRunTime={formattedGogenRunTime}
     />,
-    path.join(outputFilePath, 'Summary_Report.pdf')
+    path.join(outputFilePath, `Summary_Report_${formattedGogenRunTime}.pdf`)
   );
 }
 
