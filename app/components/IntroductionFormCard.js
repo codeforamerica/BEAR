@@ -1,16 +1,23 @@
 // @flow
 import React, { Component } from 'react';
 import FormCard, { FormCardContent } from './FormCard';
+import nonLinearScreenNumbers from '../constants/nonLinearScreenNumbers';
 import styles from './IntroductionFormCard.css';
 
 type Props = {
-  onBegin: () => void
+  onBegin: () => void,
+  goToScreen: number => void
 };
 
 export default class CountySelectFormCard extends Component<Props> {
   componentDidMount() {
     window.scrollTo(0, 0);
   }
+
+  goToFaq = () => {
+    const { goToScreen } = this.props;
+    goToScreen(nonLinearScreenNumbers.faq);
+  };
 
   render() {
     const { onBegin } = this.props;
@@ -54,6 +61,13 @@ export default class CountySelectFormCard extends Component<Props> {
                 </p>
               </div>
             </div>
+            <h2>
+              If you run into problems or have questions, visit our{' '}
+              <a href="#" className="link--subtle" onClick={this.goToFaq}>
+                FAQs
+              </a>{' '}
+              or contact us at clearmyrecord@codeforamerica.org
+            </h2>
             <div className="box nudge--large">
               <button
                 className="button button--primary button--large"

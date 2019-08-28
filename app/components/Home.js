@@ -238,7 +238,10 @@ export default class Home extends Component<Props, State> {
         goToScreen={this.goToScreen}
         onStartOver={this.resetInitialState}
       >
-        <IntroductionFormCard onBegin={this.nextScreenInFlow} />
+        <IntroductionFormCard
+          onBegin={this.nextScreenInFlow}
+          goToScreen={this.goToScreen}
+        />
         <CountySelectFormCard
           selectedCounty={county}
           onCountySelect={this.updateCounty}

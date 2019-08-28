@@ -1,7 +1,6 @@
 import React from 'react';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import renderer from 'react-test-renderer';
 import sinon from 'sinon';
 import Home from '../../app/components/Home';
 
@@ -367,17 +366,5 @@ describe('Home component', () => {
         expect(component.state('outputFilePath')).toEqual('');
       });
     });
-  });
-
-  it('should match exact snapshot', () => {
-    const counter = (
-      <div>
-        <Home />
-      </div>
-    );
-
-    const tree = renderer.create(counter).toJSON();
-
-    expect(tree).toMatchSnapshot();
   });
 });

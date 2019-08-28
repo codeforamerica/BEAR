@@ -74,6 +74,19 @@ exports[`IntroductionFormCard component should match exact snapshot 1`] = `
             </p>
           </div>
         </div>
+        <h2>
+          If you run into problems or have questions, visit our
+           
+          <a
+            className="link--subtle"
+            href="#"
+            onClick={[Function]}
+          >
+            FAQs
+          </a>
+           
+          or contact us at clearmyrecord@codeforamerica.org
+        </h2>
         <div
           className="box nudge--large"
         >
