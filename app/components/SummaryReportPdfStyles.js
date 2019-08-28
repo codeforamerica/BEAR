@@ -16,6 +16,9 @@ const styles = StyleSheet.create({
     left: 35,
     width: 200
   },
+  bulletImage: {
+    position: 'absolute'
+  },
   headerText: {
     width: 300,
     position: 'absolute',

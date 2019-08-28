@@ -58,3 +58,7 @@ export function convertTimestamp(timestamp) {
   const dayNumber = parseInt(dateArray[2], 10);
   return `${monthNames[monthNumber]} ${dayNumber}, ${dateArray[0]}`;
 }
+
+export function formatLineCountWithCommas(number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+}

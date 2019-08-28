@@ -8,9 +8,11 @@ import {
   formatCountsByAdditionalRelief,
   formatDateTime,
   toTitleCase,
-  convertTimestamp
+  convertTimestamp,
+  formatLineCountWithCommas
 } from '../utils/formatSummaryOutputUtils';
 import cmrLogo from '../assets/images/cmr_black_logo.png';
+import bullet from '../assets/images/bullet.png';
 import { version } from '../../package.json';
 
 type Props = {
@@ -37,6 +39,7 @@ export default class SummaryReportPdf extends Component<Props> {
     const earliestConviction = convertTimestamp(summaryData.earliestConviction);
     const fileIndexElision =
       inputFileCount === 1 ? '' : `_[1-${inputFileCount}]`;
+    const formattedLineCount = formatLineCountWithCommas(summaryData.lineCount);
     return (
       <Document>
         <Page>
@@ -89,7 +92,7 @@ export default class SummaryReportPdf extends Component<Props> {
               </Text>
               <Text style={styles.text}>
                 Based on your office&apos;s eligibility choices, this
-                application processed {summaryData.lineCount} lines of data in{' '}
+                application processed {formattedLineCount} lines of data in{' '}
                 {summaryData.processingTimeInSeconds.toFixed(3)} seconds and
                 produced {inputFileCount * 3} spreadsheets to assist with your
                 office’s review.
@@ -98,6 +101,11 @@ export default class SummaryReportPdf extends Component<Props> {
             <View>
               <Text style={styles.h3}>Based on your eligibility choices:</Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 {
                   summaryData.reliefWithCurrentEligibilityChoices
                     .CountSubjectsNoFelony
@@ -105,6 +113,11 @@ export default class SummaryReportPdf extends Component<Props> {
                 people will no longer have a felony on their CA record
               </Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />{' '}
                 {
                   summaryData.reliefWithCurrentEligibilityChoices
                     .CountSubjectsNoConvictionLast7Years
@@ -113,6 +126,11 @@ export default class SummaryReportPdf extends Component<Props> {
                 the last 7 years
               </Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 {
                   summaryData.reliefWithCurrentEligibilityChoices
                     .CountSubjectsNoConviction
@@ -123,10 +141,20 @@ export default class SummaryReportPdf extends Component<Props> {
             <View>
               <Text style={styles.h3}> Additional summary data:</Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 # of people with Prop 64 conviction in {formattedCountyName}{' '}
                 County: {summaryData.subjectsWithProp64ConvictionCountInCounty}
               </Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 # of Prop 64 convictions in {formattedCountyName} County:
                 {totalProp64Convictions};{' '}
                 {formatCountsByCodeSection(
@@ -134,6 +162,11 @@ export default class SummaryReportPdf extends Component<Props> {
                 )}
               </Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 For the above convictions,{' '}
                 {summaryData.prop64FelonyConvictionsCountInCounty} were felonies
                 and {summaryData.prop64NonFelonyConvictionsCountInCounty} were
@@ -150,6 +183,11 @@ export default class SummaryReportPdf extends Component<Props> {
                 you ran the application:
               </Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 For felonies, dismissals based on code section:
                 {formatCountsByCodeSection(
                   summaryData.convictionDismissalCountByCodeSection
@@ -164,6 +202,11 @@ export default class SummaryReportPdf extends Component<Props> {
                   ) {
                     return (
                       <Text style={styles.listItem}>
+                        <Image
+                          src={bullet}
+                          style={styles.bulletImage}
+                          safePath={imageDirectory}
+                        />
                         Reductions:{' '}
                         {formatCountsByCodeSection(
                           summaryData.convictionReductionCountByCodeSection
@@ -182,6 +225,11 @@ export default class SummaryReportPdf extends Component<Props> {
                   ) {
                     return (
                       <Text style={styles.listItem}>
+                        <Image
+                          src={bullet}
+                          style={styles.bulletImage}
+                          safePath={imageDirectory}
+                        />
                         Dismissals based on additional relief:{' '}
                         {formatCountsByAdditionalRelief(
                           summaryData.convictionDismissalCountByAdditionalRelief
@@ -192,6 +240,11 @@ export default class SummaryReportPdf extends Component<Props> {
                 }}
               />
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 {summaryData.subjectsWithSomeReliefCount} individuals will get
                 some type of relief
               </Text>
@@ -230,33 +283,33 @@ export default class SummaryReportPdf extends Component<Props> {
                 specific data most helpful for your office’s review.
               </Text>
               <Text style={styles.h3}>
-                {`1. “Prop64_Results${fileIndexElision}_${formattedGogenRunTime}.csv”`}
+                {`“Prop64_Results${fileIndexElision}_${formattedGogenRunTime}.csv”`}
               </Text>
               <Text style={styles.text}>
-                a . Since the DOJ file includes data from each individual&apos;s
+                Since the DOJ file includes data from each individual&apos;s
                 entire RAP Sheet, this spreadsheet condenses the data only to
                 Prop 64 convictions in {formattedCountyName} County.
               </Text>
               <Text style={styles.text}>
-                b. The first several columns (A through CQ) come straight from
-                the original DOJ file. The remaining columns are generated by
-                Code for America to surface more insights for DAs (the final two
+                The first several columns (A through CQ) come straight from the
+                original DOJ file. The remaining columns are generated by Code
+                for America to surface more insights for DAs (the final two
                 being the reduction or dismissal decision).
               </Text>
               <Text style={styles.h3}>
-                {`2. “All_Results_Condensed${fileIndexElision}_${formattedGogenRunTime}.csv”`}
+                {`“All_Results_Condensed${fileIndexElision}_${formattedGogenRunTime}.csv”`}
               </Text>
               <Text style={styles.text}>
-                a. This spreadsheet condenses some of the columns from the full
+                This spreadsheet condenses some of the columns from the full
                 results file to make it easier for DA’s offices to review the
                 data on an individual’s entire CA criminal record history.
               </Text>
               <Text style={styles.h3}>
-                {`3. “All_Results${fileIndexElision}_${formattedGogenRunTime}.csv”`}
+                {`“All_Results${fileIndexElision}_${formattedGogenRunTime}.csv”`}
               </Text>
               <Text style={styles.text}>
-                a. This spreadsheet is the entire DOJ file (columns A through
-                CQ) plus all of the supporting information that Code for America
+                This spreadsheet is the entire DOJ file (columns A through CQ)
+                plus all of the supporting information that Code for America
                 generates.
               </Text>
               <Text style={styles.text}>
@@ -270,11 +323,21 @@ export default class SummaryReportPdf extends Component<Props> {
             <View>
               <Text style={styles.h2}>Next Steps </Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 Review Code for America’s Implementation Blueprint to learn more
                 about our work helping several other counties implement H&S
                 11361.9, including developing a plan with the courts
               </Text>
               <Text style={styles.listItem}>
+                <Image
+                  src={bullet}
+                  style={styles.bulletImage}
+                  safePath={imageDirectory}
+                />
                 Share this summary report with Code for America at
                 clearmyrecord@codeforamerica.org. Our team will send you back a
                 marketing document with the above relevant summary statistics
