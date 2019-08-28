@@ -47,7 +47,7 @@ jobs:
       - run:
           name: Fetch gogen binary
           command: |
-            curl -Ls https://github.com/codeforamerica/gogen/releases/download/"$(cat ~/bear/.gogen-version)"/gogen__win./exe -o ./gogen.exe
+            curl -Ls https://github.com/codeforamerica/gogen/releases/download/"$(cat ~/bear/.gogen-version)"/gogen_win.exe -o ./gogen.exe
 
       - restore_cache:
           keys:
