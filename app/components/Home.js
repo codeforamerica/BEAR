@@ -10,7 +10,7 @@ import ResultsFormCard from './ResultsFormCard';
 import AdditionalReliefFormCard from './AdditionalReliefFormCard';
 import defaultAnalysisOptions from '../constants/defaultAnalysisOptions';
 import IntroductionFormCard from './IntroductionFormCard';
-import showFileInFolder from '../utils/osHelpers';
+import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 import { getDateTime } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
@@ -276,7 +276,7 @@ export default class Home extends Component<Props, State> {
         <ResultsFormCard
           county={county}
           outputFolder={outputFilePath}
-          showFileInFolder={showFileInFolder}
+          openFolder={openFolder}
           onStartOver={this.resetInitialState}
         />
         <PrivacyPolicyFormCard onBack={this.goToPreviousScreenInFlow} />

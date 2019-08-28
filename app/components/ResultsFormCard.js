@@ -1,6 +1,5 @@
 // @flow
 import React, { Component } from 'react';
-import path from 'path';
 import FormCard, {
   FormCardContent,
   FormCardFooter,
@@ -13,7 +12,7 @@ import EmojiMediaBox from './EmojiMediaBox';
 type Props = {
   county: County,
   outputFolder: string,
-  showFileInFolder: string => void,
+  openFolder: string => void,
   onStartOver: () => void
 };
 
@@ -23,8 +22,8 @@ export default class ResultsFormCard extends Component<Props> {
   }
 
   openResultsFolder = () => {
-    const { showFileInFolder, outputFolder } = this.props;
-    showFileInFolder(path.join(outputFolder, 'Summary_Report.pdf'));
+    const { openFolder, outputFolder } = this.props;
+    openFolder(outputFolder);
   };
 
   render() {
