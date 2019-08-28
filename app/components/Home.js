@@ -24,7 +24,7 @@ type State = {
   gogenPath: string,
   formattedGogenRunTime: string,
   currentScreen: number,
-  previousScreen: number,
+  previousScreenInFlow: number,
   county: County,
   dojFilePaths: Array<string>,
   baselineEligibilityOptions: BaselineEligibilityOptions,
@@ -153,15 +153,24 @@ export default class Home extends Component<Props, State> {
 
   goToScreen = (screenNumber: number) => {
     const { currentScreen } = this.state;
-    this.setState({
-      currentScreen: screenNumber,
-      previousScreen: currentScreen
-    });
+    const screenIsOutsideFlow = Object.values(nonLinearScreenNumbers).includes(
+      currentScreen
+    );
+    if (screenIsOutsideFlow) {
+      this.setState({
+        currentScreen: screenNumber
+      });
+    } else {
+      this.setState({
+        currentScreen: screenNumber,
+        previousScreenInFlow: currentScreen
+      });
+    }
   };
 
-  goToPreviousScreen = () => {
-    const { previousScreen } = this.state;
-    this.goToScreen(previousScreen);
+  goToPreviousScreenInFlow = () => {
+    const { previousScreenInFlow } = this.state;
+    this.goToScreen(previousScreenInFlow);
   };
 
   nextScreenInFlow = () => {
@@ -271,13 +280,13 @@ export default class Home extends Component<Props, State> {
           onStartOver={this.resetInitialState}
           resetOutputPath={this.resetOutputPath}
         />
-        <PrivacyPolicyFormCard onBack={this.goToPreviousScreen} />
-        <FaqFormCard onBack={this.goToPreviousScreen} />
+        <PrivacyPolicyFormCard onBack={this.goToPreviousScreenInFlow} />
+        <FaqFormCard onBack={this.goToPreviousScreenInFlow} />
         <ErrorFormCard
           onStartOver={this.resetInitialState}
           errorText={errorText}
         />
-        <TermsOfServiceFormCard onBack={this.goToPreviousScreen} />
+        <TermsOfServiceFormCard onBack={this.goToPreviousScreenInFlow} />
       </PageContainer>
     );
   }

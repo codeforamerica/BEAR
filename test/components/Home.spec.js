@@ -53,9 +53,9 @@ describe('Home component', () => {
       expect(component.state('currentScreen')).toEqual(0);
     });
 
-    it('sets the previousScreen to 0', () => {
+    it('sets the previousScreenInFlow to 0', () => {
       const { component } = setup('false');
-      expect(component.state('previousScreen')).toEqual(0);
+      expect(component.state('previousScreenInFlow')).toEqual(0);
     });
 
     it('sets the initial file path to HOME/desktop', () => {
@@ -236,22 +236,34 @@ describe('Home component', () => {
       expect(component.state('currentScreen')).toEqual(3);
     });
 
-    it('stores the current value of currentScreen as previousScreen', () => {
-      const { component } = setup();
-      component.setState({ currentScreen: 2 });
-      component.instance().goToScreen(3);
-      expect(component.state('previousScreen')).toEqual(2);
+    describe('when currentScreen is in linear flow', () => {
+      it('stores the current value of currentScreen as previousScreenInFlow', () => {
+        const { component } = setup();
+        component.setState({ currentScreen: 2 });
+        component.instance().goToScreen(3);
+        expect(component.state('previousScreenInFlow')).toEqual(2);
+      });
+    });
+
+    describe('when currentScreen is outside of flow', () => {
+      it('keeps previousScreenInFlow as-is', () => {
+        const { component } = setup();
+        component.instance().goToScreen(3); // in-flow
+        component.instance().goToScreen(8); // out-of-flow
+        component.instance().goToScreen(2); // in-flow
+        expect(component.state('previousScreenInFlow')).toEqual(3);
+      });
     });
   });
 
-  describe('goToPreviousScreen', () => {
-    it('calls goToScreen with the value of previousScreen', () => {
+  describe('goToPreviousScreenInFlow', () => {
+    it('calls goToScreen with the value of previousScreenInFlow', () => {
       const { component } = setup();
       const fakeGoToScreen = sandbox.spy();
       component.setState({ currentScreen: 2 });
-      component.setState({ previousScreen: 5 });
+      component.setState({ previousScreenInFlow: 5 });
       component.instance().goToScreen = fakeGoToScreen;
-      component.instance().goToPreviousScreen();
+      component.instance().goToPreviousScreenInFlow();
       expect(fakeGoToScreen.getCall(0).args[0]).toEqual(5);
     });
   });

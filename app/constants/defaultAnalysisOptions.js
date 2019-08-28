@@ -1,6 +1,6 @@
 const defaultAnalysisOptions = {
   currentScreen: 0,
-  previousScreen: 0,
+  previousScreenInFlow: 0,
   county: { name: '', code: '' },
   baselineEligibilityOptions: {
     '11357': 'dismiss',
