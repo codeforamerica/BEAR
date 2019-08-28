@@ -10,6 +10,58 @@
 .resultsSubheader {
   font-weight: lighter !important;
   font-size: 1.9rem;
+  width: 45%;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.contentsListContainer {
+  width: 50%;
+  margin: 0 auto;
+}
+
+.contentListTitle {
+  font-weight: 400;
+}
+
+.contentsList {
+  list-style: decimal;
+  padding-left: 110px;
+  margin-top: 0;
+  line-height: 1em;
+}
+
+.contentsTableTitle {
+  padding-left: 90px;
+  text-align: left;
+}
+
+.contentsTable {
+  border-bottom: none !important;
+  margin: 0 -38px auto;
+  width: 960px !important;
+}
+
+.contentsTable th {
+  padding-right: 15px;
+  border-bottom: 2px solid #f7f5f4 !important;
+}
+
+.contentsTable td {
+  padding-right: 15px;
+  border-bottom: none !important;
+}
+
+.fileColumn {
+  width: 250px;
+}
+
+.supportingColumn {
+  width: 160px;
+}
+
+.eligibilityColumn {
+  width: 160px;
 }
 
 .completedIcon {
@@ -22,4 +74,8 @@
   background-position: center center;
   background-repeat: no-repeat;
   background-size: 70%;
+}
+
+.resultsFooter {
+  margin-top: 0 !important;
 }

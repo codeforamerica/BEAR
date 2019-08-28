@@ -7,7 +7,6 @@ import FormCard, {
 } from './FormCard';
 import StartOverButton from './StartOverButton';
 import styles from './ResultsFormCard.css';
-import EmojiMediaBox from './EmojiMediaBox';
 
 type Props = {
   county: County,
@@ -39,8 +38,13 @@ export default class ResultsFormCard extends Component<Props> {
             <p
               className={styles.resultsSubheader}
             >{`We have generated results for ${county.name} County`}</p>
+            <p className={styles.resultsSubheader}>
+              Look for a folder on your desktop labeled
+              &quot;Clear_My_Record_output&quot;. Within it will be a
+              timestamped folder that will have all of your results files.
+            </p>
             <button
-              className="button button--primary"
+              className="button button--primary nudge--small"
               type="button"
               id="view_results"
               onClick={this.openResultsFolder}
@@ -50,35 +54,76 @@ export default class ResultsFormCard extends Component<Props> {
           </div>
         </FormCardHeader>
         <FormCardContent>
-          <h3 className="text--centered">
-            <p>What&apos;s included in the folder:</p>
+          <h3 className={`${styles.contentListTitle} text--centered`}>
+            What&apos;s included in the folder:
           </h3>
-          <EmojiMediaBox
-            className={styles.sidePadding}
-            emojiClass="emoji--memo"
-            title="Summary Report"
-            content="PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions."
-          />
-          <EmojiMediaBox
-            className={styles.sidePadding}
-            emojiClass="emoji--thumbs-up"
-            title="Prop 64 Results"
-            content="CSV file with only Prop 64 convictions in the county of your choice."
-          />
-          <EmojiMediaBox
-            className={styles.sidePadding}
-            emojiClass="emoji--pencil"
-            title="All Results Condensed"
-            content="CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible."
-          />
-          <EmojiMediaBox
-            className={styles.sidePadding}
-            emojiClass="emoji--page-facing-up"
-            title="All Results"
-            content="CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information."
-          />
+          <div className={styles.contentsListContainer}>
+            <ol className={styles.contentsList}>
+              <li>Summary Report</li>
+              <li>Prop 64 Conviction Results</li>
+              <li>All Results Condensed</li>
+              <li>All Results</li>
+            </ol>
+            <p className={styles.contentsTableTitle}>
+              What is included in each:
+            </p>
+          </div>
+          <table className={`${styles.contentsTable} data-table`}>
+            <thead>
+              <tr>
+                <th className={styles.fileColumn}>File Name</th>
+                <th className={styles.columnsColumn}>
+                  Columns from original DOJ file
+                </th>
+                <th className={styles.rowsColumn}>
+                  Rows from original DOJ file
+                </th>
+                <th className={styles.supportingColumn}>
+                  Supporting Clear My Record columns
+                </th>
+                <th className={styles.eligibilityColumn}>
+                  Eligibility determination
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Prop 64 Convictions</td>
+                <td>All</td>
+                <td>Only Prop 64 convictions</td>
+                <td className="text--centered">
+                  <div className="emoji emoji--big emoji--checkmark" />
+                </td>
+                <td className="text--centered">
+                  <div className="emoji emoji--big emoji--checkmark" />
+                </td>
+              </tr>
+              <tr>
+                <td>All Results Condensed</td>
+                <td>Condensed for analysis</td>
+                <td>All</td>
+                <td className="text--centered">
+                  <div className="emoji emoji--big emoji--checkmark" />
+                </td>
+                <td className="text--centered">
+                  <div className="emoji emoji--big emoji--checkmark" />
+                </td>
+              </tr>
+              <tr>
+                <td>All Results</td>
+                <td>All</td>
+                <td>All</td>
+                <td className="text--centered">
+                  <div className="emoji emoji--big emoji--checkmark" />
+                </td>
+                <td className="text--centered">
+                  <div className="emoji emoji--big emoji--checkmark" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </FormCardContent>
-        <FormCardFooter>
+        <FormCardFooter className={styles.resultsFooter}>
           <div className="text--centered">
             <StartOverButton onStartOver={onStartOver} />
           </div>

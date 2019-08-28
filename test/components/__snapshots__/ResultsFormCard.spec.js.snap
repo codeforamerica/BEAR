@@ -27,8 +27,13 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
           >
             We have generated results for undefined County
           </p>
+          <p
+            className="resultsSubheader"
+          >
+            Look for a folder on your desktop labeled "Clear_My_Record_output". Within it will be a timestamped folder that will have all of your results files.
+          </p>
           <button
-            className="button button--primary"
+            className="button button--primary nudge--small"
             id="view_results"
             onClick={[Function]}
             type="button"
@@ -42,103 +47,148 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
       className="form-card__content "
     >
       <h3
-        className="text--centered"
+        className="contentListTitle text--centered"
       >
-        <p>
-          What's included in the folder:
-        </p>
+        What's included in the folder:
       </h3>
       <div
-        className="sidePadding media-box"
+        className="contentsListContainer"
       >
-        <div
-          className="media-box__media media--icon"
+        <ol
+          className="contentsList"
         >
-          <div
-            className="emoji emoji--med emoji--memo"
-          />
-        </div>
-        <div
-          className="emojiMediaContent media-box__content"
+          <li>
+            Summary Report
+          </li>
+          <li>
+            Prop 64 Conviction Results
+          </li>
+          <li>
+            All Results Condensed
+          </li>
+          <li>
+            All Results
+          </li>
+        </ol>
+        <p
+          className="contentsTableTitle"
         >
-          <p>
-            <b>
-              Summary Report
-              : 
-            </b>
-            PDF document with eligibility criteria used to create results and summary statistics on how these results impact those with Prop 64 convictions.
-          </p>
-        </div>
+          What is included in each:
+        </p>
       </div>
-      <div
-        className="sidePadding media-box"
+      <table
+        className="contentsTable data-table"
       >
-        <div
-          className="media-box__media media--icon"
-        >
-          <div
-            className="emoji emoji--med emoji--thumbs-up"
-          />
-        </div>
-        <div
-          className="emojiMediaContent media-box__content"
-        >
-          <p>
-            <b>
-              Prop 64 Results
-              : 
-            </b>
-            CSV file with only Prop 64 convictions in the county of your choice.
-          </p>
-        </div>
-      </div>
-      <div
-        className="sidePadding media-box"
-      >
-        <div
-          className="media-box__media media--icon"
-        >
-          <div
-            className="emoji emoji--med emoji--pencil"
-          />
-        </div>
-        <div
-          className="emojiMediaContent media-box__content"
-        >
-          <p>
-            <b>
+        <thead>
+          <tr>
+            <th
+              className="fileColumn"
+            >
+              File Name
+            </th>
+            <th
+              className="columnsColumn"
+            >
+              Columns from original DOJ file
+            </th>
+            <th
+              className="rowsColumn"
+            >
+              Rows from original DOJ file
+            </th>
+            <th
+              className="supportingColumn"
+            >
+              Supporting Clear My Record columns
+            </th>
+            <th
+              className="eligibilityColumn"
+            >
+              Eligibility determination
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              Prop 64 Convictions
+            </td>
+            <td>
+              All
+            </td>
+            <td>
+              Only Prop 64 convictions
+            </td>
+            <td
+              className="text--centered"
+            >
+              <div
+                className="emoji emoji--big emoji--checkmark"
+              />
+            </td>
+            <td
+              className="text--centered"
+            >
+              <div
+                className="emoji emoji--big emoji--checkmark"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
               All Results Condensed
-              : 
-            </b>
-            CSV file with eligibility determinations and columns relevant for determining whether a conviction is eligible.
-          </p>
-        </div>
-      </div>
-      <div
-        className="sidePadding media-box"
-      >
-        <div
-          className="media-box__media media--icon"
-        >
-          <div
-            className="emoji emoji--med emoji--page-facing-up"
-          />
-        </div>
-        <div
-          className="emojiMediaContent media-box__content"
-        >
-          <p>
-            <b>
+            </td>
+            <td>
+              Condensed for analysis
+            </td>
+            <td>
+              All
+            </td>
+            <td
+              className="text--centered"
+            >
+              <div
+                className="emoji emoji--big emoji--checkmark"
+              />
+            </td>
+            <td
+              className="text--centered"
+            >
+              <div
+                className="emoji emoji--big emoji--checkmark"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td>
               All Results
-              : 
-            </b>
-            CSV file of the original bulk data set with appended columns which display eligibility determinations and provide supporting information.
-          </p>
-        </div>
-      </div>
+            </td>
+            <td>
+              All
+            </td>
+            <td>
+              All
+            </td>
+            <td
+              className="text--centered"
+            >
+              <div
+                className="emoji emoji--big emoji--checkmark"
+              />
+            </td>
+            <td
+              className="text--centered"
+            >
+              <div
+                className="emoji emoji--big emoji--checkmark"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </div>
     <div
-      className="form-card__footer"
+      className="resultsFooter form-card__footer"
     >
       <div
         className="text--centered"
