@@ -323,6 +323,7 @@ export default class FaqFormCard extends Component<Props, State> {
                     individual is registered under PC 290
                   </li>
                   <li>Date of the Proposition 64 conviction</li>
+                  <li>Whether the conviction happened after 11/9/2016</li>
                   <li>Number of years since this Proposition 64 conviction</li>
                   <li>
                     Number of years since any conviction on the individual’s
