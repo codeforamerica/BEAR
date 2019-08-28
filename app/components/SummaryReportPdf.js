@@ -81,7 +81,7 @@ export default class SummaryReportPdf extends Component<Props> {
               <Text style={styles.text}>
                 DOJ provided a spreadsheet with the entire CA criminal record
                 history for every individual convicted of H&S § 11357, H&S §
-                11358, H&S § 11359, and/or H&S § 11360 in {formattedCountyName}{' '}
+                11358, H&S § 11359, or H&S § 11360 in {formattedCountyName}{' '}
                 County since {earliestConviction}.
               </Text>
               <View style={styles.pageBreak} />
@@ -91,9 +91,8 @@ export default class SummaryReportPdf extends Component<Props> {
                 What Clear My Record’s technology was able to do:
               </Text>
               <Text style={styles.text}>
-                Based on your office&apos;s eligibility choices, this
-                application processed {formattedLineCount} lines of data in{' '}
-                {summaryData.processingTimeInSeconds.toFixed(3)} seconds and
+                This application processed {formattedLineCount} lines of data
+                in {summaryData.processingTimeInSeconds.toFixed(3)} seconds and
                 produced {inputFileCount * 3} spreadsheets to assist with your
                 office’s review.
               </Text>
@@ -139,7 +138,7 @@ export default class SummaryReportPdf extends Component<Props> {
               </Text>
             </View>
             <View>
-              <Text style={styles.h3}> Additional summary data:</Text>
+              <Text style={styles.h3}> Conviction breakdown:</Text>
               <Text style={styles.listItem}>
                 <Image
                   src={bullet}
@@ -155,7 +154,7 @@ export default class SummaryReportPdf extends Component<Props> {
                   style={styles.bulletImage}
                   safePath={imageDirectory}
                 />
-                # of Prop 64 convictions in {formattedCountyName} County:
+                # of Prop 64 convictions in {formattedCountyName} County:{' '}
                 {totalProp64Convictions};{' '}
                 {formatCountsByCodeSection(
                   summaryData.prop64ConvictionsCountInCountyByCodeSection
@@ -167,7 +166,7 @@ export default class SummaryReportPdf extends Component<Props> {
                   style={styles.bulletImage}
                   safePath={imageDirectory}
                 />
-                For the above convictions,{' '}
+                Of the above convictions,{' '}
                 {summaryData.prop64FelonyConvictionsCountInCounty} were felonies
                 and {summaryData.prop64NonFelonyConvictionsCountInCounty} were
                 misdemeanors
@@ -175,12 +174,12 @@ export default class SummaryReportPdf extends Component<Props> {
             </View>
             <View>
               <Text style={styles.h3}>
-                {formattedCountyName} County DAs eligibility determinations for
+                {formattedCountyName} County DA’s eligibility determinations for
                 felonies under Prop 64:
               </Text>
               <Text style={styles.text}>
-                The following was the eligibility determination you chose when
-                you ran the application:
+                You chose the following eligibility determinations when you ran
+                the application:
               </Text>
               <Text style={styles.listItem}>
                 <Image
@@ -188,7 +187,7 @@ export default class SummaryReportPdf extends Component<Props> {
                   style={styles.bulletImage}
                   safePath={imageDirectory}
                 />
-                For felonies, dismissals based on code section:
+                For felonies, dismissals based on code section:{' '}
                 {formatCountsByCodeSection(
                   summaryData.convictionDismissalCountByCodeSection
                 )}
