@@ -7,11 +7,12 @@ export function createJsonFile(jsonData, fileName) {
 }
 
 export function getDateTime(dateToConvert) {
-  const month = dateToConvert.getMonth();
+  const month = dateToConvert.getMonth() + 1;
   const day = dateToConvert.getDate();
   const year = dateToConvert.getFullYear();
   let hours = dateToConvert.getHours();
   const minutes = dateToConvert.getMinutes();
+  const seconds = dateToConvert.getSeconds();
   let ampm = 'AM';
 
   if (hours >= 12) {
@@ -21,7 +22,9 @@ export function getDateTime(dateToConvert) {
 
   return `${twoDigitString(month)}_${twoDigitString(day)}_${twoDigitString(
     year
-  )}_${twoDigitString(hours)}.${twoDigitString(minutes)}.${ampm}`;
+  )}_${twoDigitString(hours)}.${twoDigitString(minutes)}.${twoDigitString(
+    seconds
+  )}.${ampm}`;
 }
 
 function twoDigitString(int) {
