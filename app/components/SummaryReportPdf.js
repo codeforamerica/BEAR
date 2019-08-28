@@ -35,6 +35,8 @@ export default class SummaryReportPdf extends Component<Props> {
       summaryData.prop64NonFelonyConvictionsCountInCounty;
     const formattedCountyName = toTitleCase(summaryData.county);
     const earliestConviction = convertTimestamp(summaryData.earliestConviction);
+    const fileIndexElision =
+      inputFileCount === 1 ? '' : `_[1-${inputFileCount}]`;
     return (
       <Document>
         <Page>
@@ -228,8 +230,7 @@ export default class SummaryReportPdf extends Component<Props> {
                 specific data most helpful for your office’s review.
               </Text>
               <Text style={styles.h3}>
-                {`1. “Prop64_Results_${formattedGogenRunTime}.csv”`}
-                {inputFileCount === 1 ? '' : ` [1-${inputFileCount}]`}
+                {`1. “Prop64_Results${fileIndexElision}_${formattedGogenRunTime}.csv”`}
               </Text>
               <Text style={styles.text}>
                 a . Since the DOJ file includes data from each individual&apos;s
@@ -243,8 +244,7 @@ export default class SummaryReportPdf extends Component<Props> {
                 being the reduction or dismissal decision).
               </Text>
               <Text style={styles.h3}>
-                {`2. “All_Results_Condensed_${formattedGogenRunTime}.csv”`}
-                {inputFileCount === 1 ? '' : ` [1-${inputFileCount}]`}
+                {`2. “All_Results_Condensed${fileIndexElision}_${formattedGogenRunTime}.csv”`}
               </Text>
               <Text style={styles.text}>
                 a. This spreadsheet condenses some of the columns from the full
@@ -252,8 +252,7 @@ export default class SummaryReportPdf extends Component<Props> {
                 data on an individual’s entire CA criminal record history.
               </Text>
               <Text style={styles.h3}>
-                {`3. “All_Results_${formattedGogenRunTime}.csv”`}
-                {inputFileCount === 1 ? '' : ` [1-${inputFileCount}]`}
+                {`3. “All_Results${fileIndexElision}_${formattedGogenRunTime}.csv”`}
               </Text>
               <Text style={styles.text}>
                 a. This spreadsheet is the entire DOJ file (columns A through
