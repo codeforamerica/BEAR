@@ -39,8 +39,8 @@ export default class ResultsFormCard extends Component<Props> {
             </h2>
             <p
               className={styles.resultsSubheader}
-            >{`We have generated results for ${county.name} County`}</p>
-            <p className={styles.resultsSubheader}>
+            >{`We have generated results for ${county.name} County.`}</p>
+            <p className={`${styles.resultsSubheader}  nudge--small`}>
               Look for a folder on your desktop labeled
               &quot;Clear_My_Record_output&quot;. Within it will be a
               timestamped folder that will have all of your results files.
@@ -85,7 +85,7 @@ export default class ResultsFormCard extends Component<Props> {
               <li>All Results</li>
             </ol>
             <p className={styles.contentsTableTitle}>
-              What is included in each:
+              What&apos;s included in each file:
             </p>
           </div>
           <table className={`${styles.contentsTable} data-table`}>

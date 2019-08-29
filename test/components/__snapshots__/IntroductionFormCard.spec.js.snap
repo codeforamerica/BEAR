@@ -74,7 +74,9 @@ exports[`IntroductionFormCard component should match exact snapshot 1`] = `
             </p>
           </div>
         </div>
-        <h2>
+        <div
+          className="h2 contactInfo"
+        >
           If you run into problems or have questions, visit our
            
           <a
@@ -86,7 +88,7 @@ exports[`IntroductionFormCard component should match exact snapshot 1`] = `
           </a>
            
           or contact us at clearmyrecord@codeforamerica.org
-        </h2>
+        </div>
         <div
           className="box nudge--large"
         >

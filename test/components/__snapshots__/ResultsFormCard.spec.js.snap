@@ -25,10 +25,10 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
           <p
             className="resultsSubheader"
           >
-            We have generated results for undefined County
+            We have generated results for undefined County.
           </p>
           <p
-            className="resultsSubheader"
+            className="resultsSubheader  nudge--small"
           >
             Look for a folder on your desktop labeled "Clear_My_Record_output". Within it will be a timestamped folder that will have all of your results files.
           </p>
@@ -121,7 +121,7 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
         <p
           className="contentsTableTitle"
         >
-          What is included in each:
+          What's included in each file:
         </p>
       </div>
       <table

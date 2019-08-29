@@ -12,3 +12,9 @@
   max-width: 250px;
   margin: 0.5em auto;
 }
+
+.contactInfo {
+  max-width: 550px;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
