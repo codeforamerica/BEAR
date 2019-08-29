@@ -91,8 +91,8 @@ export default class SummaryReportPdf extends Component<Props> {
                 What Clear My Record’s technology was able to do:
               </Text>
               <Text style={styles.text}>
-                This application processed {formattedLineCount} lines of data
-                in {summaryData.processingTimeInSeconds.toFixed(3)} seconds and
+                This application processed {formattedLineCount} lines of data in{' '}
+                {summaryData.processingTimeInSeconds.toFixed(3)} seconds and
                 produced {inputFileCount * 3} spreadsheets to assist with your
                 office’s review.
               </Text>
