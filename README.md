@@ -89,9 +89,9 @@ $ yarn test-update-snapshots
 
 We create and publish built executables using [electron-builder](https://github.com/electron-userland/electron-builder).
 
-BEAR is automatically packaged and released in draft to Github as part of our CircleCI workflow.
+BEAR is automatically packaged and released as a pre-release to Github as part of our CircleCI workflow.
 
-Publishing the draft release on Github, and signing a release and making it available for public download, are manual steps. For instructions on how to do this, [see the BEAR Release Process in Google Drive](https://docs.google.com/document/d/1P4nR7UPCLYFuVVz57geN5z6adkv2y2eA8FyMuoH4f3Q/edit).
+Generating open source attributions, publishing the production-ready release on Github, and signing the binary and making it available for public download are manual steps. For instructions on how to do this, [see the BEAR Release Process in Google Drive](https://docs.google.com/document/d/1P4nR7UPCLYFuVVz57geN5z6adkv2y2eA8FyMuoH4f3Q/edit).
 
 ### Packaging and Publishing from a Local Machine
 
