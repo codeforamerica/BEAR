@@ -6,10 +6,10 @@ const baseOutputDirectory = `${process.env.HOME}/Desktop/Clear_My_Record_output/
 
 export function removeOutputDirectory(dirPath) {
   if (fs.existsSync(dirPath)) {
-    fs.readdirSync(dirPath).forEach(function(entry) {
+    fs.readdirSync(dirPath).forEach(entry => {
       const entryPath = path.join(dirPath, entry);
       if (fs.lstatSync(entryPath).isDirectory()) {
-        fs.readdirSync(entryPath).forEach(function(subEntry) {
+        fs.readdirSync(entryPath).forEach(subEntry => {
           const subEntryPath = path.join(entryPath, subEntry);
           fs.unlinkSync(subEntryPath);
         });

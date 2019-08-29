@@ -49,7 +49,7 @@ export function makeDirectory(pathToDirectory) {
 
 export function deleteDirectoryRecursive(directoryPath) {
   if (fs.existsSync(directoryPath)) {
-    fs.readdirSync(directoryPath).forEach(function(file) {
+    fs.readdirSync(directoryPath).forEach(file => {
       const curPath = `${directoryPath}/${file}`;
       if (fs.lstatSync(curPath).isDirectory()) {
         deleteDirectoryRecursive(curPath);
