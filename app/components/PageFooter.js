@@ -63,9 +63,6 @@ export default class PageFooter extends Component<Props> {
                 >
                   Terms of Service
                 </a>
-                <a href="#" className={`${styles.footerLink} link--subtle`}>
-                  Help Documents
-                </a>
               </div>
               <div className={styles.footerMessage}>
                 Clear My Record is a service delivered by{' '}
