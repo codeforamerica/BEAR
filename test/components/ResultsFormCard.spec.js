@@ -11,10 +11,16 @@ const sandbox = sinon.createSandbox();
 function setup() {
   const openFolderSpy = sandbox.spy();
   const startOverSpy = sandbox.spy();
+  const impactStats = {
+    noFelony: 2000,
+    noConvictionLast7: 5000,
+    noConviction: 1200
+  };
   const component = mount(
     <ResultsFormCard
       county="Alameda"
       outputFolder="/path/to/output"
+      impactStatistics={impactStats}
       openFolder={openFolderSpy}
       onStartOver={startOverSpy}
     />
@@ -53,9 +59,18 @@ describe('ResultsFormCard component', () => {
   });
 
   it('should match exact snapshot', () => {
+    const impactStats = {
+      noFelony: 2000,
+      noConvictionLast7: 5000,
+      noConviction: 1200
+    };
     const component = (
       <div>
-        <ResultsFormCard county="Alameda" outputFolder="/path/to/output" />
+        <ResultsFormCard
+          county="Alameda"
+          outputFolder="/path/to/output"
+          impactStatistics={impactStats}
+        />
       </div>
     );
 

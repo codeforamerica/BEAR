@@ -6,10 +6,12 @@ import FormCard, {
   FormCardHeader
 } from './FormCard';
 import StartOverButton from './StartOverButton';
+import ImpactItem from './ImpactItem';
 import styles from './ResultsFormCard.css';
 
 type Props = {
   county: County,
+  impactStatistics: ImpactStatistics,
   outputFolder: string,
   openFolder: string => void,
   onStartOver: () => void
@@ -26,7 +28,7 @@ export default class ResultsFormCard extends Component<Props> {
   };
 
   render() {
-    const { county, onStartOver } = this.props;
+    const { county, onStartOver, impactStatistics } = this.props;
     return (
       <FormCard>
         <FormCardHeader>
@@ -54,7 +56,25 @@ export default class ResultsFormCard extends Component<Props> {
           </div>
         </FormCardHeader>
         <FormCardContent>
-          <h3 className={`${styles.contentListTitle} text--centered`}>
+          <div className={styles.impactSection}>
+            <h3 className={styles.subSectionTitle}>
+              Based on your eligibility choices:
+            </h3>
+            <ImpactItem
+              value={impactStatistics.noFelony}
+              description="people will no longer have a felony on their CA record"
+            />
+            <ImpactItem
+              value={impactStatistics.noConvictionLast7}
+              description="people will no longer have a conviction on their CA record in the last 7 years"
+            />
+            <ImpactItem
+              value={impactStatistics.noConviction}
+              description="people will no longer have any conviction on their CA record"
+            />
+          </div>
+          <div className={styles.sectionDivider} />
+          <h3 className={`${styles.subSectionTitle} text--centered`}>
             What&apos;s included in the folder:
           </h3>
           <div className={styles.contentsListContainer}>

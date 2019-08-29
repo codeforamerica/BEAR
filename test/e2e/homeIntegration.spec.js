@@ -227,10 +227,16 @@ describe('The primary user flow', () => {
       );
 
       await sleep(6);
-      const resultsFormCardContent = await app.client.getText(
+      const resultsFormCardTitle = await app.client.getText(
         '.form-card__title'
       );
-      expect(resultsFormCardContent).toContain('Your files are ready!');
+      expect(resultsFormCardTitle).toContain('Your files are ready!');
+      const resultsFormCardContent = await app.client.getText(
+        '.form-card__content'
+      );
+      expect(resultsFormCardContent).toContain(
+        `4\npeople will no longer have a felony on their CA record`
+      );
 
       const outputPdfFile = `${getSummaryOutputFilePath()}`;
       expect(fs.existsSync(outputPdfFile)).toEqual(true);

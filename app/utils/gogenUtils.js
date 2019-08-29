@@ -63,6 +63,7 @@ export function runScript(
   state,
   spawnChildProcess,
   onGogenComplete: function,
+  updateImpactStatistics: function,
   preserveEligibilityConfig: boolean
 ) {
   const {
@@ -116,9 +117,11 @@ export function runScript(
       errorText = readGogenErrors(outputFilePath, fileNameSuffix);
       removeResultsDirectories(dojFilePaths, outputFilePath, fileNameSuffix);
     } else {
+      const summaryData = parseGogenOutput(outputFilePath, fileNameSuffix);
+      updateImpactStatistics(summaryData.reliefWithCurrentEligibilityChoices);
       writeSummaryReport(
+        summaryData,
         outputFilePath,
-        fileNameSuffix,
         dojFilePaths,
         formattedEligibilityOptions,
         formattedGogenRunTime
@@ -129,4 +132,14 @@ export function runScript(
     }
     onGogenComplete(code, errorText);
   });
+}
+
+function parseGogenOutput(outputFilePath, fileNameSuffix) {
+  const pathToGogenOutput = path.join(
+    outputFilePath,
+    `gogen_${fileNameSuffix}.json`
+  );
+  const gogenOutputData = fs.readFileSync(pathToGogenOutput, 'utf8');
+  fs.unlinkSync(pathToGogenOutput);
+  return JSON.parse(gogenOutputData);
 }

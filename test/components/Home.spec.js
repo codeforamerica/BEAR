@@ -117,6 +117,16 @@ describe('Home component', () => {
       });
     });
 
+    it('sets the impact statistics to 0 for all impacts', () => {
+      const { component } = setup('false');
+      const impactStatistics = component.state('impactStatistics');
+      expect(impactStatistics).toEqual({
+        noFelony: 0,
+        noConvictionLast7: 0,
+        noConviction: 0
+      });
+    });
+
     describe('gogen path', () => {
       it('should point to the home directory when the app is not packaged', () => {
         const { component } = setup('false');
@@ -212,6 +222,28 @@ describe('Home component', () => {
       expect(component.state('formattedGogenRunTime')).toEqual(
         '01_01_2011_00.00.AM'
       );
+    });
+  });
+
+  describe('updateImpactStatistics', () => {
+    it('updates state.impactStatistics', () => {
+      const { component } = setup('false');
+      const statsFromGogen = {
+        CountSubjectsNoFelony: 4,
+        CountSubjectsNoConvictionLast7Years: 8,
+        CountSubjectsNoConviction: 3
+      };
+      expect(component.state('impactStatistics')).toEqual({
+        noFelony: 0,
+        noConvictionLast7: 0,
+        noConviction: 0
+      });
+      component.instance().updateImpactStatistics(statsFromGogen);
+      expect(component.state('impactStatistics')).toEqual({
+        noFelony: 4,
+        noConvictionLast7: 8,
+        noConviction: 3
+      });
     });
   });
 

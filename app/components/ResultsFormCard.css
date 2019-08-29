@@ -10,18 +10,29 @@
 .resultsSubheader {
   font-weight: lighter !important;
   font-size: 1.9rem;
-  width: 45%;
+  width: 50%;
   margin: 0 auto;
   text-align: left;
+}
+
+.subSectionTitle {
+  font-weight: 400;
+}
+
+.sectionDivider {
+  margin: 0 -38px auto;
+  width: 960px;
+  border-bottom: 2px solid #f7f5f4;
+}
+
+.impactSection {
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .contentsListContainer {
   width: 50%;
   margin: 0 auto;
-}
-
-.contentListTitle {
-  font-weight: 400;
 }
 
 .contentsList {

@@ -16,3 +16,9 @@ declare type AdditionalReliefOptions = {
   subjectHasOnlyProp64Charges: boolean,
   subjectIsDeceased: boolean
 };
+
+declare type ImpactStatistics = {
+  noFelony: number,
+  noConvictionLast7: number,
+  noConviction: number
+};

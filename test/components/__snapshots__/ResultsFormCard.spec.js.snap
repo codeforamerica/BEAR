@@ -46,8 +46,56 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
     <div
       className="form-card__content "
     >
+      <div
+        className="impactSection"
+      >
+        <h3
+          className="subSectionTitle"
+        >
+          Based on your eligibility choices:
+        </h3>
+        <div
+          className="impactItem"
+        >
+          <h3
+            className="impactNumber"
+          >
+            2,000
+          </h3>
+          <p>
+            people will no longer have a felony on their CA record
+          </p>
+        </div>
+        <div
+          className="impactItem"
+        >
+          <h3
+            className="impactNumber"
+          >
+            5,000
+          </h3>
+          <p>
+            people will no longer have a conviction on their CA record in the last 7 years
+          </p>
+        </div>
+        <div
+          className="impactItem"
+        >
+          <h3
+            className="impactNumber"
+          >
+            1,200
+          </h3>
+          <p>
+            people will no longer have any conviction on their CA record
+          </p>
+        </div>
+      </div>
+      <div
+        className="sectionDivider"
+      />
       <h3
-        className="contentListTitle text--centered"
+        className="subSectionTitle text--centered"
       >
         What's included in the folder:
       </h3>

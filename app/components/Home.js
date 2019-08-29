@@ -29,6 +29,7 @@ type State = {
   dojFilePaths: Array<string>,
   baselineEligibilityOptions: BaselineEligibilityOptions,
   additionalReliefOptions: AdditionalReliefOptions,
+  impactStatistics: ImpactStatistics,
   outputPathPrefix: string,
   outputFilePath: string,
   errorText: string
@@ -132,6 +133,16 @@ export default class Home extends Component<Props, State> {
     });
   };
 
+  updateImpactStatistics = (gogenImpactStats: Object) => {
+    const updatedStats = {
+      noFelony: gogenImpactStats.CountSubjectsNoFelony,
+      noConvictionLast7: gogenImpactStats.CountSubjectsNoConvictionLast7Years,
+      noConviction: gogenImpactStats.CountSubjectsNoConviction
+    };
+
+    this.setState({ impactStatistics: updatedStats });
+  };
+
   updateDateForPath = () => {
     const { outputPathPrefix } = this.state;
 
@@ -218,6 +229,7 @@ export default class Home extends Component<Props, State> {
       this.state,
       spawnChildProcess,
       callbackFunction,
+      this.updateImpactStatistics,
       preserveEligibilityConfig
     );
   };
@@ -230,7 +242,8 @@ export default class Home extends Component<Props, State> {
       outputFilePath,
       baselineEligibilityOptions,
       additionalReliefOptions,
-      errorText
+      errorText,
+      impactStatistics
     } = this.state;
     return (
       <PageContainer
@@ -279,6 +292,7 @@ export default class Home extends Component<Props, State> {
         <ResultsFormCard
           county={county}
           outputFolder={outputFilePath}
+          impactStatistics={impactStatistics}
           openFolder={openFolder}
           onStartOver={this.resetInitialState}
         />

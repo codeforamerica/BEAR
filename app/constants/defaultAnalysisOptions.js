@@ -18,6 +18,11 @@ const defaultAnalysisOptions = {
     yearsCrimeFreeThreshold: 5,
     subjectHasOnlyProp64Charges: true,
     subjectIsDeceased: false
+  },
+  impactStatistics: {
+    noFelony: 0,
+    noConvictionLast7: 0,
+    noConviction: 0
   }
 };
 

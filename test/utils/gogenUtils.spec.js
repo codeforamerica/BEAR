@@ -38,19 +38,26 @@ describe('runScript', () => {
   function setup(exitCode = 0) {
     const fakeSpawnChildProcess = createFakeSpawnChildProcess(exitCode);
     const fakeOnGogenComplete = sandbox.spy();
+    const fakeUpdateImpactStatistics = sandbox.spy();
 
     return {
       fakeSpawnChildProcess,
-      fakeOnGogenComplete
+      fakeOnGogenComplete,
+      fakeUpdateImpactStatistics
     };
   }
 
   beforeEach(() => {
+    const fakeGogenOutput = {};
+    fs.__setFileContent(JSON.stringify(fakeGogenOutput));
+
     fakeCreateJsonFile = sandbox.spy();
-    fakeDeleteDirectory = sandbox.spy();
-    fakeWriteSummaryReport = sandbox.spy();
     FileUtils.createJsonFile = fakeCreateJsonFile;
+
+    fakeDeleteDirectory = sandbox.spy();
     FileUtils.deleteDirectoryRecursive = fakeDeleteDirectory;
+
+    fakeWriteSummaryReport = sandbox.spy();
     writeSummaryOutputUtils.writeSummaryReport = fakeWriteSummaryReport;
   });
 
@@ -65,9 +72,18 @@ describe('runScript', () => {
         outputFilePath: 'outputPath/outputPath'
       };
 
-      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
+      const {
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      } = setup();
 
-      runScript(state, fakeSpawnChildProcess, fakeOnGogenComplete);
+      runScript(
+        state,
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      );
 
       const { args } = fakeSpawnChildProcess.getCall(0);
       expect(args[0]).toEqual('gogenPath');
@@ -94,9 +110,18 @@ describe('runScript', () => {
         outputFilePath: 'outputPath/outputPath'
       };
 
-      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
+      const {
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      } = setup();
 
-      runScript(state, fakeSpawnChildProcess, fakeOnGogenComplete);
+      runScript(
+        state,
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      );
 
       expect(fakeSpawnChildProcess.callCount).toEqual(1);
       const { args } = fakeSpawnChildProcess.getCall(0);
@@ -128,9 +153,18 @@ describe('runScript', () => {
         outputFilePath: 'outputPath/outputPath'
       };
 
-      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
+      const {
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      } = setup();
 
-      runScript(state, fakeSpawnChildProcess, fakeOnGogenComplete);
+      runScript(
+        state,
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      );
 
       expect(fs.mkdirSync.mock.calls.length).toEqual(0);
     });
@@ -151,9 +185,18 @@ describe('runScript', () => {
         outputFilePath: 'outputPath/outputPath'
       };
 
-      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
+      const {
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      } = setup();
 
-      runScript(state, fakeSpawnChildProcess, fakeOnGogenComplete);
+      runScript(
+        state,
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      );
       expect(fs.mkdirSync.mock.calls.length).toEqual(1);
       expect(fs.mkdirSync.mock.calls[0][0]).toEqual('outputPath/outputPath');
     });
@@ -185,12 +228,17 @@ describe('runScript', () => {
         }
       };
 
-      const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
+      const {
+        fakeSpawnChildProcess,
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
+      } = setup();
 
       runScript(
         stateWithReductions,
         fakeSpawnChildProcess,
-        fakeOnGogenComplete
+        fakeOnGogenComplete,
+        fakeUpdateImpactStatistics
       );
 
       const { args } = fakeCreateJsonFile.getCall(0);
@@ -213,9 +261,18 @@ describe('runScript', () => {
           ...defaultAnalysisOptions
         };
 
-        const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
+        const {
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          fakeUpdateImpactStatistics
+        } = setup();
 
-        runScript(stateWithRelief, fakeSpawnChildProcess, fakeOnGogenComplete);
+        runScript(
+          stateWithRelief,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          fakeUpdateImpactStatistics
+        );
 
         const { args } = fakeCreateJsonFile.getCall(0);
 
@@ -260,12 +317,17 @@ describe('runScript', () => {
           }
         };
 
-        const { fakeSpawnChildProcess, fakeOnGogenComplete } = setup();
+        const {
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          fakeUpdateImpactStatistics
+        } = setup();
 
         runScript(
           stateWithoutRelief,
           fakeSpawnChildProcess,
-          fakeOnGogenComplete
+          fakeOnGogenComplete,
+          fakeUpdateImpactStatistics
         );
 
         const { args } = fakeCreateJsonFile.getCall(0);
@@ -282,6 +344,7 @@ describe('runScript', () => {
       let state;
       let fakeSpawnChildProcess;
       let fakeOnGogenComplete;
+      let fakeUpdateImpactStatistics;
       let preserveEligibilityConfig = false;
 
       beforeEach(() => {
@@ -294,7 +357,11 @@ describe('runScript', () => {
           outputFilePath: 'outputPath/outputPath'
         };
 
-        ({ fakeSpawnChildProcess, fakeOnGogenComplete } = setup(0));
+        ({
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          fakeUpdateImpactStatistics
+        } = setup(0));
       });
 
       it('writes the summary report', () => {
@@ -302,13 +369,14 @@ describe('runScript', () => {
           state,
           fakeSpawnChildProcess,
           fakeOnGogenComplete,
+          fakeUpdateImpactStatistics,
           preserveEligibilityConfig
         );
 
         expect(fakeWriteSummaryReport.callCount).toEqual(1);
         const { args } = fakeWriteSummaryReport.getCall(0);
-        expect(args[0]).toEqual('outputPath/outputPath');
-        expect(args[1]).toEqual('date');
+        expect(args[0]).toEqual({});
+        expect(args[1]).toEqual('outputPath/outputPath');
         expect(args[2]).toEqual(['/first/path', '/last/path']);
         expect(args[3]).toEqual({
           baselineEligibility: {
@@ -318,16 +386,58 @@ describe('runScript', () => {
         });
       });
 
+      it('updates the impact statistics', () => {
+        const fakeGogenOutput = {
+          reliefWithCurrentEligibilityChoices: {
+            CountSubjectsNoFelony: 4,
+            CountSubjectsNoConvictionLast7Years: 8,
+            CountSubjectsNoConviction: 3
+          }
+        };
+
+        fs.__setFileContent(JSON.stringify(fakeGogenOutput));
+        runScript(
+          state,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          fakeUpdateImpactStatistics,
+          preserveEligibilityConfig
+        );
+
+        expect(fakeUpdateImpactStatistics.callCount).toEqual(1);
+        const { args } = fakeUpdateImpactStatistics.getCall(0);
+        expect(args[0]).toEqual({
+          CountSubjectsNoFelony: 4,
+          CountSubjectsNoConvictionLast7Years: 8,
+          CountSubjectsNoConviction: 3
+        });
+      });
+
+      it('deletes the gogen summary output file', () => {
+        runScript(
+          state,
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          fakeUpdateImpactStatistics,
+          preserveEligibilityConfig
+        );
+
+        expect(fs.unlinkSync.mock.calls.length).toEqual(2);
+        const args = fs.unlinkSync.mock.calls[0];
+        expect(args[0]).toEqual('outputPath/outputPath/gogen_date.json');
+      });
+
       it('deletes the eligibility config file if PRESERVE_ELIGIBILITY_CONFIG is false', () => {
         runScript(
           state,
           fakeSpawnChildProcess,
           fakeOnGogenComplete,
+          fakeUpdateImpactStatistics,
           preserveEligibilityConfig
         );
 
-        expect(fs.unlinkSync.mock.calls.length).toEqual(1);
-        const args = fs.unlinkSync.mock.calls[0];
+        expect(fs.unlinkSync.mock.calls.length).toEqual(2);
+        const args = fs.unlinkSync.mock.calls[1];
         expect(args[0]).toEqual(
           'outputPath/outputPath/eligibilityConfig_date.json'
         );
@@ -340,10 +450,11 @@ describe('runScript', () => {
           state,
           fakeSpawnChildProcess,
           fakeOnGogenComplete,
+          fakeUpdateImpactStatistics,
           preserveEligibilityConfig
         );
 
-        expect(fs.unlinkSync.mock.calls.length).toEqual(0);
+        expect(fs.unlinkSync.mock.calls.length).toEqual(1);
       });
 
       it('does NOT delete the results folders', () => {
@@ -351,6 +462,7 @@ describe('runScript', () => {
           state,
           fakeSpawnChildProcess,
           fakeOnGogenComplete,
+          fakeUpdateImpactStatistics,
           preserveEligibilityConfig
         );
 
@@ -362,6 +474,7 @@ describe('runScript', () => {
           state,
           fakeSpawnChildProcess,
           fakeOnGogenComplete,
+          fakeUpdateImpactStatistics,
           preserveEligibilityConfig
         );
 
@@ -376,6 +489,7 @@ describe('runScript', () => {
       let errorText;
       let fakeSpawnChildProcess;
       let fakeOnGogenComplete;
+      let fakeUpdateImpactStatistics;
 
       beforeEach(() => {
         errorText = 'error text';
@@ -391,12 +505,17 @@ describe('runScript', () => {
           outputFilePath: 'outputPath/outputPath'
         };
 
-        ({ fakeSpawnChildProcess, fakeOnGogenComplete } = setup(1));
+        ({
+          fakeSpawnChildProcess,
+          fakeOnGogenComplete,
+          fakeUpdateImpactStatistics
+        } = setup(1));
 
         runScript(
           state,
           fakeSpawnChildProcess,
           fakeOnGogenComplete,
+          fakeUpdateImpactStatistics,
           preserveEligibilityConfig
         );
       });
@@ -406,6 +525,10 @@ describe('runScript', () => {
         const args = fs.readFileSync.mock.calls[0];
         expect(args[0]).toEqual('outputPath/outputPath/gogen_date.err');
         expect(args[1]).toEqual('utf8');
+      });
+
+      it('does NOT update the impact statistics', () => {
+        expect(fakeUpdateImpactStatistics.callCount).toEqual(0);
       });
 
       it('deletes the results folders for each DOJ input file', () => {
