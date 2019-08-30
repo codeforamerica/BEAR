@@ -9,7 +9,8 @@ import {
   formatDateTime,
   toTitleCase,
   convertTimestamp,
-  formatLineCountWithCommas
+  formatLineCountWithCommas,
+  formattedProcessingTime
 } from '../utils/formatSummaryOutputUtils';
 import cmrLogo from '../assets/images/cmr_black_logo.png';
 import bullet from '../assets/images/bullet.png';
@@ -92,9 +93,9 @@ export default class SummaryReportPdf extends Component<Props> {
               </Text>
               <Text style={styles.text}>
                 This application processed {formattedLineCount} lines of data in{' '}
-                {summaryData.processingTimeInSeconds.toFixed(3)} seconds and
-                produced {inputFileCount * 3} spreadsheets to assist with your
-                office’s review.
+                {formattedProcessingTime(summaryData.processingTimeInSeconds)}{' '}
+                and produced {inputFileCount * 3} spreadsheets to assist with
+                your office’s review.
               </Text>
             </View>
             <View>
