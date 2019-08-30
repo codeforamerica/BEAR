@@ -7,14 +7,13 @@ type Props = {
   children: React.Node,
   group: string,
   labelText: string,
-  value: string,
-  onChange: (string, string) => void
+  onChange: string => void
 };
 
 export default class Checkbox extends React.Component<Props> {
   handleChange = () => {
-    const { onChange, group, value } = this.props;
-    onChange(group, value);
+    const { onChange, group } = this.props;
+    onChange(group);
   };
 
   render() {
