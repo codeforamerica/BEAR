@@ -20,7 +20,7 @@ export default class ErrorFormCard extends Component<Props> {
     window.scrollTo(0, 0);
   }
 
-  extractErrors = (errorData: Object, parsing: boolean) => {
+  extractErrors = (errorData: Errors, parsing: boolean) => {
     let keys;
     if (parsing) {
       keys = Object.keys(errorData).filter(
@@ -38,7 +38,7 @@ export default class ErrorFormCard extends Component<Props> {
   };
 
   renderErrorSection = (
-    errorData: Object,
+    errorData: Errors,
     parsing: boolean,
     header: string
   ) => {

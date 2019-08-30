@@ -104,8 +104,10 @@ export default class Home extends Component<Props, State> {
     this.setState({ dojFilePaths: newPathsArray });
   };
 
-  // eslint-disable-next-line flowtype/no-weak-types
-  updateAdditionalReliefOptions = (reliefOption: string, value: any) => {
+  updateAdditionalReliefOptions = (
+    reliefOption: string,
+    value: AdditionalReliefOption
+  ) => {
     const { additionalReliefOptions } = this.state;
     const newOption = {};
     newOption[reliefOption] = value;
@@ -133,7 +135,7 @@ export default class Home extends Component<Props, State> {
     });
   };
 
-  updateImpactStatistics = (gogenImpactStats: Object) => {
+  updateImpactStatistics = (gogenImpactStats: GogenImpactStatistics) => {
     const updatedStats = {
       noFelony: gogenImpactStats.CountSubjectsNoFelony,
       noConvictionLast7: gogenImpactStats.CountSubjectsNoConvictionLast7Years,

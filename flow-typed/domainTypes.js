@@ -17,8 +17,42 @@ declare type AdditionalReliefOptions = {
   subjectIsDeceased: boolean
 };
 
+declare type AdditionalReliefOption = number | boolean;
+
 declare type ImpactStatistics = {
   noFelony: number,
   noConvictionLast7: number,
   noConviction: number
+};
+
+declare type GogenImpactStatistics = {
+  CountSubjectsNoConviction: number,
+  CountSubjectsNoConvictionLast7Years: number,
+  CountSubjectsNoFelony: number
+};
+
+declare type GogenSummaryData = {
+  county: string,
+  earliestConviction: string,
+  lineCount: number,
+  processingTimeInSeconds: number,
+  reliefWithCurrentEligibilityChoices: GogenImpactStatistics,
+  reliefWithDismissAllProp64: GogenImpactStatistics,
+  prop64ConvictionsCountInCountyByCodeSection: { [key: string]: number },
+  subjectsWithProp64ConvictionCountInCounty: number,
+  prop64FelonyConvictionsCountInCounty: number,
+  prop64NonFelonyConvictionsCountInCounty: number,
+  subjectsWithSomeReliefCount: number,
+  convictionDismissalCountByCodeSection: { [key: string]: number },
+  convictionReductionCountByCodeSection: { [key: string]: number },
+  convictionDismissalCountByAdditionalRelief: { [key: string]: number }
+};
+
+declare type ErrorData = {
+  errorType: string,
+  errorMessage: string
+};
+
+declare type Errors = {
+  [key: string]: ErrorData
 };

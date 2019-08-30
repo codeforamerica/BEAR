@@ -16,7 +16,7 @@ import bullet from '../assets/images/bullet.png';
 import { version } from '../../package.json';
 
 type Props = {
-  summaryData: Object,
+  summaryData: GogenSummaryData,
   inputFileCount: number,
   allEligibleConvictionsDismissed: boolean,
   formattedGogenRunTime: string

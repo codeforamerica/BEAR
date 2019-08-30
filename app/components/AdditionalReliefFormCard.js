@@ -15,7 +15,7 @@ import NumberSelect from './NumberSelect';
 
 type Props = {
   additionalReliefOptions: AdditionalReliefOptions,
-  onReliefOptionSelect: (string, any) => void,
+  onReliefOptionSelect: (string, AdditionalReliefOption) => void,
   onOptionsConfirm: void => void,
   updateDate: void => void,
   onBack: void => void

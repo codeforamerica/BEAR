@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 type Props = {
   header: string,
-  errors: Object,
+  errors: Errors,
   showFile: boolean
 };
 
