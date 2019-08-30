@@ -1,13 +1,14 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 
 type Props = {
-  children: string,
+  children: string | React.Node,
   helpText?: string
 };
 
-export default class FormCardHeader extends Component<Props, State> {
+export default class FormCardHeader extends React.Component<Props> {
   static defaultProps = {
-    helpText: null
+    helpText: ''
   };
 
   render() {

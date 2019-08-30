@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import FormCard, {
   FormCardContent,
@@ -11,7 +12,7 @@ type Props = {
   onBack: () => void
 };
 
-export default class PrivacyPolicyFormCard extends Component<Props, State> {
+export default class PrivacyPolicyFormCard extends Component<Props> {
   render() {
     const { onBack } = this.props;
     return (

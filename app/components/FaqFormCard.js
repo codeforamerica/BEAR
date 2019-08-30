@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import {
   Accordion,
@@ -18,7 +19,7 @@ type Props = {
   onBack: () => void
 };
 
-export default class FaqFormCard extends Component<Props, State> {
+export default class FaqFormCard extends Component<Props> {
   render() {
     const { onBack } = this.props;
     return (

@@ -1,7 +1,8 @@
+// @flow
 import React, { Component } from 'react';
 
 type Props = {
-  onGoBack: () => {}
+  onGoBack: () => void
 };
 
 export default class GoBackButton extends Component<Props> {

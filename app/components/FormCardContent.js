@@ -1,11 +1,14 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 
 type Props = {
-  children: [Component],
-  className: string
+  children: React.Node,
+  className?: string
 };
 
-export default class FormCardContent extends Component<Props, State> {
+export default class FormCardContent extends React.Component<Props> {
+  static defaultProps = { className: '' };
+
   render() {
     const { children, className } = this.props;
 

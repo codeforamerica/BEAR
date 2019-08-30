@@ -5,6 +5,7 @@ import FormCard, {
   FormCardFooter,
   FormCardHeader
 } from './FormCard';
+// @flow
 import StartOverButton from './StartOverButton';
 import ImpactItem from './ImpactItem';
 import styles from './ResultsFormCard.css';

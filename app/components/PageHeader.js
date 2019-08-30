@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import cmrLogo from '../assets/images/cmr_black_logo.png';
 import styles from './PageHeader.css';
@@ -6,8 +7,8 @@ type Props = {
   onStartOver: () => void
 };
 
-export default class PageHeader extends Component<Props, State> {
-  onClickStartOver = event => {
+export default class PageHeader extends Component<Props> {
+  onClickStartOver = (event: Event) => {
     const { onStartOver } = this.props;
     event.preventDefault();
     onStartOver();

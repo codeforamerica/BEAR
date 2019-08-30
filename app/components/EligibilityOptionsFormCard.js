@@ -105,7 +105,7 @@ export default class EligibilityOptionsFormCard extends Component<Props> {
           </div>
         </FormCardContent>
         <FormCardFooter>
-          <ContinueButton onContinue={this.onContinue} />
+          <ContinueButton disabled={false} onContinue={this.onContinue} />
           <GoBackButton onGoBack={onBack} />
         </FormCardFooter>
       </FormCard>

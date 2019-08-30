@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import styles from './Checkbox.css';
 
 type Props = {
   checked: boolean,
-  children: string,
+  children: React.Node,
   group: string,
   labelText: string,
   value: string,
   onChange: (string, string) => void
 };
 
-export default class Checkbox extends Component<Props> {
+export default class Checkbox extends React.Component<Props> {
   handleChange = () => {
     const { onChange, group, value } = this.props;
     onChange(group, value);

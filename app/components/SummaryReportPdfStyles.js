@@ -1,3 +1,4 @@
+// @flow
 import { StyleSheet } from '@react-pdf/renderer';
 // import robotoBold from '../assets/fonts/Roboto-Bold.ttf';
 // import robotoRegular from '../assets/fonts/Roboto-Regular.ttf';

@@ -1,17 +1,18 @@
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import PageHeader from './PageHeader';
 import PageContent from './PageContent';
 import PageFooter from './PageFooter';
 import styles from './PageContainer.css';
 
 type Props = {
-  children: [Component],
-  goToScreen: () => {},
+  children: Array<React.Node>,
+  goToScreen: number => void,
   currentScreen: number,
   onStartOver: () => void
 };
 
-export default class PageContainer extends Component<Props, State> {
+export default class PageContainer extends React.Component<Props> {
   render() {
     const { children, goToScreen, currentScreen, onStartOver } = this.props;
     return (

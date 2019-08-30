@@ -67,7 +67,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       </div>
     </div>
     <div
-      className="form-card__footer"
+      className=" form-card__footer"
     >
       <div
         className="buttons"
@@ -155,7 +155,7 @@ exports[`DojFileSelectFormCard component should match exact snapshot when file h
       </div>
     </div>
     <div
-      className="form-card__footer"
+      className=" form-card__footer"
     >
       <div
         className="buttons"

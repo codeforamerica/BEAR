@@ -1,10 +1,11 @@
+// @flow
 import React, { Component } from 'react';
 import RadioButton from './RadioButton';
 
 type Props = {
   codeSection: string,
   codeSectionDescription: string,
-  baselineEligibilityOptions: string,
+  baselineEligibilityOptions: BaselineEligibilityOptions,
   onEligibilityOptionSelect: (string, string) => void
 };
 

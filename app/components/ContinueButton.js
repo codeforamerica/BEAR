@@ -1,7 +1,8 @@
+// @flow
 import React, { Component } from 'react';
 
 type Props = {
-  onContinue: () => {},
+  onContinue: () => void,
   disabled: boolean
 };
 

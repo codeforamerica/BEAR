@@ -56,6 +56,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             }
             labelText="Dismiss convictions that occurred more than X years ago."
             group="dismissYearsSinceConvictionThreshold"
+            value="dismissYearsSinceConvictionThreshold"
             onChange={this.handleToggleChecked}
           >
             Dismiss convictions that occurred more than X years ago:
@@ -74,6 +75,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             checked={additionalReliefOptions.dismissYearsCrimeFreeThreshold}
             labelText="Dismiss convictions if the individual has had no convictions in the past X years."
             group="dismissYearsCrimeFreeThreshold"
+            value="dismissYearsCrimeFreeThreshold"
             onChange={this.handleToggleChecked}
           >
             Dismiss convictions if the individual has had no convictions in the
@@ -91,6 +93,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             checked={additionalReliefOptions.subjectHasOnlyProp64Charges}
             labelText="Select to dismiss convictions for people who only have HS 11357, 11358, 11359, 11360 convictions on their record."
             group="subjectHasOnlyProp64Charges"
+            value="subjectHasOnlyProp64Charges"
             onChange={this.handleToggleChecked}
           >
             Dismiss all H&S § 11357, H&S § 11358, H&S § 11359, or H&S § 11360
@@ -99,7 +102,7 @@ export default class AdditionalReliefFormCard extends Component<Props> {
           </Checkbox>
         </FormCardContent>
         <FormCardFooter>
-          <ContinueButton onContinue={this.onContinue} />
+          <ContinueButton disabled={false} onContinue={this.onContinue} />
           <GoBackButton onGoBack={onBack} />
         </FormCardFooter>
       </FormCard>

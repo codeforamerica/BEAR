@@ -1,3 +1,4 @@
+// @flow
 import React, { Component } from 'react';
 import { version } from '../../package.json';
 import nonLinearScreenNumbers from '../constants/nonLinearScreenNumbers';
@@ -5,7 +6,7 @@ import styles from './PageFooter.css';
 import cmrLogo from '../assets/images/cmr_black_logo.png';
 
 type Props = {
-  goToScreen: () => {},
+  goToScreen: number => void,
   onStartOver: () => void
 };
 
@@ -25,7 +26,7 @@ export default class PageFooter extends Component<Props> {
     goToScreen(nonLinearScreenNumbers.faq);
   };
 
-  onClickStartOver = event => {
+  onClickStartOver = (event: Event) => {
     const { onStartOver } = this.props;
     event.preventDefault();
     onStartOver();
