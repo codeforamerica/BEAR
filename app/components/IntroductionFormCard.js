@@ -30,8 +30,7 @@ export default class CountySelectFormCard extends Component<Props> {
               which Prop 64 convictions are eligible for relief under H&S §
               11361.9.
             </h1>
-            {/* eslint-disable-next-line react/no-unescaped-entities */}
-            <p>Here's what you need to do:</p>
+            <p>Here&apos;s what you need to do:</p>
             <div className="vertical-steps">
               <div className="vertical-steps__step">
                 <div className="emoji emoji--big emoji--page-facing-up" />

@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable no-unused-vars */
 // @flow
 import React, { Component } from 'react';
 
@@ -10,7 +8,6 @@ import FormCard, {
 } from './FormCard';
 import styles from './FormCard.css';
 import BaselineEligibilityOption from './BaselineEligibilityOption';
-import RadioButton from './RadioButton';
 import ContinueButton from './ContinueButton';
 import GoBackButton from './GoBackButton';
 

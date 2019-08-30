@@ -1,4 +1,5 @@
-// eslint-disable-next-line no-undef
+/* eslint no-undef: 0 */
+
 const fs = jest.genMockFromModule('fs');
 
 let pathExists = true;
@@ -16,7 +17,6 @@ function mockExistsSync() {
   return pathExists;
 }
 
-// eslint-disable-next-line no-undef
 const mockReadFileSync = jest.fn().mockImplementation(() => fileContent);
 
 fs.__setExistsSync = __setExistsSync;

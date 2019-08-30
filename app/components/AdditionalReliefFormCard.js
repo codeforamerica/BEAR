@@ -1,5 +1,3 @@
-/* eslint-disable react/no-unescaped-entities */
-/* eslint-disable no-unused-vars */
 // @flow
 import React, { Component } from 'react';
 
@@ -96,8 +94,8 @@ export default class AdditionalReliefFormCard extends Component<Props> {
             onChange={this.handleToggleChecked}
           >
             Dismiss all H&S § 11357, H&S § 11358, H&S § 11359, or H&S § 11360
-            convictions if those are the only convictions on an individual's
-            record.
+            convictions if those are the only convictions on an
+            individual&apos;s record.
           </Checkbox>
         </FormCardContent>
         <FormCardFooter>
