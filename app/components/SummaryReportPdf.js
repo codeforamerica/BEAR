@@ -25,6 +25,10 @@ type Props = {
 const imageDirectory = path.join(__dirname, '/assets/images/');
 
 export default class SummaryReportPdf extends Component<Props> {
+  onRenderError = error => {
+    console.log(`Error while loading document! ${error.message}`);
+  };
+
   render() {
     const {
       summaryData,
@@ -41,7 +45,7 @@ export default class SummaryReportPdf extends Component<Props> {
       inputFileCount === 1 ? '' : `_[1-${inputFileCount}]`;
     const formattedLineCount = formatLineCountWithCommas(summaryData.lineCount);
     return (
-      <Document>
+      <Document error={this.onRenderError}>
         <Page size="A4" style={styles.page}>
           <View style={styles.header}>
             <Image

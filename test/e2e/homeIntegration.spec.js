@@ -26,7 +26,7 @@ describe('The primary user flow', () => {
   });
 
   afterEach(() => {
-    removeOutputDirectory(outputDirectory);
+    // removeOutputDirectory(outputDirectory);
     if (app && app.isRunning()) {
       return app.stop();
     }
@@ -167,7 +167,9 @@ describe('The primary user flow', () => {
     });
 
     it('can complete the full flow and generate correct eligibility config', async () => {
-      jest.setTimeout(30000);
+      jest.setTimeout(300000);
+
+      await sleep(20000);
 
       await app.client.click('#begin');
 
@@ -238,7 +240,8 @@ describe('The primary user flow', () => {
         `4\npeople will no longer have a felony on their CA record`
       );
 
-      const outputPdfFile = `${getSummaryOutputFilePath()}`;
+      console.log(getSummaryOutputFilePath());
+      const outputPdfFile = getSummaryOutputFilePath();
       expect(fs.existsSync(outputPdfFile)).toEqual(true);
     });
 

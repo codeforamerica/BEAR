@@ -1,26 +1,34 @@
-import { StyleSheet } from '@react-pdf/renderer';
-// import robotoBold from '../assets/fonts/Roboto-Bold.ttf';
-// import robotoRegular from '../assets/fonts/Roboto-Regular.ttf';
-//
-// Font.register({
-//   family: 'Roboto-Bold',
-//   src: robotoBold
-// });
-//
-// Font.register({
-//   family: 'Roboto',
-//   src: robotoRegular
-// });
+import { StyleSheet, Font } from '@react-pdf/renderer';
+import path from 'path';
+import robotoBold from '../assets/fonts/Roboto-Bold.ttf';
+import robotoRegular from '../assets/fonts/Roboto-Regular.ttf';
+
+Font.register({
+  family: 'Roboto-Bold',
+  src: path.resolve(
+    process.env.DIST_PATH,
+    './ee7b96fa85d8fdb8c126409326ac2d2b.ttf'
+  )
+});
+
+console.log(process.env.FONT_PATH);
+console.log(path.resolve(process.env.FONT_PATH, './ee7b96fa85d8fdb8c126409326ac2d2b.ttf'));
+
+Font.register({
+  family: 'Roboto',
+  src: path.resolve(process.env.FONT_PATH, './d917e7dd24a892f863c1988305a7505a.ttf')
+});
+console.log(path.resolve(process.env.FONT_PATH, './d917e7dd24a892f863c1988305a7505a.ttf'));
 
 const baseTextStyles = {
   fontSize: 12,
-  lineHeight: 1.5
-  // fontFamily: 'Roboto'
+  lineHeight: 1.5,
+  fontFamily: 'Roboto'
 };
 
 const baseHxStyles = {
   color: '#008060',
-  fontWeight: 'bold'
+  fontFamily: 'Roboto-Bold'
 };
 
 const styles = StyleSheet.create({
@@ -69,8 +77,8 @@ const styles = StyleSheet.create({
   },
   h1: {
     marginBottom: 10,
-    fontSize: 24
-    // fontFamily: 'Roboto-Bold'
+    fontSize: 24,
+    fontFamily: 'Roboto-Bold'
   },
   h2: {
     ...baseHxStyles,
@@ -99,8 +107,8 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   boldText: {
-    ...baseTextStyles
-    // fontFamily: 'Roboto-Bold'
+    ...baseTextStyles,
+    fontFamily: 'Roboto-Bold'
   },
   listItem: {
     ...baseTextStyles,

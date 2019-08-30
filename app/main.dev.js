@@ -79,8 +79,13 @@ app.on('ready', async () => {
 
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
-  if (process.env.NODE_ENV === 'development') {
+  // if (process.env.NODE_ENV === 'development') {
     mainWindow.webContents.openDevTools();
+  // } else {
+  if (process.env.NODE_ENV == 'development') {
+    process.env.FONT_PATH = path.join(__dirname, 'app', 'assets', 'fonts');
+  } else {
+    process.env.FONT_PATH = path.join(app.getAppPath(), 'app', 'dist');
   }
 
   // @TODO: Use 'ready-to-show' event
