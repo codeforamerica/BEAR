@@ -26,7 +26,7 @@ const baseHxStyles = {
 const styles = StyleSheet.create({
   page: {
     paddingBottom: 20,
-    paddingTop: 40
+    paddingTop: 30
   },
   logoImage: {
     position: 'absolute',
