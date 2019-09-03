@@ -93,7 +93,7 @@ export default class Home extends Component<Props, State> {
 
   updateAdditionalReliefOptions = (
     reliefOption: string,
-    value: AdditionalReliefOption
+    value: AdditionalReliefValue
   ) => {
     const { additionalReliefOptions } = this.state;
     const newOption = {};

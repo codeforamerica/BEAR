@@ -21,18 +21,14 @@ declare type County = {
 declare type BaselineEligibilityOptions = { [string]: string };
 
 declare type AdditionalReliefOptions = {
-  subjectUnder21AtConviction: boolean,
-  dismissOlderThanAgeThreshold: boolean,
-  subjectAgeThreshold: number,
   dismissYearsSinceConvictionThreshold: boolean,
   yearsSinceConvictionThreshold: number,
   dismissYearsCrimeFreeThreshold: boolean,
   yearsCrimeFreeThreshold: number,
-  subjectHasOnlyProp64Charges: boolean,
-  subjectIsDeceased: boolean
+  subjectHasOnlyProp64Charges: boolean
 };
 
-declare type AdditionalReliefOption = number | boolean;
+declare type AdditionalReliefValue = number | boolean;
 
 declare type EligibilityConfiguration = {
   baselineEligibility: {
