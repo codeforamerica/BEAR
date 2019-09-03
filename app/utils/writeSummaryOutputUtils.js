@@ -1,14 +1,15 @@
+// @flow
 import path from 'path';
 import ReactPDF from '@react-pdf/renderer';
 import React from 'react';
 import SummaryReportPdf from '../components/SummaryReportPdf';
 
 export function writeSummaryReport(
-  summaryData,
-  outputFilePath,
-  dojFilePaths,
-  formattedEligibilityOptions,
-  formattedGogenRunTime
+  summaryData: GogenSummaryData,
+  outputFilePath: string,
+  dojFilePaths: Array<string>,
+  formattedEligibilityOptions: BaselineEligibilityConfiguration,
+  formattedGogenRunTime: string
 ) {
   ReactPDF.render(
     <SummaryReportPdf
@@ -23,6 +24,8 @@ export function writeSummaryReport(
   );
 }
 
-export function allEligibleConvictionsDismissed(transformedEligibilityOptions) {
+export function allEligibleConvictionsDismissed(
+  transformedEligibilityOptions: BaselineEligibilityConfiguration
+) {
   return transformedEligibilityOptions.baselineEligibility.reduce.length === 0;
 }

@@ -30,6 +30,13 @@ declare type AdditionalReliefOptions = {
 
 declare type AdditionalReliefValue = number | boolean;
 
+declare type BaselineEligibilityConfiguration = {
+  baselineEligibility: {
+    dismiss: Array<string>,
+    reduce: Array<string>
+  }
+};
+
 declare type EligibilityConfiguration = {
   baselineEligibility: {
     dismiss: Array<string>,
