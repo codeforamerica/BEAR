@@ -62,3 +62,10 @@ export function convertTimestamp(timestamp) {
 export function formatLineCountWithCommas(number) {
   return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
+
+export function formattedProcessingTime(timeInSeconds) {
+  if (timeInSeconds >= 90) {
+    return `${Math.round(timeInSeconds / 6) / 10} minutes`;
+  }
+  return `${Math.round(timeInSeconds * 10) / 10} seconds`;
+}
