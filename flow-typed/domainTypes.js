@@ -1,3 +1,18 @@
+declare type ApplicationState = {
+  gogenPath: string,
+  formattedGogenRunTime: string,
+  currentScreen: number,
+  previousScreenInFlow: number,
+  county: County,
+  dojFilePaths: Array<string>,
+  baselineEligibilityOptions: BaselineEligibilityOptions,
+  additionalReliefOptions: AdditionalReliefOptions,
+  impactStatistics: ImpactStatistics,
+  outputPathPrefix: string,
+  outputFilePath: string,
+  errorText: string
+};
+
 declare type County = {
   name: string,
   code: string

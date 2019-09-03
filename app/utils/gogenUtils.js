@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable no-unused-expressions */
 import fs from 'fs';
 import path from 'path';
@@ -8,7 +9,9 @@ import {
 } from './fileUtils';
 import { writeSummaryReport } from './writeSummaryOutputUtils';
 
-function transformBaselineEligibilityOptions(eligibilityOptions) {
+function transformBaselineEligibilityOptions(
+  eligibilityOptions: BaselineEligibilityOptions
+) {
   const jsonObject = { baselineEligibility: { dismiss: [], reduce: [] } };
   Object.keys(eligibilityOptions)
     .sort()
@@ -39,15 +42,15 @@ function transformOptionalReliefValues(additionalReliefOptions) {
   return transformedOptions;
 }
 
-function readGogenErrors(outputFilePath, fileNameSuffix) {
+function readGogenErrors(outputFilePath: string, fileNameSuffix: string) {
   const pathToErrors = path.join(outputFilePath, `gogen_${fileNameSuffix}.err`);
   return fs.readFileSync(pathToErrors, 'utf8');
 }
 
 function removeResultsDirectories(
-  dojFilePaths,
-  outputFilePath,
-  fileNameSuffix
+  dojFilePaths: Array<string>,
+  outputFilePath: string,
+  fileNameSuffix: string
 ) {
   dojFilePaths.forEach((_, index) => {
     const resultDirectory = path.join(
@@ -60,8 +63,8 @@ function removeResultsDirectories(
 
 // eslint-disable-next-line import/prefer-default-export
 export function runScript(
-  state,
-  spawnChildProcess,
+  state: ApplicationState,
+  spawnChildProcess: function,
   onGogenComplete: function,
   updateImpactStatistics: function,
   preserveEligibilityConfig: boolean
@@ -134,7 +137,7 @@ export function runScript(
   });
 }
 
-function parseGogenOutput(outputFilePath, fileNameSuffix) {
+function parseGogenOutput(outputFilePath: string, fileNameSuffix: string) {
   const pathToGogenOutput = path.join(
     outputFilePath,
     `gogen_${fileNameSuffix}.json`

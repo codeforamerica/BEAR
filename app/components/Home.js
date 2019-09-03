@@ -20,20 +20,7 @@ import FaqFormCard from './FaqFormCard';
 import ErrorFormCard from './ErrorFormCard';
 import nonLinearScreenNumbers from '../constants/nonLinearScreenNumbers';
 
-type State = {
-  gogenPath: string,
-  formattedGogenRunTime: string,
-  currentScreen: number,
-  previousScreenInFlow: number,
-  county: County,
-  dojFilePaths: Array<string>,
-  baselineEligibilityOptions: BaselineEligibilityOptions,
-  additionalReliefOptions: AdditionalReliefOptions,
-  impactStatistics: ImpactStatistics,
-  outputPathPrefix: string,
-  outputFilePath: string,
-  errorText: string
-};
+type State = ApplicationState;
 
 type Props = {
   preserveEligibilityConfig: boolean,
