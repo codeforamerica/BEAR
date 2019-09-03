@@ -25,7 +25,7 @@ describe('formattedProcessingTime', () => {
   });
 
   describe('time is under 90 seconds', () => {
-    it('should return time in minutes, rounded to tenth', () => {
+    it('should return time in seconds, rounded to tenth', () => {
       expect(formattedProcessingTime(11.33458)).toEqual('11.3 seconds');
     });
   });
