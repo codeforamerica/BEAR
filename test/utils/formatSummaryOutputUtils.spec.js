@@ -1,6 +1,7 @@
 import {
   formatLineCountWithCommas,
-  formattedProcessingTime
+  formattedProcessingTime,
+  convertTimestamp
 } from '../../app/utils/formatSummaryOutputUtils';
 
 describe('formatLineCountWithCommas', () => {
@@ -28,5 +29,12 @@ describe('formattedProcessingTime', () => {
     it('should return time in seconds, rounded to tenth', () => {
       expect(formattedProcessingTime(11.33458)).toEqual('11.3 seconds');
     });
+  });
+});
+
+describe('convertTimestamp', () => {
+  it('it should return a human readable date', () => {
+    const stringDate = convertTimestamp('1979-06-01T00:00:00Z');
+    expect(stringDate).toEqual('June 1, 1979');
   });
 });

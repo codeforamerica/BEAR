@@ -57,6 +57,8 @@ declare type GogenImpactStatistics = {
   CountSubjectsNoFelony: number
 };
 
+declare type ConvictionCountByType = { [key: string]: number };
+
 declare type GogenSummaryData = {
   county: string,
   earliestConviction: string,
@@ -64,14 +66,14 @@ declare type GogenSummaryData = {
   processingTimeInSeconds: number,
   reliefWithCurrentEligibilityChoices: GogenImpactStatistics,
   reliefWithDismissAllProp64: GogenImpactStatistics,
-  prop64ConvictionsCountInCountyByCodeSection: { [key: string]: number },
+  prop64ConvictionsCountInCountyByCodeSection: ConvictionCountByType,
   subjectsWithProp64ConvictionCountInCounty: number,
   prop64FelonyConvictionsCountInCounty: number,
   prop64NonFelonyConvictionsCountInCounty: number,
   subjectsWithSomeReliefCount: number,
-  convictionDismissalCountByCodeSection: { [key: string]: number },
-  convictionReductionCountByCodeSection: { [key: string]: number },
-  convictionDismissalCountByAdditionalRelief: { [key: string]: number }
+  convictionDismissalCountByCodeSection: ConvictionCountByType,
+  convictionReductionCountByCodeSection: ConvictionCountByType,
+  convictionDismissalCountByAdditionalRelief: ConvictionCountByType
 };
 
 declare type ErrorData = {
