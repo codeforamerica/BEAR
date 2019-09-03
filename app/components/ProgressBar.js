@@ -14,7 +14,7 @@ type State = {
   stepSize: number
 };
 
-export const PROCESSING_RATE = 10000000;
+export const PROCESSING_RATE = 7000000;
 export const MAX_FILL = 100;
 export const MIN_PROCESSING_TIME = 5;
 export const MAX_STEP_SIZE = MAX_FILL / MIN_PROCESSING_TIME;
