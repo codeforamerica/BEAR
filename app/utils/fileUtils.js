@@ -1,12 +1,15 @@
+// @flow
 import fs from 'fs';
-import path from 'path';
 
-export function createJsonFile(jsonData, fileName) {
+export function createJsonFile(
+  jsonData: EligibilityConfiguration,
+  fileName: string
+) {
   const jsonString = JSON.stringify(jsonData);
   fs.writeFileSync(fileName, jsonString);
 }
 
-export function getDateTime(dateToConvert) {
+export function getDateTime(dateToConvert: Date) {
   const month = dateToConvert.getMonth() + 1;
   const day = dateToConvert.getDate();
   const year = dateToConvert.getFullYear();
@@ -27,27 +30,24 @@ export function getDateTime(dateToConvert) {
   )}.${ampm}`;
 }
 
-function twoDigitString(int) {
+function twoDigitString(int: number) {
   if (int < 10) {
     return `0${int}`;
   }
   return int.toString();
 }
 
-export function getFileSize(pathname) {
+export function getFileSize(pathname: string) {
   return fs.statSync(pathname).size;
 }
 
-export function makeDirectory(pathToDirectory) {
+export function makeDirectory(pathToDirectory: string) {
   if (!fs.existsSync(pathToDirectory)) {
-    fs.mkdirSync(pathToDirectory, { recursive: true }, err => {
-      if (err) throw err;
-      console.log('error making path:', path);
-    });
+    fs.mkdirSync(pathToDirectory, { recursive: true });
   }
 }
 
-export function deleteDirectoryRecursive(directoryPath) {
+export function deleteDirectoryRecursive(directoryPath: string) {
   if (fs.existsSync(directoryPath)) {
     fs.readdirSync(directoryPath).forEach(file => {
       const curPath = `${directoryPath}/${file}`;

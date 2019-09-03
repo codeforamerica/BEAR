@@ -23,7 +23,9 @@ function transformBaselineEligibilityOptions(
   return jsonObject;
 }
 
-function transformOptionalReliefValues(additionalReliefOptions) {
+function transformOptionalReliefValues(
+  additionalReliefOptions: AdditionalReliefOptions
+) {
   const transformedOptions = {
     yearsSinceConvictionThreshold: 0,
     yearsCrimeFreeThreshold: 0

@@ -34,6 +34,14 @@ declare type AdditionalReliefOptions = {
 
 declare type AdditionalReliefOption = number | boolean;
 
+declare type EligibilityConfiguration = {
+  baselineEligibility: {
+    dismiss: Array<string>,
+    reduce: Array<string>
+  },
+  additionalRelief: AdditionalReliefOptions
+};
+
 declare type ImpactStatistics = {
   noFelony: number,
   noConvictionLast7: number,
