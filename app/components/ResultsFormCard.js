@@ -38,11 +38,9 @@ export default class ResultsFormCard extends Component<Props> {
             <h2 className={`${styles.resultsHeader} nudge--med`}>
               Your files are ready!
             </h2>
-            <p
-              className={styles.resultsSubheader}
-            >{`We have generated results for ${county.name} County.`}</p>
             <p className={`${styles.resultsSubheader}  nudge--small`}>
-              Look for a folder on your desktop labeled
+              {`We have generated results for ${county.name} County.`} Look for
+              a folder on your desktop labeled
               &quot;Clear_My_Record_output&quot;. Within it will be a
               timestamped folder that will have all of your results files.
             </p>
@@ -85,9 +83,6 @@ export default class ResultsFormCard extends Component<Props> {
               <li>All Results Condensed</li>
               <li>All Results</li>
             </ol>
-            <p className={styles.contentsTableTitle}>
-              What&apos;s included in each file:
-            </p>
           </div>
           <table className={`${styles.contentsTable} data-table`}>
             <thead>
@@ -112,10 +107,10 @@ export default class ResultsFormCard extends Component<Props> {
                 <td>Prop 64 Convictions</td>
                 <td>All</td>
                 <td>Only Prop 64 convictions</td>
-                <td className="text--centered">
+                <td className={`${styles.supportingCheck} text--centered`}>
                   <div className="emoji emoji--big emoji--checkmark" />
                 </td>
-                <td className="text--centered">
+                <td className={`${styles.eligibilityCheck} text--centered`}>
                   <div className="emoji emoji--big emoji--checkmark" />
                 </td>
               </tr>
@@ -123,10 +118,10 @@ export default class ResultsFormCard extends Component<Props> {
                 <td>All Results Condensed</td>
                 <td>Condensed for analysis</td>
                 <td>All</td>
-                <td className="text--centered">
+                <td className={`${styles.supportingCheck} text--centered`}>
                   <div className="emoji emoji--big emoji--checkmark" />
                 </td>
-                <td className="text--centered">
+                <td className={`${styles.eligibilityCheck} text--centered`}>
                   <div className="emoji emoji--big emoji--checkmark" />
                 </td>
               </tr>
@@ -134,10 +129,10 @@ export default class ResultsFormCard extends Component<Props> {
                 <td>All Results</td>
                 <td>All</td>
                 <td>All</td>
-                <td className="text--centered">
+                <td className={`${styles.supportingCheck} text--centered`}>
                   <div className="emoji emoji--big emoji--checkmark" />
                 </td>
-                <td className="text--centered">
+                <td className={`${styles.eligibilityCheck} text--centered`}>
                   <div className="emoji emoji--big emoji--checkmark" />
                 </td>
               </tr>
