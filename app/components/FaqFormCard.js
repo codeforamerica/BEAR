@@ -27,6 +27,8 @@ export default class FaqFormCard extends Component<Props> {
         <FormCardHeader>
           Frequently asked questions
           <div className={styles.headerText}>
+            <i>Last updated: August 30th, 2019 </i>
+            <br />
             If you have more questions, you can refer to the blueprint that
             accompanies our application by downloading it{' '}
             <a
@@ -35,6 +37,14 @@ export default class FaqFormCard extends Component<Props> {
               rel="noopener noreferrer"
             >
               here
+            </a>
+            , or checking for updates to our FAQ on our{' '}
+            <a
+              href="https://s3-us-west-1.amazonaws.com/codeforamerica-cms1/documents/1793-FAQ-page-copy-2.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              website
             </a>
             . The DOJ has also created guides to help counties understand the
             bulk Proposition 64 conviction data format, which you can download{' '}

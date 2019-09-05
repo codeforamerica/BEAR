@@ -84,7 +84,7 @@ exports[`IntroductionFormCard component should match exact snapshot 1`] = `
             href="#"
             onClick={[Function]}
           >
-            FAQs
+            FAQ
           </a>
            
           or contact us at clearmyrecord@codeforamerica.org

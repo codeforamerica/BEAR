@@ -63,7 +63,7 @@ export default class CountySelectFormCard extends Component<Props> {
             <div className={`h2 ${styles.contactInfo}`}>
               If you run into problems or have questions, visit our{' '}
               <a href="#" className="link--subtle" onClick={this.goToFaq}>
-                FAQs
+                FAQ
               </a>{' '}
               or contact us at clearmyrecord@codeforamerica.org
             </div>
