@@ -23,14 +23,10 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
             Your files are ready!
           </h2>
           <p
-            className="resultsSubheader"
-          >
-            We have generated results for undefined County.
-          </p>
-          <p
             className="resultsSubheader  nudge--small"
           >
-            Look for a folder on your desktop labeled "Clear_My_Record_output". Within it will be a timestamped folder that will have all of your results files.
+            We have generated results for undefined County.
+             Look for a folder on your desktop labeled "Clear_My_Record_output". Within it will be a timestamped folder that will have all of your results files.
           </p>
           <button
             className="button button--primary nudge--small"
@@ -118,11 +114,6 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
             All Results
           </li>
         </ol>
-        <p
-          className="contentsTableTitle"
-        >
-          What's included in each file:
-        </p>
       </div>
       <table
         className="contentsTable data-table"
@@ -168,14 +159,14 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
               Only Prop 64 convictions
             </td>
             <td
-              className="text--centered"
+              className="supportingCheck text--centered"
             >
               <div
                 className="emoji emoji--big emoji--checkmark"
               />
             </td>
             <td
-              className="text--centered"
+              className="eligibilityCheck text--centered"
             >
               <div
                 className="emoji emoji--big emoji--checkmark"
@@ -193,14 +184,14 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
               All
             </td>
             <td
-              className="text--centered"
+              className="supportingCheck text--centered"
             >
               <div
                 className="emoji emoji--big emoji--checkmark"
               />
             </td>
             <td
-              className="text--centered"
+              className="eligibilityCheck text--centered"
             >
               <div
                 className="emoji emoji--big emoji--checkmark"
@@ -218,14 +209,14 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
               All
             </td>
             <td
-              className="text--centered"
+              className="supportingCheck text--centered"
             >
               <div
                 className="emoji emoji--big emoji--checkmark"
               />
             </td>
             <td
-              className="text--centered"
+              className="eligibilityCheck text--centered"
             >
               <div
                 className="emoji emoji--big emoji--checkmark"

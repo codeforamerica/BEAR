@@ -10,7 +10,7 @@
 .resultsSubheader {
   font-weight: lighter !important;
   font-size: 1.9rem;
-  width: 50%;
+  width: 60%;
   margin-top: 2em;
   margin-left: auto;
   margin-right: auto;
@@ -70,12 +70,28 @@
   width: 250px;
 }
 
+.columnsColumn {
+  width: 185px;
+}
+
+.rowsColumn {
+  width: 170px;
+}
+
 .supportingColumn {
   width: 160px;
 }
 
+.supportingCheck {
+  padding-right: 35px !important;
+}
+
 .eligibilityColumn {
   width: 160px;
+}
+
+.eligibilityCheck {
+  padding-right: 72px !important;
 }
 
 .completedIcon {
