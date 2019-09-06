@@ -5,7 +5,7 @@ exports[`Checkbox component should match exact snapshot when NOT checked 1`] = `
   className="form-group grid"
 >
   <div
-    className="form-question grid__item width-two-thirds"
+    className="form-question grid__item width-eleven-twelfths"
   >
     This is a checkbox
   </div>
@@ -35,7 +35,7 @@ exports[`Checkbox component should match exact snapshot when checked 1`] = `
   className="form-group grid"
 >
   <div
-    className="form-question grid__item width-two-thirds"
+    className="form-question grid__item width-eleven-twelfths"
   >
     This is a checkbox
   </div>
