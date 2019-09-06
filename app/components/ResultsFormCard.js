@@ -108,10 +108,10 @@ export default class ResultsFormCard extends Component<Props> {
                 <td>All</td>
                 <td>Only Prop 64 convictions</td>
                 <td className={`${styles.supportingCheck} text--centered`}>
-                  <div className="emoji emoji--big emoji--checkmark" />
+                  <div className={`emoji emoji--big ${styles.tealCheck}`} />
                 </td>
                 <td className={`${styles.eligibilityCheck} text--centered`}>
-                  <div className="emoji emoji--big emoji--checkmark" />
+                  <div className={`emoji emoji--big ${styles.tealCheck}`} />
                 </td>
               </tr>
               <tr>
@@ -119,10 +119,10 @@ export default class ResultsFormCard extends Component<Props> {
                 <td>Condensed for analysis</td>
                 <td>All</td>
                 <td className={`${styles.supportingCheck} text--centered`}>
-                  <div className="emoji emoji--big emoji--checkmark" />
+                  <div className={`emoji emoji--big ${styles.tealCheck}`} />
                 </td>
                 <td className={`${styles.eligibilityCheck} text--centered`}>
-                  <div className="emoji emoji--big emoji--checkmark" />
+                  <div className={`emoji emoji--big ${styles.tealCheck}`} />
                 </td>
               </tr>
               <tr>
@@ -130,10 +130,10 @@ export default class ResultsFormCard extends Component<Props> {
                 <td>All</td>
                 <td>All</td>
                 <td className={`${styles.supportingCheck} text--centered`}>
-                  <div className="emoji emoji--big emoji--checkmark" />
+                  <div className={`emoji emoji--big ${styles.tealCheck}`} />
                 </td>
                 <td className={`${styles.eligibilityCheck} text--centered`}>
-                  <div className="emoji emoji--big emoji--checkmark" />
+                  <div className={`emoji emoji--big ${styles.tealCheck}`} />
                 </td>
               </tr>
             </tbody>

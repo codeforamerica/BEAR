@@ -162,14 +162,14 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
               className="supportingCheck text--centered"
             >
               <div
-                className="emoji emoji--big emoji--checkmark"
+                className="emoji emoji--big tealCheck"
               />
             </td>
             <td
               className="eligibilityCheck text--centered"
             >
               <div
-                className="emoji emoji--big emoji--checkmark"
+                className="emoji emoji--big tealCheck"
               />
             </td>
           </tr>
@@ -187,14 +187,14 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
               className="supportingCheck text--centered"
             >
               <div
-                className="emoji emoji--big emoji--checkmark"
+                className="emoji emoji--big tealCheck"
               />
             </td>
             <td
               className="eligibilityCheck text--centered"
             >
               <div
-                className="emoji emoji--big emoji--checkmark"
+                className="emoji emoji--big tealCheck"
               />
             </td>
           </tr>
@@ -212,14 +212,14 @@ exports[`ResultsFormCard component should match exact snapshot 1`] = `
               className="supportingCheck text--centered"
             >
               <div
-                className="emoji emoji--big emoji--checkmark"
+                className="emoji emoji--big tealCheck"
               />
             </td>
             <td
               className="eligibilityCheck text--centered"
             >
               <div
-                className="emoji emoji--big emoji--checkmark"
+                className="emoji emoji--big tealCheck"
               />
             </td>
           </tr>
