@@ -5,6 +5,7 @@
 }
 
 .fileRemove {
+  padding-top: 2px;
   padding-left: 5px;
   cursor: pointer;
 }

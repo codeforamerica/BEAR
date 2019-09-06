@@ -76,7 +76,7 @@ app.on('ready', async () => {
       nodeIntegration: true
     }
   });
-
+  mainWindow.maximize();
   mainWindow.loadURL(`file://${__dirname}/app.html`);
 
   if (process.env.NODE_ENV === 'development') {
