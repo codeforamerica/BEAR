@@ -21,7 +21,7 @@ export default class Checkbox extends React.Component<Props> {
 
     return (
       <div className="form-group grid">
-        <div className="form-question grid__item width-two-thirds">
+        <div className="form-question grid__item width-eleven-twelfths">
           {children}
         </div>
         <label
