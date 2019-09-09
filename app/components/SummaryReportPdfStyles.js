@@ -24,6 +24,13 @@ const baseHxStyles = {
   fontWeight: 'bold'
 };
 
+const baseHorizontalRuleStyles = {
+  borderBottom: 1,
+  borderColor: '#008060',
+  marginHorizontal: 130,
+  marginTop: 12
+};
+
 const styles = StyleSheet.create({
   page: {
     paddingBottom: 20,
@@ -94,6 +101,10 @@ const styles = StyleSheet.create({
   text: {
     ...baseTextStyles
   },
+  textWithBottomPadding: {
+    ...baseTextStyles,
+    marginBottom: 5
+  },
   indentedText: {
     ...baseTextStyles,
     marginLeft: 16,
@@ -109,10 +120,11 @@ const styles = StyleSheet.create({
     paddingLeft: 15
   },
   horizontalRule: {
-    borderBottom: 1,
-    borderColor: '#008060',
-    marginHorizontal: 130,
-    marginTop: 12
+    ...baseHorizontalRuleStyles
+  },
+  horizontalRuleWithTopPadding: {
+    ...baseHorizontalRuleStyles,
+    marginTop: 16
   }
 });
 
