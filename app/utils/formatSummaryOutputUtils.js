@@ -64,6 +64,12 @@ export function formatLineCountWithCommas(number: number) {
 }
 
 export function formattedProcessingTime(timeInSeconds: number) {
+  if (timeInSeconds <= 1) {
+    return `${Math.round(timeInSeconds * 1000) / 1000} seconds`;
+  }
+  if (timeInSeconds <= 10 && timeInSeconds > 1) {
+    return `${Math.round(timeInSeconds * 100) / 100} seconds`;
+  }
   if (timeInSeconds >= 90) {
     return `${Math.round(timeInSeconds / 6) / 10} minutes`;
   }

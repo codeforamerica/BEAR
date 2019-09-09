@@ -30,6 +30,18 @@ describe('formattedProcessingTime', () => {
       expect(formattedProcessingTime(11.33458)).toEqual('11.3 seconds');
     });
   });
+
+  describe('time is under 10 seconds and more than 1 second', () => {
+    it('should return time in seconds, rounded to one decimal place', () => {
+      expect(formattedProcessingTime(9.10001)).toEqual('9.1 seconds');
+    });
+  });
+
+  describe('time is under 1 second', () => {
+    it('should return time in seconds, rounded to 3 decimal places', () => {
+      expect(formattedProcessingTime(0.001543)).toEqual('0.002 seconds');
+    });
+  });
 });
 
 describe('convertTimestamp', () => {
