@@ -43,9 +43,9 @@ const styles = StyleSheet.create({
     width: 200
   },
   bulletImage: {
-    position: 'absolute',
+    paddingRight: 10,
     height: 6,
-    marginRight: 20
+    marginTop: 4
   },
   headerText: {
     width: 300,
@@ -70,10 +70,6 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingHorizontal: 35,
     paddingRight: 65
-  },
-  textWithPadding: {
-    ...baseTextStyles,
-    paddingTop: 8
   },
   h1: {
     marginBottom: 10,
@@ -116,6 +112,8 @@ const styles = StyleSheet.create({
   },
   listItem: {
     ...baseTextStyles,
+    display: 'flex',
+    flexDirection: 'row',
     marginBottom: 8,
     paddingLeft: 15
   },

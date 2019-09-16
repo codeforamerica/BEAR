@@ -100,78 +100,92 @@ export default class SummaryReportPdf extends Component<Props> {
             </View>
             <View>
               <Text style={styles.h3}>Based on your eligibility choices:</Text>
-              <Text style={styles.listItem}>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                {
-                  summaryData.reliefWithCurrentEligibilityChoices
-                    .CountSubjectsNoFelony
-                }{' '}
-                people will no longer have a felony on their CA record
-              </Text>
-              <Text style={styles.listItem}>
+                />
+                <Text>
+                  {
+                    summaryData.reliefWithCurrentEligibilityChoices
+                      .CountSubjectsNoFelony
+                  }{' '}
+                  people will no longer have a felony on their CA record
+                </Text>
+              </View>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                {
-                  summaryData.reliefWithCurrentEligibilityChoices
-                    .CountSubjectsNoConvictionLast7Years
-                }{' '}
-                people will no longer have any conviction on their CA record in
-                the last 7 years
-              </Text>
-              <Text style={styles.listItem}>
+                />
+                <Text>
+                  {
+                    summaryData.reliefWithCurrentEligibilityChoices
+                      .CountSubjectsNoConvictionLast7Years
+                  }{' '}
+                  people will no longer have any conviction on their CA record
+                  in the last 7 years
+                </Text>
+              </View>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                {
-                  summaryData.reliefWithCurrentEligibilityChoices
-                    .CountSubjectsNoConviction
-                }{' '}
-                people will no longer have any conviction on their CA record
-              </Text>
+                />
+                <Text>
+                  {
+                    summaryData.reliefWithCurrentEligibilityChoices
+                      .CountSubjectsNoConviction
+                  }{' '}
+                  people will no longer have any conviction on their CA record
+                </Text>
+              </View>
             </View>
             <View>
               <Text style={styles.h3}> Conviction breakdown:</Text>
-              <Text style={styles.listItem}>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                # of people with Prop 64 conviction in {formattedCountyName}{' '}
-                County: {summaryData.subjectsWithProp64ConvictionCountInCounty}
-              </Text>
-              <Text style={styles.listItem}>
+                />
+                <Text>
+                  # of people with Prop 64 conviction in {formattedCountyName}{' '}
+                  County:{' '}
+                  {summaryData.subjectsWithProp64ConvictionCountInCounty}
+                </Text>
+              </View>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                # of Prop 64 convictions in {formattedCountyName} County:{' '}
-                {totalProp64Convictions};{' '}
-                {formatCountsByCodeSection(
-                  summaryData.prop64ConvictionsCountInCountyByCodeSection
-                )}
-              </Text>
-              <Text style={styles.listItem}>
+                />
+                <Text>
+                  # of Prop 64 convictions in {formattedCountyName} County:{' '}
+                  {totalProp64Convictions};{' '}
+                  {formatCountsByCodeSection(
+                    summaryData.prop64ConvictionsCountInCountyByCodeSection
+                  )}
+                </Text>
+              </View>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                Of the above convictions,{' '}
-                {summaryData.prop64FelonyConvictionsCountInCounty} were felonies
-                and {summaryData.prop64NonFelonyConvictionsCountInCounty} were
-                misdemeanors
-              </Text>
+                />
+                <Text>
+                  Of the above convictions,{' '}
+                  {summaryData.prop64FelonyConvictionsCountInCounty} were
+                  felonies and{' '}
+                  {summaryData.prop64NonFelonyConvictionsCountInCounty} were
+                  misdemeanors
+                </Text>
+              </View>
             </View>
             <View>
               <Text style={styles.h3}>
@@ -182,17 +196,19 @@ export default class SummaryReportPdf extends Component<Props> {
                 You chose the following eligibility determinations when you ran
                 the application:
               </Text>
-              <Text style={styles.listItem}>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                For felonies, dismissals based on code section:{' '}
-                {formatCountsByCodeSection(
-                  summaryData.convictionDismissalCountByCodeSection
-                )}
-              </Text>
+                />
+                <Text>
+                  For felonies, dismissals based on code section:{' '}
+                  {formatCountsByCodeSection(
+                    summaryData.convictionDismissalCountByCodeSection
+                  )}
+                </Text>
+              </View>
               <View
                 render={() => {
                   if (
@@ -201,17 +217,19 @@ export default class SummaryReportPdf extends Component<Props> {
                     ).length > 0
                   ) {
                     return (
-                      <Text style={styles.listItem}>
+                      <View style={styles.listItem}>
                         <Image
                           src={bullet}
                           style={styles.bulletImage}
                           safePath={imageDirectory}
-                        />{' '}
-                        Reductions:{' '}
-                        {formatCountsByCodeSection(
-                          summaryData.convictionReductionCountByCodeSection
-                        )}
-                      </Text>
+                        />
+                        <Text>
+                          Reductions:{' '}
+                          {formatCountsByCodeSection(
+                            summaryData.convictionReductionCountByCodeSection
+                          )}
+                        </Text>
+                      </View>
                     );
                   }
                 }}
@@ -224,30 +242,34 @@ export default class SummaryReportPdf extends Component<Props> {
                     ).length > 0
                   ) {
                     return (
-                      <Text style={styles.listItem}>
+                      <View style={styles.listItem}>
                         <Image
                           src={bullet}
                           style={styles.bulletImage}
                           safePath={imageDirectory}
-                        />{' '}
-                        Dismissals based on additional relief:{' '}
-                        {formatCountsByAdditionalRelief(
-                          summaryData.convictionDismissalCountByAdditionalRelief
-                        )}
-                      </Text>
+                        />
+                        <Text>
+                          Dismissals based on additional relief:{' '}
+                          {formatCountsByAdditionalRelief(
+                            summaryData.convictionDismissalCountByAdditionalRelief
+                          )}
+                        </Text>
+                      </View>
                     );
                   }
                 }}
               />
-              <Text style={styles.listItem}>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                {summaryData.subjectsWithSomeReliefCount} individuals will get
-                some type of relief
-              </Text>
+                />
+                <Text>
+                  {summaryData.subjectsWithSomeReliefCount} individuals will get
+                  some type of relief
+                </Text>
+              </View>
             </View>
             <View>
               <View
@@ -318,33 +340,35 @@ export default class SummaryReportPdf extends Component<Props> {
             <View style={styles.horizontalRuleWithTopPadding} />
             <View>
               <Text style={styles.h2}>Next Steps </Text>
-              <Text style={styles.listItem}>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                Review Code for America’s Implementation Blueprint to learn more
-                about our work helping several other counties implement H&S
-                11361.9, including developing a plan with the courts
-              </Text>
-              <Text style={styles.listItem}>
+                />
+                <Text>
+                  Review Code for America’s Implementation Blueprint to learn
+                  more about our work helping several other counties implement
+                  H&S 11361.9, including developing a plan with the courts
+                </Text>
+              </View>
+              <View style={styles.listItem}>
                 <Image
                   src={bullet}
                   style={styles.bulletImage}
                   safePath={imageDirectory}
-                />{' '}
-                Share this summary report with Code for America at
-                clearmyrecord@codeforamerica.org. Our team will send you back a
-                marketing document with the above relevant summary statistics
-                that your office can then share with the entire community in{' '}
-                {formattedCountyName} County
-              </Text>
+                />
+                <Text>
+                  Share this summary report with Code for America at
+                  clearmyrecord@codeforamerica.org. Our team will send you back
+                  a marketing document with the above relevant summary
+                  statistics that your office can then share with the entire
+                  community in {formattedCountyName} County
+                </Text>
+              </View>
               <Text style={styles.text}>
-                Have more questions or have feedback for our team?
-              </Text>
-              <Text style={styles.text}>
-                Email us at clearmyrecord@codeforamerica.org.
+                Have questions or have feedback for our team? Email us at
+                clearmyrecord@codeforamerica.org.
               </Text>
             </View>
           </View>
