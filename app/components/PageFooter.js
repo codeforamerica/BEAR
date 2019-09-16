@@ -64,6 +64,22 @@ export default class PageFooter extends Component<Props> {
                 >
                   Terms of Service
                 </a>
+                <a
+                  className={`${styles.footerLink} link--subtle`}
+                  href="https://github.com/codeforamerica/BEAR/blob/master/NOTICES.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Software License (Clear My Record)
+                </a>
+                <a
+                  className={`${styles.footerLink} link--subtle`}
+                  href="https://github.com/codeforamerica/gogen/blob/master/NOTICE.md"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Software License (Gogen)
+                </a>
               </div>
               <div className={styles.footerMessage}>
                 Clear My Record is a service delivered by{' '}
