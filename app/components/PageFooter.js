@@ -11,11 +11,6 @@ type Props = {
 };
 
 export default class PageFooter extends Component<Props> {
-  goToPrivacyPolicy = () => {
-    const { goToScreen } = this.props;
-    goToScreen(nonLinearScreenNumbers.privacyPolicy);
-  };
-
   goToTermsOfService = () => {
     const { goToScreen } = this.props;
     goToScreen(nonLinearScreenNumbers.termsOfService);

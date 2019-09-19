@@ -14,7 +14,6 @@ import openFolder from '../utils/osHelpers';
 import { runScript } from '../utils/gogenUtils';
 import { getDateTime } from '../utils/fileUtils';
 import ProcessingFormCard from './ProcessingFormCard';
-import PrivacyPolicyFormCard from './PrivacyPolicyFormCard';
 import TermsOfServiceFormCard from './TermsOfServiceFormCard';
 import FaqFormCard from './FaqFormCard';
 import ErrorFormCard from './ErrorFormCard';
@@ -285,7 +284,6 @@ export default class Home extends Component<Props, State> {
           openFolder={openFolder}
           onStartOver={this.resetInitialState}
         />
-        <PrivacyPolicyFormCard onBack={this.goToPreviousScreenInFlow} />
         <FaqFormCard onBack={this.goToPreviousScreenInFlow} />
         <ErrorFormCard
           onStartOver={this.resetInitialState}
