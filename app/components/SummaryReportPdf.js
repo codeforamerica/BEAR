@@ -367,8 +367,10 @@ export default class SummaryReportPdf extends Component<Props> {
                 </Text>
               </View>
               <Text style={styles.text}>
-                Have questions or have feedback for our team? Email us at
-                clearmyrecord@codeforamerica.org.
+                Have questions or have feedback for our team?
+              </Text>
+              <Text style={styles.text}>
+                Email us at clearmyrecord@codeforamerica.org.
               </Text>
             </View>
           </View>
