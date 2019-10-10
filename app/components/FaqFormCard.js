@@ -330,6 +330,10 @@ export default class FaqFormCard extends Component<Props> {
                 <ul className={styles.bulletedList}>
                   <li>Number of convictions on the individual’s record</li>
                   <li>
+                    Charges that our software detected may also be possible
+                    Proposition 64 convictions
+                  </li>
+                  <li>
                     Convictions listed under PC 667 or PC 290 or if the
                     individual is registered under PC 290
                   </li>
