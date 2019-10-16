@@ -145,6 +145,6 @@ function parseGogenOutput(outputFilePath: string, fileNameSuffix: string) {
     `gogen_${fileNameSuffix}.json`
   );
   const gogenOutputData = fs.readFileSync(pathToGogenOutput, 'utf8');
-  fs.unlinkSync(pathToGogenOutput);
+  // fs.unlinkSync(pathToGogenOutput);
   return JSON.parse(gogenOutputData);
 }
