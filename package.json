@@ -1,7 +1,7 @@
 {
   "name": "clearmyrecord-hs_11361",
   "productName": "Clear My Record",
-  "version": "1.22.0",
+  "version": "1.22.1-rc1",
   "description": "Electron app to configure eligibility logic and identify convictions eligible for CA Prop 64 relief",
   "scripts": {
     "build": "concurrently \"yarn build-main\" \"yarn build-renderer\"",
@@ -237,7 +237,7 @@
     "webpack-cli": "^3.3.0",
     "webpack-dev-server": "^3.2.1",
     "webpack-merge": "^4.2.1",
-    "yarn": "^1.17.3"
+    "yarn": "^1.22.0"
   },
   "dependencies": {
     "@react-pdf/renderer": "^1.6.3",
@@ -265,7 +265,7 @@
   "devEngines": {
     "node": ">=7.x",
     "npm": ">=4.x",
-    "yarn": ">=0.21.3"
+    "yarn": ">=1.22.0"
   },
   "browserslist": "electron 1.6",
   "husky": {
