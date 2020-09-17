@@ -1,11 +1,19 @@
 # B.E.A.R. (Bulk Expungement Analysis of Records)
 
+🚫 **This repository has been archived**
+
+B.E.A.R. (Bulk Expungement Analysis of Records) was an application created by the Clear My Record team at Code for America in 2019 to support the state of California’s implementation of H&S § 11361.9 (marijuana conviction relief).
+
+Since the deadline for the use case of this application by government was July 2020, the Clear My Record team discontinued maintenance of the application in September 2020.
+
+**Please see below for more background on the project, and please reach out to clearmyrecord@codeforamerica.org for questions.**
+
+## The Application
+
 This app provides a desktop GUI for a Golang script that takes in California Department of Justice .dat files containing criminal histories and identifies convictions that are eligible for relief under California's Proposition 64.
 The app can be packaged for installation on Windows, Mac, or Linux.
 
-We call it B.E.A.R. (Bulk Expungement Analysis of Records).
-
-The Golang project can be found [here](https://github.com/codeforamerica/gogen).
+The companion Golang project can be found [here](https://github.com/codeforamerica/gogen).
 
 ## About
 
